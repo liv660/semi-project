@@ -1,0 +1,55 @@
+package service.face;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import dto.ReviewBoard;
+import dto.ReviewDetailView;
+import dto.ReviewUserJoin;
+import util.Paging;
+
+public interface ReviewService {
+
+	/**
+	 * 페이징 객체 생성
+	 * 
+	 * @param req
+	 * @return
+	 */
+	public Paging getPaging(HttpServletRequest req);
+
+	/**
+	 * 게시글 전체 조회 (페이징 처리)
+	 * 
+	 * @param paging
+	 * @return
+	 */
+	public List<ReviewUserJoin> getList(Paging paging);
+
+	/**
+	 * 리뷰 게시글 작성
+	 * 입력한 내용 DB 저장 
+	 * 
+	 * @param req - 요청정보 객체 (게시글 내용 + 첨부파일)
+	 */
+	public void reviewWrite(HttpServletRequest req);
+
+	/**
+	 * 요청 파라미터 얻기
+	 * 
+	 * @param req
+	 * @return
+	 */
+	public ReviewBoard getReviewNo(HttpServletRequest req);
+
+	/**
+	 * 주어진 reviewNo로 게시글 조회
+	 * 조회된 게시글 조회수 1 증가
+	 * 
+	 * @param reviewNo
+	 * @return
+	 */
+	public ReviewDetailView view(ReviewBoard reviewNo);
+
+}
