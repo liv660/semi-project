@@ -1,12 +1,28 @@
+<%@page import="dto.ReviewImgFile"%>
+<%@page import="java.util.List"%>
 <%@page import="dto.ReviewBoard"%>
 <%@page import="dto.ReviewDetailView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <% ReviewDetailView view = (ReviewDetailView) request.getAttribute("reviewTextView"); %>
-<%-- <% ReviewBoard reviewNo = (ReviewBoard) request.getAttribute("reviewNo"); %> --%>
+<% List<ReviewImgFile> imgs = (List<ReviewImgFile>) request.getAttribute("reviewImgs"); %>
 
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#btnList").click(function() {
+		
+		JOptionPane.showConfirmDialog(null, "작성을 중단하고\n목록으로 돌아가시겠습니까?", "알림창")
+		location.href="/review/list";
+	});
+	
+});
+</script>
+
 
 <style type="text/css">
 
@@ -17,6 +33,13 @@
 
 .table {
 	width: 1100px;
+}
+
+#imgs {
+	width: 240px;
+	height: 200px;
+	float: left;
+	margin: 5px;
 }
 
 </style>
@@ -40,17 +63,58 @@
 	<td>작성일</td><td colspan="2"><%=view.getCreateDate() %></td>
 	<td><button type="button" id="btnUpdate" class="btn">수정</button></td>
 	<td><button type="button" id="btnDelete" class="btn">삭제</button></td>
-<tr>
-	<!-- 이미지 띄워줄 자리 -->
-	<td colspan="2"><image></td>
-	<td colspan="2"><image></td>
-	<td colspan="2"><image></td>
-	<td colspan="2"><image></td>
-</tr>
-
+	
+<% int i = imgs.size(); %>	
+	<% if(i <= 0) { %>
+		<tr>
+			<!-- 이미지 띄워줄 자리 -->
+			<td colspan="2"><img src=".." alt="img1" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img2" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img3" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+		</tr>
+	<% } else if(i < 2 && i > 0) { %>
+		<tr>
+			<!-- 이미지 띄워줄 자리 -->
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img2" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img3" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+		</tr>
+	<% } else if(i < 3 && i > 1)  {%>	
+		<tr>
+			<!-- 이미지 띄워줄 자리 -->
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img3" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+		</tr>
+	<% } else if(i < 4 && i > 2) { %>
+		<tr>
+			<!-- 이미지 띄워줄 자리 -->
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(2).getStoredImg() %>" alt="img3" id="imgs" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+		</tr>
+	<% } else if(i < 5 && i > 3) { %>
+		<tr>
+			<!-- 이미지 띄워줄 자리 -->
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(2).getStoredImg() %>" alt="img3" id="imgs" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(3).getStoredImg() %>" alt="img4" id="imgs"></td>
+		</tr>
+	<% } %>
+		
+		
 <tr> <!-- 본문 -->
-	<td colspan="8"><textarea 
-			style="width: 97%; height: 300px;" name="content" id="content"><%=view.getContent() %></textarea></td>
+	<td colspan="8">
+<%-- 		<textarea style="width: 97%; height: 300px;" name="content" id="content"><%=view.getContent() %></textarea> --%>
+		<div style="width: 1100px; height: 300px; border: 1px solid; margin: 10px 0 10px 0;">
+		<p><%=view.getContent() %></p>
+		</div>
+	</td>
 </tr>
 
 <tr>

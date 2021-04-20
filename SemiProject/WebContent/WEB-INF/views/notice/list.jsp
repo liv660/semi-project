@@ -166,7 +166,7 @@ ul.tabs li.current{
 		
 		<a href="/notice/write"><input type="button" value="글쓰기" id="writebtn"/></a>
 		<br>
-		<%@ include file="/WEB-INF/views/layout/Paging.jsp" %>
+		<%@ include file="/WEB-INF/views/layout/paging.jsp" %>
 	
 	</div>
 	<div id="tab-2" class="tab-content">

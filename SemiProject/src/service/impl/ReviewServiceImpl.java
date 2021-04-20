@@ -81,7 +81,16 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		//게시글 정보 저장할 객체 생성
 		reviewBoard = new  ReviewBoard();
+
+
+		//게시글 정보 저장할 객체 생성
+		reviewBoard = new  ReviewBoard();
 		
+		//DB 데이터 입력
+		Connection conn = JDBCTemplate.getConnection();
+		//게시글 번호 생성 - DAO 이용
+		int reviewNo = reviewDao.selectReviewNo(conn);
+		reviewBoard.setReviewNo(reviewNo);
 		
 		//디스크 기반 아이템 팩토리
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -165,8 +174,12 @@ public class ReviewServiceImpl implements ReviewService {
 				
 				//첨부파일 정보 객체
 				reviewImgFile = new ReviewImgFile(); //객체 생성
-				reviewImgFile.setOriginImg(item.getName()); //원본파일 명
-				reviewImgFile.setStoredImg(item.getName()+"_"+u); //저장파일명
+				reviewImgFile.setReviewNo(reviewNo);
+//				reviewImgFile.setOriginImg(item.getName()); //원본파일 명
+				reviewImgFile.setOriginImg(originName); //원본파일 명
+				reviewImgFile.setStoredImg(storedName); //저장파일명
+				
+				reviewImgs.add(reviewImgFile);
 				
 				//처리 완료된 파일 업로드하기
 				try {
@@ -178,14 +191,9 @@ public class ReviewServiceImpl implements ReviewService {
 			} //파일 처리 end
 		}
 		
-		//DB 데이터 입력
-		Connection conn = JDBCTemplate.getConnection();
-		
 		//게시글 작성자 user_no 입력
 		reviewBoard.setUserNo((int) req.getSession().getAttribute("userno"));
 		
-		//게시글 번호 생성 - DAO 이용
-		int reviewNo = reviewDao.selectReviewNo(conn);
 		
 		//게시글 정보가 있는 경우
 		if(reviewBoard != null) {
@@ -207,13 +215,13 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		
 		//첨부파일 정보가 있을 경우
-		if(reviewImgFile != null) {
+		if(reviewImgs != null) {
 			
 			//게시글 번호 입력
-			reviewImgFile.setReviewNo(reviewNo);
+//			reviewImgFile.setReviewNo(reviewNo);
 			
 			//첨부파일 삽입
-			if(reviewDao.insertImgFile(conn, reviewImgFile) > 0) {
+			if(reviewDao.insertImgFile(conn, reviewImgs) > 0) {
 				JDBCTemplate.commit(conn);
 			} else {
 				JDBCTemplate.rollback(conn);
@@ -256,6 +264,12 @@ public class ReviewServiceImpl implements ReviewService {
 		ReviewDetailView reviewBoard = reviewDao.selectReviewBoardByReviewNo(conn, reviewNo);
 
 		return reviewBoard;
+	}
+	
+	@Override
+	public List<ReviewImgFile> viewFile(ReviewBoard reviewNo) {
+
+		return reviewDao.selectReviewImgs(JDBCTemplate.getConnection(), reviewNo);
 	}
 
 }

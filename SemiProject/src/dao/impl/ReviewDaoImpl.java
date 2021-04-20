@@ -165,22 +165,24 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 	
 	@Override
-	public int insertImgFile(Connection conn, ReviewImgFile reviewImgFile) {
+	public int insertImgFile(Connection conn, List<ReviewImgFile> reviewImgs) {
 
 		String sql = "";
 		sql += "INSERT INTO review_img(image_no, review_no, origin_img, stored_img)";
 		sql += " VALUES (review_img_seq.nextval, ?, ?, ?)";
 		
 		int res = 0;
-		
+		int result = 0;
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, reviewImgFile.getReviewNo());
-			ps.setString(2, reviewImgFile.getOriginImg());
-			ps.setString(2, reviewImgFile.getStoredImg());
-			
-			res = ps.executeUpdate();
+			for(int i=0; i<reviewImgs.size(); i++) {
+				ps.setInt(1, reviewImgs.get(i).getReviewNo());
+				ps.setString(2, reviewImgs.get(i).getOriginImg());
+				ps.setString(3, reviewImgs.get(i).getStoredImg());
+				result += ps.executeUpdate();
+			}
+			res = result;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -258,5 +260,44 @@ public class ReviewDaoImpl implements ReviewDao {
 		}
 
 		return res;
+	}
+	
+	
+	@Override
+	public List<ReviewImgFile> selectReviewImgs(Connection conn, ReviewBoard reviewNo) {
+
+		String sql = "";
+		sql += "SELECT * FROM review_img";
+		sql += " WHERE review_no = ?";
+		sql += " ORDER BY image_no DESC";
+		
+		//결과 저장 List 객체
+		List<ReviewImgFile> reviewImgs = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, reviewNo.getReviewNo());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ReviewImgFile imgFile = new ReviewImgFile();
+				
+				imgFile.setImageNo(rs.getInt("image_no"));
+				imgFile.setReviewNo(rs.getInt("review_no"));
+				imgFile.setOriginImg(rs.getString("origin_img"));
+				imgFile.setStoredImg(rs.getString("stored_img"));
+				
+				reviewImgs.add(imgFile);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return reviewImgs;
 	}
 }

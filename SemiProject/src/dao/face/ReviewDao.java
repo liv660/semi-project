@@ -53,7 +53,7 @@ public interface ReviewDao {
 	 * @param reviewImgFile
 	 * @return
 	 */
-	public int insertImgFile(Connection conn, ReviewImgFile reviewImgFile);
+	public int insertImgFile(Connection conn, List<ReviewImgFile> reviewImgs);
 
 	/**
 	 * reviewNo로 게시글 조회
@@ -72,5 +72,14 @@ public interface ReviewDao {
 	 * @return
 	 */
 	public int updateViews(Connection conn, ReviewBoard reviewNo);
+
+	/**
+	 * 첨부파일 조회
+	 * 
+	 * @param connection
+	 * @param reviewTextview
+	 * @return
+	 */
+	public List<ReviewImgFile> selectReviewImgs(Connection conn, ReviewBoard reviewNo);
 
 }

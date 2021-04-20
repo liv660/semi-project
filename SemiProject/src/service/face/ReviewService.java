@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.ReviewBoard;
 import dto.ReviewDetailView;
+import dto.ReviewImgFile;
 import dto.ReviewUserJoin;
 import util.Paging;
 
@@ -51,5 +52,13 @@ public interface ReviewService {
 	 * @return
 	 */
 	public ReviewDetailView view(ReviewBoard reviewNo);
+
+	/**
+	 * 첨부파일 정보 얻어오기
+	 * 
+	 * @param reviewTextview
+	 * @return
+	 */
+	public List<ReviewImgFile> viewFile(ReviewBoard reviewNo);
 
 }

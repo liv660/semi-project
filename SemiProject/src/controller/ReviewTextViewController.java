@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.ReviewBoard;
 import dto.ReviewDetailView;
+import dto.ReviewImgFile;
 import service.face.ReviewService;
 import service.impl.ReviewServiceImpl;
 
@@ -34,6 +36,10 @@ public class ReviewTextViewController extends HttpServlet {
 		//조회결과 MODEL값 전달
 		req.setAttribute("reviewTextView", reviewTextview);
 		
+		//첨부파일 정보 VIEW에 전달
+		List<ReviewImgFile> reviewImgs = reviewService.viewFile(reviewNo);
+		req.setAttribute("reviewImgs", reviewImgs);
+//		System.out.println(reviewImgs);
 		
 		req.getRequestDispatcher("/WEB-INF/views/review/view.jsp").forward(req, resp);
 	}

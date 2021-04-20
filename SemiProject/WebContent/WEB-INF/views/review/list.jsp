@@ -83,4 +83,4 @@ $(document).ready(function() {
 
 </div>
 
-<%@ include file="/WEB-INF/views/layout/Paging.jsp" %>
+<%@ include file="/WEB-INF/views/layout/paging.jsp" %>
