@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="../resources/css/slider.css"/>
@@ -38,14 +37,13 @@
         <label for="slide5">&nbsp;</label>
    </div>
 
-
 </div>
 
+<% for(Cookie c : request.getCookies()) { %>
+<tr>
+	<td><%=c.getName() %></td>
+	<td><%=c.getValue() %></td>
+</tr>
+<%} %>
 
-
-</body>
-
-</html>
-
-</body>
-</html>
+<%@ include file="/WEB-INF/views/layout/footer.jsp" %>

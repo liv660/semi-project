@@ -17,28 +17,28 @@
 <style type="text/css">
 
 #header {
-	width: 1200px;
-	margin: 0 auto;
+   width: 1200px;
+   margin: 0 auto;
 }
 
 #login {
-	width: 1200px;
-	height: 50px;
+   width: 1200px;
+   height: 50px;
 }
 
 #login > button {
- 	float: right;  
-	margin-top: 10px;
-	margin-right: 10px;
-	background-color: transparent !important;
+    float: right;  
+   margin-top: 10px;
+   margin-right: 10px;
+   background-color: transparent !important;
 }
 
 .navbar {
-	background-color: #EBC680;
+   background-color: #EBC680;
 }
 
 .container-fluid > .navbar-header {
-/* 	margin-right: 30px; */
+/*    margin-right: 30px; */
     margin-left: 10px;
 }
 
@@ -56,52 +56,52 @@
 /* 가운데 정렬 끝 */
 
 .nav li a {
-	color: brown;
-	font-size: 17px;
+   color: brown;
+   font-size: 17px;
 }
 
 .nav li a:hover, .nav li a:active, .nav li a:visited { 
-	background-color: #A48654;
- 	color: brown;  
+   background-color: #A48654;
+    color: brown;  
 }
 
 #loginNick {
-	float: right;
-	margin-top: 10px;
+   float: right;
+   margin-top: 10px;
 }
 
 .submenu { 
-	/* 하위 메뉴 스타일 설정 */ 
-	position: absolute; 
-	height: 0px; 
-	overflow: hidden; 
-	transition: height .2s; 
-	-webkit-transition: height .2s; 
-	-moz-transition: height .2s; 
-	-o-transition: height .2s; 
-	width: 200px; /* [변경] 가로 드랍다운 메뉴의 넓이 */ 
-	background-color: #EBC680;
+   /* 하위 메뉴 스타일 설정 */ 
+   position: absolute; 
+   height: 0px; 
+   overflow: hidden; 
+   transition: height .2s; 
+   -webkit-transition: height .2s; 
+   -moz-transition: height .2s; 
+   -o-transition: height .2s; 
+   width: 200px; /* [변경] 가로 드랍다운 메뉴의 넓이 */ 
+   background-color: #EBC680;
 } 
 
 .submenu li { 
-	display: inline-block; /* 가로로 펼쳐지도록 설정  */
+   display: inline-block; /* 가로로 펼쳐지도록 설정  */
 }
 
 .submenu li a { 
-/* 	border: solid 1px #A48654;  */
-	margin-right: -1px
+/*    border: solid 1px #A48654;  */
+   margin-right: -1px
 } 
 
 .submenu li a:hover {
-	text-decoration: none;
-	background-color: #A48654;
+   text-decoration: none;
+   background-color: #A48654;
 }
 
 .topMenuLi:hover .submenu {
-	height: 40px;
-	text-align: center;
-	font-size: 15px;
-/* 	padding: 5px; */
+   height: 40px;
+   text-align: center;
+   font-size: 15px;
+/*    padding: 5px; */
 }
 
 
@@ -114,26 +114,26 @@
 
 <div id="header">
 
-<%	if(session.getAttribute("login") == null || !(boolean)session.getAttribute("login")) { %>
+<%   if(session.getAttribute("login") == null || !(boolean)session.getAttribute("login")) { %>
 <!-- 비로그인상태 -->
 
-	<div id="login">
-		<button class="btn" onclick="location.href= '/login/login';">로그인</button>
-		<button class="btn" onclick="location.href= '/login/signup';">회원가입</button>
-	</div>
+   <div id="login">
+      <button class="btn" onclick="location.href= '/login/login';">로그인</button>
+      <button class="btn" onclick="location.href= '/login/terms';">회원가입</button>
+   </div>
 
-<%	} else if( (boolean)session.getAttribute("login") ) { %>
+<%   } else if( (boolean)session.getAttribute("login") ) { %>
 <!-- 로그인상태 -->
 
-	<div id="login">
-		<div id="loginNick">
-			<%=session.getAttribute("nick") %>님 
-			<button class="btn" onclick="location.href= '';">마이페이지</button> |
-			<button class="btn" onclick="location.href= '/login/logout';">로그아웃</button> 
-		</div>
-	</div>
+   <div id="login">
+      <div id="loginNick">
+         <%=session.getAttribute("nick") %>님 
+         <button class="btn" onclick="location.href= '/mypage';">마이페이지</button> |
+         <button class="btn" onclick="location.href= '/login/logout';">로그아웃</button> 
+      </div>
+   </div>
 
-<%	} %>
+<%   } %>
 
 <!-- <nav class="navbar navbar-default"> -->
 <nav class="navbar">
@@ -146,8 +146,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">
-      	<img alt="Logo" src="">
+      <a class="navbar-brand" href="/main">
+         <img alt="Logo" src="">
       </a>
     </div>
 
@@ -158,11 +158,11 @@
         <li class="topMenuLi"><a href="#">유기동물 발견</a></li>
         <li class="topMenuLi"><a href="#">스토어</a></li>
         <li class="topMenuLi"><a href="#">커뮤니티</a>
-        	<ul class="submenu nav">
-	        	<li><a href="#">공지사항</a></li>
-	        	<li>|</li>
-	        	<li><a href="/review/list">후기</a></li>
-        	</ul>
+           <ul class="submenu nav">
+              <li><a href="/notice/list">공지사항</a></li>
+              <li>|</li>
+              <li><a href="/review/list">후기</a></li>
+           </ul>
         </li>
       </ul>
 

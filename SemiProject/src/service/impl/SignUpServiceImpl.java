@@ -20,11 +20,13 @@ import dao.face.SignUpDao;
 import dao.impl.SignUpDaoImpl;
 import dto.Usertb;
 import service.face.SignUpService;
+import util.HashNMacUtil;
 
 public class SignUpServiceImpl implements SignUpService {
 	
 	class MyAuthentication extends Authenticator {
 	    
+		//id, pw 저장 객체 생성
 	    PasswordAuthentication pa;
 	 
 	    public MyAuthentication(){
@@ -85,11 +87,10 @@ public class SignUpServiceImpl implements SignUpService {
 	        // 이메일 제목  ( 제목 / 타입 )
 	        msg.setSubject("TEST5", "UTF-8");
 	        
-	        // 랜덤 발생
+	        //인증번호 생성
 	        Random ran = new Random();
-	        int i;
 	        
-	        for(i=0;i<11;i++){
+	        for(int i=0;i<11;i++){
 	            if(ran.nextBoolean()){
 	                value += ((char)((int)(ran.nextInt(26))+97));
 	            }else{
@@ -124,38 +125,54 @@ public class SignUpServiceImpl implements SignUpService {
 
 		Usertb user = new Usertb();
 		
-		user.setUserId(req.getParameter("id"));
-		user.setUserPw(req.getParameter("pw"));
-		user.setNick(req.getParameter("nick"));
+		user.setUserId(req.getParameter("id")); //id
 		
-		String year = req.getParameter("year");
+		try {
+			//비밀번호 Sha256 해쉬코드 암호화처리
+			user.setUserPw(HashNMacUtil.EncBySha256(req.getParameter("pw"))); //pw
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		user.setNick(req.getParameter("nick")); //nick
+		
+		String year = req.getParameter("year"); //year
 		if(year != null && !"".equals(year)) {
 			user.setYear(Integer.parseInt(year));
 		}
 		
-		String month = req.getParameter("month");
+		String month = req.getParameter("month"); //month
 		if(month != null && !"".equals(month)) {
 			user.setMonth(Integer.parseInt(month));
 		}
 		
-		String day = req.getParameter("day");
+		String day = req.getParameter("day"); //day
 		if(day != null && !"".equals(day)) {
 			user.setDay(Integer.parseInt(day));
 		}
 		
-		user.setName(req.getParameter("name"));
-		user.setGender(req.getParameter("gender"));
-		user.setEmail(req.getParameter("email"));
-		user.setPhone(req.getParameter("tel"));
+		user.setName(req.getParameter("name")); //name
+		user.setGender(req.getParameter("gender")); //gender
+		user.setEmail(req.getParameter("email")); //email
+		user.setPhone(req.getParameter("tel")); //tel
+		
+		String postnum = req.getParameter("postnum"); //postnum
+		if(postnum !=null && !"".equals(postnum)) {
+			user.setPostnum(Integer.parseInt(postnum));
+		}
+		
+		user.setAddr(req.getParameter("addr")); //addr
+		user.setAddrDetail(req.getParameter("addrDetail")); //addrDetail
 		
 		return user;
 	}
 	
 	@Override
-	public void signUpUser(Usertb user) {
+	public int signUpUser(Usertb user) {
 
 		conn = JDBCTemplate.getConnection();
 		
+		//유저정보 삽입
 		int res = signUpDao.insertUser(conn, user);
 		
 		if(res > 0) {
@@ -164,6 +181,7 @@ public class SignUpServiceImpl implements SignUpService {
 			JDBCTemplate.rollback(conn);
 		}
 		
+		return res;
 	}
 	
 	@Override
@@ -171,6 +189,7 @@ public class SignUpServiceImpl implements SignUpService {
 
 		conn = JDBCTemplate.getConnection();
 		
+		//아이디 중복 체크
 		int res = signUpDao.selectId(conn, id);
 		
 		return res;
@@ -181,6 +200,7 @@ public class SignUpServiceImpl implements SignUpService {
 
 		conn = JDBCTemplate.getConnection();
 		
+		//닉네임 중복 체크
 		int res = signUpDao.selectNick(conn, nick);
 		
 		return res; 

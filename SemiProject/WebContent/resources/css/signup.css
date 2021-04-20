@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: sans-serif;
+}
+
+.box {
+	margin: 0 auto;
+	padding: 40px;
+	text-align: center;
+}
+
+.box h1, .box label {
+	color : #EA9A56;
+	text-transform: uppercase;
+	font-weight: 500px;
+	font-weight: bold;
+}
+
+.box input[type = "text"], .box input[type = "password"] {
+	border: 0px;
+	background: none;
+	margin: 20px auto;
+	text-align: center;
+	border : 2px solid #FFC091;
+	padding: 5px 5px;
+	width: 200px;
+	outline: none;
+	color: #000;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+
+.box input[type = "number"], .box select {
+	border: 0px;
+	background: none;
+	margin: 20px auto;
+	text-align: center;
+	border : 2px solid #FFC091;
+	padding: 5px 5px;
+	width: 50px;
+	outline: none;
+	color: #000;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+
+.box input[type = "text"]:focus, .box input[type = "password"]:focus{
+	width: 280px;
+	border-color: A48654;
+}	
+#uAddress_zoneCode {width:140px; margin-bottom : 3px;}
+#uAddress_zoneCode:focus {width:140px;}
+#uAddress_addr {width: 200px; margin-top : 3px;}
+#uAddress_addr:focus {width: 200px;}
+#search_addr_btn {margin-bottom : 3px;}
+
+.box input[type = "submit"] {
+	border : 0;
+	background : none;
+	margin: 20px auto;
+	text-align: center;
+	border : 2px solid #EA9A56;
+	padding: 5px 5px;
+	outline: none;
+	color: #000;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+	
+}
+
+
+ .box input[type = "button"] {
+ 	border : 0;
+	background : none;
+	margin: 20px auto;
+	text-align: center;
+	border : 2px solid #A48654;
+	padding: 5px 5px;
+	outline: none;
+	color: #000;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+	position: absolute;
+	margin-left : 20px;
+ } 
+ 
+#main {position : static; padding:12px 12px; margin-right: 10px;}
+#submit {padding: 12px 12px;}
+ 
+.box input[type = "submit"]:hover {background: #EA9A56;}
+.box input[type = "button"]:hover {background: #A48654;}
+ 
+span {color : red;}
+#cor_num, #idMsg_cor, #nickMsg_cor {color : blue;}
+.birth {width: 30px; }
+#email, #mailbtn {margin-bottom : 10px;}
+#atnum, #atnbtn {margin-top: 10px;}

@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+body {
+	margin: 0px;
+	pading: 0px;
+	font-family: sans-serif;
+}
+
+.box {
+	width: 300px;
+	padding: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #fff;
+	text-align: center;
+}
+
+.box h1, .box label {
+	color : #EA9A56;
+	text-transform: uppercase;
+	font-weight: 500px;
+}
+
+.box input[type = "text"] {
+	border : 0;
+	background : none;
+	display : block;
+	margin: 20px auto;
+	text-align: center;
+	border : 2px solid #FFC091;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+
+.box input[type = "text"]:focus {
+	width: 280px;
+	border-color: #A48654;
+}
+
+.box input[type = "submit"] {
+	border : 0;
+	background : none;
+	margin: 40px auto;
+	text-align: center;
+	border : 2px solid #A48654;
+	padding: 10px 15px;
+	outline: none;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+ 
+.box input[type = "submit"]:hover {background: #A48654;}
+
+.link {color : #A48654; text-decoration: none; font-size: small;}
+.link:link {color : #A48654; text-decoration: none;}
+.link:visited {color : #A48654; text-decoration: none;}
+.link:hover {color : #A48654; text-decoration: none;}
+.link:active {color : #A48654; text-decoration: none;}
+.stick {color : #A48654; font-size: small;}

@@ -16,10 +16,11 @@ public class SignUpDaoImpl implements SignUpDao {
 	
 	@Override
 	public int insertUser(Connection conn, Usertb user) {
-
+		
+		//회원가입 정보 저장
 		String sql = "";
-		sql += "INSERT INTO usertb(user_no, user_id, user_pw, nick, year, month, day, name, gender, email, phone)";
-		sql += " VALUES(usertb_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+		sql += "INSERT INTO usertb(user_no, user_id, user_pw, nick, year, month, day, name, gender, email, phone, postnum, addr, addr_detail)";
+		sql += " VALUES(usertb_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 		
 		int res = 0;
 		
@@ -36,6 +37,9 @@ public class SignUpDaoImpl implements SignUpDao {
 			ps.setString(8, user.getGender());
 			ps.setString(9, user.getEmail());
 			ps.setString(10, user.getPhone());
+			ps.setInt(11, user.getPostnum());
+			ps.setString(12, user.getAddr());
+			ps.setString(13, user.getAddrDetail());
 			
 			res = ps.executeUpdate();
 		
@@ -50,7 +54,8 @@ public class SignUpDaoImpl implements SignUpDao {
 	
 	@Override
 	public int selectId(Connection conn, String id) {
-
+		
+		//아이디 중복 조회
 		String sql = "";
 		sql += "SELECT * FROM usertb";
 		sql += " WHERE user_id = ?";
@@ -80,7 +85,8 @@ public class SignUpDaoImpl implements SignUpDao {
 	
 	@Override
 	public int selectNick(Connection conn, String nick) {
-
+		
+		//닉네임 중복 조회
 		String sql = "";
 		sql += "SELECT * FROM usertb";
 		sql += " WHERE nick = ?";

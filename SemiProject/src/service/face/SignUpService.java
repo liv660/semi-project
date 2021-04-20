@@ -10,7 +10,7 @@ public interface SignUpService {
 
 	public Usertb getParam(HttpServletRequest req);
 
-	public void signUpUser(Usertb user);
+	public int signUpUser(Usertb user);
 
 	public int signUpIDCheck(String id);
 

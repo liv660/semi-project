@@ -3,6 +3,7 @@ package service.impl;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -63,6 +64,7 @@ public class ReviewServiceImpl implements ReviewService {
 		//첨부파일 정보 저장할 객체
 		ReviewImgFile reviewImgFile = null;
 		
+		List<ReviewImgFile> reviewImgs = new ArrayList<>(); //
 		
 		//파일업로드 형태의 데이터가 맞는지 검사
 		boolean isMultipart = false;
@@ -70,13 +72,16 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		//multipart/form-data 인코딩으로 전송되지 않았을 경우
 		if( !isMultipart ) {
-			System.out.println("[ERROR] multipart/form-data 형식이 아님");
+			System.out.println("[ERROR] multipart/form-data 형식이 아닙니다.");
 			
 			return;
 		}
 		
+		//multipart/form-data일 때
+		
 		//게시글 정보 저장할 객체 생성
 		reviewBoard = new  ReviewBoard();
+		
 		
 		//디스크 기반 아이템 팩토리
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -144,16 +149,19 @@ public class ReviewServiceImpl implements ReviewService {
 				
 				// UUID 생성
 				UUID uuid = UUID.randomUUID();
-				String u = uuid.toString().split("-")[0]; //8자리 ㅕㅑㅇ
+				String u = uuid.toString().split("-")[0]; //8자리 
+				
+
+				//파일이 저장될 이름을 설정(originName_xxxxxxxx)
+				int lastDot = item.getName().lastIndexOf('.');
+				String originName = item.getName().substring(0, lastDot);
+				String storedName = originName + "_" + u;
 				
 				// 로컬 저장소의 파일 객체 생성
 				File upFolder = new File(req.getServletContext().getRealPath("reviewImgFile")); //업로드될 파일 경로
 				upFolder.mkdir();
 				
-				File up = new File(
-						upFolder,
-						item.getName() + "_" + u //원본파일명_uid
-						);
+				File up = new File(upFolder, storedName);
 				
 				//첨부파일 정보 객체
 				reviewImgFile = new ReviewImgFile(); //객체 생성
