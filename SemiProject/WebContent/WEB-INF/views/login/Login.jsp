@@ -119,7 +119,7 @@ body {
 	
 		for(Cookie c : cookies) {
 		
-		if("userid".equals(c.getName())) {
+		if("remuserid".equals(c.getName())) {
 			value = c.getValue();
 		}
 	} 

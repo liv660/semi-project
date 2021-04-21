@@ -26,13 +26,18 @@ public class LogoutController extends HttpServlet {
 		
 		for(Cookie c : cookies) {
 			if("autologin".equals(c.getName())) {
-				
-			c.setMaxAge(0);
-			resp.addCookie(c);
+				c.setMaxAge(0);
+				c.setPath("/");
+				resp.addCookie(c);
+			}
+			if("userid".equals(c.getName())) {
+				c.setMaxAge(0);
+				c.setPath("/");
+				resp.addCookie(c);
 			}
 		}
 		
-		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+		resp.sendRedirect("/main");
 		
 		
 	}

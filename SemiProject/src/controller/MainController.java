@@ -25,14 +25,16 @@ public class MainController extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		
-		System.out.println(req.getParameter("autologin"));
 		
-		String auto = "";
+		System.out.println(req.getParameter("autologin"));
+		System.out.println(req.getParameter("rememberid"));
 		
 		//자동 로그인 쿠키 저장
-		if(!"null".equals(req.getParameter("autologin"))) {
+		if("on".equals(req.getParameter("autologin"))) {
 			
-			auto = (String) session.getAttribute("userid");
+			System.out.println("자동로그인");
+			
+			String auto = req.getParameter("userid");
 			
 			Cookie autologin = new Cookie("autologin", "autologin");
 			Cookie userid = new Cookie("userid", auto);
@@ -47,12 +49,14 @@ public class MainController extends HttpServlet {
 			resp.addCookie(userid);
 		}
 		
-		if(!"null".equals(req.getParameter("rememberid"))) {
-
-			auto = (String) session.getAttribute("userid");
+		if("on".equals(req.getParameter("rememberid"))) {
+			
+			System.out.println("아이디저장");
+			
+			String remuserid = req.getParameter("userid");
 			
 			Cookie rememberid = new Cookie("rememberid", "rememberid");
-			Cookie userid = new Cookie("userid", auto);
+			Cookie userid = new Cookie("remuserid", remuserid);
 			
 			rememberid.setMaxAge(30*24*60*60);
 			userid.setMaxAge(30*24*60*60);
@@ -69,22 +73,33 @@ public class MainController extends HttpServlet {
 			
 			Cookie[] cookies = req.getCookies();
 			String value = "";
+			String id = "";
 			
 			for(Cookie c : cookies) {
+				
+				System.out.println("for문 도는지 검사");
 				
 				if("autologin".equals(c.getName())) {
 					value = c.getValue();
 				}
+				if("userid".equals(c.getName())) {
+					id = c.getValue();
+				}
 			}
 			
-			if(value != null) {
+			System.out.println("value : " + value);
+			
+			if("autologin".equals(value)) {
+				
+				System.out.println("ds");
 				
 				Usertb info = new Usertb();
-				info.setUserId(auto);
+				info.setUserId(id);
 				
 				Usertb res = loginService.loginUser(info);
 				
 				if(res != null) {
+					System.out.println("aaa");
 					session.setAttribute("login", true);
 					session.setAttribute("userid", res.getUserId());
 					session.setAttribute("userno", res.getUserNo());
