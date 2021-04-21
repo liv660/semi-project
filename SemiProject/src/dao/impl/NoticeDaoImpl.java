@@ -58,8 +58,10 @@ public class NoticeDaoImpl implements NoticeDao {
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " SELECT rownum rnum, N.* FROM(";
-		sql += " SELECT notice_no,title, manager_id, create_date, views, notice_imp";
-		sql += " FROM notice_board";
+		sql += " SELECT notice_no,title, manager_id, create_date, views, notice_imp" ;
+		sql += " ,(SELECT count(*) FROM notice_comment";
+		sql += " WHERE NB.notice_no = notice_comment.notice_no ) as count";
+		sql += " FROM notice_board NB";
 		if("writer".equals(map.get("title"))) {
 			sql += " WHERE manager_id LIKE '%' || ? || '%' ";
 		} else if ("title".equals(map.get("title"))) {
@@ -98,6 +100,7 @@ public class NoticeDaoImpl implements NoticeDao {
 				res.setCreateDate(rs.getDate("create_date"));
 				res.setViews(rs.getInt("views"));
 				res.setNoticeImp(rs.getString("notice_imp"));
+				res.setCommentCnt(rs.getInt("count"));
 				
 				list.add(res);
 				

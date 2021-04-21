@@ -115,6 +115,9 @@ ul.tabs li.current{
 #searchBox:focus {outline : none;}
 #searchtitle {border : 1px solid #A48654; border-radius : 24px;}
 
+.container .titleContent { color : #000;}
+.container .titleContent:hover { color : #EA9A56; text-decoration :none; font-size: medium; transition: 0.5s;}
+
 </style>
 
 
@@ -156,7 +159,11 @@ ul.tabs li.current{
 				<% } else {%>
 				<td><img src="/resources/image/dot.png"></td>
 				<% } %>
-				<td><a href="/notice/view?noticeno=<%=list.get(i).getNoticeNo() %>"><%=list.get(i).getTitle() %></a></td>
+				<td><a href="/notice/view?noticeno=<%=list.get(i).getNoticeNo() %>" class="titleContent"><%=list.get(i).getTitle() %>
+				<% if(list.get(i).getCommentCnt() != 0) { %>
+				 (<%=list.get(i).getCommentCnt() %>)
+				<% } %>
+				 </a></td>
 				<td class="writer"><%=list.get(i).getManagerId() %></td>
 				<td class="date"><%=list.get(i).getCreateDate() %></td>
 				<td class="views"><%=list.get(i).getViews() %> </td>
