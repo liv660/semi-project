@@ -197,9 +197,9 @@ $(document.body).on("change", "#profileimg", function( e ) {
 <div class="rel_forin">
 	<div class="rel_pic">
 		<div class="box" id="preview" style="background: #BDBDBD;">
-			<% if(  (userimg.getUpdateDate()) != null) {%>
+			<% if(  !"basic.png".equals(userimg.getStroedName()) ) {%>
     		<img class="profile" src="/userimgup/<%=userimg.getStroedName() %>">
-    		<% } else {%>
+    		<% }  else { %>
     		<img class="profile" src="/resources/image/basic.png">
  			<% } %>
 		</div>

@@ -134,9 +134,9 @@ font-size: 30px;
 <div class="abs_img">
 		<div id=myprofil>
 		<div class="box" style="background: #BDBDBD;">
-		<% if(  (userimg.getUpdateDate()) != null) {%>
+		<% if(  !"basic.png".equals(userimg.getStroedName()) ) {%>
     	<img class="profile" src="/userimgup/<%=userimg.getStroedName() %>">
-    	<% } else {%>
+    	<% }  else {%>
     	<img class="profile" src="/resources/image/basic.png">
  		<% } %>
 		</div>
