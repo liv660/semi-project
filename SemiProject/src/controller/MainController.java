@@ -25,10 +25,6 @@ public class MainController extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		
-		
-		System.out.println(req.getParameter("autologin"));
-		System.out.println(req.getParameter("rememberid"));
-		
 		//자동 로그인 쿠키 저장
 		if("on".equals(req.getParameter("autologin"))) {
 			
@@ -77,8 +73,6 @@ public class MainController extends HttpServlet {
 			
 			for(Cookie c : cookies) {
 				
-				System.out.println("for문 도는지 검사");
-				
 				if("autologin".equals(c.getName())) {
 					value = c.getValue();
 				}
@@ -86,8 +80,6 @@ public class MainController extends HttpServlet {
 					id = c.getValue();
 				}
 			}
-			
-			System.out.println("value : " + value);
 			
 			if("autologin".equals(value)) {
 				
