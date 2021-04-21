@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,15 +27,22 @@ public class UserConfirmController extends HttpServlet {
 			return;
 		}
 		
-		String Pw = proFileService.getPw(req);
 		
-		req.setAttribute("Pw", Pw);
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/uconfirm.jsp")
 		 	.forward(req, resp);
 	}
 
-	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		boolean confirm = proFileService.getPw(req);
+		
+		PrintWriter out = resp.getWriter();
+		
+		out.print( confirm );
+		
+	}
 		
 		
 	

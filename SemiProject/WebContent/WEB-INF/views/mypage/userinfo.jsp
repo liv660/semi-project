@@ -173,7 +173,7 @@ $(document.body).on("change", "#profileimg", function( e ) {
 				
 					$("#preview").html(
 						$("<img>").attr({
-						"src": "/file/basic.png" ,
+						"src": "/resources/image/basic.png" ,
 						"width" : "100%",
 						"height" : "100%",
 						"object-fit" : "cover"
@@ -200,7 +200,7 @@ $(document.body).on("change", "#profileimg", function( e ) {
 			<% if(  (userimg.getUpdateDate()) != null) {%>
     		<img class="profile" src="/userimgup/<%=userimg.getStroedName() %>">
     		<% } else {%>
-    		<img class="profile" src="/userimgup/basic.png">
+    		<img class="profile" src="/resources/image/basic.png">
  			<% } %>
 		</div>
 	</div> 

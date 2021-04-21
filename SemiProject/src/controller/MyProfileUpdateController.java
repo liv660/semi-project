@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.Usertb;
 import service.face.ProFileService;
 import service.impl.ProFileServiceImpl;
 
@@ -36,12 +37,15 @@ public class MyProfileUpdateController extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
+		
 		int res = proFileService.getUserUpdate(req);
 		
-		res = 0;
 		
-		res = proFileService.UserAddress(req);
-	
+		
+		
+		
+		
+		
 		resp.sendRedirect("/mypage/profile/update");
 	}
 }

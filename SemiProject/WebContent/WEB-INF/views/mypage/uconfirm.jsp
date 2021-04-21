@@ -92,17 +92,29 @@ function pwconfirm() {
 	
 	
 	var ipw = $("input").val();
-	if( "<%=Pw %>" == ipw  ) {
-		$("#pw_cor").html("");
-		$("#pw").html("PASSWORD MATCH");
-		$("#pwcon").removeAttr("disabled")
+	$.ajax({
+		type: 'post',
+		url: '/mypage/confirm',
+		data: { ipw:ipw },
+		success : function( data ) {
+			console.log( data )
+				if( data == "true") {
+					$("#pw_cor").html("");
+					$("#pw").html("PASSWORD MATCH");
+					$("#pwcon").removeAttr("disabled")
+				
+				} else {
+					$("#pw").html("");
+					$("#pw_cor").html("PASSWORD MISMATCH");
+					
+					
+				}
+			
+
+			}
+		}) 
 	
-	} else {
-		$("#pw").html("");
-		$("#pw_cor").html("PASSWORD MISMATCH");
-		
-		
-	}
+	
 }
 
 

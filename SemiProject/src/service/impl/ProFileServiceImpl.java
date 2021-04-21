@@ -23,6 +23,7 @@ import dto.UserImg;
 import dto.UserLeave;
 import dto.Usertb;
 import service.face.ProFileService;
+import util.HashNMacUtil;
 
 public class ProFileServiceImpl implements ProFileService {
 
@@ -208,26 +209,55 @@ public class ProFileServiceImpl implements ProFileService {
 
 
 	@Override
-	public String getPw(HttpServletRequest req) {
+	public boolean getPw(HttpServletRequest req) {
 
 		int userno = (int)req.getSession().getAttribute("userno");
 
 		Connection conn = JDBCTemplate.getConnection();
 
 		String Pw = proFileDao.selectPw(conn, userno);
+		
+		boolean ipwcon = false;
+		
+		try {
+			//비밀번호 Sha256 해쉬코드 암호화처리
+			String iPw = (HashNMacUtil.EncBySha256(req.getParameter("ipw"))); //pw
+			
+			if ( Pw.equals(iPw) ) {
+				
+				ipwcon = true;
+			}
 
-		return Pw;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(ipwcon);
+
+		return ipwcon;
 	}
 
 
 	@Override
 	public int getUserUpdate(HttpServletRequest req) {
-
+		
 		Connection conn = JDBCTemplate.getConnection();
-
+		Usertb usertb = new Usertb();
+		
+		
+		String postnum = req.getParameter("uAddress_zoneCode");
+		int pn = 0;
+		if( null != postnum && !"".equals(postnum)) {
+			pn = Integer.parseInt(postnum);
+		}
+		
+		usertb.setPostnum( pn ); 
+		usertb.setAddr( req.getParameter("uAddress_addr"));
+		usertb.setAddrDetail(req.getParameter("uAddress_detail"));
+		
+		
 		int res = 0;
 
-		Usertb usertb = new Usertb();
 		usertb.setUserNo( (int)req.getSession().getAttribute("userno") );
 		if ( req.getParameter("userpw_up") != null && req.getParameter("userpw_up") != "" ) {
 
@@ -276,126 +306,61 @@ public class ProFileServiceImpl implements ProFileService {
 				JDBCTemplate.rollback(conn);
 			}
 		}
-
-		return res;
-	}
-
-
-	@Override
-	public int UserAddress(HttpServletRequest req) {
-
-		Connection conn = JDBCTemplate.getConnection();
-
-		UserAddress userAddress = new UserAddress();
-		userAddress.setUserNo( (int)req.getSession().getAttribute("userno") );
-		userAddress.setUserPostcode( req.getParameter("user_postcode"));
-		userAddress.setUserRoadAddress( req.getParameter("user_roadAddress"));
-		userAddress.setUserJibunAddress( req.getParameter("user_jibunAddress"));
-		userAddress.setUserDetailAddress( req.getParameter("user_detailAddress"));
-		userAddress.setUserExtraAddress( req.getParameter("user_extraAddress"));
-
-
-		String postcode = (String) proFileDao.selectbyPost(conn, userAddress) ;
-		//결과값 초기화
-		int res = 0;
-
-		//postcode 입력
-		if( "".equals( postcode  ) ) {
-
-			res = proFileDao.getinsertaddress(conn, userAddress);
-
-			if ( res > 0 ) {
-
-				JDBCTemplate.commit(conn);
-			} else {
-
-				JDBCTemplate.rollback(conn);
-			}
-		}
-
-
-		//결과값 초기화
-		res = 0;
-
+		
 		//postcode update
-		if ( !"".equals( req.getParameter("user_postcode") ) ) {
-
-			res = proFileDao.updatepost(conn, userAddress);
-
+		if ( !"".equals( req.getParameter("uAddress_zoneCode") ) ) {
+			
+			res = proFileDao.updatepost(conn, usertb);
+			
 			if ( res > 0 ) {
-
+				
 				JDBCTemplate.commit(conn);
 			} else {
-
+				
 				JDBCTemplate.rollback(conn);
 			}
-
+			
 		}
-
+		
 		res = 0;
-
+		
 		//roadAddress update
-		if ( !"".equals( req.getParameter("user_roadAddress") ) ) {
-
-			res = proFileDao.updateroad(conn, userAddress);
-
+		if ( !"".equals( req.getParameter("uAddress_addr") ) ) {
+			
+			res = proFileDao.updateaddr(conn, usertb);
+			
 			if ( res > 0 ) {
-
+				
 				JDBCTemplate.commit(conn);
 			} else {
-
+				
 				JDBCTemplate.rollback(conn);
 			}
-
+			
 		}
-
+		
 		res = 0;
-		//jibunAddress update
-		if ( !"".equals( req.getParameter("user_jibunAddress") ) ) {
-
-			res = proFileDao.updatejibun(conn, userAddress);
-
+		//ditail update
+		if ( !"".equals( req.getParameter("uAddress_detail") ) ) {
+			
+			res = proFileDao.updatedetail(conn, usertb);
+			
 			if ( res > 0 ) {
-
+				
 				JDBCTemplate.commit(conn);
 			} else {
-
+				
 				JDBCTemplate.rollback(conn);
 			}
 		}
+		
+		
+		
 
-
-		res = 0;
-		//detailAddress update
-		if ( !"".equals( req.getParameter("user_detailAddress") ) ) {
-
-			res = proFileDao.updatedetail(conn, userAddress);
-
-			if ( res > 0 ) {
-
-				JDBCTemplate.commit(conn);
-			} else {
-
-				JDBCTemplate.rollback(conn);
-			}
-		}
-
-		//extraAddress update
-		if ( !"".equals( req.getParameter("user_extraAddress") ) ) {
-
-			res = proFileDao.updateExtra(conn, userAddress);
-
-			if ( res > 0 ) {
-
-				JDBCTemplate.commit(conn);
-			} else {
-
-				JDBCTemplate.rollback(conn);
-			}
-		}
-
+		
 		return res;
 	}
+
 
 
 	@Override
@@ -434,5 +399,7 @@ public class ProFileServiceImpl implements ProFileService {
 
 		return res;
 	}
+
+
 
 }

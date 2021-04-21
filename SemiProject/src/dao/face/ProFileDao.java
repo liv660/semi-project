@@ -28,20 +28,12 @@ public interface ProFileDao {
 
 	public int updatebyPhone(Connection conn, Usertb usertb);
 
-	public int getinsertaddress(Connection conn, UserAddress userAddress);
+	public int updatepost(Connection conn, Usertb usertb);
 
-	public int updatejibun(Connection conn, UserAddress userAddress);
+	public int updateaddr(Connection conn, Usertb usertb);
 
-	public int updatedetail(Connection conn, UserAddress userAddress);
-
-	public String selectbyPost(Connection conn, UserAddress userAddress);
-
-	public int updatepost(Connection conn, UserAddress userAddress);
-
-	public int updateroad(Connection conn, UserAddress userAddress);
-
-	public int updateExtra(Connection conn, UserAddress userAddress);
-
+	public int updatedetail(Connection conn, Usertb usertb);
+	
 	public int deleteuser(Connection conn, int userno);
 
 	public int insertleave(Connection conn, UserLeave userLeave);

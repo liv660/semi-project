@@ -14,11 +14,9 @@ public interface ProFileService {
 
 	public void basicimg(HttpServletRequest req);
 
-	public String getPw(HttpServletRequest req);
+	public boolean getPw(HttpServletRequest req);
 
 	public int getUserUpdate(HttpServletRequest req);
-
-	public int UserAddress(HttpServletRequest req);
 
 	public int getuserleave(HttpServletRequest req);
 

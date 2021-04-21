@@ -8,6 +8,7 @@ import java.util.Date;
 
 import common.JDBCTemplate;
 import dao.face.ProFileDao;
+import dto.Usertb;
 import dto.UserAddress;
 import dto.UserImg;
 import dto.UserLeave;
@@ -102,7 +103,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		
 		String sql = "SELECT * FROM userimg ";
 		sql += " WHERE 1 = 1";
-		sql += "     AND user_no = ?";
+		sql += " AND user_no = ?";
 		//객체생성
 		UserImg useri = new UserImg();
 		
@@ -259,67 +260,14 @@ public class ProFileDaoImpl implements ProFileDao {
 		return res;
 	}
 
-	@Override
-	public int getinsertaddress(Connection conn, UserAddress userAddress) {
-		
-		String sql = "";
-		sql += "INSERT INTO useraddress ( user_no, user_postcode";
-		sql += " , write_date)";
-		sql += " VALUES ( ?, ?, SYSDATE ) ";
-		
-		int res = -1;
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, userAddress.getUserNo() );
-			ps.setString(2, userAddress.getUserPostcode() );
-			
-			res = ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(ps);
-			
-		}
-		
-		return res;
-	}
+	
+
 
 	@Override
-	public String selectbyPost(Connection conn, UserAddress userAddress) {
-		
-		String sql = "";
-		sql += "SELECT user_postcode FROM useraddress";
-		sql += " WHERE user_no = ?";
-		String pc = new String();
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, userAddress.getUserNo());
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				pc = rs.getString("user_postcode");
-			}
-			
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(ps);
-		}
-		
-		return pc;
-	}
-
-	@Override
-	public int updatepost(Connection conn, UserAddress userAddress) {
+	public int updatepost(Connection conn, Usertb usertb) {
 		String sql ="";
-		sql += "UPDATE useraddress";
-		sql += " SET user_postcode = ?";
-		sql += " , update_date = SYSDATE";
+		sql += "UPDATE usertb";
+		sql += " SET postnum = ?";
 		sql += " WHERE 1 = 1";
 		sql += " AND user_no = ?";
 
@@ -327,8 +275,8 @@ public class ProFileDaoImpl implements ProFileDao {
 
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, userAddress.getUserPostcode());
-			ps.setInt(2, userAddress.getUserNo());
+			ps.setInt(1, usertb.getPostnum());
+			ps.setInt(2, usertb.getUserNo());
 
 			res = ps.executeUpdate();
 
@@ -342,11 +290,10 @@ public class ProFileDaoImpl implements ProFileDao {
 	}
 
 	@Override
-	public int updatejibun(Connection conn, UserAddress userAddress) {
+	public int updateaddr(Connection conn, Usertb usertb) {
 		String sql ="";
-		sql += "UPDATE useraddress";
-		sql += " SET user_jibunAddress = ?";
-		sql += " , update_date = SYSDATE";
+		sql += "UPDATE usertb";
+		sql += " SET addr = ?";
 		sql += " WHERE 1 = 1";
 		sql += " AND user_no = ?";
 
@@ -354,37 +301,8 @@ public class ProFileDaoImpl implements ProFileDao {
 
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, userAddress.getUserJibunAddress());
-			ps.setInt(2, userAddress.getUserNo());
-
-			res = ps.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(ps);
-		}
-
-		return res;
-	}
-
-
-	@Override
-	public int updateroad(Connection conn, UserAddress userAddress) {
-		
-		String sql ="";
-		sql += "UPDATE useraddress";
-		sql += " SET user_roadAddress = ?";
-		sql += " , update_date = SYSDATE";
-		sql += " WHERE 1 = 1";
-		sql += " AND user_no = ?";
-
-		int res = 0;
-
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, userAddress.getUserRoadAddress());
-			ps.setInt(2, userAddress.getUserNo());
+			ps.setString(1, usertb.getAddr());
+			ps.setInt(2, usertb.getUserNo());
 
 			res = ps.executeUpdate();
 
@@ -399,38 +317,11 @@ public class ProFileDaoImpl implements ProFileDao {
 
 
 	@Override
-	public int updatedetail(Connection conn, UserAddress userAddress) {
+	public int updatedetail(Connection conn, Usertb usertb) {
+		
 		String sql ="";
-		sql += "UPDATE useraddress";
-		sql += " SET user_detailAddress = ?";
-		sql += " , update_date = SYSDATE";
-		sql += " WHERE 1 = 1";
-		sql += " AND user_no = ?";
-		
-		int res = 0;
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, userAddress.getUserDetailAddress());
-			ps.setInt(2, userAddress.getUserNo());
-			
-			res = ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(ps);
-		}
-		
-		return res;
-	}
-
-	@Override
-	public int updateExtra(Connection conn, UserAddress userAddress) {
-		String sql ="";
-		sql += "UPDATE useraddress";
-		sql += " SET user_extraAddress = ?";
-		sql += " , update_date = SYSDATE";
+		sql += "UPDATE usertb";
+		sql += " SET addr_detail = ?";
 		sql += " WHERE 1 = 1";
 		sql += " AND user_no = ?";
 
@@ -438,8 +329,8 @@ public class ProFileDaoImpl implements ProFileDao {
 
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, userAddress.getUserExtraAddress());
-			ps.setInt(2, userAddress.getUserNo());
+			ps.setString(1, usertb.getAddrDetail());
+			ps.setInt(2, usertb.getUserNo());
 
 			res = ps.executeUpdate();
 
@@ -451,6 +342,8 @@ public class ProFileDaoImpl implements ProFileDao {
 
 		return res;
 	}
+
+
 
 	@Override
 	public int deleteuser(Connection conn, int userno) {
@@ -500,6 +393,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		
 		return res;
 	}
+
 
 	
 }
