@@ -32,8 +32,6 @@ public class MainController extends HttpServlet {
 		//자동 로그인 쿠키 저장
 		if(!"null".equals(req.getParameter("autologin"))) {
 			
-			System.out.println("autologinaaaaa");
-			
 			auto = (String) session.getAttribute("userid");
 			
 			Cookie autologin = new Cookie("autologin", "autologin");
@@ -50,8 +48,7 @@ public class MainController extends HttpServlet {
 		}
 		
 		if(!"null".equals(req.getParameter("rememberid"))) {
-			System.out.println("rememeemememm");
-			
+
 			auto = (String) session.getAttribute("userid");
 			
 			Cookie rememberid = new Cookie("rememberid", "rememberid");
@@ -85,11 +82,7 @@ public class MainController extends HttpServlet {
 				Usertb info = new Usertb();
 				info.setUserId(auto);
 				
-				System.out.println(info);
-				
 				Usertb res = loginService.loginUser(info);
-				
-				System.out.println(res);
 				
 				if(res != null) {
 					session.setAttribute("login", true);
