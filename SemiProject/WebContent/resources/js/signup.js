@@ -3,7 +3,7 @@ $(document).ready(function() {
 	
 	var uidReg = /^[A-Za-z0-9]{8,}$/
 	var upwReg = /^[A-Za-z0-9]{8,}$/
-	var emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+	var emailReg = /^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i;
 	var telReg = /^\d{3}\d{3,4}\d{4}$/;
 	var idFlag = "";
 	var pwFlag = "";
@@ -64,7 +64,6 @@ $(document).ready(function() {
 				$("#emailMsg").html("");
 				emFlag = "true";
 				$("#mailbtn").attr('disabled', false);
-				$("#email").attr('readonly', true);
 			}
 		})
 		
@@ -145,7 +144,8 @@ $(document).ready(function() {
 		
 		//이메일 인증번호 발송
 		$("#mailbtn").click(function() {
-		var email = $("#email").val();
+			var email = $("#email").val();
+			$("#email").attr('readonly', true);
 			
 				$.ajax({
 					type : 'get',

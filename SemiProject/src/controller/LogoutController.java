@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +22,17 @@ public class LogoutController extends HttpServlet {
 		//세션 무효화
 		session.invalidate();
 		
-		//로그아웃시 메인으로 리다이렉트
-		resp.sendRedirect("/main");
+		Cookie[] cookies = req.getCookies();
+		
+		for(Cookie c : cookies) {
+			if("autologin".equals(c.getName())) {
+				
+			c.setMaxAge(0);
+			resp.addCookie(c);
+			}
+		}
+		
+		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
 		
 		
 	}

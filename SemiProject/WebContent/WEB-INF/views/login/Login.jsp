@@ -110,12 +110,32 @@ body {
 </head>
 <body>
 
+<% 	
+
+	String value = "";
+	if(request.getCookies() != null) {
+	
+	Cookie[] cookies = request.getCookies();
+	
+		for(Cookie c : cookies) {
+		
+		if("userid".equals(c.getName())) {
+			value = c.getValue();
+		}
+	} 
+	
+	}%>
+
 <form action="/login/login" method="post" class="box">
 
 	<h1>Login</h1>
 	
 	<label for="id">아이디</label><br>
-	<input type="text" id="id" name="id" />
+	<input type="text" id="id" name="id" <% if(!"".equals(value)) { %>
+	
+	value="<%=value %>"
+	
+	<% } %>/>
 	
 	<label for="pw">비밀번호</label><br>
 	<input type="password" id="pw" name="pw" />
@@ -140,6 +160,8 @@ body {
 	<a href="/login/findpw" class="link">비밀번호 찾기</a>
 
 </div>
+
+<%  %>
 
 </form>
 

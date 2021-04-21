@@ -8,18 +8,96 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dto.Usertb;
+import service.face.LoginService;
+import service.impl.LoginServiceImpl;
 
 @WebServlet("/main")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private LoginService loginService = new LoginServiceImpl();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Cookie[] cookies = req.getCookies();
+		HttpSession session = req.getSession();
 		
-		for(Cookie c : cookies) {
-			System.out.println(c.getName() + "=" + c.getValue());
+		System.out.println(req.getParameter("autologin"));
+		
+		String auto = "";
+		
+		//자동 로그인 쿠키 저장
+		if(!"null".equals(req.getParameter("autologin"))) {
+			
+			System.out.println("autologinaaaaa");
+			
+			auto = (String) session.getAttribute("userid");
+			
+			Cookie autologin = new Cookie("autologin", "autologin");
+			Cookie userid = new Cookie("userid", auto);
+			
+			autologin.setMaxAge(30*24*60*60);
+			userid.setMaxAge(30*24*60*60);
+			
+			autologin.setPath("/");
+			userid.setPath("/");
+			
+			resp.addCookie(autologin);
+			resp.addCookie(userid);
+		}
+		
+		if(!"null".equals(req.getParameter("rememberid"))) {
+			System.out.println("rememeemememm");
+			
+			auto = (String) session.getAttribute("userid");
+			
+			Cookie rememberid = new Cookie("rememberid", "rememberid");
+			Cookie userid = new Cookie("userid", auto);
+			
+			rememberid.setMaxAge(30*24*60*60);
+			userid.setMaxAge(30*24*60*60);
+			
+			rememberid.setPath("/");
+			userid.setPath("/");
+			
+			resp.addCookie(rememberid);
+			resp.addCookie(userid);
+		}
+
+
+		if(req.getCookies() != null) {
+			
+			Cookie[] cookies = req.getCookies();
+			String value = "";
+			
+			for(Cookie c : cookies) {
+				
+				if("autologin".equals(c.getName())) {
+					value = c.getValue();
+				}
+			}
+			
+			if(value != null) {
+				
+				Usertb info = new Usertb();
+				info.setUserId(auto);
+				
+				System.out.println(info);
+				
+				Usertb res = loginService.loginUser(info);
+				
+				System.out.println(res);
+				
+				if(res != null) {
+					session.setAttribute("login", true);
+					session.setAttribute("userid", res.getUserId());
+					session.setAttribute("userno", res.getUserNo());
+					session.setAttribute("nick", res.getNick());
+				}
+			}
 		}
 
 		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);

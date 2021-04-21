@@ -33,31 +33,12 @@ public class LoginController extends HttpServlet {
 		//입력정보 받아오기
 		Usertb param = loginService.getParam(req);
 		
-		//자동 로그인 쿠키 저장
-		if(req.getParameter("autologin") != null) {
-			
-			System.out.println("autologin");
-			
-			Cookie autoLogin = new Cookie("autologin", "true");
-			Cookie userid = new Cookie("userid", param.getUserId());
-			
-			autoLogin.setMaxAge(30*24*60*60);
-			userid.setMaxAge(30*24*60*60);
-			
-			autoLogin.setPath("/");
-			userid.setPath("/");
-			
-			resp.addCookie(autoLogin);
-			resp.addCookie(userid);
-			
-		}
-		
-		if(req.getParameter("remeberid") != null) {
-			
-		}
-		
 		//입력정보와 유저정보가 일치하는지 조회
 		boolean flag = loginService.login(param);
+		
+		String autologin = req.getParameter("autologin");
+		String rememberid = req.getParameter("rememberid");
+		
 	
 		if(flag) {
 			//유저 정보 조회
@@ -65,13 +46,13 @@ public class LoginController extends HttpServlet {
 			
 			//세션생성 및 로그인상태, id, userNo, Nickname 저장
 			HttpSession session = req.getSession();
-			session.setAttribute("login", flag);
+			session.setAttribute("login", true);
 			session.setAttribute("userid", res.getUserId());
 			session.setAttribute("userno", res.getUserNo());
 			session.setAttribute("nick", res.getNick());
 			
 			//로그인 완료시 메인으로 리다이렉트
-			resp.sendRedirect("/main");
+			resp.sendRedirect("/main?autologin=" + autologin + "&rememberid=" + rememberid);
 			
 		} else {
 			//입력정보와 유저정보가 일치하지 않을시 메시지 전달
