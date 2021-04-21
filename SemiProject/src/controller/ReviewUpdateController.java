@@ -15,26 +15,25 @@ import dto.ReviewImgFile;
 import service.face.ReviewService;
 import service.impl.ReviewServiceImpl;
 
-@WebServlet("/review/view")
-public class ReviewTextViewController extends HttpServlet {
+@WebServlet("/review/update")
+public class ReviewUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private ReviewService reviewService = new ReviewServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		System.out.println("리뷰 상세보기 [GET]");
+//		System.out.println("리뷰 수정");
 		
-		//reviewNo 전달파라미터 얻기
+		//전달파라미터 얻기 - reviewNo
 		ReviewBoard reviewNo = reviewService.getReviewNo(req);
 //		System.out.println(reviewNo);
 		
-		//상세보기 결과 조회
-		ReviewDetailView reviewTextview = reviewService.view(reviewNo);
-//		System.out.println(reviewTextview);
+		//상세보기 결과
+		ReviewDetailView reviewDetail = reviewService.view(reviewNo);
+//		System.out.println(reviewDetail);
 		
-		//조회결과 MODEL값 전달
-		req.setAttribute("reviewTextView", reviewTextview);
+		req.setAttribute("reviewDetail", reviewDetail);
 		
 		//첨부파일 정보 VIEW에 전달
 		List<ReviewImgFile> reviewImgs = reviewService.viewFile(reviewNo);
@@ -43,7 +42,7 @@ public class ReviewTextViewController extends HttpServlet {
 		
 		req.setAttribute("reviewNo", reviewNo);
 		
-		req.getRequestDispatcher("/WEB-INF/views/review/view.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/review/update.jsp").forward(req, resp);
 	}
 
 }

@@ -7,6 +7,7 @@
     
 <% ReviewDetailView view = (ReviewDetailView) request.getAttribute("reviewTextView"); %>
 <% List<ReviewImgFile> imgs = (List<ReviewImgFile>) request.getAttribute("reviewImgs"); %>
+<% ReviewBoard reviewNo = (ReviewBoard) request.getAttribute("reviewNo"); %>
 
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 
@@ -15,10 +16,12 @@
 $(document).ready(function() {
 	
 	$("#btnList").click(function() {
-		
-		JOptionPane.showConfirmDialog(null, "작성을 중단하고\n목록으로 돌아가시겠습니까?", "알림창")
 		location.href="/review/list";
 	});
+	
+	$("#btnUpdate").click(function() {
+		$(location).attr("href", "/review/update?reviewNo=<%=reviewNo.getReviewNo() %>")
+	})
 	
 });
 </script>
@@ -59,10 +62,13 @@ $(document).ready(function() {
 <tr>
 	<td>제목</td><td colspan="6"><%=view.getTitle() %></td>
 </tr>
+
+<tr>
 	<td>작성자</td><td colspan="2"><%=view.getNick() %></td>
 	<td>작성일</td><td colspan="2"><%=view.getCreateDate() %></td>
 	<td><button type="button" id="btnUpdate" class="btn">수정</button></td>
 	<td><button type="button" id="btnDelete" class="btn">삭제</button></td>
+</tr>
 	
 <% int i = imgs.size(); %>	
 	<% if(i <= 0) { %>
