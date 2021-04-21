@@ -330,6 +330,10 @@ public class NoticeServiceImpl implements NoticeService {
 						notice.setContent(item.getString("UTF-8"));
 					}
 					
+					if("check".equals(item.getFieldName())) { //NoticeImp
+						notice.setNoticeImp(item.getString("UTF-8"));
+					}
+					
 					if("filelist".equals(item.getFieldName())) { //originName
 						//삭제한 파일 리스트 , 로 구분해 배열에 저장
 						fileArr = item.getString().split(",");

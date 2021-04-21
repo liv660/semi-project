@@ -267,7 +267,7 @@ public class NoticeDaoImpl implements NoticeDao {
 		//게시글 수정
 		String sql = "";
 		sql += "UPDATE notice_board";
-		sql += " SET title = ?, content = ?";
+		sql += " SET title = ?, content = ?, notice_imp = ?";
 		sql += " WHERE notice_no = ?";
 		
 		int res = 0;
@@ -277,7 +277,8 @@ public class NoticeDaoImpl implements NoticeDao {
 
 			ps.setString(1, notice.getTitle());
 			ps.setString(2, notice.getContent());
-			ps.setInt(3, notice.getNoticeNo());
+			ps.setString(3, notice.getNoticeImp());
+			ps.setInt(4, notice.getNoticeNo());
 			
 			res = ps.executeUpdate();
 		
