@@ -300,4 +300,92 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 		return reviewImgs;
 	}
+	
+	
+	@Override
+	public int deleteImgFile(Connection conn, ReviewBoard reviewBoard) {
+
+		String sql = "";
+		sql += "DELETE FROM review_img";
+		sql += " WHERE review_no = ?";
+		
+		PreparedStatement ps = null;
+		
+		int res = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, reviewBoard.getReviewNo());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		return res;
+	}
+	
+	
+	@Override
+	public int update(Connection conn, ReviewBoard reviewBoard) {
+		
+		String sql = "";
+		sql += "UPDATE review_board";
+		sql += " SET title = ?,";
+		sql += "	content = ?,";
+		sql += "	update_date = sysdate";
+		sql += " WHERE review_no = ?";
+		
+		int res = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, reviewBoard.getTitle());
+			ps.setString(2, reviewBoard.getContent());
+			ps.setInt(3, reviewBoard.getReviewNo());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	
+	
+	@Override
+	public int insertImg(Connection conn, List<ReviewImgFile> reviewImgs) {
+		
+		String sql = "";
+		sql += "INSERT INTO review_img";
+		sql += " VALUES (review_img_seq.nextval, ?, ?, ?)";
+		
+		int result = -1;
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			for(int i=0; i < reviewImgs.size(); i++) {
+				ps.setInt(1, reviewImgs.get(i).getReviewNo());
+				ps.setString(2, reviewImgs.get(i).getOriginImg());
+				ps.setString(3, reviewImgs.get(i).getStoredImg());
+				
+				res += ps.executeUpdate();
+			}
+			result = res;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return result;
+	}
 }

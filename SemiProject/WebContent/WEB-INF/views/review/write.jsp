@@ -32,20 +32,6 @@ $(document).ready(function() {
 	
 	//작성버튼
 	$("#btnWrite").click(function() {
-		
-// 		index = $("#select option").index($("#select option:selected")) + 1;
-// 		alert(index + '번째 선택');
-
-// 		if(index == 1) {
-<%-- 			<% session.setAttribute("reviewSort",  "1"); %>	 --%>
-// 		}
-// 		else if(index == 2) {
-<%-- 			<% session.setAttribute("reviewSort",  "2"); %>	 --%>
-// 		}
-// 		else if(index == 3) {
-<%-- 			<% session.setAttribute("reviewSort",  "3"); %>	 --%>
-// 		}
-		
 		submitContents($("#btnWrite"))
 		$("form").submit();
 	});
@@ -186,7 +172,7 @@ function uploadImg(e) {
 		reader.readAsDataURL(files[i])
 		
 	} //for() END
-	
+	}
 }
 
 </script>

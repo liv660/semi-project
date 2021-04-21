@@ -82,4 +82,30 @@ public interface ReviewDao {
 	 */
 	public List<ReviewImgFile> selectReviewImgs(Connection conn, ReviewBoard reviewNo);
 
+	/**
+	 * 파일 삭제
+	 * 
+	 * @param conn
+	 * @param reviewBoard
+	 */
+	public int deleteImgFile(Connection conn, ReviewBoard reviewBoard);
+
+	/**
+	 * 게시글 수정
+	 * 
+	 * @param conn
+	 * @param reviewBoard
+	 * @return
+	 */
+	public int update(Connection conn, ReviewBoard reviewBoard);
+
+	/**
+	 * 수정된 게시글의 새로운 첨부파일 삽입
+	 * 
+	 * @param conn
+	 * @param reviewImgs
+	 * @return
+	 */
+	public int insertImg(Connection conn, List<ReviewImgFile> reviewImgs);
+
 }
