@@ -68,4 +68,11 @@ public interface ReviewService {
 	 */
 	public void update(HttpServletRequest req);
 
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param reviewNo
+	 */
+	public void delete(ReviewBoard reviewNo);
+
 }

@@ -388,4 +388,55 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 		return result;
 	}
+	
+	
+	@Override
+	public int deleteFile(Connection conn, ReviewBoard reviewNo) {
+		
+		String sql = "";
+		sql += "DELETE FROM review_img";
+		sql += " WHERE review_no = ?";
+		
+		int res = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, reviewNo.getReviewNo());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	
+	
+	@Override
+	public int delete(Connection conn, ReviewBoard reviewNo) {
+		
+		String sql = "";
+		sql += "DELETE FROM review_board";
+		sql += " WHERE review_no = ?";
+		
+		int res = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, reviewNo.getReviewNo());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return res;
+	}
 }

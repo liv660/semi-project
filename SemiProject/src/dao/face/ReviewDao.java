@@ -108,4 +108,22 @@ public interface ReviewDao {
 	 */
 	public int insertImg(Connection conn, List<ReviewImgFile> reviewImgs);
 
+	/**
+	 * 파일 삭제
+	 * 
+	 * @param conn
+	 * @param reviewNo - 리뷰넘버
+	 * @return
+	 */
+	public int deleteFile(Connection conn, ReviewBoard reviewNo);
+
+	/**
+	 * 게시글 삭제
+	 * 
+	 * @param conn
+	 * @param reviewNo
+	 * @return
+	 */
+	public int delete(Connection conn, ReviewBoard reviewNo);
+
 }
