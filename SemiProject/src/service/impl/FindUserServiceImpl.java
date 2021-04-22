@@ -31,8 +31,8 @@ public class FindUserServiceImpl implements FindUserService {
 	 
 	    public MyAuthentication(){
 	        
-	        String id = "zimmyrabbit@naver.com";       //  ID
-	        String pw = "wook19669!";          //  비밀번호
+	        String id = "";       //  ID
+	        String pw = "";          //  비밀번호
 	 
 	        pa = new PasswordAuthentication(id, pw);
 	      

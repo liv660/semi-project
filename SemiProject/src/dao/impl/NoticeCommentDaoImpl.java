@@ -48,6 +48,7 @@ public class NoticeCommentDaoImpl implements NoticeCommentDao {
 				res.setCommentNo(rs.getInt("comment_no"));
 				res.setCommentCnt(rs.getInt("count"));
 				res.setStoredName(rs.getString("storedname"));
+				res.setUserNo(rs.getInt("user_no"));
 				
 				list.add(res);
 			}

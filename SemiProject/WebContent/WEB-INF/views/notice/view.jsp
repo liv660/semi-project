@@ -177,6 +177,17 @@ height : 70px;
 	margin-top : 5px;
 }
 
+.commentWrapBox .fold {
+	display : none;
+}
+
+.commentWrapBox #foldbtn {
+	width : 800px;
+	border : none;
+	margin-top : 20px;
+	
+}
+
 
 
 
@@ -256,6 +267,14 @@ height : 70px;
 /* 댓글목록 조회 */
 $(document).ready(function() {
 	commentlist();
+	
+	$(document).on('click', '#foldbtn', function() {
+		
+		$('.fold').css('display','block');
+		$('#foldbtn').css('display','none');
+	})
+	
+	
 })
 
 /* .pic 인 이미지들의 배열 */
@@ -301,8 +320,9 @@ function commentlist() {
 					var commentCnt = commentlist[i].commentCnt;
 				}
 				
-				console.log(commentlist[i].storedName);
-				
+				if(i > 4) {
+					html += "<div class='fold'>";
+				}
 				html += "<div class='commentwrap'>"
 				html += "<div class='commentImg'> <img src='"
 				if(commentlist[i].storedName == "basic.png" || commentlist[i].storedName == null) {
@@ -313,21 +333,31 @@ function commentlist() {
 				html += " '/> </div>"
 				html += "<div class='commentNick'>" + commentlist[i].nick + "</div>"
 				html += "<div class='commentDate'>" + commentlist[i].commentDate + "</div>"
+				if( $("#userno").val() == commentlist[i].userNo) {
 				html += "<div class='commentBtn'>"
 				html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
 				html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
+				}
 				html += "</div> <br>"
-				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" 
-				html += "<span class='commentText' id='commentText" + commentlist[i].commentNo + "'> " + commentlist[i].commentText + "</span>"
+				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
 				html += "</div>"
+				if( i == commentlist.length-1) {
+					html += "</div>"
+				}
+				if( i == 4) {
+					html += "<input type='button' id='foldbtn' value='댓글 더보기'>"
+				}
 				
 				$("#commentwrap").append(html);
+				
+				
 			}
 			$("#commentCnt").html("");
 			$("#commentCnt").append(commentCnt);
 		}
 	})
 }	
+
 	
 
 /* 댓글 추가 */

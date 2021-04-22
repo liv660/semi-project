@@ -419,7 +419,7 @@ public class ReviewServiceImpl implements ReviewService {
 				} //if(!item.isFormField()) end
 			} //while(iter.hasNext()) end
 			
-			String usernoString = (String)req.getSession().getAttribute("userno");
+			String usernoString = String.valueOf(req.getSession().getAttribute("userno"));
 			if(usernoString != null && !"".equals(usernoString)) {
 				reviewBoard.setUserNo(Integer.parseInt(usernoString));
 			}

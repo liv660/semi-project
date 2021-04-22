@@ -39,11 +39,5 @@
 
 </div>
 
-<% for(Cookie c : request.getCookies()) { %>
-<tr>
-	<td><%=c.getName() %></td>
-	<td><%=c.getValue() %></td>
-</tr>
-<%} %>
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>
