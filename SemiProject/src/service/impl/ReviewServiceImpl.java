@@ -16,9 +16,12 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import common.JDBCTemplate;
+import dao.face.ReviewCommentDao;
 import dao.face.ReviewDao;
+import dao.impl.ReviewCommentDaoImpl;
 import dao.impl.ReviewDaoImpl;
 import dto.ReviewBoard;
+import dto.ReviewComment;
 import dto.ReviewDetailView;
 import dto.ReviewImgFile;
 import dto.ReviewUserJoin;
@@ -28,6 +31,7 @@ import util.Paging;
 public class ReviewServiceImpl implements ReviewService {
 	
 	private ReviewDao reviewDao = new ReviewDaoImpl();
+	private ReviewCommentDao reviewCommentDao = new ReviewCommentDaoImpl();
 	
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
@@ -419,7 +423,9 @@ public class ReviewServiceImpl implements ReviewService {
 				} //if(!item.isFormField()) end
 			} //while(iter.hasNext()) end
 			
-			String usernoString = String.valueOf(req.getSession().getAttribute("userno"));
+
+
+			String usernoString = String.valueOf(req.getSession().getAttribute("userno")) ;
 			if(usernoString != null && !"".equals(usernoString)) {
 				reviewBoard.setUserNo(Integer.parseInt(usernoString));
 			}
@@ -461,6 +467,51 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		
 		if(reviewDao.delete(conn, reviewNo) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	
+	}
+	
+	
+	@Override
+	public ReviewComment getCommentParam(HttpServletRequest req) {
+		
+		ReviewComment reviewComment = new ReviewComment();
+		
+		String reviewNo = req.getParameter("reviewNo");
+		String userno = req.getParameter("userno");
+		String comment = req.getParameter("comment");
+		
+		if(reviewNo != null && !"".equals(reviewNo)) {
+			reviewComment.setReviewNo(Integer.parseInt(reviewNo));
+		}
+		
+		if(userno != null && !"".equals(userno)) {
+			reviewComment.setUserNo(Integer.parseInt(userno));
+		}
+		
+		if(comment != null) {
+			reviewComment.setCommentText(comment);
+		}
+		
+		reviewComment.setNick(req.getParameter("nick"));
+		
+		if(req.getParameter("commentno") != null && !"".equals(req.getParameter("commentno"))) {
+			reviewComment.setCommentNo(Integer.parseInt(req.getParameter("commentno")));
+		}
+		
+		return reviewComment;
+	}
+	
+	
+	@Override
+	public void writeComment(ReviewComment param) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if(reviewCommentDao.insertComment(conn, param) > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);

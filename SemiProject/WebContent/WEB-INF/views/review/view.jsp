@@ -51,6 +51,29 @@ $(document).ready(function() {
 	margin: 5px;
 }
 
+#commentUpdatebtn {
+	border : none;
+	background : none;
+	text-align: center;
+	padding: 5px 5px;
+	outline: none;
+	color: #000;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+	margin-top : 20px;
+}
+
+#comment {
+width : 500px;
+height : 70px;
+}
+
+.commentwrap {
+	border-bottom: 1px solid #000;
+}
+
+
 </style>
 
 
@@ -75,7 +98,8 @@ $(document).ready(function() {
 	<% if(nick.equals(view.getNick()))  {%>
 	<td><button type="button" id="btnUpdate" class="btn">수정</button></td>
 	<td><button type="button" id="btnDelete" class="btn">삭제</button></td>
-	<% } %>
+	<% }%>
+	
 </tr>
 	
 <% int i = imgs.size(); %>	
@@ -137,7 +161,50 @@ $(document).ready(function() {
 
 </table>
 
+<input type="hidden" id="nick" value="<%=session.getAttribute("nick") %>">
+<input type="hidden" id="reviewNo" value="<%=reviewNo.getReviewNo() %>">
+<input type="hidden" id="userno" value="<%=session.getAttribute("userno")  %>">
+
+<div class="commentWrapBox">
+	<h4>댓글<span id="commentCnt"></span></h4>
+	
+	<input type="text" id="comment" name="comment" />
+	<input type="button" id="commentUpdatebtn" value="댓글 등록" />
+	
+	<div id="commentwrap">
+	
+	</div>
 </div>
 
-</body>
-</html>
+</div>
+
+<script type="text/javascript">
+
+/* 댓글 추가 */
+$("#commentUpdatebtn").click(function() {
+	
+	var reviewNo = $("#reviewNo").val();
+	var comment = $("#comment").val();
+	var nick = $("nick").val();
+	var userno = $("#userno").val();
+	
+	$.ajax({
+		type : 'post',
+		url : '/review/commentinsert',
+		data : {'reviewNo' : reviewNo,
+				'comment' : comment,
+				'nick' : nick,
+				'userno' : userno},
+		success : function() {
+			$("#comment").val("");
+			$("#commentwrap").html("");
+			
+			commentlist();
+		}
+	})
+	
+});
+
+</script>
+
+<%@ include file="/WEB-INF/views/layout/footer.jsp" %>

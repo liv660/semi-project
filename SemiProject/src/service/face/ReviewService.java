@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.ReviewBoard;
+import dto.ReviewComment;
 import dto.ReviewDetailView;
 import dto.ReviewImgFile;
 import dto.ReviewUserJoin;
@@ -74,5 +75,20 @@ public interface ReviewService {
 	 * @param reviewNo
 	 */
 	public void delete(ReviewBoard reviewNo);
+
+	/**
+	 * 파라미터 얻어오기
+	 * 
+	 * @param req
+	 * @return
+	 */
+	public ReviewComment getCommentParam(HttpServletRequest req);
+
+	/**
+	 * 댓글 쓰기
+	 * 
+	 * @param param
+	 */
+	public void writeComment(ReviewComment param);
 
 }
