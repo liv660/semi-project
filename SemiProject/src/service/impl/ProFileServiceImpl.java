@@ -3,6 +3,7 @@ package service.impl;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -408,13 +409,15 @@ public class ProFileServiceImpl implements ProFileService {
 
 
 	@Override
-	public List<MyBoard> myboradlist() {
+	public List<MyBoard> myboradlist(HttpServletRequest req) {
 
 		Connection conn = JDBCTemplate.getConnection();
 
-		List<MyBoard> myBoard = proFileDao.selectMyList(conn);
+		int userno = (int) req.getSession().getAttribute("userno");
 
-		System.out.println(myBoard);
+		List<MyBoard> myBoard = proFileDao.selectMyList(conn, userno);
+
+
 
 		return myBoard;
 	}
@@ -456,15 +459,100 @@ public class ProFileServiceImpl implements ProFileService {
 
 
 	@Override
-	public List<MyBoard> myboradlist(MyPaging myPaging) {
+	public List<MyBoard> myboradlist(HttpServletRequest req, MyPaging myPaging) {
 
 		Connection conn = JDBCTemplate.getConnection();
 
-		List<MyBoard> myBoard = proFileDao.selectMyList(conn, myPaging);
+		int userno = (int) req.getSession().getAttribute("userno");
 
-		System.out.println(myBoard);
+		List<MyBoard> myBoard = proFileDao.selectMyList(conn, myPaging, userno);
 
 		return myBoard;
+	}
+
+
+	@Override
+	public int deleteMyBoard(HttpServletRequest req) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		List<MyBoard> listMyBoard = new ArrayList<MyBoard>();
+
+		int cnt = Integer.parseInt((String) req.getParameter("CNT"));
+
+		String noDiv = (String)req.getParameter("no_div");
+
+		String [] noDivArr = noDiv.split(",");
+
+		int res = 0;
+
+		for(int i=0; i<cnt; i++) {
+
+			MyBoard myBoard = new MyBoard();
+			String [] noDivAr = noDivArr[i].split("_");
+
+			myBoard.setUser_no( (int) req.getSession().getAttribute("userno") );
+			myBoard.setBorad_no( Integer.parseInt( noDivAr[0] ));
+			myBoard.setBoard_div( noDivAr[1] );
+
+			listMyBoard.add(myBoard);
+		}
+		for(int i=0; i<listMyBoard.size(); i++)	 {
+			if( listMyBoard.get(i).getBoard_div().equals("찾기 게시판") ) {
+				res = proFileDao.deleteFindBoard(conn, listMyBoard.get(i));
+				if ( res > 0 ) {
+
+					JDBCTemplate.commit(conn);
+				} else {
+
+					JDBCTemplate.rollback(conn);
+				}
+
+			} else if ( listMyBoard.get(i).getBoard_div().equals("발견 게시판") ) {
+				res = 0;
+				res = proFileDao.deleteDiscoveryBoard(conn, listMyBoard.get(i));
+
+				if ( res > 0 ) {
+
+					JDBCTemplate.commit(conn);
+				} else {
+
+					JDBCTemplate.rollback(conn);
+				}
+
+			} else if ( listMyBoard.get(i).getBoard_div().equals("후기 게시판") ) {
+
+				res = 0;
+				String storedName = proFileDao.selectByReviewStroed(conn, listMyBoard.get(i));
+
+				if( null != storedName && !"".equals(storedName)) {
+
+					res = proFileDao.deleteReviewImg(conn, listMyBoard.get(i));
+
+					if ( res > 0 ) {
+
+						JDBCTemplate.commit(conn);
+					} else {
+
+						JDBCTemplate.rollback(conn);
+					}
+				}
+
+				res = 0;
+				res = proFileDao.deleteReviewBoard(conn, listMyBoard.get(i));
+				if ( res > 0 ) {
+
+					JDBCTemplate.commit(conn);
+				} else {
+
+					JDBCTemplate.rollback(conn);
+				}
+			}
+
+		}
+
+		return res;
+
 	}
 
 

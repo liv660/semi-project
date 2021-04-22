@@ -27,7 +27,7 @@ public class UserWrittenViewController extends HttpServlet {
 		MyPaging myPaging = proFileService.getPageing(req);
 		
 		//페이징을 적용한 게시글 조회
-		List<MyBoard> myBoardList = proFileService.myboradlist(myPaging);
+		List<MyBoard> myBoardList = proFileService.myboradlist(req, myPaging);
 		
 		
 		req.setAttribute("myPaging", myPaging);

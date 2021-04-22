@@ -24,13 +24,15 @@ public interface ProFileService {
 
 	public int getuserleave(HttpServletRequest req);
 
-	public List<MyBoard> myboradlist();
+	public List<MyBoard> myboradlist(HttpServletRequest req);
 
 	public String getNick(HttpServletRequest req);
 
 	public MyPaging getPageing(HttpServletRequest req);
 
-	public List<MyBoard> myboradlist(MyPaging myPaging);
+	public List<MyBoard> myboradlist(HttpServletRequest req, MyPaging myPaging);
+
+	public int deleteMyBoard(HttpServletRequest req);
 
 
 

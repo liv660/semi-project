@@ -163,124 +163,47 @@ font-size: 30px;
 		<th style="width: 50%;">제목</th>
 		<th>날짜</th>
 	</tr>
+	<% if (listMyb.size() > 0) { %>
+	<% for(int i=0; i < 3 && i <listMyb.size(); i++) { %>
 	<tr>
+	<td><%=listMyb.get(i).getBorad_no() %></td>
+	<% if(listMyb.get(i).getBoard_div().equals("찾기 게시판")) { %>
+	<td><a href="#" style="font-size: 17px">
+		<%=listMyb.get(i).getBoard_div() %>
+		</a>
+	</td>
+	<% } else if (listMyb.get(i).getBoard_div().equals("발견 게시판")) {%>
+	<td><a href="#" style="font-size: 17px">
+		<%=listMyb.get(i).getBoard_div() %>
+		</a>
+	</td>
+	<% } else if (listMyb.get(i).getBoard_div().equals("후기 게시판")) {%>
+	<td><a href="/review/list" style="font-size: 17px">
+		<%=listMyb.get(i).getBoard_div() %>
+		</a>
+	</td>
+	<% } %>
 	
-		<td><%=listMyb.get(1).getBorad_no() %></td>
-		
-		<% if(listMyb.get(1).getBoard_div().equals("찾기 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(1).getBoard_div() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(1).getBoard_div().equals("발견 게시판")) {%>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(1).getBoard_div() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(1).getBoard_div().equals("후기 게시판")) {%>
-		<td><a href="/review/list" style="font-size: 17px">
-			<%=listMyb.get(1).getBoard_div() %>
-			</a>
-		</td>
-		<% } %>
-	
-		<% if (listMyb.get(1).getBoard_div().equals("찾기 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(1).getTitle() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(1).getBoard_div().equals("발견 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(1).getTitle() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(1).getBoard_div().equals("후기 게시판")) { %>
-		<td><a href="/review/view?reviewNo=<%=listMyb.get(1).getBorad_no() %>" style="font-size: 17px">
-			<%=listMyb.get(1).getTitle() %>
-			</a>
-		</td>
-		<% } %>
-		<td><%=listMyb.get(1).getCreate_date() %></td>
-	</tr>
-	
-	<tr>
-		<td><%=listMyb.get(2).getBorad_no() %></td>
-		
-		<% if(listMyb.get(2).getBoard_div().equals("찾기 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(2).getBoard_div() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(2).getBoard_div().equals("발견 게시판")) {%>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(2).getBoard_div() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(2).getBoard_div().equals("후기 게시판")) {%>
-		<td><a href="/review/list" style="font-size: 17px">
-			<%=listMyb.get(2).getBoard_div() %>
-			</a>
-		</td>
-		<% } %>
-	
-		<% if (listMyb.get(2).getBoard_div().equals("찾기 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(2).getTitle() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(2).getBoard_div().equals("발견 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(2).getTitle() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(2).getBoard_div().equals("후기 게시판")) { %>
-		<td><a href="/review/view?reviewNo=<%=listMyb.get(2).getBorad_no() %>" style="font-size: 17px">
-			<%=listMyb.get(2).getTitle() %>
-			</a>
-		</td>
-		<% } %>
-		
-		<td><%=listMyb.get(2).getCreate_date() %></td>
-	</tr>
-	<tr>
-		<td><%=listMyb.get(3).getBorad_no() %></td>
-		
-		<% if(listMyb.get(3).getBoard_div().equals("찾기 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(3).getBoard_div() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(3).getBoard_div().equals("발견 게시판")) {%>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(3).getBoard_div() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(3).getBoard_div().equals("후기 게시판")) {%>
-		<td><a href="/review/list" style="font-size: 17px">
-			<%=listMyb.get(3).getBoard_div() %>
-			</a>
-		</td>
-		<% } %>
-	
-		<% if (listMyb.get(3).getBoard_div().equals("찾기 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(3).getTitle() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(1).getBoard_div().equals("발견 게시판")) { %>
-		<td><a href="#" style="font-size: 17px">
-			<%=listMyb.get(3).getTitle() %>
-			</a>
-		</td>
-		<% } else if (listMyb.get(3).getBoard_div().equals("후기 게시판")) { %>
-		<td><a href="/review/view?reviewNo=<%=listMyb.get(1).getBorad_no() %>" style="font-size: 17px">
-			<%=listMyb.get(3).getTitle() %>
-			</a>
-		</td>
-		<% } %>
-		
-		<td><%=listMyb.get(3).getCreate_date() %></td>
-	</tr>
+	<% if (listMyb.get(i).getBoard_div().equals("찾기 게시판")) { %>
+	<td><a href="#" style="font-size: 17px">
+		<%=listMyb.get(i).getTitle() %>
+		</a>
+	</td>
+	<% } else if (listMyb.get(i).getBoard_div().equals("발견 게시판")) { %>
+	<td><a href="#" style="font-size: 17px">
+		<%=listMyb.get(i).getTitle() %>
+		</a>
+	</td>
+	<% } else if (listMyb.get(i).getBoard_div().equals("후기 게시판")) { %>
+	<td><a href="/review/view?reviewNo=<%=listMyb.get(i).getBorad_no() %>" style="font-size: 17px">
+		<%=listMyb.get(i).getTitle() %>
+		</a>
+	</td>
+	<% } %>
+	<td><%=listMyb.get(i).getCreate_date() %></td>
+</tr>
+<% } %>
+<% } %>
 </table>
 </div>
 
