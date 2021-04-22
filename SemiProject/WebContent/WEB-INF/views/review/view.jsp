@@ -11,7 +11,7 @@
 
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 
-
+<% String nick = (String) session.getAttribute("nick"); %>
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -21,7 +21,13 @@ $(document).ready(function() {
 	
 	$("#btnUpdate").click(function() {
 		$(location).attr("href", "/review/update?reviewNo=<%=reviewNo.getReviewNo() %>")
-	})
+	});
+	
+	$("#btnDelete").click(function() {
+		if(confirm("게시글을 삭제하시겠습니까?")) {
+			$(location).attr("href", "/review/delete?reviewNo=<%=reviewNo.getReviewNo() %>")
+		}
+	});
 	
 });
 </script>
@@ -66,8 +72,10 @@ $(document).ready(function() {
 <tr>
 	<td>작성자</td><td colspan="2"><%=view.getNick() %></td>
 	<td>작성일</td><td colspan="2"><%=view.getCreateDate() %></td>
+	<% if(nick.equals(view.getNick()))  {%>
 	<td><button type="button" id="btnUpdate" class="btn">수정</button></td>
 	<td><button type="button" id="btnDelete" class="btn">삭제</button></td>
+	<% } %>
 </tr>
 	
 <% int i = imgs.size(); %>	

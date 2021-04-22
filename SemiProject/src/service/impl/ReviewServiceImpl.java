@@ -447,5 +447,25 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		
 	}
+	
+	
+	@Override
+	public void delete(ReviewBoard reviewNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if(reviewDao.deleteFile(conn, reviewNo) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		if(reviewDao.delete(conn, reviewNo) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+	}
 
 }
