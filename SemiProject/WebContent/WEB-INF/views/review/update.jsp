@@ -48,7 +48,7 @@ $(document).ready(function() {
 	
 	$("#upfile").on('change', uploadImg)
 	
-})
+});
 
 function uploadImg(e) {
 	
@@ -159,7 +159,7 @@ function uploadImg(e) {
 			} //switch END
 			
 		reader.readAsDataURL(files[i])
-		
+	}
 }
 </script>
 
@@ -194,6 +194,7 @@ function uploadImg(e) {
 <h3 style="text-align: center">후기 게시판 수정</h3>
 <hr>
 
+<div>
 <form action="/review/update" method="post" enctype="multipart/form-data">
 
 <input type="hidden" name="reviewNo" value="<%=request.getParameter("reviewNo") %>">
@@ -316,6 +317,9 @@ function uploadImg(e) {
 	<button type="button" id="btnWrite" class="btn">작성</button>
 </div>
 
+</div>
+
+<br><br>
 <script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({

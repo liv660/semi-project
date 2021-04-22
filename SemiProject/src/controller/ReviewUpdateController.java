@@ -44,5 +44,16 @@ public class ReviewUpdateController extends HttpServlet {
 		
 		req.getRequestDispatcher("/WEB-INF/views/review/update.jsp").forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		System.out.println("리뷰 수정 완료");
+		
+		reviewService.update(req);
+		
+		System.out.println(req);
+		
+		resp.sendRedirect("/review/list");
+	}
 
 }

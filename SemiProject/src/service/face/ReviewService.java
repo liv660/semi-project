@@ -61,4 +61,11 @@ public interface ReviewService {
 	 */
 	public List<ReviewImgFile> viewFile(ReviewBoard reviewNo);
 
+	/**
+	 * 게시글 수정
+	 * 
+	 * @param req
+	 */
+	public void update(HttpServletRequest req);
+
 }

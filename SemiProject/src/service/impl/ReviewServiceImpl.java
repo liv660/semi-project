@@ -271,5 +271,181 @@ public class ReviewServiceImpl implements ReviewService {
 
 		return reviewDao.selectReviewImgs(JDBCTemplate.getConnection(), reviewNo);
 	}
+	
+	@Override
+	public void update(HttpServletRequest req) {
+		
+		ReviewBoard reviewBoard = null;
+		ReviewImgFile reviewImgFile = null;
+		List<ReviewImgFile> reviewImgs = new ArrayList<>();
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		boolean isNewFile = false;
+		boolean isMultipart = ServletFileUpload.isMultipartContent(req);
+		
+		//사진파일이 없으면
+		if(!isMultipart) {
+			System.out.println("사진 파일 없음");
+			
+			reviewBoard = new ReviewBoard();
+			
+			reviewBoard.setTitle(req.getParameter("title"));
+			reviewBoard.setContent(req.getParameter("content"));
+		} else {
+			//사진 파일 있으면
+			
+			System.out.println("사진파일 수정");
+			
+			reviewBoard = new ReviewBoard();
+			
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			
+			//메모리 처리 사이즈 지정
+			final int MEM_SIZE = 1 * 1024; // 1KB
+			factory.setSizeThreshold(MEM_SIZE);
+			
+			//임시저장소
+			File repository = new File(req.getServletContext().getRealPath("tmp"));
+			repository.mkdir();
+			
+			factory.setRepository(repository);
+			
+			//파일 업로드
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			
+			//용량 제한
+			final int MAX_SIZE = 10 * 1024 * 1024; // 10MB
+			upload.setFileSizeMax(MAX_SIZE);
+			
+			//전달 데이터 파싱
+			List<FileItem> items = null;
+			try {
+				items = upload.parseRequest(req);
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			}
+			
+			//추출된 전달파라미터 처리 반복자
+			Iterator<FileItem> iter = items.iterator();
+			
+			//모든 요청 정보 처리하기
+			while(iter.hasNext()) {
+				FileItem item = iter.next();
+				
+				//빈 파일
+				if(item.getSize() <= 0) continue;
+				
+				//요청 데이터 처리
+				if(item.isFormField()) {
+					
+					try {
+						if("reviewNo".equals(item.getFieldName())) {
+							reviewBoard.setReviewNo(Integer.parseInt(item.getString()));
+						}
+						if("title".equals(item.getFieldName())) {
+							reviewBoard.setTitle(item.getString("UTF-8"));
+						}
+						if("content".equals(item.getFieldName())) {
+							reviewBoard.setContent(item.getString("UTF-8"));
+						}
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					} // try-carch end
+				} // if(item.isFormField()) end
+				
+				//파일처리
+				if(!item.isFormField()) {
+					
+					isNewFile = true;
+					
+					//확장자 추출
+					int lastDot = item.getName().lastIndexOf('.');
+					String ext = item.getName().substring(lastDot + 1);
+					
+					//확장자 유효 검사
+					boolean isImg = false;
+					if("jpg".equals(ext) || "jpeg".equals(ext)) isImg = true;
+					
+					//파일명 유효 검사
+					boolean isValidName = false;
+					String originName = item.getName().substring(0, lastDot);
+					
+					//파일명 String -> Byte 길이로 변환
+					int nameToBytes = 0;
+					try {
+						nameToBytes = originName.getBytes("UTF-8").length;
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+					
+					//30byte 초과시 false
+					final int maxBytes = 30;
+					if(nameToBytes <= maxBytes) isValidName = true;
+					
+					//확장자, 파일명 모두 유효할 때만 파일 저장 및 DB 삽입
+					if(isImg && isValidName) {
+						
+						//UUID 생성
+						UUID uuid = UUID.randomUUID();
+						String u = uuid.toString().split("-")[0];
+						
+						//파일의 저장될 이름
+						String storedName = originName + "_" + u;
+						
+						//upload 폴더 생성
+						File upFolder = new File(req.getServletContext().getRealPath("reviewImgFile"));
+						upFolder.mkdir();
+						
+						File upFile = new File(upFolder, storedName);
+						
+						reviewImgFile = new ReviewImgFile();
+						
+						reviewImgFile.setReviewNo(reviewBoard.getReviewNo());
+						reviewImgFile.setOriginImg(originName);
+						reviewImgFile.setStoredImg(storedName);
+						
+						reviewImgs.add(reviewImgFile);
+						
+						//처리가 완료된 파일 업ㄹ드
+						try {
+							item.write(upFile);
+							item.delete();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} //if(isImg && isValidName) end
+					
+				} //if(!item.isFormField()) end
+			} //while(iter.hasNext()) end
+			
+			String usernoString = (String)req.getSession().getAttribute("userno");
+			if(usernoString != null && !"".equals(usernoString)) {
+				reviewBoard.setUserNo(Integer.parseInt(usernoString));
+			}
+		}
+		
+		if(isNewFile) {
+			//이전 파일 삭제
+			reviewDao.deleteImgFile(conn, reviewBoard);
+		}
+		
+		if (reviewBoard != null) {
+			if(reviewDao.update(conn, reviewBoard) > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		}
+		
+		if (reviewImgs != null) {
+			if(reviewDao.insertImg(conn, reviewImgs) > 0) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+		}
+		
+	}
 
 }
