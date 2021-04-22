@@ -309,7 +309,6 @@ function commentUpdateTrans(commentno) {
 	
 	$('#comwrap' + commentno).html(html)
 	
-	commentUpdateFocus();
 }
 
 

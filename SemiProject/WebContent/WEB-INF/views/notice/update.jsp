@@ -115,16 +115,17 @@ input[type = "button"] {
 <table class="table table-bordered">
 	<tr>
 		<td class="info"><label for="title">제목</label></td>
-		<td><input type="text" id="title" name="title" value="<%= notice.getTitle()%>"/></td>
+		<td colspan="2"><input type="text" id="title" name="title" value="<%= notice.getTitle()%>"/></td>
 	</tr>
 	
 	<tr>
 		<td class="info"><label for="writer">작성자</label></td>
 		<td><input type="text" id="writer" name="writer" value=<%=notice.getManagerId()%> readonly="readonly"/></td>
+		<td>중요공지 <input type="checkbox" name="check" id="check"/></td>
 	</tr>
 	
 	<tr>
-		<td colspan="2"><textarea id="content" name="content"><%=notice.getContent() %></textarea></td>
+		<td colspan="3"><textarea id="content" name="content"><%=notice.getContent() %></textarea></td>
 	</tr>
 </table>
 
@@ -136,7 +137,6 @@ input[type = "button"] {
 <input type="file" name="file" />
 <% } %>
 
-</form>
 
 <div id="fileupload">
 <% for(int i=0; i<list.size(); i++) {%> 
@@ -146,6 +146,7 @@ input[type = "button"] {
 <% } %>
 </div>
 
+</form>
 
 <div style="text-align: center;">
 <input type="button" id="btnUpdate" value="수정" />

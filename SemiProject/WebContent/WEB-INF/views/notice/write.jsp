@@ -26,6 +26,11 @@ $(document).ready(function() {
 	
 	$("#submit").click(function() {
 		
+		if($("#title").val() == "") {
+			alert("제목을 입력해주세요")
+			return false;
+		}
+		
 		submitContents( $("#submit") )
 		
 		$("form").submit();

@@ -58,8 +58,10 @@ public class NoticeDaoImpl implements NoticeDao {
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " SELECT rownum rnum, N.* FROM(";
-		sql += " SELECT notice_no,title, manager_id, create_date, views, notice_imp";
-		sql += " FROM notice_board";
+		sql += " SELECT notice_no,title, manager_id, create_date, views, notice_imp" ;
+		sql += " ,(SELECT count(*) FROM notice_comment";
+		sql += " WHERE NB.notice_no = notice_comment.notice_no ) as count";
+		sql += " FROM notice_board NB";
 		if("writer".equals(map.get("title"))) {
 			sql += " WHERE manager_id LIKE '%' || ? || '%' ";
 		} else if ("title".equals(map.get("title"))) {
@@ -98,6 +100,7 @@ public class NoticeDaoImpl implements NoticeDao {
 				res.setCreateDate(rs.getDate("create_date"));
 				res.setViews(rs.getInt("views"));
 				res.setNoticeImp(rs.getString("notice_imp"));
+				res.setCommentCnt(rs.getInt("count"));
 				
 				list.add(res);
 				
@@ -267,7 +270,7 @@ public class NoticeDaoImpl implements NoticeDao {
 		//게시글 수정
 		String sql = "";
 		sql += "UPDATE notice_board";
-		sql += " SET title = ?, content = ?";
+		sql += " SET title = ?, content = ?, notice_imp = ?";
 		sql += " WHERE notice_no = ?";
 		
 		int res = 0;
@@ -277,7 +280,8 @@ public class NoticeDaoImpl implements NoticeDao {
 
 			ps.setString(1, notice.getTitle());
 			ps.setString(2, notice.getContent());
-			ps.setInt(3, notice.getNoticeNo());
+			ps.setString(3, notice.getNoticeImp());
+			ps.setInt(4, notice.getNoticeNo());
 			
 			res = ps.executeUpdate();
 		
