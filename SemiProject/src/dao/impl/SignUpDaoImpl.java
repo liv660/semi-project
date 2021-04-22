@@ -15,7 +15,7 @@ public class SignUpDaoImpl implements SignUpDao {
 	private ResultSet rs = null;
 	
 	@Override
-	public int insertUser(Connection conn, Usertb user) {
+	public void insertUser(Connection conn, Usertb user) {
 		
 		//회원가입 정보 저장
 		String sql = "";
@@ -49,7 +49,6 @@ public class SignUpDaoImpl implements SignUpDao {
 			JDBCTemplate.close(ps);
 		}
 		
-		return res;
 	} // insertUser() end
 	
 	@Override
@@ -109,6 +108,30 @@ public class SignUpDaoImpl implements SignUpDao {
 		} finally {
 			JDBCTemplate.close(ps);
 			JDBCTemplate.close(rs);
+		}
+		
+		return res;
+	}
+
+	
+	@Override
+	public int setUserImg(Connection conn) {
+
+		String sql = "";
+		sql += "INSERT INTO userimg (user_no)";
+		sql += " VALUES( usertb_seq.currval )";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
 		}
 		
 		return res;

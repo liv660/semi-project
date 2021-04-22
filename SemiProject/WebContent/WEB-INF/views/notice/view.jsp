@@ -31,19 +31,22 @@ function confirmDelete() {
 	padding-left : 200px;
 }
 
-.content {
+.wrapBox .content {
 	width : 80%;
 	height : 300px;
 	margin-top: 30px; 
 	border : 1px solid #A48654;
 }
 
-.right {
-	padding-left: 500px;
-	padding-bottom: 5px;
+.wrapBox .firsttd {
+	width : 500px;
 }
 
-.line {
+.wrapBox th, .wrapBox td {
+	padding-bottom : 10px;
+}
+
+.wrapBox .line {
 	border-top : 1px solid #ccc;
 	width: 80%;
 	margin-bottom: 10px;
@@ -56,14 +59,19 @@ function confirmDelete() {
 	font-weight: 500px;
 	font-family: sans-serif;
 	display: inline;
-
 }
 
-.manage { margin-left : 550px;}
-.delete {margin-left : 10px;}
-.writebtn {margin-left: 700px; margin-bottom: 50px;}
+.wrapBox .topbtn {
+	position : relative;
+	left : 550px;
+}
 
-input[type = "button"] {
+.wrapBox .botbtn {
+	position : relative;
+	left : 700px;
+}
+
+.wrapBox input[type = "button"] {
 	border : none;
 	background : none;
 	text-align: center;
@@ -113,9 +121,63 @@ width : 500px;
 height : 70px;
 }
 
-.commentwrap {
-	border-bottom: 1px solid #000;
+.commentWrapBox {
+	width: 1200px;
+	margin : 0 auto;
+	padding-left : 190px;
 }
+
+.commentWrapBox .commentwrap {
+	margin-top : 20px;
+}
+
+.commentWrapBox .commentwrap .combtn {
+	color: red;
+	position : relative;
+	left : 500px;
+	border : none;
+	background : none;
+	text-align: center;
+	padding: 5px 5px;
+	outline: none;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+
+.commentWrapBox .commentwrap .commentDate {
+	position: relative;
+	left : 100px;
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentNick {
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentImg {
+	width: 30px;
+	height : 30px;
+	margin-right : 10px;
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentImg img {
+	width : 100%;
+	height : 100%;
+	object-fit : cover;
+	border-radius: 50%
+}
+
+.commentWrapBox .commentwrap .commentBtn {
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentText {
+	margin-top : 5px;
+}
+
+
 
 
 </style>
@@ -126,15 +188,15 @@ height : 70px;
 
 	<h1>Notice</h1>
 <%-- 	<% if(session.getAttribute("manager") != null) { %> --%>
-		<a href="/notice/update?noticeno=<%=view.getNoticeNo()%>"><input type="button" value="수정" class="manage orange"></a>
-		<input type="button" value="삭제" class="red delete" onclick="confirmDelete();"/>
+		<a  href="/notice/update?noticeno=<%=view.getNoticeNo()%>"  class="topbtn orange"><input type="button" value="수정"></a>
+		<input type="button" value="삭제" class="topbtn red" onclick="confirmDelete();"/>
 <%-- 	<% } %> --%>
 	<div class="line"></div>
 	
 	<table>
 		<tr>
 			<th>제목 &nbsp; : &nbsp; </th>
-			<td><%=view.getTitle() %></td>
+			<td class="firsttd"><%=view.getTitle() %></td>
 		
 			<th class="right">조회수 &nbsp; : &nbsp; </th>
 			<td><%=view.getViews() %></td>
@@ -142,7 +204,7 @@ height : 70px;
 		
 		<tr>
 			<th>작성자 &nbsp; : &nbsp; </th>
-			<td><%=view.getManagerId() %> 
+			<td class="firsttd"><%=view.getManagerId() %> 
 			
 			<th class="right">작성일 &nbsp; : &nbsp; </th>
 			<td><%=view.getCreateDate() %></td>
@@ -163,6 +225,7 @@ height : 70px;
 		<% } %>
 		<br>
 	</div>
+	
 	<div id="lightbox">
 		<img alt="" src="" id="lightboxImage">
 	</div>
@@ -171,10 +234,13 @@ height : 70px;
 	<%=view.getContent() %>
 	</div>
 	
-	<a href="/notice/write"><input type="button" value="글쓰기" class="writebtn"/></a>
-	<a href="/notice/list"><input type="button" value="목록" /></a>
+	<a href="/notice/write" class="botbtn"><input type="button" value="글쓰기"/></a>
+	<a href="/notice/list" class="botbtn"><input type="button" value="목록" /></a>
 	
-	<h3>댓글</h3>
+</div>
+
+<div class="commentWrapBox">
+	<h3>댓글<span id="commentCnt"></span></h3>
 	
 	<input type="text" id=comment name="comment" />
 	<input type="button" id="commentUpdatebtn" value="댓글 등록"/>
@@ -226,25 +292,39 @@ function commentlist() {
 		success : function(data) {
 			var jsontext = JSON.stringify(data);
 			var commentlist = JSON.parse(jsontext);
-
+			
 			for(var i=0; i<commentlist.length; i++) {
 				
 				var html = '';
 				
-				html += "<div class='commentwrap'> <span class='commnetNick'>"
-				html += commentlist[i].nick
-				html += "</span> <span class='commentDate'>"
-				html += commentlist[i].commentDate
-				html += "</span>"
-				html += "<input type='button' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
-				html += "<input type='button' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
-				html += "<br> <div id='comwrap" + commentlist[i].commentNo + "'> <span class='commentText' id='commentText" + commentlist[i].commentNo + "'> "
-				html += commentlist[i].commentText
-				html += "</span> </div>"
+				if(commentlist[i].commentCnt != null) {
+					var commentCnt = commentlist[i].commentCnt;
+				}
+				
+				console.log(commentlist[i].storedName);
+				
+				html += "<div class='commentwrap'>"
+				html += "<div class='commentImg'> <img src='"
+				if(commentlist[i].storedName == "basic.png" || commentlist[i].storedName == null) {
+					html += "/resources/image/basic.png"
+				} else {
+					html += "/userimgup/" + commentlist[i].storedName
+				}
+				html += " '/> </div>"
+				html += "<div class='commentNick'>" + commentlist[i].nick + "</div>"
+				html += "<div class='commentDate'>" + commentlist[i].commentDate + "</div>"
+				html += "<div class='commentBtn'>"
+				html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
+				html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
+				html += "</div> <br>"
+				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" 
+				html += "<span class='commentText' id='commentText" + commentlist[i].commentNo + "'> " + commentlist[i].commentText + "</span>"
+				html += "</div>"
 				
 				$("#commentwrap").append(html);
 			}
-			
+			$("#commentCnt").html("");
+			$("#commentCnt").append(commentCnt);
 		}
 	})
 }	
@@ -304,8 +384,8 @@ function commentUpdateTrans(commentno) {
 	var html = '';
 	
 	html += "<input type='text' id='comupdate' value='" + contentText + "' style='width:300px; height:40px;'/>";
-	html += "<input type='button' id='updateConfirm' onclick='commentUpdate(" + commentno + ")' value='수정'/>"
-	html += "<input type='button' id='canclebtn' onclick='updatecancle()' value='취소'/>"
+	html += "<input type='button' class='combtn' id='updateConfirm' onclick='commentUpdate(" + commentno + ")' value='수정'/>"
+	html += "<input type='button' class='combtn' id='canclebtn' onclick='updatecancle()' value='취소'/>"
 	
 	$('#comwrap' + commentno).html(html)
 	

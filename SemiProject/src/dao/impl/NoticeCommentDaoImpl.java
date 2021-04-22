@@ -21,9 +21,12 @@ public class NoticeCommentDaoImpl implements NoticeCommentDao {
 	public List<NoticeComment> selectComment(Connection conn, int noticeno) {
 
 		String sql = "";
-		sql += "SELECT * FROM notice_comment";
-		sql += " WHERE notice_no = ?";
-		sql += " ORDER BY comment_no";
+		sql += "SELECT comment_no, notice_no, NC.user_no, nick, comment_text, comment_date, UI.storedname,(";
+		sql += " SELECT count(*) FROM notice_comment WHERE notice_no = ?) count";
+		sql += " FROM notice_comment NC, userimg UI";
+		sql += " WHERE NC.user_no = UI.user_no";
+		sql += " AND notice_no = ?";
+		sql += " ORDER BY comment_no DESC";
 		
 		List<NoticeComment> list = new ArrayList<>();
 		
@@ -31,6 +34,7 @@ public class NoticeCommentDaoImpl implements NoticeCommentDao {
 			ps = conn.prepareStatement(sql);
 
 			ps.setInt(1, noticeno);
+			ps.setInt(2, noticeno);
 			
 			rs = ps.executeQuery();
 			
@@ -42,6 +46,8 @@ public class NoticeCommentDaoImpl implements NoticeCommentDao {
 				res.setCommentText(rs.getString("comment_text"));
 				res.setCommentDate(rs.getDate("comment_date"));
 				res.setCommentNo(rs.getInt("comment_no"));
+				res.setCommentCnt(rs.getInt("count"));
+				res.setStoredName(rs.getString("storedname"));
 				
 				list.add(res);
 			}

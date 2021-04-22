@@ -32,7 +32,7 @@ public class SignUpServiceImpl implements SignUpService {
 	    public MyAuthentication(){
 	         
 	        String id = "zimmyrabbit@naver.com";       //  ID
-	        String pw = "wook19669!";          //  비밀번호
+	        String pw = "wook19661306!";          //  비밀번호
 	 
 	        pa = new PasswordAuthentication(id, pw);
 	      
@@ -173,11 +173,12 @@ public class SignUpServiceImpl implements SignUpService {
 		conn = JDBCTemplate.getConnection();
 		
 		//유저정보 삽입
-		int res = signUpDao.insertUser(conn, user);
+		signUpDao.insertUser(conn, user);
+		
+		int res = signUpDao.setUserImg(conn);
 		
 		if(res > 0) {
 			JDBCTemplate.commit(conn);
-		} else {
 			JDBCTemplate.rollback(conn);
 		}
 		
