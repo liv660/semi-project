@@ -54,7 +54,7 @@
 }
 .rel_page {
 	position: relative;
-    width: 200px;
+    width: 500px;
     top: 100px;
     margin: 0 auto;
 }
@@ -83,6 +83,27 @@ function allchecked() {
 
 }
 
+function writtenDelete() {
+var cnt = $("input[name='reportChkBxRow']:checked").length;
+var arr = new Array();
+$("input[name='reportChkBxRow']:checked").each(function() {
+arr.push($(this).attr('id'));
+});
+if(cnt == 0){
+alert("선택된 글이 없습니다.");
+}
+
+$.ajax({
+type: 'get',
+url: '/written/delete',
+data: { ipw:ipw },
+	success : function( ) {
+				
+			
+
+		}
+	}) 
+}
 </script>
 
 <div id="wrapper">
@@ -96,7 +117,7 @@ function allchecked() {
 
 <div class="rel_btn">
 <button type="button" onclick="allchecked()">전체선택</button>
-<button>선택삭제</button>
+<button type="button" onclick="">선택삭제</button>
 </div>
 
 <div class="rel_se">
