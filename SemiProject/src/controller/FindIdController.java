@@ -43,7 +43,7 @@ public class FindIdController extends HttpServlet {
 		req.setAttribute("id", id);
 		
 		//VIEW 지정 및 응답 - forward
-		req.getRequestDispatcher("/WEB-INF/views/login/Viewfindid.jsp").forward(req,resp);
+		req.getRequestDispatcher("/WEB-INF/views/login/Viewfindid.jsp").forward(req,resp); 
 	
 	
 	}
