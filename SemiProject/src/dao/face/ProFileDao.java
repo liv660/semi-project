@@ -2,7 +2,9 @@ package dao.face;
 
 import java.sql.Connection;
 import java.util.Date;
+import java.util.List;
 
+import dto.MyBoard;
 import dto.UserAddress;
 import dto.UserImg;
 import dto.UserLeave;
@@ -37,6 +39,10 @@ public interface ProFileDao {
 	public int deleteuser(Connection conn, int userno);
 
 	public int insertleave(Connection conn, UserLeave userLeave);
+
+	public List<MyBoard> selectMyList(Connection conn);
+
+	public String selectByNick(Connection conn, int userno);
 
 
 

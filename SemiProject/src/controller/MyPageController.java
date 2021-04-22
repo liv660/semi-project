@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.MyBoard;
 import dto.UserImg;
 import service.face.ProFileService;
 import service.impl.ProFileServiceImpl;
@@ -31,7 +33,10 @@ public class MyPageController extends HttpServlet {
 		
 		userimg = proFileService.viewimg(userimg);
 		
-//		System.out.println(userimg);
+		
+		List<MyBoard> myBoard = proFileService.myboradlist();
+		
+		req.setAttribute("myBoard", myBoard);
 		
 		req.setAttribute("userimg", userimg);
 		

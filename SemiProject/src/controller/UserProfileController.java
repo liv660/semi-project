@@ -41,10 +41,18 @@ public class UserProfileController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		proFileService.upDatebynickbyImg(req);
-
-
-
+		boolean flag = proFileService.upDatebynickbyImg(req);
+		
+		String nick = proFileService.getNick(req);
+//		System.out.println( flag );
+//		System.out.println( nick );
+		
+		if( flag ) {
+			
+			req.getSession().removeAttribute("nick");
+			req.getSession().setAttribute("nick", nick);
+		}
+		
 		resp.sendRedirect("/mypage");
 	}
 

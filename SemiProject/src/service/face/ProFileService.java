@@ -1,12 +1,15 @@
 package service.face;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import dto.MyBoard;
 import dto.UserImg;
 
 public interface ProFileService {
 
-	public void upDatebynickbyImg(HttpServletRequest req);
+	public boolean upDatebynickbyImg(HttpServletRequest req);
 
 	public UserImg getuserno(HttpServletRequest req);
 
@@ -19,6 +22,11 @@ public interface ProFileService {
 	public int getUserUpdate(HttpServletRequest req);
 
 	public int getuserleave(HttpServletRequest req);
+
+	public List<MyBoard> myboradlist();
+
+	public String getNick(HttpServletRequest req);
+
 
 	
 

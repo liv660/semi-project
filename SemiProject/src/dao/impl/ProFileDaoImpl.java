@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import common.JDBCTemplate;
 import dao.face.ProFileDao;
 import dto.Usertb;
+import dto.MyBoard;
 import dto.UserAddress;
 import dto.UserImg;
 import dto.UserLeave;
@@ -392,6 +395,90 @@ public class ProFileDaoImpl implements ProFileDao {
 		}
 		
 		return res;
+	}
+
+	@Override
+	public List<MyBoard> selectMyList(Connection conn) {
+		
+		String sql = "";
+		sql += "SELECT";
+		sql += " find_no , board_div, title, create_date";
+		sql += " FROM findboard";
+		sql += " UNION";
+		sql += " SELECT";
+		sql += " review_no, board_div, title, create_date";
+		sql += " FROM review_board";
+		sql += " ORDER BY board_div desc, find_no desc";
+		
+		List<MyBoard> myBoard = new ArrayList<MyBoard>();
+		
+		String divone = "찾기 게시판";
+		String divtwo = "발견 게시판";
+		String divthree = "후기 게시판";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				
+				MyBoard myb = new MyBoard();
+				
+				myb.setBorad_no( rs.getInt("find_no"));
+				
+				
+				if ( rs.getInt("board_div") == 1) {
+					myb.setBoard_div(divone);
+					
+				} else if(rs.getInt("board_div") == 2) {
+					myb.setBoard_div(divtwo);
+					
+				} else if(rs.getInt("board_div") == 3) {
+					myb.setBoard_div(divthree);
+				}
+				
+				myb.setTitle( rs.getString("title"));
+				myb.setCreate_date(rs.getDate("create_date"));
+				
+				myBoard.add(myb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return myBoard;
+	}
+
+	@Override
+	public String selectByNick(Connection conn, int userno) {
+		
+		String sql = "";
+		sql += "SELECT nick FROM usertb";
+		sql += " WHERE user_no = ?";
+		
+		String nick = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				
+				nick = rs.getString("nick");
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return nick;
 	}
 
 

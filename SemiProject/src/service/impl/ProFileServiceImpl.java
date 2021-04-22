@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import common.JDBCTemplate;
 import dao.face.ProFileDao;
 import dao.impl.ProFileDaoImpl;
+import dto.MyBoard;
 import dto.UserAddress;
 import dto.UserImg;
 import dto.UserLeave;
@@ -30,7 +31,7 @@ public class ProFileServiceImpl implements ProFileService {
 	ProFileDao proFileDao = new ProFileDaoImpl();
 
 	@Override
-	public void upDatebynickbyImg(HttpServletRequest req) {
+	public boolean upDatebynickbyImg(HttpServletRequest req) {
 		Usertb usertb = null;
 		UserImg userimg = null;
 
@@ -137,12 +138,14 @@ public class ProFileServiceImpl implements ProFileService {
 		//		System.out.println(userimg);
 
 		Connection conn = JDBCTemplate.getConnection();
-
+		boolean flag = false;
 		if( usertb != null || !"".equals(usertb.getNick())) {
 			if( proFileDao.updatebynick(conn, usertb) > 0 ) {
 				JDBCTemplate.commit(conn);
+				flag = true;
 			} else {
 				JDBCTemplate.rollback(conn);
+				flag = false;
 			}
 		}
 
@@ -162,6 +165,8 @@ public class ProFileServiceImpl implements ProFileService {
 				JDBCTemplate.rollback(conn);
 			}
 		}
+		
+		return flag;
 	}// public void upDatebynickbyImg(HttpServletRequest req) end
 
 
@@ -398,6 +403,30 @@ public class ProFileServiceImpl implements ProFileService {
 		}
 
 		return res;
+	}
+
+
+	@Override
+	public List<MyBoard> myboradlist() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<MyBoard> myBoard = proFileDao.selectMyList(conn);
+		
+		System.out.println(myBoard);
+		
+		return myBoard;
+	}
+
+
+	@Override
+	public String getNick(HttpServletRequest req) {
+		
+		int userno = (int) req.getSession().getAttribute("userno");
+		
+		
+		
+		return proFileDao.selectByNick(JDBCTemplate.getConnection(), userno );
 	}
 
 

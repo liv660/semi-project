@@ -1,8 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="dto.MyBoard"%>
 <%@page import="dto.UserImg"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <% UserImg userimg = (UserImg) request.getAttribute("userimg"); %>
+<% List<MyBoard> listMyb = (List) request.getAttribute("myBoard"); %>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 
 <style type="text/css">
@@ -119,7 +122,6 @@ font-size: 30px;
 }
 </style>
 
-<body>
 
 <div id="wrapper">
 <%@ include file="/WEB-INF/views/mypage/mypagemenu.jsp" %>
@@ -150,7 +152,7 @@ font-size: 30px;
 
 <div class="rel_bor">
 <div class="abs_botx">내가 작성한 글</div>
-<div class="abs_puls">+</div>
+<div class="abs_puls"><a href="/mypage/written" style="font-size: 30px;">+</a></div>
 </div>
 
 <div class="rel_borad">
@@ -162,22 +164,22 @@ font-size: 30px;
 		<th>날짜</th>
 	</tr>
 	<tr>
-		<td>123</td>
-		<td>후기 게시판</td>
-		<td>덕분에 찾았습니다</td>
-		<td>2021/03/05</td>
+		<td><%=listMyb.get(1).getBorad_no() %></td>
+		<td><%=listMyb.get(1).getBoard_div() %></td>
+		<td><%=listMyb.get(1).getTitle() %></td>
+		<td><%=listMyb.get(1).getCreate_date() %></td>
 	</tr>
 	<tr>
-		<td>51</td>
-		<td>반려동물 찾기 게시판</td>
-		<td>우리 이쁜 강아지 찾습니다</td>
-		<td>2021/02/05</td>
+		<td><%=listMyb.get(2).getBorad_no() %></td>
+		<td><%=listMyb.get(2).getBoard_div() %></td>
+		<td><%=listMyb.get(2).getTitle() %></td>
+		<td><%=listMyb.get(2).getCreate_date() %></td>
 	</tr>
 	<tr>
-		<td>6</td>
-		<td>유기동물 발견 게시판 </td>
-		<td>이렇게 이쁜 강아지 발견했어요</td>
-		<td>2021/01/05</td>
+		<td><%=listMyb.get(3).getBorad_no() %></td>
+		<td><%=listMyb.get(3).getBoard_div() %></td>
+		<td><%=listMyb.get(3).getTitle() %></td>
+		<td><%=listMyb.get(3).getCreate_date() %></td>
 	</tr>
 </table>
 </div>
@@ -185,7 +187,7 @@ font-size: 30px;
 
 <div class="rel_ord">
 <div class="abs_botx">최근 주문 목록</div>
-<div class="abs_puls">+</div>
+<div class="abs_puls"><a href="#" style="font-size: 30px;">+</a></div>
 </div>
 
 
@@ -201,15 +203,15 @@ font-size: 30px;
 </div>
 
 
-</div>
-
-
-
-
-
-
 <!-- <div id="content" class="right"> end  -->
 </div>
 
-</body>
-</html>
+
+
+
+</div>
+
+
+
+
+
