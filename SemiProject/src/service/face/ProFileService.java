@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.MyBoard;
 import dto.UserImg;
+import util.MyPaging;
 
 public interface ProFileService {
 
@@ -26,6 +27,11 @@ public interface ProFileService {
 	public List<MyBoard> myboradlist();
 
 	public String getNick(HttpServletRequest req);
+
+	public MyPaging getPageing(HttpServletRequest req);
+
+	public List<MyBoard> myboradlist(MyPaging myPaging);
+
 
 
 	

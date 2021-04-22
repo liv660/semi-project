@@ -11,6 +11,7 @@ import java.util.List;
 import common.JDBCTemplate;
 import dao.face.ProFileDao;
 import dto.Usertb;
+import util.MyPaging;
 import dto.MyBoard;
 import dto.UserAddress;
 import dto.UserImg;
@@ -479,6 +480,106 @@ public class ProFileDaoImpl implements ProFileDao {
 		}
 		
 		return nick;
+	}
+
+	@Override
+	public int selectCntAll(Connection conn) {
+		
+		String sql = "";
+		sql += "SELECT count(*) cnt FROM (";
+		sql += " SELECT";
+		sql += " find_no , board_div, title, create_date";
+		sql += " FROM findboard";
+		sql += " UNION";
+		sql += " SELECT ";
+		sql += " review_no, board_div, title, create_date";
+		sql += " FROM review_board)";
+		
+		//총 게시글 수
+		int cnt = 0;
+		
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cnt = rs.getInt(1);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public List<MyBoard> selectMyList(Connection conn, MyPaging myPaging) {
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += " SELECT rownum rnum, B.* FROM (";
+		sql += "        SELECT";
+		sql += "            find_no , board_div, title, create_date";
+		sql += "        FROM findboard";
+		sql += "        UNION";
+		sql += "        SELECT";
+		sql += "            review_no, board_div, title, create_date";
+		sql += "        FROM review_board";
+		sql += "        ORDER BY board_div desc, find_no desc";
+		sql += "    ) B";
+		sql += " ) BOARD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		List<MyBoard> myBoard = new ArrayList<MyBoard>();
+		
+		String divone = "찾기 게시판";
+		String divtwo = "발견 게시판";
+		String divthree = "후기 게시판";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myPaging.getStartNo());
+			ps.setInt(2, myPaging.getEndNo());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				
+				MyBoard myb = new MyBoard();
+				
+				myb.setBorad_no( rs.getInt("find_no"));
+				
+				
+				if ( rs.getInt("board_div") == 1) {
+					myb.setBoard_div(divone);
+					
+				} else if(rs.getInt("board_div") == 2) {
+					myb.setBoard_div(divtwo);
+					
+				} else if(rs.getInt("board_div") == 3) {
+					myb.setBoard_div(divthree);
+				}
+				
+				myb.setTitle( rs.getString("title"));
+				myb.setCreate_date(rs.getDate("create_date"));
+				
+				myBoard.add(myb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return myBoard;
 	}
 
 

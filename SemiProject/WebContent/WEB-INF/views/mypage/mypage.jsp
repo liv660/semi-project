@@ -158,27 +158,127 @@ font-size: 30px;
 <div class="rel_borad">
 <table class="table table_di">
 	<tr>
-		<th>글번호</th>
-		<th>게시판 이름</th>
-		<th>제목</th>
+		<th style="width: 13%;">글번호</th>
+		<th style="width: 20%;">게시판 이름</th>
+		<th style="width: 50%;">제목</th>
 		<th>날짜</th>
 	</tr>
 	<tr>
+	
 		<td><%=listMyb.get(1).getBorad_no() %></td>
-		<td><%=listMyb.get(1).getBoard_div() %></td>
-		<td><%=listMyb.get(1).getTitle() %></td>
+		
+		<% if(listMyb.get(1).getBoard_div().equals("찾기 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(1).getBoard_div() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(1).getBoard_div().equals("발견 게시판")) {%>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(1).getBoard_div() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(1).getBoard_div().equals("후기 게시판")) {%>
+		<td><a href="/review/list" style="font-size: 17px">
+			<%=listMyb.get(1).getBoard_div() %>
+			</a>
+		</td>
+		<% } %>
+	
+		<% if (listMyb.get(1).getBoard_div().equals("찾기 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(1).getTitle() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(1).getBoard_div().equals("발견 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(1).getTitle() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(1).getBoard_div().equals("후기 게시판")) { %>
+		<td><a href="/review/view?reviewNo=<%=listMyb.get(1).getBorad_no() %>" style="font-size: 17px">
+			<%=listMyb.get(1).getTitle() %>
+			</a>
+		</td>
+		<% } %>
 		<td><%=listMyb.get(1).getCreate_date() %></td>
 	</tr>
+	
 	<tr>
 		<td><%=listMyb.get(2).getBorad_no() %></td>
-		<td><%=listMyb.get(2).getBoard_div() %></td>
-		<td><%=listMyb.get(2).getTitle() %></td>
+		
+		<% if(listMyb.get(2).getBoard_div().equals("찾기 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(2).getBoard_div() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(2).getBoard_div().equals("발견 게시판")) {%>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(2).getBoard_div() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(2).getBoard_div().equals("후기 게시판")) {%>
+		<td><a href="/review/list" style="font-size: 17px">
+			<%=listMyb.get(2).getBoard_div() %>
+			</a>
+		</td>
+		<% } %>
+	
+		<% if (listMyb.get(2).getBoard_div().equals("찾기 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(2).getTitle() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(2).getBoard_div().equals("발견 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(2).getTitle() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(2).getBoard_div().equals("후기 게시판")) { %>
+		<td><a href="/review/view?reviewNo=<%=listMyb.get(2).getBorad_no() %>" style="font-size: 17px">
+			<%=listMyb.get(2).getTitle() %>
+			</a>
+		</td>
+		<% } %>
+		
 		<td><%=listMyb.get(2).getCreate_date() %></td>
 	</tr>
 	<tr>
 		<td><%=listMyb.get(3).getBorad_no() %></td>
-		<td><%=listMyb.get(3).getBoard_div() %></td>
-		<td><%=listMyb.get(3).getTitle() %></td>
+		
+		<% if(listMyb.get(3).getBoard_div().equals("찾기 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(3).getBoard_div() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(3).getBoard_div().equals("발견 게시판")) {%>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(3).getBoard_div() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(3).getBoard_div().equals("후기 게시판")) {%>
+		<td><a href="/review/list" style="font-size: 17px">
+			<%=listMyb.get(3).getBoard_div() %>
+			</a>
+		</td>
+		<% } %>
+	
+		<% if (listMyb.get(3).getBoard_div().equals("찾기 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(3).getTitle() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(1).getBoard_div().equals("발견 게시판")) { %>
+		<td><a href="#" style="font-size: 17px">
+			<%=listMyb.get(3).getTitle() %>
+			</a>
+		</td>
+		<% } else if (listMyb.get(3).getBoard_div().equals("후기 게시판")) { %>
+		<td><a href="/review/view?reviewNo=<%=listMyb.get(1).getBorad_no() %>" style="font-size: 17px">
+			<%=listMyb.get(3).getTitle() %>
+			</a>
+		</td>
+		<% } %>
+		
 		<td><%=listMyb.get(3).getCreate_date() %></td>
 	</tr>
 </table>

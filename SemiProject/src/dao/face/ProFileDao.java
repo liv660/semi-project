@@ -9,6 +9,7 @@ import dto.UserAddress;
 import dto.UserImg;
 import dto.UserLeave;
 import dto.Usertb;
+import util.MyPaging;
 
 public interface ProFileDao {
 
@@ -42,7 +43,12 @@ public interface ProFileDao {
 
 	public List<MyBoard> selectMyList(Connection conn);
 
+	public List<MyBoard> selectMyList(Connection conn, MyPaging myPaging);
+
 	public String selectByNick(Connection conn, int userno);
+
+	public int selectCntAll(Connection conn);
+
 
 
 

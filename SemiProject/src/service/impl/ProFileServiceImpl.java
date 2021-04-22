@@ -25,6 +25,7 @@ import dto.UserLeave;
 import dto.Usertb;
 import service.face.ProFileService;
 import util.HashNMacUtil;
+import util.MyPaging;
 
 public class ProFileServiceImpl implements ProFileService {
 
@@ -165,7 +166,7 @@ public class ProFileServiceImpl implements ProFileService {
 				JDBCTemplate.rollback(conn);
 			}
 		}
-		
+
 		return flag;
 	}// public void upDatebynickbyImg(HttpServletRequest req) end
 
@@ -221,22 +222,22 @@ public class ProFileServiceImpl implements ProFileService {
 		Connection conn = JDBCTemplate.getConnection();
 
 		String Pw = proFileDao.selectPw(conn, userno);
-		
+
 		boolean ipwcon = false;
-		
+
 		try {
 			//비밀번호 Sha256 해쉬코드 암호화처리
 			String iPw = (HashNMacUtil.EncBySha256(req.getParameter("ipw"))); //pw
-			
+
 			if ( Pw.equals(iPw) ) {
-				
+
 				ipwcon = true;
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println(ipwcon);
 
 		return ipwcon;
@@ -245,22 +246,22 @@ public class ProFileServiceImpl implements ProFileService {
 
 	@Override
 	public int getUserUpdate(HttpServletRequest req) {
-		
+
 		Connection conn = JDBCTemplate.getConnection();
 		Usertb usertb = new Usertb();
-		
-		
+
+
 		String postnum = req.getParameter("uAddress_zoneCode");
 		int pn = 0;
 		if( null != postnum && !"".equals(postnum)) {
 			pn = Integer.parseInt(postnum);
 		}
-		
+
 		usertb.setPostnum( pn ); 
 		usertb.setAddr( req.getParameter("uAddress_addr"));
 		usertb.setAddrDetail(req.getParameter("uAddress_detail"));
-		
-		
+
+
 		int res = 0;
 
 		usertb.setUserNo( (int)req.getSession().getAttribute("userno") );
@@ -311,58 +312,58 @@ public class ProFileServiceImpl implements ProFileService {
 				JDBCTemplate.rollback(conn);
 			}
 		}
-		
+
 		//postcode update
 		if ( !"".equals( req.getParameter("uAddress_zoneCode") ) ) {
-			
+
 			res = proFileDao.updatepost(conn, usertb);
-			
+
 			if ( res > 0 ) {
-				
+
 				JDBCTemplate.commit(conn);
 			} else {
-				
+
 				JDBCTemplate.rollback(conn);
 			}
-			
+
 		}
-		
+
 		res = 0;
-		
+
 		//roadAddress update
 		if ( !"".equals( req.getParameter("uAddress_addr") ) ) {
-			
+
 			res = proFileDao.updateaddr(conn, usertb);
-			
+
 			if ( res > 0 ) {
-				
+
 				JDBCTemplate.commit(conn);
 			} else {
-				
+
 				JDBCTemplate.rollback(conn);
 			}
-			
+
 		}
-		
+
 		res = 0;
 		//ditail update
 		if ( !"".equals( req.getParameter("uAddress_detail") ) ) {
-			
+
 			res = proFileDao.updatedetail(conn, usertb);
-			
+
 			if ( res > 0 ) {
-				
+
 				JDBCTemplate.commit(conn);
 			} else {
-				
+
 				JDBCTemplate.rollback(conn);
 			}
 		}
-		
-		
-		
 
-		
+
+
+
+
 		return res;
 	}
 
@@ -408,25 +409,62 @@ public class ProFileServiceImpl implements ProFileService {
 
 	@Override
 	public List<MyBoard> myboradlist() {
-		
+
 		Connection conn = JDBCTemplate.getConnection();
-		
+
 		List<MyBoard> myBoard = proFileDao.selectMyList(conn);
-		
+
 		System.out.println(myBoard);
-		
+
 		return myBoard;
 	}
 
 
 	@Override
 	public String getNick(HttpServletRequest req) {
-		
+
 		int userno = (int) req.getSession().getAttribute("userno");
-		
-		
-		
+
+
+
 		return proFileDao.selectByNick(JDBCTemplate.getConnection(), userno );
+	}
+
+
+	@Override
+	public MyPaging getPageing(HttpServletRequest req) {
+
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+
+		//전달파라미터 curPage 파싱
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if(param != null && !"".equals(param)) {
+
+			curPage = Integer.parseInt(param);
+		}
+
+
+		//myBoard 테이블의 총 게시글 수를 조회한다
+		int totalCount = proFileDao.selectCntAll(conn);
+
+		MyPaging myPaging = new MyPaging(totalCount, curPage);
+
+		return myPaging;
+	}
+
+
+	@Override
+	public List<MyBoard> myboradlist(MyPaging myPaging) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		List<MyBoard> myBoard = proFileDao.selectMyList(conn, myPaging);
+
+		System.out.println(myBoard);
+
+		return myBoard;
 	}
 
 

@@ -93,7 +93,7 @@ function uconfirm() {
 <div class="rel_tx2">
 <div class="abs_tx2">
 	<div class="tx_size">MY 활동</div>
-	<a href="#">내가 작성한 게시물</a><br>
+	<a href="/mypage/written">내가 작성한 게시물</a><br>
 	<a href="#">찜 리스트</a><br><br>
 </div>
 </div>
