@@ -34,7 +34,7 @@ public class MyPageController extends HttpServlet {
 		userimg = proFileService.viewimg(userimg);
 		
 		
-		List<MyBoard> myBoard = proFileService.myboradlist();
+		List<MyBoard> myBoard = proFileService.myboradlist(req);
 		
 		req.setAttribute("myBoard", myBoard);
 		
@@ -42,6 +42,8 @@ public class MyPageController extends HttpServlet {
 		
 		req.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp")
 			.forward(req, resp);
+		
+		
 	
 	}
 

@@ -84,25 +84,27 @@ function allchecked() {
 }
 
 function writtenDelete() {
-var cnt = $("input[name='reportChkBxRow']:checked").length;
-var arr = new Array();
-$("input[name='reportChkBxRow']:checked").each(function() {
-arr.push($(this).attr('id'));
-});
-if(cnt == 0){
-alert("선택된 글이 없습니다.");
-}
-
-$.ajax({
-type: 'get',
-url: '/written/delete',
-data: { ipw:ipw },
-	success : function( ) {
+	var cnt = $("input[class='checkList']:checked").length;
+	var arr = new Array();
+	$("input[class='checkList']:checked").each(function() {
+		arr.push($(this).attr('id'));
+	});
+	if(cnt == 0){
+		alert("선택된 글이 없습니다.");
+	} else {
+		
+		$.ajax({
+			type: 'post',
+			url: '/written/delete',
+			data: "no_div=" + arr + "&CNT=" + cnt,
+			success : function( ) {
 				
-			
+			location.href="/mypage/written";
 
-		}
-	}) 
+			},
+			error: function(){alert("서버통신 오류");}
+		}); 
+	}
 }
 </script>
 
@@ -117,7 +119,7 @@ data: { ipw:ipw },
 
 <div class="rel_btn">
 <button type="button" onclick="allchecked()">전체선택</button>
-<button type="button" onclick="">선택삭제</button>
+<button type="button" onclick="writtenDelete()">선택삭제</button>
 </div>
 
 <div class="rel_se">
@@ -133,6 +135,7 @@ data: { ipw:ipw },
 	<th>날짜</th>
 	<th>선택</th>
 </tr>
+<% if (mbl.size() > 0 ) { %>
 <% for(int i=0; i<mbl.size(); i++) { %>
 <tr>
 	<td><%=mbl.get(i).getBorad_no() %></td>
@@ -170,8 +173,9 @@ data: { ipw:ipw },
 	</td>
 	<% } %>
 	<td><%=mbl.get(i).getCreate_date() %></td>
-	<td><input type="checkbox" class="checkList"/></td>
+	<td><input type="checkbox" class="checkList" id="<%=mbl.get(i).getBorad_no() %>_<%=mbl.get(i).getBoard_div() %>"/></td>
 </tr>
+<% } %>
 <% } %>
 </table>
 </div>

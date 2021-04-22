@@ -4,15 +4,21 @@ import java.util.Date;
 
 public class MyBoard {
 	
+	private int user_no;
 	private int borad_no;
 	private String board_div;
 	private String title;
 	private Date create_date;
-	
 	@Override
 	public String toString() {
-		return "MyBoard [borad_no=" + borad_no + ", board_div=" + board_div + ", title=" + title + ", create_date="
-				+ create_date + "]";
+		return "MyBoard [user_no=" + user_no + ", borad_no=" + borad_no + ", board_div=" + board_div + ", title="
+				+ title + ", create_date=" + create_date + "]";
+	}
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 	public int getBorad_no() {
 		return borad_no;

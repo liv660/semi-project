@@ -399,7 +399,7 @@ public class ProFileDaoImpl implements ProFileDao {
 	}
 
 	@Override
-	public List<MyBoard> selectMyList(Connection conn) {
+	public List<MyBoard> selectMyList(Connection conn, int userno) {
 		
 		String sql = "";
 		sql += "SELECT";
@@ -409,6 +409,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += " SELECT";
 		sql += " review_no, board_div, title, create_date";
 		sql += " FROM review_board";
+		sql += " WHERE user_no = ?";
 		sql += " ORDER BY board_div desc, find_no desc";
 		
 		List<MyBoard> myBoard = new ArrayList<MyBoard>();
@@ -419,6 +420,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
 			
 			rs = ps.executeQuery();
 			
@@ -518,7 +520,7 @@ public class ProFileDaoImpl implements ProFileDao {
 	}
 
 	@Override
-	public List<MyBoard> selectMyList(Connection conn, MyPaging myPaging) {
+	public List<MyBoard> selectMyList(Connection conn, MyPaging myPaging, int userno) {
 		
 		String sql = "";
 		sql += "SELECT * FROM (";
@@ -530,6 +532,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += "        SELECT";
 		sql += "            review_no, board_div, title, create_date";
 		sql += "        FROM review_board";
+		sql += " 		WHERE user_no = ?";
 		sql += "        ORDER BY board_div desc, find_no desc";
 		sql += "    ) B";
 		sql += " ) BOARD";
@@ -543,8 +546,9 @@ public class ProFileDaoImpl implements ProFileDao {
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, myPaging.getStartNo());
-			ps.setInt(2, myPaging.getEndNo());
+			ps.setInt(1, userno);
+			ps.setInt(2, myPaging.getStartNo());
+			ps.setInt(3, myPaging.getEndNo());
 			
 			rs = ps.executeQuery();
 			
@@ -581,6 +585,209 @@ public class ProFileDaoImpl implements ProFileDao {
 		
 		return myBoard;
 	}
+
+	@Override
+	public int deleteReviewImg(Connection conn, MyBoard myBoard) {
+		String sql = "";
+		sql += "DELETE review_img";
+		sql += " WHERE 1 = 1";
+		sql += " AND review_no = ?";
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getBorad_no());
+			res = ps.executeUpdate();
+		
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	@Override
+	public int deleteReviewBoard(Connection conn, MyBoard myBoard) {
+		String sql = "";
+		sql += "DELETE review_board";
+		sql += " WHERE 1 = 1";
+		sql += " 	AND user_no = ?";
+		sql += " 		AND review_no = ?";
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getUser_no());
+			ps.setInt(2, myBoard.getBorad_no());
+			res = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int deleteFindImg(Connection conn, MyBoard myBoard) {
+		String sql = "";
+		sql += "DELETE findimg";
+		sql += " WHERE 1 = 1";
+		sql += " AND review_no = ?";
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getBorad_no());
+			res = ps.executeUpdate();
+		
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int deleteFindBoard(Connection conn, MyBoard myBoard) {
+		String sql = "";
+		sql += "DELETE findboard";
+		sql += " WHERE 1 = 1";
+		sql += " 	AND user_no = ?";
+		sql += " 		AND review_no = ?";
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getUser_no());
+			ps.setInt(2, myBoard.getBorad_no());
+			res = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int deleteDiscoveryImg(Connection conn, MyBoard myBoard) {
+		
+		String sql = "";
+		sql += "DELETE findimg";
+		sql += " WHERE 1 = 1";
+		sql += " AND review_no = ?";
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getBorad_no());
+			res = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int deleteDiscoveryBoard(Connection conn, MyBoard myBoard) {
+		String sql = "";
+		sql += "DELETE findboard";
+		sql += " WHERE 1 = 1";
+		sql += " 	AND user_no = ?";
+		sql += " 		AND review_no = ?";
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getUser_no());
+			ps.setInt(2, myBoard.getBorad_no());
+			res = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+
+	@Override
+	public String selectByReviewStroed(Connection conn, MyBoard myBoard) {
+		
+		String sql = "";
+		sql += "SELECT stored_img FROM review_img";
+		sql += " WHERE review_no = ?";
+		
+		String StoredName = new String();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getBorad_no());
+			rs = ps.executeQuery();
+			
+			
+			while ( rs.next() ) {
+				StoredName = rs.getString("stored_img");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return StoredName;
+	}
+
+	@Override
+	public String selectByFindStroed(Connection conn, MyBoard myBoard) {
+		String sql = "";
+		sql += "SELECT stored_img FROM findimg";
+		sql += " WHERE find_no = ?";
+		
+		String StoredName = new String();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, myBoard.getBorad_no());
+			rs = ps.executeQuery();
+			
+			
+			while ( rs.next() ) {
+				StoredName = rs.getString("stored_img");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return StoredName;
+	}
+		
+		
+		
+
 
 
 	

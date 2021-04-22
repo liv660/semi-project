@@ -41,13 +41,32 @@ public interface ProFileDao {
 
 	public int insertleave(Connection conn, UserLeave userLeave);
 
-	public List<MyBoard> selectMyList(Connection conn);
+	public List<MyBoard> selectMyList(Connection conn, int userno);
 
-	public List<MyBoard> selectMyList(Connection conn, MyPaging myPaging);
+	public List<MyBoard> selectMyList(Connection conn, MyPaging myPaging, int userno);
 
 	public String selectByNick(Connection conn, int userno);
 
 	public int selectCntAll(Connection conn);
+
+	public int deleteFindImg(Connection conn, MyBoard myBoard);
+	
+	public int deleteFindBoard(Connection conn, MyBoard myBoard);
+	
+	public int deleteDiscoveryImg(Connection conn, MyBoard myBoard);
+	
+	public int deleteDiscoveryBoard(Connection conn, MyBoard myBoard);
+
+	public int deleteReviewImg(Connection conn, MyBoard myBoard);
+
+	public int deleteReviewBoard(Connection conn, MyBoard myBoard);
+
+	public String selectByFindStroed(Connection conn, MyBoard myBoard);
+
+	public String selectByReviewStroed(Connection conn, MyBoard myBoard);
+
+
+
 
 
 
