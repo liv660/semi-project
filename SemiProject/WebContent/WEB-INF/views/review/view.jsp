@@ -69,8 +69,60 @@ width : 500px;
 height : 70px;
 }
 
-.commentwrap {
-	border-bottom: 1px solid #000;
+.commentWrapBox {
+	width: 1200px;
+	margin : 0 auto;
+	padding-left : 190px;
+}
+
+.commentWrapBox .commentwrap {
+	margin-top : 20px;
+}
+
+.commentWrapBox .commentwrap .combtn {
+	color: red;
+	position : relative;
+	left : 500px;
+	border : none;
+	background : none;
+	text-align: center;
+	padding: 5px 5px;
+	outline: none;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+
+.commentWrapBox .commentwrap .commentDate {
+	position: relative;
+	left : 100px;
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentNick {
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentImg {
+	width: 30px;
+	height : 30px;
+	margin-right : 10px;
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentImg img {
+	width : 100%;
+	height : 100%;
+	object-fit : cover;
+	border-radius: 50%
+}
+
+.commentWrapBox .commentwrap .commentBtn {
+	display : inline-block;
+}
+
+.commentWrapBox .commentwrap .commentText {
+	margin-top : 5px;
 }
 
 
@@ -254,7 +306,7 @@ function commentlist() {
 				html += "<div class = 'commentDate'>" + commentlist[i].commentDate + "</div>"
 				
 				if($("#userno").val() == commentlist[i].userNo) {
-					html += "<div class 'commentBtn'>"
+					html += "<div class='commentBtn'>"
 					html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정' />"
 					html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제' />"
 					html += "</div><br>"

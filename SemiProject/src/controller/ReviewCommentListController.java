@@ -39,6 +39,7 @@ public class ReviewCommentListController extends HttpServlet {
 		
 		//조회한 글의 댓글 조회
 		List<ReviewComment> commentlist = reviewService.viewComment(reviewNo);
+//		System.out.println(commentlist);
 		
 		PrintWriter out = resp.getWriter();
 		out.print(gson.toJson(commentlist));

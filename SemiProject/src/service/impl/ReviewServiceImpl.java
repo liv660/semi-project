@@ -528,7 +528,7 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		List<ReviewComment> list = reviewCommentDao.selectComment(conn, reviewNo);
 		
-		return null;
+		return list;
 	}
 
 }
