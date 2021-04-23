@@ -638,7 +638,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		String sql = "";
 		sql += "DELETE findimg";
 		sql += " WHERE 1 = 1";
-		sql += " AND review_no = ?";
+		sql += " AND find_no = ?";
 		int res = 0;
 		
 		try {
@@ -662,7 +662,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += "DELETE findboard";
 		sql += " WHERE 1 = 1";
 		sql += " 	AND user_no = ?";
-		sql += " 		AND review_no = ?";
+		sql += " 		AND find_no = ?";
 		int res = 0;
 		
 		try {
@@ -687,7 +687,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		String sql = "";
 		sql += "DELETE findimg";
 		sql += " WHERE 1 = 1";
-		sql += " AND review_no = ?";
+		sql += " AND find_no = ?";
 		int res = 0;
 		
 		try {
@@ -711,7 +711,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += "DELETE findboard";
 		sql += " WHERE 1 = 1";
 		sql += " 	AND user_no = ?";
-		sql += " 		AND review_no = ?";
+		sql += " 		AND find_no = ?";
 		int res = 0;
 		
 		try {
