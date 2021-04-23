@@ -358,9 +358,6 @@ function commentlist() {
 				html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
 				html += "</div>"
 				}
-				html += "<br> <div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
-				html += "</div> <br>"
-				}
 				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
 				html += "</div>"
 				if( i == commentlist.length-1) {
