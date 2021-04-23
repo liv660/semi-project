@@ -359,6 +359,9 @@ function commentlist() {
 				html += "</div>"
 				}
 				html += "<br> <div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
+				html += "</div> <br>"
+				}
+				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
 				html += "</div>"
 				if( i == commentlist.length-1) {
 					html += "</div>"

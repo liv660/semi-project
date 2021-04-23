@@ -91,4 +91,12 @@ public interface ReviewService {
 	 */
 	public void writeComment(ReviewComment param);
 
+	/**
+	 * 조회한 글의 댓글 보여주기
+	 * 
+	 * @param reviewNo
+	 * @return
+	 */
+	public List<ReviewComment> viewComment(int reviewNo);
+
 }

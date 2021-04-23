@@ -483,6 +483,7 @@ public class ReviewServiceImpl implements ReviewService {
 		String reviewNo = req.getParameter("reviewNo");
 		String userno = req.getParameter("userno");
 		String comment = req.getParameter("comment");
+		String nick = req.getParameter("nick");
 		
 		if(reviewNo != null && !"".equals(reviewNo)) {
 			reviewComment.setReviewNo(Integer.parseInt(reviewNo));
@@ -496,7 +497,7 @@ public class ReviewServiceImpl implements ReviewService {
 			reviewComment.setCommentText(comment);
 		}
 		
-		reviewComment.setNick(req.getParameter("nick"));
+		reviewComment.setNick(nick);
 		
 		if(req.getParameter("commentno") != null && !"".equals(req.getParameter("commentno"))) {
 			reviewComment.setCommentNo(Integer.parseInt(req.getParameter("commentno")));
@@ -517,6 +518,17 @@ public class ReviewServiceImpl implements ReviewService {
 			JDBCTemplate.rollback(conn);
 		}
 		
+	}
+	
+	
+	@Override
+	public List<ReviewComment> viewComment(int reviewNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<ReviewComment> list = reviewCommentDao.selectComment(conn, reviewNo);
+		
+		return null;
 	}
 
 }

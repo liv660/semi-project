@@ -161,7 +161,7 @@ height : 70px;
 
 </table>
 
-<input type="hidden" id="nick" value="<%=session.getAttribute("nick") %>">
+<input type="hidden" id="nick" value="<%=nick %>">
 <input type="hidden" id="reviewNo" value="<%=reviewNo.getReviewNo() %>">
 <input type="hidden" id="userno" value="<%=session.getAttribute("userno")  %>">
 
@@ -179,13 +179,24 @@ height : 70px;
 </div>
 
 <script type="text/javascript">
+/* 댓글 목록 조회 */
+$(document).ready(function() {
+	commentlist();
+	
+	$(document).on('click', '#foldbtn', function() {
+		$('.fold').css('display', 'block');
+		$('#foldbtn').css('display', 'none');
+	})
+});
+
+
 
 /* 댓글 추가 */
 $("#commentUpdatebtn").click(function() {
 	
 	var reviewNo = $("#reviewNo").val();
 	var comment = $("#comment").val();
-	var nick = $("nick").val();
+	var nick = $("#nick").val();
 	var userno = $("#userno").val();
 	
 	$.ajax({
@@ -204,6 +215,67 @@ $("#commentUpdatebtn").click(function() {
 	})
 	
 });
+
+
+
+/* 댓글 목록 */
+function commentlist() {
+	var reviewNo = $("#reviewNo").val();
+	
+	$.ajax({
+		type : 'get',
+		url : '/review/commentList',
+		data : {'reviewNo' : reviewNo},
+		dataType : 'json',
+		success : function(data) {
+			var jsonText = JSON.stringify(data);
+			var commentlist = JSON.parse(jsonText);
+			
+			for(var i=0; i<commentlist.length; i++) {
+				
+				var html = '';
+				
+				if(commentlist[i].commentCnt != null) {
+					var commentCnt = commentlist[i].commentCnt;
+				}
+				
+				if(i > 4) {
+					html += "<div class 'fold'>";
+				}
+				html += "<div class='commentwrap'>"
+				html += "<div class='commentImg'><img src='"
+				if(commentlist[i].storedImg == "basic.png" || commentlist[i].storedImg == null) {
+					html += "/resources/image/basic.png"
+				} else {
+					html += "/userimgup/" + commentlist[i].storedImg
+				}
+				html += " '/></div>"
+				html += "<div class='commentNick'>" + commentlist[i].nick + "</div>"
+				html += "<div class = 'commentDate'>" + commentlist[i].commentDate + "</div>"
+				
+				if($("#userno").val() == commentlist[i].userNo) {
+					html += "<div class 'commentBtn'>"
+					html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정' />"
+					html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제' />"
+					html += "</div><br>"
+				}
+				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
+				html += "</div>"
+				
+				if(i == commentlist.length-1) {
+					html += "</div>"
+				}
+				if(i == 4) {
+					html += "<input type='button' id='foldbtn' value='댓글 더보기'>"
+				}
+				
+				$("#commentwrap").append(html);
+			}
+			$("#commentCnt").html("");
+			$("#commentCnt").append(commentCnt);
+		}
+	})
+}
 
 </script>
 
