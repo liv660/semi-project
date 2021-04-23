@@ -25,6 +25,10 @@ function confirmDelete() {
 
 <style type="text/css">
 
+* {
+	font-family: sans-serif;
+}
+
 .wrapBox {
 	width : 1200px;
 	margin : 0 auto;
@@ -96,6 +100,11 @@ function confirmDelete() {
 .imgbox img {
 	width: 200px;
 	height: 200px;
+	margin-bottom : 10px;
+}
+
+.imgbox .imgclickspan {
+	font-size : small;
 }
 
 #lightbox {
@@ -114,11 +123,6 @@ function confirmDelete() {
   left:50%;
   transform:translate(-50%, -50%);
   border:1px solid #eee;      
-}
-
-#comment {
-width : 500px;
-height : 70px;
 }
 
 .commentWrapBox {
@@ -143,6 +147,9 @@ height : 70px;
 	border-radius: 24px;
 	transition: 0.25s;
 	cursor: pointer;
+}
+
+.commentWrapBox .commentwrap .comupdtn {
 }
 
 .commentWrapBox .commentwrap .commentDate {
@@ -185,10 +192,18 @@ height : 70px;
 	width : 800px;
 	border : none;
 	margin-top : 20px;
-	
 }
 
+.commentWrapBox #commentUpdateBtn {
+	padding : 15px 15px;
+	border-radius : 24px;
+}
 
+.commentWrapBox #comment {
+	width : 500px;
+	height : 70px;
+	border : 2px solid #000;
+}
 
 
 </style>
@@ -232,7 +247,11 @@ height : 70px;
 		<% for( int i=0; i<file.size(); i++) { %>
 			<img src="<%=request.getContextPath()%>/upload/<%=file.get(i).getStoredName() %>"
 				data-src="<%=request.getContextPath()%>/upload/<%=file.get(i).getStoredName() %>"
-				 class="pic">
+			 	class="pic">
+		<% } %>
+		<br>
+		<% if ( file.size() > 0 ) { %>
+		<span class='imgclickspan'>*이미지 클릭시 확대됩니다*</span>
 		<% } %>
 		<br>
 	</div>
@@ -254,7 +273,7 @@ height : 70px;
 	<h3>댓글<span id="commentCnt"></span></h3>
 	
 	<input type="text" id=comment name="comment" />
-	<input type="button" id="commentUpdatebtn" value="댓글 등록"/>
+	<input type="button" id="commentUpdateBtn" value="댓글 등록"/>
 	
 	<div id="commentwrap">
 	
@@ -337,9 +356,9 @@ function commentlist() {
 				html += "<div class='commentBtn'>"
 				html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
 				html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
+				html += "</div>"
 				}
-				html += "</div> <br>"
-				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
+				html += "<br> <div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
 				html += "</div>"
 				if( i == commentlist.length-1) {
 					html += "</div>"
@@ -414,8 +433,8 @@ function commentUpdateTrans(commentno) {
 	var html = '';
 	
 	html += "<input type='text' id='comupdate' value='" + contentText + "' style='width:300px; height:40px;'/>";
-	html += "<input type='button' class='combtn' id='updateConfirm' onclick='commentUpdate(" + commentno + ")' value='수정'/>"
-	html += "<input type='button' class='combtn' id='canclebtn' onclick='updatecancle()' value='취소'/>"
+	html += "<input type='button' class='comupbtn' id='updateConfirm' onclick='commentUpdate(" + commentno + ")' value='수정'/>"
+	html += "<input type='button' class='comupbtn' id='canclebtn' onclick='updatecancle()' value='취소'/>"
 	
 	$('#comwrap' + commentno).html(html)
 	
