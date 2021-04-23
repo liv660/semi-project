@@ -251,7 +251,7 @@ function confirmDelete() {
       <% } %>
       <br>
       <% if ( file.size() > 0 ) { %>
-      <span class='imgclickspan'>*이미지 클릭시 확대됩니다*</span>
+      <span class='imgclickspan'>*이미지 클릭시 원본사이즈로 확대됩니다*</span>
       <% } %>
       <br>
    </div>

@@ -154,6 +154,14 @@ ul.tabs li.current{
 	margin : 20px;
 }
 
+#imgwrapbox h2 {
+	font-family: fantasy;
+	letter-spacing: 5px;
+	display : inline-block;
+	padding : 10px 20px;
+	margin-bottom : 50px;
+}
+
 #tab-3 #result, #tab-3 #couponNo {
 	border : none;
 	text-align: center;
@@ -184,7 +192,6 @@ ul.tabs li.current{
 }
 #tab-3 .startbtn:before, #tab-3 .startbtn:after {
   border-color: transparent;
-  -webkit-transition: all 0.25s;
   transition: all 0.25s;
   border-style: solid;
   border-width: 0;
@@ -283,6 +290,8 @@ ul.tabs li.current{
 
 	<div id="tab-3" class="tab-content">
 		<div id="imgwrapbox">
+		
+		<h2>스토어 할인쿠폰 EVENT</h2> <br>
 
 		<div id="imgbox1">
 		<img src="/resources/image/dog2.jpg" class="img" name="first" style="width:200px; height:200px;"> <br>
@@ -315,7 +324,7 @@ ul.tabs li.current{
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
-<script>
+<script type="text/javascript">
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -475,9 +484,8 @@ function resultgame(){
 		, url : '/coupon/save'
 	})
 }
-	
-</script>
 
+</script>
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>
 
 

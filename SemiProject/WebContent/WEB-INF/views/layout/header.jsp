@@ -33,8 +33,13 @@
    background-color: transparent !important;
 }
 
+#loginNick {
+   float: right;
+   margin-top: 10px;
+}
+
 .navbar {
-   background-color: #EBC680;
+   background-color: none;
 }
 
 .container-fluid > .navbar-header {
@@ -56,58 +61,40 @@
 /* 가운데 정렬 끝 */
 
 .nav li a {
-   color: brown;
-   font-size: 17px;
+   	font-size: 1.05em;
+	font-weight: bold;
+	display: block;
+	padding: 1em 3em;
 }
 
-.nav li a:hover, .nav li a:active, .nav li a:visited { 
-   background-color: #A48654;
-    color: brown;  
-}
-
-#loginNick {
-   float: right;
-   margin-top: 10px;
-}
-
-.submenu { 
-   /* 하위 메뉴 스타일 설정 */ 
-   position: absolute; 
-   height: 0px; 
-   overflow: hidden; 
-   transition: height .2s; 
-   -webkit-transition: height .2s; 
-   -moz-transition: height .2s; 
-   -o-transition: height .2s; 
-   width: 200px; /* [변경] 가로 드랍다운 메뉴의 넓이 */ 
-   background-color: #EBC680;
+.nav li a:link, .nav li a:visited {
+     color: #aaa;  
+     background : none;  
 } 
 
-.submenu li { 
-   display: inline-block; /* 가로로 펼쳐지도록 설정  */
-}
-
-.submenu li a { 
-/*    border: solid 1px #A48654;  */
-   margin-right: -1px
+.nav li a:hover, .nav li a:active { 
+ 	color: #EBAA5F; 
+ 	background: none; 
 } 
 
-.submenu li a:hover {
-   text-decoration: none;
-   background-color: #A48654;
-}
-
-.topMenuLi:hover .submenu {
-   height: 40px;
-   text-align: center;
-   font-size: 15px;
-/*    padding: 5px; */
-}
-
+.nav li a:after { 
+    display:block; 
+    content: ''; 
+    border-bottom: solid 1px #EBAA5F;; 
+    transform: scaleX(0); 
+   transition: transform 250ms ease-in-out; 
+} 
+.nav li a:hover:after { 
+    transform: scaleX(1); 
+} 
 
 
 
 </style>
+
+<script type="text/javascript">
+
+</script>
 
 </head>
 <body>
@@ -140,12 +127,6 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" href="/main">
          <img alt="Logo" src="">
       </a>
@@ -154,16 +135,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active topMenuLi"><a href="/find/list">반려동물 찾기 <span class="sr-only">(current)</span></a></li>
-        <li class="topMenuLi"><a href="/discover/list">유기동물 발견</a></li>
-        <li class="topMenuLi"><a href="/product">스토어</a></li>
-        <li class="topMenuLi"><a href="#">커뮤니티</a>
-           <ul class="submenu nav">
-              <li><a href="/notice/list">공지사항</a></li>
-              <li>|</li>
-              <li><a href="/review/list">후기</a></li>
-           </ul>
-        </li>
+        <li class="active topMenuLi"><a href="/find/list" class="link">반려동물 찾기</a></li>
+        <li class="topMenuLi"><a href="/discover/list" class="link" >유기동물 발견</a></li>
+        <li class="topMenuLi"><a href="/product" class="link" >스토어</a></li>
+        <li class="topMenuLi"><a href="/review/list" class="link" >후기</a></li>
+        <li class="topMenuLi"><a href="" class="link" >공지사항</a></li>
+        
       </ul>
 
     </div>
