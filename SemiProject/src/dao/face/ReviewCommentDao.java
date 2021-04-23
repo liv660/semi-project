@@ -34,4 +34,13 @@ public interface ReviewCommentDao {
 	 */
 	public int deleteComment(Connection conn, ReviewComment param);
 
+	/**
+	 * 리뷰 업데이트
+	 * 
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public int commentUpdate(Connection conn, ReviewComment param);
+
 }

@@ -357,6 +357,57 @@ function commentDelete(commentno) {
 	
 }
 
+
+
+/* 댓글 수정 */
+function commentUpdateTrans(commentno) {
+	
+	var contentText = $('#commentText' + commentno).text();
+	
+	$('#updatebtn' + commentno).css('display', 'none');
+	$('#deletebtn' + commentno).css('display', 'none');
+	
+	var html = '';
+	
+	html += "<input type='text' id='comupdate' value='" + contentText + "' style='width: 300px; height: 40px;' />";
+	html += "<input type='button' class='comupbtn' id='updateConfirm' onclick='commentUpdate(" + commentno + ")' value='수정' />";
+	html += "<input type='button' class='comupbtn' id='canclebtn' onclick='updatecancel()' value='취소' />";
+	
+	$('#comwrap' + commentno).html(html)
+	
+}
+
+
+
+/* 댓글 수정 - 수정버튼 클릭 */
+function commentUpdate(commentno) {
+	
+	var comment = $('#comupdate').val();
+	
+	$.ajax({
+		type: 'post',
+		url : '/review/commentupdate',
+		data : {'commentno' : commentno,
+				'comment' : comment},
+		success : function() {
+			$("#commentwrap").html("");
+			
+			commentlist();
+		}
+	})
+	
+}
+
+
+/* 댓글 수정 - 취소버튼 클릭 */
+function updatecancel() {
+	
+	$("#commentwrap").html("");
+	
+	commentlist();
+	
+}
+
 </script>
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>

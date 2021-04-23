@@ -106,4 +106,11 @@ public interface ReviewService {
 	 */
 	public void removeComment(ReviewComment param);
 
+	/**
+	 * 리뷰 수정
+	 * 
+	 * @param param
+	 */
+	public void recomment(ReviewComment param);
+
 }

@@ -114,4 +114,32 @@ public class ReviewCommentDaoImpl implements ReviewCommentDao {
 		
 		return res;
 	}
+	
+	
+	@Override
+	public int commentUpdate(Connection conn, ReviewComment param) {
+		
+		String sql = "";
+		sql += "UPDATE review_comment";
+		sql += " SET comment_text = ?, comment_date = sysdate";
+		sql += " WHERE comment_no = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, param.getCommentText());
+			ps.setInt(2, param.getCommentNo());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
 }

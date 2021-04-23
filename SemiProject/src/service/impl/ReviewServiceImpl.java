@@ -543,8 +543,18 @@ public class ReviewServiceImpl implements ReviewService {
 			JDBCTemplate.rollback(conn);
 		}
 		
-		
-		
 	}
 
+	
+	
+	@Override
+	public void recomment(ReviewComment param) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if(reviewCommentDao.commentUpdate(conn,param) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
 }
