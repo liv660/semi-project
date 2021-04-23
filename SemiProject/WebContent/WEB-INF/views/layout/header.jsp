@@ -88,13 +88,14 @@
     transform: scaleX(1); 
 } 
 
+.clicked {
+	color :red;
+}
+
 
 
 </style>
 
-<script type="text/javascript">
-
-</script>
 
 </head>
 <body>
@@ -135,11 +136,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active topMenuLi"><a href="/find/list" class="link">반려동물 찾기</a></li>
-        <li class="topMenuLi"><a href="/discover/list" class="link" >유기동물 발견</a></li>
-        <li class="topMenuLi"><a href="/product" class="link" >스토어</a></li>
-        <li class="topMenuLi"><a href="/review/list" class="link" >후기</a></li>
-        <li class="topMenuLi"><a href="" class="link" >공지사항</a></li>
+        <li class="active topMenuLi"><a href="/find/list" class="link"><span>반려동물 찾기</span></a></li>
+        <li class="topMenuLi"><a href="/discover/list" class="link" ><span>유기동물 발견</span></a></li>
+        <li class="topMenuLi"><a href="/product" class="link" ><span>스토어</span></a></li>
+        <li class="topMenuLi"><a href="/review/list" class="link" ><span>후기</span></a></li>
+        <li class="topMenuLi"><a href="/notice/list" class="link" ><span>공지사항</span></a></li>
         
       </ul>
 
@@ -149,3 +150,8 @@
 </nav>
 
 </div>
+
+<script type="text/javascript">
+
+
+</script>
