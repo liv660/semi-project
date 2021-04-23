@@ -291,7 +291,7 @@ function userCoupon() {
 				}else if (coupon.dateCompare == 1) {
 					alert('하루에 한번만 참여 가능합니다.')
 				}else if(coupon.firstPart == 2 || coupon.dateCompare == 2) {
-					startGame()
+					rullet()
 				}
 				
 			}
@@ -334,21 +334,11 @@ function randomCode() {
 	return str
 }
 
-
-//게임시작
-function startGame(){
-   if(game == false){
-            game = true
-        if (coin <= 0){
-           }else{
-          rullet()
-         }
-     }
-}
-
 //룰렛 돌리기
 function rullet(){
        
+   game = true;   
+	
    if(num == 10) num = 0
    if(box1)document.images["first"].src = IMG[num % 10].src
    if(box2)document.images["second"].src = IMG[(num+3) % 10].src

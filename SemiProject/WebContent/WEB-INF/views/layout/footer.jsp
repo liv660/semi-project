@@ -31,6 +31,7 @@
   left:0;
   display:none;
   transition : 0.25s;
+  
 }
 
 .footer .lightboxContent {

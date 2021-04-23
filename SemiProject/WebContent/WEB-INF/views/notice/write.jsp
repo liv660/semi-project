@@ -147,6 +147,7 @@ p {margin-bottom : 0px;}
 		fileArr = $fileListArr; 
 	
 		$limit = $totSize;
+		
 
 		/* 파일 사이즈 체크 해주는 부분 */ 
 		for(var i = 0 ; i < files.length ; i++){
@@ -156,22 +157,28 @@ p {margin-bottom : 0px;}
 				return false;
 			}
 		}
-
-		/* 파일의 갯수 체크하는 부분 과 파일의 이름과 사이즈 버튼 출력 */
-		for(var i = 0 ; i < files.length ; i++){
-			$fileCount++; // 파일 카운트 
-			if($fileCount >4) {
-				alert('첨부파일은 최대 4개 입니다.');
-				break;
+		if(files.length > 0 ) {
+			
+			$('#file_table').html("");
+			$totSize = 0;
+			$fileCount = 0;
+			
+			/* 파일의 갯수 체크하는 부분 과 파일의 이름과 사이즈 버튼 출력 */
+			for(var i = 0 ; i < files.length ; i++){
+				$fileCount++; // 파일 카운트 
+				if($fileCount >4) {
+					alert('첨부파일은 최대 4개 입니다.');
+					break;
+				}
+				
+				 $('#file_table').append("<tr id=file"+ $keyNum +"><td class='txt-c'><button type='button' class='deleteFile' >&#8861;</button></td>"+
+							+ "&nbsp;" + "<td>"+ files[i].name +"</td>"+
+							"<td id='fileSize "+ $keyNum +"'><p class=file"+ $keyNum +">"+ " : " + Math.floor(files[i].size / 1000) +" KB</p></td>"+
+							"</tr>");
+				 $keyNum++;  
+				 fileArr.push(files[i]);
+				 $totSize = $totSize + files[i].size; 
 			}
-
-			 $('#file_table').append("<tr id=file"+ $keyNum +"><td class='txt-c'><button type='button' class='deleteFile' >&#8861;</button></td>"+
-						+ "&nbsp;" + "<td>"+ files[i].name +"</td>"+
-						"<td id='fileSize "+ $keyNum +"'><p class=file"+ $keyNum +">"+ " : " + Math.floor(files[i].size / 1000) +" KB</p></td>"+
-						"</tr>");
-			 $keyNum++;  
-			 fileArr.push(files[i]);
-			 $totSize = $totSize + files[i].size; 
 		}
 
 		$fileListArr = new Array();

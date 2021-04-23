@@ -25,10 +25,6 @@ function confirmDelete() {
 
 <style type="text/css">
 
-* {
-	font-family: sans-serif;
-}
-
 .wrapBox {
 	width : 1200px;
 	margin : 0 auto;
@@ -100,11 +96,6 @@ function confirmDelete() {
 .imgbox img {
 	width: 200px;
 	height: 200px;
-	margin-bottom : 10px;
-}
-
-.imgbox .imgclickspan {
-	font-size : small;
 }
 
 #lightbox {
@@ -123,6 +114,11 @@ function confirmDelete() {
   left:50%;
   transform:translate(-50%, -50%);
   border:1px solid #eee;      
+}
+
+#comment {
+width : 500px;
+height : 70px;
 }
 
 .commentWrapBox {
@@ -147,9 +143,6 @@ function confirmDelete() {
 	border-radius: 24px;
 	transition: 0.25s;
 	cursor: pointer;
-}
-
-.commentWrapBox .commentwrap .comupdtn {
 }
 
 .commentWrapBox .commentwrap .commentDate {
@@ -184,26 +177,7 @@ function confirmDelete() {
 	margin-top : 5px;
 }
 
-.commentWrapBox .fold {
-	display : none;
-}
 
-.commentWrapBox #foldbtn {
-	width : 800px;
-	border : none;
-	margin-top : 20px;
-}
-
-.commentWrapBox #commentUpdateBtn {
-	padding : 15px 15px;
-	border-radius : 24px;
-}
-
-.commentWrapBox #comment {
-	width : 500px;
-	height : 70px;
-	border : 2px solid #000;
-}
 
 
 </style>
@@ -247,11 +221,7 @@ function confirmDelete() {
 		<% for( int i=0; i<file.size(); i++) { %>
 			<img src="<%=request.getContextPath()%>/upload/<%=file.get(i).getStoredName() %>"
 				data-src="<%=request.getContextPath()%>/upload/<%=file.get(i).getStoredName() %>"
-			 	class="pic">
-		<% } %>
-		<br>
-		<% if ( file.size() > 0 ) { %>
-		<span class='imgclickspan'>*이미지 클릭시 확대됩니다*</span>
+				 class="pic">
 		<% } %>
 		<br>
 	</div>
@@ -273,7 +243,7 @@ function confirmDelete() {
 	<h3>댓글<span id="commentCnt"></span></h3>
 	
 	<input type="text" id=comment name="comment" />
-	<input type="button" id="commentUpdateBtn" value="댓글 등록"/>
+	<input type="button" id="commentUpdatebtn" value="댓글 등록"/>
 	
 	<div id="commentwrap">
 	
@@ -286,14 +256,6 @@ function confirmDelete() {
 /* 댓글목록 조회 */
 $(document).ready(function() {
 	commentlist();
-	
-	$(document).on('click', '#foldbtn', function() {
-		
-		$('.fold').css('display','block');
-		$('#foldbtn').css('display','none');
-	})
-	
-	
 })
 
 /* .pic 인 이미지들의 배열 */
@@ -339,9 +301,8 @@ function commentlist() {
 					var commentCnt = commentlist[i].commentCnt;
 				}
 				
-				if(i > 4) {
-					html += "<div class='fold'>";
-				}
+				console.log(commentlist[i].storedName);
+				
 				html += "<div class='commentwrap'>"
 				html += "<div class='commentImg'> <img src='"
 				if(commentlist[i].storedName == "basic.png" || commentlist[i].storedName == null) {
@@ -352,31 +313,21 @@ function commentlist() {
 				html += " '/> </div>"
 				html += "<div class='commentNick'>" + commentlist[i].nick + "</div>"
 				html += "<div class='commentDate'>" + commentlist[i].commentDate + "</div>"
-				if( $("#userno").val() == commentlist[i].userNo) {
 				html += "<div class='commentBtn'>"
 				html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
 				html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
 				html += "</div> <br>"
-				}
-				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
+				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" 
+				html += "<span class='commentText' id='commentText" + commentlist[i].commentNo + "'> " + commentlist[i].commentText + "</span>"
 				html += "</div>"
-				if( i == commentlist.length-1) {
-					html += "</div>"
-				}
-				if( i == 4) {
-					html += "<input type='button' id='foldbtn' value='댓글 더보기'>"
-				}
 				
 				$("#commentwrap").append(html);
-				
-				
 			}
 			$("#commentCnt").html("");
 			$("#commentCnt").append(commentCnt);
 		}
 	})
 }	
-
 	
 
 /* 댓글 추가 */
@@ -433,8 +384,8 @@ function commentUpdateTrans(commentno) {
 	var html = '';
 	
 	html += "<input type='text' id='comupdate' value='" + contentText + "' style='width:300px; height:40px;'/>";
-	html += "<input type='button' class='comupbtn' id='updateConfirm' onclick='commentUpdate(" + commentno + ")' value='수정'/>"
-	html += "<input type='button' class='comupbtn' id='canclebtn' onclick='updatecancle()' value='취소'/>"
+	html += "<input type='button' class='combtn' id='updateConfirm' onclick='commentUpdate(" + commentno + ")' value='수정'/>"
+	html += "<input type='button' class='combtn' id='canclebtn' onclick='updatecancle()' value='취소'/>"
 	
 	$('#comwrap' + commentno).html(html)
 	
