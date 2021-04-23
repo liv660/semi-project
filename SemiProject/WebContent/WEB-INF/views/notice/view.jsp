@@ -358,9 +358,10 @@ function commentlist() {
             html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
             html += "</div>"
             }
-            html += "<br> <div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" + commentlist[i].commentText + "</div>"
-            html += "</div>"
-            if( i == commentlist.length-1) {
+			html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" 
+			html += "<span class='commentText' id='commentText" + commentlist[i].commentNo + "'> " + commentlist[i].commentText + "</span>"
+			html += "</div>"
+    	    if( i == commentlist.length-1) {
                html += "</div>"
             }
             if( i == 4) {
@@ -380,7 +381,7 @@ function commentlist() {
    
 
 /* 댓글 추가 */
-$("#commentUpdatebtn").click(function() {
+$("#commentUpdateBtn").click(function() {
    
    var noticeno = $("#noticeno").val();
    var comment = $("#comment").val();

@@ -45,22 +45,7 @@ function search() {
 	font-family : sans-serif;
 }
 
-.container h1 {
-	color : #EA9A56;
-	text-transform: uppercase;
-	font-weight: 500px;
-	font-family: sans-serif;
-	margin-bottom : 30px;
-}
-.noticeno {width: 100px; text-align : center;}
-.important {width: 50px;}
-.title {width:410px;}
-.writer {width : 120px; text-align : center;}
-.date {width:150px; text-align : center;}
-.views {width:120px; text-align : center;}
-.searchbox {float : right; margin-bottom : 10px; margin-top : 10px;}
-
-
+/* TAB */
 ul.tabs{
 	margin: 0px;
 	padding: 0px;
@@ -90,18 +75,24 @@ ul.tabs li.current{
 	border-bottom : none;
 }
 
-
 .tab-content.current{display: inherit;}
 
 
-
-#wrapChart {
-	width:600px;
-	margin : 80px auto;
-	text-align: center;
+/* TAB-1 */
+.container h1 {
+	color : #EA9A56;
+	text-transform: uppercase;
+	font-weight: 500px;
+	font-family: sans-serif;
+	margin-bottom : 30px;
 }
-
-
+.noticeno {width: 100px; text-align : center;}
+.important {width: 50px;}
+.title {width:410px;}
+.writer {width : 120px; text-align : center;}
+.date {width:150px; text-align : center;}
+.views {width:120px; text-align : center;}
+.searchbox {float : right; margin-bottom : 10px; margin-top : 10px;}
 
 #searchbtn, #writebtn {
 	border : 1px solid #A48654;
@@ -111,6 +102,7 @@ ul.tabs li.current{
 	padding : 2px 5px;
 	color : #000;
 }
+
 #searchbtn:hover, #writebtn:hover {background : #A48654; color : #000;}
 #writebtn {padding : 5px 8px; float: right;}
 #searchBox {border : 2px solid #A48654; border-radius : 24px;}
@@ -120,6 +112,21 @@ ul.tabs li.current{
 .container .titleContent { color : #000;}
 .container .titleContent:hover { color : #EA9A56; text-decoration :none; font-size: medium; transition: 0.5s;}
 
+
+/* TAB-2 */
+#wrapChart {
+	width:600px;
+	margin : 80px auto;
+	text-align: center;
+}
+
+#wrapChart h3 {
+	margin-bottom : 50px;
+}
+
+
+
+/* TAB-3 */
 #imgwrapbox #imgbox1, #imgwrapbox #imgbox2, #imgwrapbox #imgbox3 {
 	display : inline-block;
 	text-align: center;
@@ -127,6 +134,85 @@ ul.tabs li.current{
 
 .container #tab-3 {
 	text-align : center;
+}
+
+#imgwrapbox .img {
+	border : 1px solid #000;
+	border-radius : 24px;
+}
+
+#imgwrapbox .stopbtn {
+	border : 1px solid orange;
+	margin-top : 20px;
+	margin-bottom : 50px;
+	padding : 5px 15px;
+	border-radius : 10px;
+	background : #f7d794;	
+}
+
+#imgwrapbox [id*="imgbox"] {
+	margin : 20px;
+}
+
+#tab-3 #result, #tab-3 #couponNo {
+	border : none;
+	text-align: center;
+	margin-bottom : 20px;
+	background : #fffafa;
+}
+
+#tab-3 #result:focus, #tab-3 #couponNo:focus, #imgwrapbox .stopbtn:focus {
+	outline : none;
+}
+
+#tab-3 .startbtn {
+  background-color: #c47135;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'BenchNine', Arial, sans-serif;
+  font-size: 1em;
+  font-size: 22px;
+  line-height: 1em;
+  margin: 15px 40px;
+  outline: none;
+  padding: 12px 40px 10px;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+#tab-3 .startbtn:before, #tab-3 .startbtn:after {
+  border-color: transparent;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  border-style: solid;
+  border-width: 0;
+  content: "";
+  height: 24px;
+  position: absolute;
+  width: 24px;
+}
+#tab-3 .startbtn:before {
+  border-color: #c47135;
+  border-right-width: 2px;
+  border-top-width: 2px;
+  right: -5px;
+  top: -5px;
+}
+#tab-3 .startbtn:after {
+  border-bottom-width: 2px;
+  border-color: #c47135;
+  border-left-width: 2px;
+  bottom: -5px;
+  left: -5px;
+}
+#tab-3 .startbtn:hover {
+  background-color: #c47135;
+}
+#tab-3 .startbtn:hover:before, #tab-3 .startbtn:hover:after{
+  height: 100%;
+  width: 100%;
 }
 
 </style>
@@ -137,9 +223,9 @@ ul.tabs li.current{
 <h1>Notice</h1>
 
 	<ul class="tabs">
-		<li class="tab-link current" data-tab="tab-1">notice</li>
-		<li class="tab-link" data-tab="tab-2">chart</li>
-		<li class="tab-link" data-tab="tab-3">coupon</li>
+		<li class="tab-link current" data-tab="tab-1">Notice</li>
+		<li class="tab-link" data-tab="tab-2">Statistic</li>
+		<li class="tab-link" data-tab="tab-3">Event</li>
 	</ul>
 	<div id="tab-1" class="tab-content current">
 		<div class="searchbox">
@@ -200,26 +286,28 @@ ul.tabs li.current{
 
 		<div id="imgbox1">
 		<img src="/resources/image/dog2.jpg" class="img" name="first" style="width:200px; height:200px;"> <br>
-		<input type="button" value="stop" name="firstb" onClick='end(1);'>
+		<input type="button" value="stop" id="stop1" name="firstb" class="stopbtn" onClick='end(1);'>
 		</div>
 		
-		<div id="imgbox1">
+		<div id="imgbox2">
 		<img src="/resources/image/cat2.jpg" class="img" name="second" style="width:200px; height:200px;"> <br>
-		<input type="button" value="stop" name="secondb" onClick='end(2);'>
+		<input type="button" value="stop" id="stop2" name="secondb" class="stopbtn" onClick='end(2);'>
 		</div>
 		
-		<div id="imgbox1">
+		<div id="imgbox3">
 		<img src="/resources/image/cat3.jpg" class="img" name="third" style="width:200px; height:200px;"> <br>
-		<input type="button" value="stop" name="thirdb" onClick='end(3);'>
+		<input type="button" value="stop" id="stop3" name="thirdb" class="stopbtn" onClick='end(3);'>
 		</div>
 		
 		</div>
 		
+		<button type="button" class="startbtn" onClick='userCoupon();'>START</button> <br><br><br>
 		
-		<input type="button" value="  START  " onClick='userCoupon();'> <br><br><br>
-		
-		<input type="text" size=55 name="result" id="result" value="랜덤 쿠폰 뽑기!" readonly="readonly"><br>
+		<input type="text" size=55 name="result" id="result" value="START버튼을 눌러주세요" readonly="readonly"><br>
 		<input type="text" size=55 id='couponNo' readonly="readonly" />
+		
+		
+		<div ></div>
 		
 		<input type="hidden" id="firstPart" value=""/>
 		
@@ -283,9 +371,6 @@ function userCoupon() {
 				
 				$('#firstPart').val(coupon.firstPart)
 				
-				console.log(coupon.dateCompare)
-				
-	
 				if(coupon.gameSuccess == 'Y') {
 					alert('이미 쿠폰을 받으셨습니다.')
 				}else if (coupon.dateCompare == 1) {
@@ -304,8 +389,6 @@ function userCoupon() {
 
 
 
-coin = 1  
-bet = 1
 game = false
 box1 = true
 box2 = true
@@ -354,6 +437,8 @@ function end(variable){
 			if(variable == 1)box1 = false
 			if(variable == 2)box2 = false
 			if(variable == 3)box3 = false
+			
+			$('#stop'+variable).css('background','#e58e26');
 	  }
 	if((box1 == false) && (box2 == false) && (box3 == false)){
 			clearTimeout(tid)

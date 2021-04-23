@@ -53,8 +53,6 @@ public class CouponSaveController extends HttpServlet {
 		HttpSession session = req.getSession();
 		coupon.setUserId((String) session.getAttribute("userid"));
 		
-		System.out.println(coupon);
-		
 		couponService.saveCouponInfo(coupon);
 		
 		

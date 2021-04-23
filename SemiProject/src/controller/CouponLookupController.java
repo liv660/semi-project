@@ -31,8 +31,6 @@ public class CouponLookupController extends HttpServlet {
 			userno = Integer.parseInt(param);
 		}
 		
-		System.out.println(userno);
-		
 		Coupon coupon = couponService.getUserInfo(userno);
 		
 		Gson gson = new Gson();
