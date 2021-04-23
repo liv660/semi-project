@@ -75,6 +75,7 @@ public class ReviewCommentDaoImpl implements ReviewCommentDao {
 				rc.setCommentText(rs.getString("comment_text"));
 				rc.setCommentDate(rs.getDate("comment_date"));
 				rc.setCommentCnt(rs.getInt("count"));
+				rc.setStoredName(rs.getString("storedname"));
 				
 				list.add(rc);
 			}
@@ -87,5 +88,30 @@ public class ReviewCommentDaoImpl implements ReviewCommentDao {
 		}
 		
 		return list;
+	}
+	
+	
+	@Override
+	public int deleteComment(Connection conn, ReviewComment param) {
+		
+		String sql = "";
+		sql += "DELETE FROM review_comment";
+		sql += " WHERE comment_no = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, param.getCommentNo());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
 	}
 }

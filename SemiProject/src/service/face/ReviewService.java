@@ -99,4 +99,11 @@ public interface ReviewService {
 	 */
 	public List<ReviewComment> viewComment(int reviewNo);
 
+	/**
+	 * 댓글 삭제
+	 * 
+	 * @param param
+	 */
+	public void removeComment(ReviewComment param);
+
 }

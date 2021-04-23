@@ -530,5 +530,21 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return list;
 	}
+	
+	
+	@Override
+	public void removeComment(ReviewComment param) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		if (reviewCommentDao.deleteComment(conn, param) > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		
+	}
 
 }

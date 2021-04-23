@@ -25,4 +25,13 @@ public interface ReviewCommentDao {
 	 */
 	public List<ReviewComment> selectComment(Connection conn, int reviewNo);
 
+	/**
+	 * 댓글삭제
+	 * 
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public int deleteComment(Connection conn, ReviewComment param);
+
 }

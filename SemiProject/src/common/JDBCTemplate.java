@@ -14,8 +14,8 @@ public class JDBCTemplate {
 	
 	//DB연결 정보
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static final String USERNAME = "SCOTT";
-	private static final String PASSWORD = "zimmyrabbit";
+	private static final String USERNAME = "scott";
+	private static final String PASSWORD = "tiger";
 	
 	//private 생성자
 	private JDBCTemplate() { };

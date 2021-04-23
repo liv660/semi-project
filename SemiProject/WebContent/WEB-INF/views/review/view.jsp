@@ -72,7 +72,7 @@ height : 70px;
 .commentWrapBox {
 	width: 1200px;
 	margin : 0 auto;
-	padding-left : 190px;
+	padding-left : 180px;
 }
 
 .commentWrapBox .commentwrap {
@@ -123,6 +123,16 @@ height : 70px;
 
 .commentWrapBox .commentwrap .commentText {
 	margin-top : 5px;
+}
+
+.commentWrapBox .fold {
+   display : none;
+}
+
+.commentWrapBox #foldbtn {
+   width : 800px;
+   border : none;
+   margin-top : 20px;
 }
 
 
@@ -218,7 +228,7 @@ height : 70px;
 <input type="hidden" id="userno" value="<%=session.getAttribute("userno")  %>">
 
 <div class="commentWrapBox">
-	<h4>댓글<span id="commentCnt"></span></h4>
+	<h4>댓글(<span id="commentCnt"></span>)</h4>
 	
 	<input type="text" id="comment" name="comment" />
 	<input type="button" id="commentUpdatebtn" value="댓글 등록" />
@@ -292,14 +302,14 @@ function commentlist() {
 				}
 				
 				if(i > 4) {
-					html += "<div class 'fold'>";
+					html += "<div class='fold'>";
 				}
 				html += "<div class='commentwrap'>"
 				html += "<div class='commentImg'><img src='"
-				if(commentlist[i].storedImg == "basic.png" || commentlist[i].storedImg == null) {
+				if(commentlist[i].storedName == "basic.png" || commentlist[i].storedName == null) {
 					html += "/resources/image/basic.png"
 				} else {
-					html += "/userimgup/" + commentlist[i].storedImg
+					html += "/userimgup/" + commentlist[i].storedName
 				}
 				html += " '/></div>"
 				html += "<div class='commentNick'>" + commentlist[i].nick + "</div>"
@@ -327,6 +337,24 @@ function commentlist() {
 			$("#commentCnt").append(commentCnt);
 		}
 	})
+}
+
+
+/* 댓글 삭제 */
+function commentDelete(commentno) {
+	
+	$.ajax({
+		type: 'post',
+		url : '/review/commentdelete',
+		data : {'commentno' : commentno},
+		success : function() {
+			
+			$("#commentwrap").html("");
+			
+			commentlist();
+		}
+	})
+	
 }
 
 </script>
