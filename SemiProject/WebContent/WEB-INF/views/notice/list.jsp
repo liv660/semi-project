@@ -10,8 +10,6 @@
 
 <% Map<String, Integer> map = (Map) request.getAttribute("map"); %>
 
-<% String test = (String) request.getAttribute("hihi"); %>
-
 <script type="text/javascript"
 src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
@@ -60,7 +58,7 @@ function search() {
 .writer {width : 120px; text-align : center;}
 .date {width:150px; text-align : center;}
 .views {width:120px; text-align : center;}
-.searchbox {float : right; margin-bottom : 10px;}
+.searchbox {float : right; margin-bottom : 10px; margin-top : 10px;}
 
 
 ul.tabs{
@@ -68,6 +66,14 @@ ul.tabs{
 	padding: 0px;
 	list-style: none;
 }
+
+.tab-content{
+	display: none;
+	padding: 15px;
+	background: #fffafa;
+	border : 1px solid rgb(255, 206, 86);
+}
+
 ul.tabs li{
 	background: none;
 	color: #000;
@@ -77,17 +83,13 @@ ul.tabs li{
 }
 
 ul.tabs li.current{
-	background: #FFC091;
-	color: #fff;
+	background: rgba(255, 206, 86, 0.3);
+	color: #000;
 	border-radius : 25% 25% 0 0; 
+	border : 1px solid rgb(255, 206, 86);
 	border-bottom : none;
 }
 
-.tab-content{
-	display: none;
-	padding: 15px;
-	background: #fffafa;
-}
 
 .tab-content.current{display: inherit;}
 
@@ -118,6 +120,15 @@ ul.tabs li.current{
 .container .titleContent { color : #000;}
 .container .titleContent:hover { color : #EA9A56; text-decoration :none; font-size: medium; transition: 0.5s;}
 
+#imgwrapbox #imgbox1, #imgwrapbox #imgbox2, #imgwrapbox #imgbox3 {
+	display : inline-block;
+	text-align: center;
+}
+
+.container #tab-3 {
+	text-align : center;
+}
+
 </style>
 
 
@@ -128,7 +139,7 @@ ul.tabs li.current{
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">notice</li>
 		<li class="tab-link" data-tab="tab-2">chart</li>
-		<li class="tab-link" data-tab="tab-3">tab-3</li>
+		<li class="tab-link" data-tab="tab-3">coupon</li>
 	</ul>
 	<div id="tab-1" class="tab-content current">
 		<div class="searchbox">
@@ -157,7 +168,7 @@ ul.tabs li.current{
 				<%if (list.get(i).getNoticeImp() == null) { %>
 				<td> </td>
 				<% } else {%>
-				<td><img src="/resources/image/dot.png"></td>
+				<td><img src="/resources/image/check.jpg" style="width:20px; height:20px;"></td>
 				<% } %>
 				<td><a href="/notice/view?noticeno=<%=list.get(i).getNoticeNo() %>" class="titleContent"><%=list.get(i).getTitle() %>
 				<% if(list.get(i).getCommentCnt() != 0) { %>
@@ -184,45 +195,212 @@ ul.tabs li.current{
 		
 	</div>
 
-	<div id="tab-3" class="tab-content"></div>
+	<div id="tab-3" class="tab-content">
+		<div id="imgwrapbox">
+
+		<div id="imgbox1">
+		<img src="/resources/image/dog2.jpg" class="img" name="first" style="width:200px; height:200px;"> <br>
+		<input type="button" value="stop" name="firstb" onClick='end(1);'>
+		</div>
+		
+		<div id="imgbox1">
+		<img src="/resources/image/cat2.jpg" class="img" name="second" style="width:200px; height:200px;"> <br>
+		<input type="button" value="stop" name="secondb" onClick='end(2);'>
+		</div>
+		
+		<div id="imgbox1">
+		<img src="/resources/image/cat3.jpg" class="img" name="third" style="width:200px; height:200px;"> <br>
+		<input type="button" value="stop" name="thirdb" onClick='end(3);'>
+		</div>
+		
+		</div>
+		
+		
+		<input type="button" value="  START  " onClick='userCoupon();'> <br><br><br>
+		
+		<input type="text" size=55 name="result" id="result" value="랜덤 쿠폰 뽑기!" readonly="readonly"><br>
+		<input type="text" size=55 id='couponNo' readonly="readonly" />
+		
+		<input type="hidden" id="firstPart" value=""/>
+		
+	</div>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
 <script>
-	var ctx = document.getElementById('myChart');
-	var myChart = new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	        labels: ['월', '화', '수', '목', '금', '토', '일'],
-	        datasets: [{
-	            data: [<%=map.get("mon")%>, <%=map.get("tue")%>, <%=map.get("wen")%>, <%=map.get("tur")%>
-	            		, <%=map.get("fri")%>, <%=map.get("sat")%>, <%=map.get("sun")%>],
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)',
-	                'rgba(0,0,0)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)',
-	                'rgba(0,0,0)'
-	            ], 
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-		    legend: {display: false} 
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['월', '화', '수', '목', '금', '토', '일'],
+        datasets: [{
+            data: [<%=map.get("mon")%>, <%=map.get("tue")%>, <%=map.get("wen")%>, <%=map.get("tur")%>
+            		, <%=map.get("fri")%>, <%=map.get("sat")%>, <%=map.get("sun")%>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(0,0,0,0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(0,0,0)'
+            ], 
+            borderWidth: 1
+        }]
+    },
+    options: {
+	    legend: {display: false} 
+
+    }
+});
 	
-	    }
-	});
+	
+function userCoupon() {
+	
+	if(<%=session.getAttribute("userno")%> == null) {
+
+		alert('로그인 후 참여가 가능합니다.')
+		
+	} else {
+		$.ajax({
+			type:'get'
+			, url: '/coupon/lookup'
+			, data: {'userno' : <%=session.getAttribute("userno")%>}
+			, dataType: 'json'
+			, success : function(data) {
+	
+				var jsontext = JSON.stringify(data);
+				var coupon = JSON.parse(jsontext);
+				
+				$('#firstPart').val(coupon.firstPart)
+				
+				console.log(coupon.dateCompare)
+				
+	
+				if(coupon.gameSuccess == 'Y') {
+					alert('이미 쿠폰을 받으셨습니다.')
+				}else if (coupon.dateCompare == 1) {
+					alert('하루에 한번만 참여 가능합니다.')
+				}else if(coupon.firstPart == 2 || coupon.dateCompare == 2) {
+					startGame()
+				}
+				
+			}
+			
+		})
+	
+	}
+	 
+}
+
+
+
+coin = 1  
+bet = 1
+game = false
+box1 = true
+box2 = true
+box3 = true
+num = Math.floor(Math.random() * 10)
+
+IMG = new Array();
+
+IMG[0] = new Image(); IMG[0].src = "/resources/image/cat1.jpg";
+IMG[1] = new Image(); IMG[1].src = "/resources/image/dog1.jpg";
+IMG[2] = new Image(); IMG[2].src = "/resources/image/cat2.jpg";
+IMG[3] = new Image(); IMG[3].src = "/resources/image/dog2.jpg";
+IMG[4] = new Image(); IMG[4].src = "/resources/image/cat3.jpg";
+IMG[5] = new Image(); IMG[5].src = "/resources/image/dog3.jpg";
+IMG[6] = new Image(); IMG[6].src = "/resources/image/dog4.jpg";
+IMG[7] = new Image(); IMG[7].src = "/resources/image/dog5.jpg";
+IMG[8] = new Image(); IMG[8].src = "/resources/image/dog6.jpg";
+IMG[9] = new Image(); IMG[9].src = "/resources/image/dog7.jpg";
+
+//쿠폰번호 생성
+function randomCode() {
+  	let str = '';
+  	for (let i = 0; i < 16; i++) {
+    	str += Math.floor(Math.random() * 10)
+  	}
+	return str
+}
+
+
+//게임시작
+function startGame(){
+   if(game == false){
+            game = true
+        if (coin <= 0){
+           }else{
+          rullet()
+         }
+     }
+}
+
+//룰렛 돌리기
+function rullet(){
+       
+   if(num == 10) num = 0
+   if(box1)document.images["first"].src = IMG[num % 10].src
+   if(box2)document.images["second"].src = IMG[(num+3) % 10].src
+   if(box3)document.images["third"].src = IMG[(num+6) % 10].src
+   
+	num += 1
+	tid = setTimeout("rullet()",60)  
+}
+
+//스탑
+function end(variable){
+	if(game == true){
+			if(variable == 1)box1 = false
+			if(variable == 2)box2 = false
+			if(variable == 3)box3 = false
+	  }
+	if((box1 == false) && (box2 == false) && (box3 == false)){
+			clearTimeout(tid)
+			resultgame()
+	  }
+}
+
+
+//결과
+function resultgame(){
+	
+	var discount;
+	
+	if((document.images["first"].src == document.images["second"].src) && (document.images["second"].src == document.images["third"].src) && (document.images["third"].src == document.images["first"].src)){ 
+		$("#result").val("축하합니다 30% 할인쿠폰 당첨");
+		$("#couponNo").val(randomCode());
+		discount = 30;
+	}
+	else if((document.images["first"].src == document.images["second"].src) || (document.images["second"].src == document.images["third"].src) || (document.images["third"].src == document.images["first"].src)) {
+		$("#result").val("축하합니다 20% 할인쿠폰 당첨");
+		$("#couponNo").val(randomCode());
+		discount = 20;
+	} else {
+		$("#result").val("꽝!");
+	}
+	
+	$.ajax({
+		type:'get'
+		, url:'couponSave'
+		, data: {'userno' : <%=session.getAttribute("userno")%>
+				, 'firstPart' : $('#firstPart').val()
+				, 'discount' : discount
+				, 'couponNo' : $('#couponNo').val()}
+		, url : '/coupon/save'
+	})
+}
+	
 </script>
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>

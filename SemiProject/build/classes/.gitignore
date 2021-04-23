@@ -1,5 +1,7 @@
 /common/
-/service/
 /controller/
-/dao/
+/dto/
+/service/
 /util/
+/uuid/
+/dao/
