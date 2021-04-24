@@ -144,6 +144,9 @@ public interface FindBoardService {
 	 */
 	public void updateComment(FindComment param);
 
+
+	public void completeFind(int findno);
+
 	
 
 

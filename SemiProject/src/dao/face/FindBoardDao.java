@@ -190,6 +190,9 @@ public interface FindBoardDao {
 	 */
 	public int updateComment(Connection conn, FindComment param);
 
+
+	public int updateComplete(Connection conn, int findno);
+
 	
 //	/**
 //	 * 수정시 기존 이미지 파일 삭제

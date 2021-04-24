@@ -99,15 +99,13 @@ public class FindBoardDaoImpl implements FindBoardDao {
 	@Override
 	public List<FindBoard> selectAll(Connection conn, Paging paging, Map<String, String> map) {
 		
-		System.out.println(map.get("pet"));
-		System.out.println(map.get("loc"));
 		//SQL 작성
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " 	SELECT rownum rnum, F.* FROM (";
 		sql += " 		SELECT";
 		sql += " 			FB.find_no, FB.user_no, FB.title, FB.create_date, FB.update_date";
-		sql += " 			, FB.views, FB.pet_name, FB.pet_kinds, FB.pet_age, FB.loc, FB.content, FB.board_div";
+		sql += " 			, FB.views, FB.pet_name, FB.pet_kinds, FB.pet_age, FB.loc, FB.content, FB.board_div, FB.find_complete";
 		sql += "            , FI.image_no, FI.origin_img, FI.stored_img ";
 		sql += " 		FROM findboard FB, (";
 		sql += "        	SELECT FIND_IMG.* FROM (";
@@ -164,6 +162,7 @@ public class FindBoardDaoImpl implements FindBoardDao {
 				f.setImage_no(rs.getInt("image_no"));
 				f.setOrigin_img(rs.getString("origin_img"));
 				f.setStroed_img(rs.getString("stored_img"));
+				f.setFind_complete(rs.getString("find_complete"));
 				
 				//리스트에 결과값 저장
 				findboardList.add(f);
@@ -213,6 +212,7 @@ public class FindBoardDaoImpl implements FindBoardDao {
 				viewFindBoard.setFindNo( rs.getInt("find_No") );
 				viewFindBoard.setUserNo( rs.getInt("user_No") );
 				viewFindBoard.setUpdateDate( rs.getDate("update_Date") );
+				viewFindBoard.setFind_complete(rs.getString("find_complete"));
 								
 			}
 			
@@ -775,6 +775,32 @@ public class FindBoardDaoImpl implements FindBoardDao {
 		
 		return res;
 
+	}
+	
+	@Override
+	public int updateComplete(Connection conn, int findno) {
+
+		String sql = "";
+		sql += "UPDATE findboard";
+		sql += " SET find_complete = 'Y'";
+		sql += " WHERE find_no = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, findno);
+			
+			res = ps.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);	
+		}
+		
+		return res;
 	}
 
 	

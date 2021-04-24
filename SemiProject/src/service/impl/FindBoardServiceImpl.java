@@ -713,6 +713,23 @@ public class FindBoardServiceImpl implements FindBoardService{
 				}
 				
 			}
+			
+			
+	@Override
+	public void completeFind(int findno) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = findBoardDao.updateComplete(conn, findno);
+		
+		if(res > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+	}
 
 
 			

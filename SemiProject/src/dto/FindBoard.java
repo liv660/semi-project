@@ -16,17 +16,21 @@ public class FindBoard {
 	private String loc;
 	private String content;
 	private int boardDiv;
+	private String find_complete;
 	
 	//findImg Join data
 	private int image_no;
 	private String origin_img;
 	private String stroed_img;
+	
+	
 	@Override
 	public String toString() {
 		return "FindBoard [findNo=" + findNo + ", userNo=" + userNo + ", title=" + title + ", createDate=" + createDate
 				+ ", updateDate=" + updateDate + ", views=" + views + ", petName=" + petName + ", petKinds=" + petKinds
 				+ ", petAge=" + petAge + ", loc=" + loc + ", content=" + content + ", boardDiv=" + boardDiv
-				+ ", image_no=" + image_no + ", origin_img=" + origin_img + ", stroed_img=" + stroed_img + "]";
+				+ ", find_complete=" + find_complete + ", image_no=" + image_no + ", origin_img=" + origin_img
+				+ ", stroed_img=" + stroed_img + "]";
 	}
 	public int getFindNo() {
 		return findNo;
@@ -100,6 +104,12 @@ public class FindBoard {
 	public void setBoardDiv(int boardDiv) {
 		this.boardDiv = boardDiv;
 	}
+	public String getFind_complete() {
+		return find_complete;
+	}
+	public void setFind_complete(String find_complete) {
+		this.find_complete = find_complete;
+	}
 	public int getImage_no() {
 		return image_no;
 	}
@@ -118,7 +128,7 @@ public class FindBoard {
 	public void setStroed_img(String stroed_img) {
 		this.stroed_img = stroed_img;
 	}
-	
 
+	
 	
 }

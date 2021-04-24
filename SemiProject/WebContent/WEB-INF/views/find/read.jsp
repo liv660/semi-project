@@ -189,6 +189,30 @@ function updatecancle() {
 
 <style type="text/css">
 
+.container h1 {
+	display: inline-block;
+}
+
+.container .complete {
+	width : 500px;
+	display : inline-block;
+	position : relative;
+}
+
+.container .complete #completebtn {
+	position : absolute;
+	left : 800px;
+}
+
+.container .complete #completeMsg {
+	position : absolute;
+	left : 800px;
+	color : red;
+	width: 80px;
+}
+
+
+
 #findheader{
 	border:1px solid;
 	width: 700px;
@@ -285,6 +309,18 @@ height : 70px;
 <div class="container">
 
 <h1>반려동물 찾기</h1>
+
+<div class="complete">
+<% if( ((Integer)session.getAttribute("userno")) == b.getUserNo() && b.getFind_complete() == null) { %>
+<input type="button" id="completebtn" value="완료" onclick="complete();">
+<% } %>
+
+<% if(b.getFind_complete() != null) {%>
+<span id='completeMsg'>찾기 완료</span>
+<% } %>
+</div>
+
+
 <hr>
 
 <input type ="hidden" name ="FindNo" id ="FindNo" value="<%=request.getParameter("FindNo") %>" />
@@ -395,25 +431,58 @@ height : 70px;
 
 <script type="text/javascript">
 
-	/* .pic 인 이미지들의 배열 */
-	var pics = document.getElementsByClassName("subimages");
+/* .pic 인 이미지들의 배열 */
+var pics = document.getElementsByClassName("subimages");
 
-	/* 이미지에 클릭 이벤트 등록 */
-	for(var i=0; i<pics.length; i++) {
-	   pics[i].addEventListener("click", showPopup);
+/* 이미지에 클릭 이벤트 등록 */
+for(var i=0; i<pics.length; i++) {
+   pics[i].addEventListener("click", showPopup);
+}
+
+/* 클릭시 이미지저장경로와 display속성 부여 */
+function showPopup() {
+   var imageLocation = this.getAttribute("src");
+   lightboxImage.setAttribute("src", imageLocation);
+   lightbox.style.display = "block";
+}
+
+/* 팝업 클릭시 창닫음 */
+lightbox.onclick = function() {
+	lightbox.style.display = "none";
+};
+
+
+
+function complete() {
+
+	var con = confirm("정말 완료 하시겠습니까? \n완료 이후에는 변경할 수 없습니다.")
+
+	if(con == true) {
+
+		$.ajax({
+			
+			type : 'get'
+			, url : '/find/complete'
+			, data : { 'findno' : $('#FindNo').val()}
+			, success : function() {
+			
+				var html = '';
+				
+				html += "<span id='completeMsg'>찾기 완료</span>"
+				
+				
+				$('.complete').html(html);
+				
+				
+			}
+		
+		})
+		
 	}
-
-	/* 클릭시 이미지저장경로와 display속성 부여 */
-	function showPopup() {
-	   var imageLocation = this.getAttribute("src");
-	   lightboxImage.setAttribute("src", imageLocation);
-	   lightbox.style.display = "block";
-	}
-
-	/* 팝업 클릭시 창닫음 */
-	lightbox.onclick = function() {
-		lightbox.style.display = "none";
-	};
+	
+}
+	
+	
 
 
 </script>
