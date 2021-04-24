@@ -15,7 +15,6 @@
 
 #content
 {
-	border: 1px solid #ccc;
 	height:680px;
 
 }
@@ -32,8 +31,8 @@
 }
 .rel_btn {
 	position: relative;
-    width: 150px;
-    margin-left: 700px;
+    width: 250px;
+    margin-left: 680px;
     top: 100px;
 }
 .rel_se {
@@ -67,6 +66,36 @@
 	text-align: center;
 
 }
+
+.btn_del {
+	border: 1px solid #ccc;
+    background-color: white;
+    color: #0CBCF2;
+    border-radius: 10px;
+    width: 85px;
+    font-size: 17px;
+	height: 33px;
+
+}
+
+.btn_del:hover {
+	
+	color:red;
+}
+
+.btn_all {
+	width: 95px;
+	height: 33px;
+	font-size: 17px;
+	background-color: #0CBCF2;
+	border-radius: 10px;
+	border: 0;
+	color: white;
+
+}
+
+.btn_all:hover {
+	color: red;
 
 </style>
 
@@ -118,8 +147,8 @@ function writtenDelete() {
 
 
 <div class="rel_btn">
-<button type="button" onclick="allchecked()">전체선택</button>
-<button type="button" onclick="writtenDelete()">선택삭제</button>
+<button type="button" class="btn_all" onclick="allchecked()">전체선택</button>
+<button type="button" class="btn_del" onclick="writtenDelete()">선택삭제</button>
 </div>
 
 <div class="rel_se">

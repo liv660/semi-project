@@ -77,7 +77,7 @@ function uconfirm() {
 <div class="abs_tx">
 	<div class="tx_size">MY 쇼핑</div>
 	<a href="/mypage/basket">장바구니</a><br>
-	<a href="#">구매목록</a>
+	<a href="/purchase/list">구매목록</a>
 </div>
 </div>
 
@@ -94,7 +94,7 @@ function uconfirm() {
 <div class="abs_tx2">
 	<div class="tx_size">MY 활동</div>
 	<a href="/mypage/written">내가 작성한 게시물</a><br>
-	<a href="#">찜 리스트</a><br><br>
+	<a href="/mypage/select">찜 리스트</a><br><br>
 </div>
 </div>
 </div>

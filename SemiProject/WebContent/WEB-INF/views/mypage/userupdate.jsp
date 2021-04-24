@@ -259,7 +259,7 @@ img {
 	text-align: center;
 }
 
-span {
+.spa {
 	font-size: 18px;
 	color: red;
 }
@@ -515,13 +515,13 @@ function uleave() {
 <div class="abs_deltex">
 	회원탈퇴를 원하시면 우측 회원탈퇴 버튼을 눌러주세요
 </div>
-<div class="abs_pwup"><span id="pwMsg"></span></div>
-<div class="abs_cpwup"><span id="cpwMsg"></span></div>
-<div class="abs_em"><span id="emailMsg"></span></div>
-<div class="abs_numc"><span id="cor_num"></span></div>
-<div class="abs_numw"><span id="wro_num"></span></div>
-<div class="abs_tel"><span id="telMsg"></span></div>
-<div class="abs_guide"><span id="guide" style="color:#999;display:none;"></span></div>
+<div class="abs_pwup"><span class="spa" id="pwMsg"></span></div>
+<div class="abs_cpwup"><span class="spa" id="cpwMsg"></span></div>
+<div class="abs_em"><span  class="spa" id="emailMsg"></span></div>
+<div class="abs_numc"><span class="spa" id="cor_num"></span></div>
+<div class="abs_numw"><span  class="spa" id="wro_num"></span></div>
+<div class="abs_tel"><span class="spa" id="telMsg"></span></div>
+<div class="abs_guide"><span class="spa" id="guide" style="color:#999;display:none;"></span></div>
 
 
 <button class="abs_btnup" id="btnup">변경사항 저장</button>

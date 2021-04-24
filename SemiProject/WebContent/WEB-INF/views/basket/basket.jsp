@@ -7,54 +7,37 @@
 	width: 1200px;
 	margin: 0 auto;
 }
+
 #content
 {
-	width: 960px;
-	height: 160px;
+	height:680px;
+
 }
 
 .right {
 	float: right;
 	width: 80%;
 }
-
-.rel_head {
-	position: relative;
-	width: 800px;
-	margin: 0 auto;
-	top: 30px;
-
+.h_po {
+    margin-top: 45px;
+    margin-left: 30px;
+    margin-right: 50px;
 }
 
-.hr_red {
-	border-color: red;
+hr {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    border: 0;
+    border-top: 1px solid #ccc;
+
 }
-.hr_bot {
-	margin-bottom: 0;
-	
-}
+.allchk_layout {
+	width: 250px;
+	margin-left: 25px;
+} 
 #allcheck {
-	zoom:2.0;
-}
-.abs_chkbox {
- 	position: absolute; 
-	width: 28px;
-	height: 26px;
-	left: 20px;
-} 
-.abs_chklab {
- 	position: absolute; 
-	width: 83px;
-	height: 26px;
-	left:60px;
-	top:67px;
-} 
-.abs_chkbtn {
- 	position: absolute; 
-	width: 83px;
-	height: 26px;
-	left:155px;
-	top:65px;
+	zoom:1.6;
+	margin-top: 0;
 }
 .btn_del {
 	border: 1px solid #ccc;
@@ -62,34 +45,15 @@
     color: #0CBCF2;
     border-radius: 10px;
     height: 31px;
-    width: 50px;
+    width: 85px;
     font-size: 15px;
+    margin-left: 10px;
 
 }
 
 .btn_del:hover {
 	
 	color:red;
-}
-#se {
-	width: 960px;
-	height: 400px;
-}
-.rel_se1 {
-	position: relative;
-    width: 800px;
-    height: 170px;
-    margin: 0 auto;
-    top: 5px;
-    padding-top: 8px;
-}
-.rel_se2 {
-	position: relative;
-    width: 800px;
-    height: 170px;
-    margin: 0 auto;
-    top: 130px;
-    padding-top: 8px;
 }
 
 .box {
@@ -105,72 +69,42 @@
     object-fit: cover;
 }
 
-.abs_pdt {
-	position: absolute;
-    top: 0px;
-    left: 30px;
-    width: 159px;
-    height: 155px;
-    text-align: center;
-}
-
-.abs_tt {
-	position: absolute;
-    left: 220px;
-    width: 520px;
-    height: 150px;
-    text-align: center;
-    top: 0;
+.table_layout {
+	border: 1px solid #ccc;
+    margin-left: 30px;
+    margin-top: 15px;
+    width: 870px;
 
 }
-
-.abs_tt th {
-	font-size: 25px;
-
+.table_layout tr th {
+	font-size: 23px;
 }
-.abs_tt td {
-	font-size: 18px;
-
+.table_layout tr td {
+	font-size: 17px;
+	text-align: center;
 }
-#fot {
-	width: 960px;
-	height: 240px;
-	
+.f_po {
+    margin-left: 30px;
+    margin-right: 50px;
 }
-
-.rel_fot {
-	position: relative;
-	width: 800px;
-	height: 145px;
-	margin: 0 auto;
-
-}
-.abs_pri {
-	position: absolute;
-    width: 740px;
+.pri_info {
+	width: 740px;
     height: 44px;
     border: 4px solid #ccc;
-    left: 27px;
-    top: 40px;
     text-align: center;
 	font-size: 20px;
-	
-
+	margin: 0 auto;
 }
-.abs_pri > span {
+
+.pri_info span {
 	font-size: 26px;
 }
-
-.abs_fobtn {
-	position: absolute;
-    top: 100px;
-    left: 250px;
-    width: 280px;
-    height: 37px;
-    text-align: center;
+.btn_f {
+	margin: 0 auto;
+    width: 310px;
+    margin-top: 70px;
 
 }
-
 #store_btn {
 	width: 130px;
 	height: 33px;
@@ -200,6 +134,14 @@
 	color: red;
 }
 
+.no_basket {
+    width: 870px;
+    height: 155px;
+    margin-left: 30px;
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    text-align: center;
+}
 </style>
 
 <script type="text/javascript">
@@ -221,89 +163,55 @@ $(document).ready (function () {
 
 
 </script>
-
 <div id="wrapper">
-<%@ include file="/WEB-INF/views/mypage/mypagemenu.jsp" %>
+	<%@ include file="/WEB-INF/views/mypage/mypagemenu.jsp" %>
+	<div id="content" class="right">
+		<div class="h_po">
+			<h1>주문목록</h1>
+			<hr>
 
-<div id="content" class="right">
+		<div class="allchk_layout">
+			<input type="checkbox" id="allcheck"/>
+			<label for="allcheck"style="font-size: 20px; margin-left: 15px;">전체선택</label>
+			<button class="btn_del">선택 삭제</button>
+		</div>
 
-<div class="rel_head">
-<h1>장바구니</h1>
-<hr class="hr_red hr_bot">
-<div class="abs_chkbox">
-<input type="checkbox" id="allcheck"/>
-</div>
-<div class="abs_chklab">
-<label for="allcheck" style="font-size: 20px;">전체선택</label>
-</div>
-<div class="abs_chkbtn">
-<button class="btn_del">삭제</button>
-</div>
-<hr class="hr_red hr_bot" style="margin-top:40px; ">
-</div>
-
-<!-- <div id="content" class="right"> -->
-</div>
-<div id="se" class="right">
-
-<div class="rel_se1">
-<input type="checkbox" class="checkList" style="zoom:1.6;"/>
-	<div class="abs_pdt">
-		<div class="box" style="background: #BDBDBD;">
-    	<img class="product" src="/userimgup/basic.png">
-	<table class="abs_tt">
-		<tr>
-			<th>상품명</th>
-			<td>가격</td>
-			<td>배송비</td>
-		</tr>
-	</table>
+		<hr style="margin-top: 2px;">
+		</div>
+	
+		<table class="table_layout">
+			<tr>
+				<td style="padding-bottom: 95px; width: 5%;"><input type="checkbox" class="checkList" style="zoom:1.6;"/></td>
+				<td style="width: 30%;">
+					<div class="box" style="background: #BDBDBD;">
+    				<img class="product" src="/resources/image/basic.png">
+					</div>
+				</td>
+				<th>상품명</th>
+				<td>가격</td>
+				<td>배송비</td>
+			</tr>
+		</table>
+		
+		<div class="no_basket">
+		<h1>장바구니에 담긴 상품이 없습니다</h1>
+		
+		</div>
+		<div class="f_po">
+			<hr style="margin-bottom: 30px;">
+			<div class="pri_info">
+			총 상품 가격 
+				<span>0</span>
+			원 + 배송비
+				<span>0</span>
+			원 = 주문금액 
+				<span style="color: red; text-decoration: underline; ">0</span>
+			원
+			</div>
+		</div>
+		<div class="btn_f">
+			<button id="store_btn">계속 쇼핑하기</button>
+			<button id="pur_btn">구매하기</button>
+		</div>
 	</div>
 </div>
-
-<div class="rel_se2">
-<input type="checkbox" class="checkList" style="zoom:1.6;"/>
-	<div class="abs_pdt">
-		<div class="box" style="background: #BDBDBD;">
-    	<img class="product" src="/userimgup/basic.png">
-	<table class="abs_tt">
-		<tr>
-			<th>상품명</th>
-			<td>가격</td>
-			<td>배송비</td>
-		</tr>
-	</table>
-	</div>
-</div>
-
-
-
-</div>
-
-
-</div>
-
-<!-- <div id="se" class="right"> -->
-</div>
-
-<div id="fot" class="right">
-
-<div class="rel_fot">
-<hr class="hr_red hr_bot" style="margin-top: 5px;">
-
-<div class="abs_pri">
-	총 상품 가격 <span>0</span>원 + 배송비 <span>0</span>원 = 주문금액 <span style="color: red; text-decoration: underline; ">0</span>원
-</div>
-
-<div class="abs_fobtn">
-	<button id="store_btn">계속 쇼핑하기</button>
-	<button id="pur_btn">구매하기</button>
-</div>
-
-<!-- <div id="fot" class="right"> -->
-</div>
-
-<!-- <div id="wrapper"> -->
-</div>
-</body>
-</html>
