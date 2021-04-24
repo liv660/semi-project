@@ -650,9 +650,16 @@ public class FindBoardDaoImpl implements FindBoardDao {
 	public List<FindComment> selectComment(Connection conn, int findNo) {
 		
 		String sql = "";
-		sql += "SELECT * FROM findboard_comment";
-		sql += " WHERE find_no = ?";
-		sql += " ORDER BY comment_no";
+//		sql += "SELECT * FROM findboard_comment";
+//		sql += " WHERE find_no = ?";
+//		sql += " ORDER BY comment_no";
+		
+		sql += "SELECT comment_no, find_no, FC.user_no, nick, comment_text, comment_date, comment_update, UI.storedname,(";
+		sql += " SELECT count(*) FROM findboard_comment WHERE find_no = ?) count";
+		sql += " FROM findboard_comment FC, userimg UI";
+		sql += " WHERE FC.user_no = UI.user_no";
+		sql += " AND find_no = ?";
+		sql += " ORDER BY comment_no DESC";
 		
 		
 		List<FindComment> list = new ArrayList<>();
@@ -662,6 +669,7 @@ public class FindBoardDaoImpl implements FindBoardDao {
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, findNo);
+			ps.setInt(2, findNo);
 			
 			rs = ps.executeQuery();
 			
@@ -669,11 +677,15 @@ public class FindBoardDaoImpl implements FindBoardDao {
 				
 				FindComment res = new FindComment();
 				
-				res.setNick( rs.getString("nick") );
 				res.setCommentNo( rs.getInt("comment_no") );
+				res.setFindNo(rs.getInt("find_no"));
+				res.setUserNo(rs.getInt("user_no"));
+				res.setNick( rs.getString("nick") );
 				res.setCommentText( rs.getString("comment_text") );
 				res.setCommentDate( rs.getDate("comment_date") );
 				res.setCommentUpdate( rs.getDate("comment_update") );
+				res.setStoredName(rs.getString("storedname"));
+				res.setCommentCnt(rs.getInt("count"));
 				
 				list.add(res);
 				

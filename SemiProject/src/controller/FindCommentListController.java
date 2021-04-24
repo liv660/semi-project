@@ -27,17 +27,12 @@ public class FindCommentListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("find/commentlist - [GET] 요청");
-		
 		Gson gson = new Gson();
 		
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json; charset=utf-8");
 		
 		String param = req.getParameter("findNo");
-		
-		System.out.println("/find/commentlist param = " + param);
-		
 		
 		int findNo = 0;
 		if( param != null && !"".equals(param)) {
@@ -46,7 +41,6 @@ public class FindCommentListController extends HttpServlet {
 			
 		}
 		
-		System.out.println("/find/commentlist findNo = "+ findNo);
 		List<FindComment> findcommentlist = findBoardService.viewComment(findNo);
 		
 		PrintWriter out = resp.getWriter();

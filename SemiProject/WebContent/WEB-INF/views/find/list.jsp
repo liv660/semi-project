@@ -152,15 +152,17 @@ function search(){
 		<%	for(int i=0; i<list.size(); i++) { %>
 			<div class="pet_list">
 				<p class="img_box" ><a href="/find/read?FindNo=<%=list.get(i).getFindNo() %>">
+				<%if(list.get(i).getFind_complete() == null) { %>
 				<img src="<%=request.getContextPath() %>/upload/<%=list.get(i).getStroed_img() %>" id="mainimages" style="width:148px; height:150px;"/>
 				</a></p>
-				<%if(list.get(i).getFind_complete() == null) { %>
 				<p><%=list.get(i).getTitle() %></p>
 				<p><%=list.get(i).getLoc() %></p>
 				<p><%=list.get(i).getPetKinds() %></p> 
 				<% } else { %>
-				<br>
-				<p style="color : red;">찾기 완료</p> 
+				<img src="/resources/image/complete.png" id="mainimages" style="width:148px; height:150px;"/>
+				</a></p>
+				<p><%=list.get(i).getTitle() %></p>
+				<p style="color:red;">[찾기완료]</p>
 				<% } %>
 			</div>
 		<% } %>

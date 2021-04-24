@@ -41,6 +41,12 @@ $(document).ready(function() {
 /* 댓글목록 조회 */
 $(document).ready(function() {
 	commentlist();
+	
+   $(document).on('click', '#foldbtn', function() {
+	      
+	      $('.fold').css('display','block');
+	      $('#foldbtn').css('display','none');
+	   })
 })
 
 // $("#commentwrap").click(
@@ -63,16 +69,50 @@ function commentlist() {
 				
 				var html = '';
 				
-				html += "<div class='commentwrap'> <span class='commnetNick'>"
-				html += commentlist[i].nick
-				html += "</span> <span class='commentDate'>"
-				html += commentlist[i].commentDate
-				html += "</span>"
-				html += "<input type='button' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
-				html += "<input type='button' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
-				html += "<br> <div id='comwrap" + commentlist[i].commentNo + "'> <span class='commentText' id='commentText" + commentlist[i].commentNo + "'> "
-				html += commentlist[i].commentText
-				html += "</span> </div>"
+	            
+	            if(commentlist[i].commentCnt != null) {
+	               var commentCnt = commentlist[i].commentCnt;
+	            }
+	            
+	            if(i > 4) {
+	               html += "<div class='fold'>";
+	            }
+	            html += "<div class='commentwrap'>"
+	            html += "<div class='commentImg'> <img src='"
+	            if(commentlist[i].storedName == "basic.png" || commentlist[i].storedName == null) {
+	               html += "/resources/image/basic.png"
+	            } else {
+	               html += "/userimgup/" + commentlist[i].storedName
+	            }
+	            html += " '/> </div>"
+	            html += "<div class='commentNick'>" + commentlist[i].nick + "</div>"
+	            html += "<div class='commentDate'>" + commentlist[i].commentDate + "</div>"
+	            if( $("#userno").val() == commentlist[i].userNo) {
+	            html += "<div class='commentBtn'>"
+	            html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
+	            html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
+	            html += "</div>"
+	            }
+				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" 
+				html += "<span class='commentText' id='commentText" + commentlist[i].commentNo + "'> " + commentlist[i].commentText + "</span>"
+				html += "</div>"
+	    	    if( i == commentlist.length-1) {
+	               html += "</div>"
+	            }
+	            if( i == 4) {
+	               html += "<input type='button' id='foldbtn' value='댓글 더보기'>"
+	            }
+				
+// 				html += "<div class='commentwrap'> <span class='commnetNick'>"
+// 				html += commentlist[i].nick
+// 				html += "</span> <span class='commentDate'>"
+// 				html += commentlist[i].commentDate
+// 				html += "</span>"
+// 				html += "<input type='button' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
+// 				html += "<input type='button' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
+// 				html += "<br> <div id='comwrap" + commentlist[i].commentNo + "'> <span class='commentText' id='commentText" + commentlist[i].commentNo + "'> "
+// 				html += commentlist[i].commentText
+// 				html += "</span> </div>"
 				
 				$("#commentwrap").append(html);
 			}/* for문 끝 */
@@ -300,6 +340,44 @@ height : 70px;
   left:50%;
   transform:translate(-50%, -50%);
   border:1px solid #eee;      
+}
+
+#commentwrap .commentwrap .commentImg {
+   width: 30px;
+   height : 30px;
+   margin-right : 10px;
+   display : inline-block;
+}
+
+#commentwrap .commentwrap .commentImg img {
+   width : 100%;
+   height : 100%;
+   object-fit : cover;
+   border-radius: 50%;
+}
+
+#commentwrap .commentwrap .commentDate {
+   left : 100px;
+   display : inline-block;
+}
+
+#commentwrap .commentwrap .commentNick {
+   display : inline-block;
+}
+
+#commentwrap .commentwrap .commentBtn {
+   display : inline-block;
+   left : 100px;
+}
+
+#commentwrap .fold {
+   display : none;
+}
+
+#commentwrap #foldbtn {
+   width : 800px;
+   border : none;
+   margin-top : 20px;
 }
 
 </style>
