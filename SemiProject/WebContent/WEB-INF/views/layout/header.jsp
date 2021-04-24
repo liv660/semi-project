@@ -60,6 +60,7 @@
 }
 /* 가운데 정렬 끝 */
 
+
 .nav li a {
    	font-size: 1.05em;
 	font-weight: bold;
@@ -80,18 +81,17 @@
 .nav li a:after { 
     display:block; 
     content: ''; 
-    border-bottom: solid 1px #EBAA5F;; 
+    border-bottom: solid 1px #EBAA5F;
     transform: scaleX(0); 
-   transition: transform 250ms ease-in-out; 
+   	transition: transform 250ms ease-in-out; 
 } 
 .nav li a:hover:after { 
     transform: scaleX(1); 
 } 
 
-.clicked {
-	color :red;
+.on {
+	color :#EBAA5F !important;
 }
-
 
 
 </style>
@@ -136,22 +136,17 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active topMenuLi"><a href="/find/list" class="link"><span>반려동물 찾기</span></a></li>
-        <li class="topMenuLi"><a href="/discover/list" class="link" ><span>유기동물 발견</span></a></li>
-        <li class="topMenuLi"><a href="/product" class="link" ><span>스토어</span></a></li>
-        <li class="topMenuLi"><a href="/review/list" class="link" ><span>후기</span></a></li>
-        <li class="topMenuLi"><a href="/notice/list" class="link" ><span>공지사항</span></a></li>
-        
+      <!-- 해주시죠 고수씨 -->
+        <li class="active topMenuLi"><a href="/find/list" id="menu1" data-menu="menu1" ><span>반려동물 찾기</span></a></li> 
+        <li class="topMenuLi"><a href="/discover/list" id="menu2" data-menu="menu2" ><span>유기동물 발견</span></a></li> 
+        <li class="topMenuLi"><a href="/product" id="menu3" data-menu="menu3" ><span>스토어</span></a></li>
+        <li class="topMenuLi"><a href="/review/list" id="menu4" data-menu="menu4" ><span>후기</span></a></li>
+        <li class="topMenuLi"><a href="/notice/list" id="menu5" data-menu="menu5"><span>공지사항</span></a></li>
       </ul>
-
     </div>
-    
   </div>
 </nav>
 
 </div>
-
-<script type="text/javascript">
-
-
+<script type="text/javascript" src="/resources/js/MenuSelect.js"> 
 </script>
