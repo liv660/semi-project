@@ -29,6 +29,9 @@ public class DiscoverCommentInsertController extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
+		
+		System.out.println("discover/commentinsert  - [POST] 접근 완료");
+		
 		DiscoverComment param = discoverBoardService.getCommentParam(req);
 		
 		

@@ -7,6 +7,12 @@
 <script src="http://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="../resources/js/slider.js"></script>
 
+<script type="text/javascript">
+
+delete localStorage.menu;
+
+</script>
+
 <!-- <div class="sliderbox"> -->
 <div class="sliderbox" style="margin-top: 45px;">
    <input type="radio" name="slide" id="slide1" checked="checked" />

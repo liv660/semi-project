@@ -23,10 +23,16 @@ public class DiscoverUpdateController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
+		System.out.println("req = "+req);
+		
 		DiscoverBoard discoverno = discoverBoardService.getParam(req);
 		
+		System.out.println("discoverno = " + discoverno);
+		
 		DiscoverBoard viewDiscoverBoard = discoverBoardService.views(discoverno);
+		
+		System.out.println("viewDiscoverBoard = " + viewDiscoverBoard);
 		
 		req.setAttribute("nick", discoverBoardService.getnick(viewDiscoverBoard));
 		req.setAttribute("eamil", discoverBoardService.getemail(viewDiscoverBoard));
@@ -34,8 +40,9 @@ public class DiscoverUpdateController extends HttpServlet {
 		
 		
 		List<DiscoverImg> discoverImg = discoverBoardService.viewFile(viewDiscoverBoard);
-		req.setAttribute("dicoverImg", discoverImg);
+		req.setAttribute("discoverImg", discoverImg);
 		
+		System.out.println("discoverImg = " + discoverImg);
 		req.getRequestDispatcher("/WEB-INF/views/discover/update.jsp")
 		.forward(req, resp);
 		
@@ -47,7 +54,7 @@ public class DiscoverUpdateController extends HttpServlet {
 
 		discoverBoardService.update(req);
 		
-		resp.sendRedirect("discover/list");
+		resp.sendRedirect("/discover/list");
 		
 		
 		

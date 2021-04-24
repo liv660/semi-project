@@ -26,6 +26,9 @@ public class DiscoverCommentListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
+		System.out.println("discover 댓글 리스트 확인");
+		
 		Gson gson = new Gson();
 		
 		req.setCharacterEncoding("UTF-8");

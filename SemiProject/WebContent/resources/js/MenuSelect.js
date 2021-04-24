@@ -4,7 +4,6 @@ $(document).ready(function() {
 	if(localStorage.menu != "" ) {
 		
 		$('#' + localStorage.menu).addClass('on'); // 로컬에 저장된 메뉴값에  클래스 on 부여
-		delete localStorage.menu; // 사용된 메뉴값 삭제
 	} 
 
 })

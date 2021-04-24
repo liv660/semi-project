@@ -23,7 +23,7 @@ $(document).ready(function() {
 	
 	//수정버튼 동작
 	$("#btnUpdate").click(function() {
-		$(location).attr("href", "/discover/update?DicoverNo=<%=b.getDiscoverNo() %>");
+		$(location).attr("href", "/discover/update?DiscoverNo=<%=b.getDiscoverNo() %>");
 	});
 
 	//삭제버튼 동작
@@ -203,7 +203,7 @@ function commentUpdate(commentno) {
 	
 	$.ajax({
 		type: 'post',
-		url: '/find/commentupdate',
+		url: '/discover/commentupdate',
 		data: { 'commentno' : commentno
 				,'comment' : comment},
 		success : function() {

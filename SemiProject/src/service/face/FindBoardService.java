@@ -107,6 +107,8 @@ public interface FindBoardService {
 	 */
 	public void update(HttpServletRequest req);
 
+
+	
 	/**
 	 * findboard의 댓글 보여주기
 	 * @param findNo 댓글이 나올 게시글 번호
@@ -143,7 +145,6 @@ public interface FindBoardService {
 	public void updateComment(FindComment param);
 
 	
-
 
 
 	

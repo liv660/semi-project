@@ -632,7 +632,7 @@ public class FindBoardDaoImpl implements FindBoardDao {
 		return res;
 		
 	}
-
+	
 	@Override
 	public List<FindComment> selectComment(Connection conn, int findNo) {
 		
@@ -763,6 +763,8 @@ public class FindBoardDaoImpl implements FindBoardDao {
 		return res;
 
 	}
+
+	
 
 //	@Override
 //	public void deleteFile(Connection conn, boolean isNewFile) {

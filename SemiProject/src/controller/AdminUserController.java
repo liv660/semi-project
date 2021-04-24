@@ -22,14 +22,20 @@ public class AdminUserController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
-//		List<Usertb> userList = adminService.getList();
-		
+
 		AdminPaging apaging = adminService.getPaging(req);
-		List<Usertb> userList = adminService.getList(apaging);
+		List<Usertb> userList = adminService.getUserList(apaging);
 		
 		req.setAttribute("userList", userList);
 		req.setAttribute("apaging", apaging);
 		req.getRequestDispatcher("/WEB-INF/views/admin/user.jsp").forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		adminService.withdraw(req);
+		resp.sendRedirect("/admin/user");
+	}
+	
 }
