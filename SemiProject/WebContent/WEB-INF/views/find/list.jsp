@@ -109,7 +109,7 @@ function search(){
 	
 	#container .pet_list p a{display:block;}
 	
-	#container .pet_list .img_box{width:150px; height:150px; line-height:150px; border:1px solid #ccc;}
+	#container .pet_list .img_box{width:150px; height:150px; line-height:150px;}
 </style>
 	
 	<div id="container">

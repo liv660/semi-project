@@ -117,11 +117,11 @@ public class FindBoardDaoImpl implements FindBoardDao {
 		sql += " 				FROM findimg";
 		sql += " 			) FIND_IMG";
 		sql += "			WHERE rnum = 1";
+		sql += " 		)FI";
+		sql += " 		WHERE FB.find_no = FI.find_no(+)";		
 		if( map.get("pet") != null && map.get("loc") != null ) {
 			sql += " AND loc=? AND pet_kinds=?";
 		}
-		sql += " 		)FI";
-		sql += " 		WHERE FB.find_no = FI.find_no(+)";		
 		sql += " 		ORDER BY find_no DESC";
 		sql += "	) F";
 		sql += " ) findboard";

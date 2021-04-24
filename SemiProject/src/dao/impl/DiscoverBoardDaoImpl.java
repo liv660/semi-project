@@ -23,21 +23,6 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 	@Override
 	public List<DiscoverBoard> selectAll(Connection conn, Paging paging, Map<String, String> map) {
 		// SQL 작성
-//		String sql = "";
-//		sql += "SELECT * FROM (";
-//		sql += " 	SELECT rownum rnum, F.* FROM (";
-//		sql += " 		SELECT";
-//		sql += " 			discover_no, user_no, title, create_date, update_date, views";
-//		sql += " 			, pet_name, pet_kinds, pet_age, loc, content, board_div";
-//		sql += " 		FROM discoverboard";
-//		if (map.get("pet") != null && map.get("loc") != null) {
-//			sql += " WHERE loc=? AND pet_kinds=?";
-//		}
-//		sql += " 		ORDER BY discover_no DESC";
-//		sql += "	) F";
-//		sql += " ) discoverboard";
-//		sql += " WHERE rnum BETWEEN ? AND ?";
-		
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " 	SELECT rownum rnum, D.* FROM (";
@@ -53,11 +38,11 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 		sql += " 				FROM discoverimg";
 		sql += " 			) DISCOVER_IMG";
 		sql += "			WHERE rnum = 1";
+		sql += " 		)DI";
+		sql += " 		WHERE DB.discover_no = DI.discover_no(+)";		
 		if( map.get("pet") != null && map.get("loc") != null ) {
 			sql += " AND loc=? AND pet_kinds=?";
 		}
-		sql += " 		)DI";
-		sql += " 		WHERE DB.discover_no = DI.discover_no(+)";		
 		sql += " 		ORDER BY discover_no DESC";
 		sql += "	) D";
 		sql += " ) discoverboard";
