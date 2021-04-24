@@ -155,7 +155,9 @@ function search(){
 		</div>
 		<%	for(int i=0; i<list.size(); i++) { %>
 			<div class="pet_list">
-				<p class="img_box" ><a href="/discover/read?DiscoverNo=<%=list.get(i).getDiscoverNo() %>">img</a></p>
+				<p class="img_box" ><a href="/discover/read?DiscoverNo=<%=list.get(i).getDiscoverNo() %>">
+				<img src="<%=request.getContextPath() %>/upload/<%=list.get(i).getStroed_img() %>" id="mainimages" style="width:148px; height:150px;"/>
+				</a></p>
 				<p><%=list.get(i).getTitle() %></p>
 				<p><%=list.get(i).getLoc() %></p>
 				<p><%=list.get(i).getPetKinds() %></p>

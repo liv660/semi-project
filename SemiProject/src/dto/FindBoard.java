@@ -17,14 +17,17 @@ public class FindBoard {
 	private String content;
 	private int boardDiv;
 	
+	//findImg Join data
+	private int image_no;
+	private String origin_img;
+	private String stroed_img;
 	@Override
 	public String toString() {
-		return "FindBoard [findNo=" + findNo + ", userNO=" + userNo + ", title=" + title + ", createDate=" + createDate
+		return "FindBoard [findNo=" + findNo + ", userNo=" + userNo + ", title=" + title + ", createDate=" + createDate
 				+ ", updateDate=" + updateDate + ", views=" + views + ", petName=" + petName + ", petKinds=" + petKinds
-				+ ", petAge=" + petAge + ", loc=" + loc + ", content=" + content + ", boardDiv=" + boardDiv + "]";
+				+ ", petAge=" + petAge + ", loc=" + loc + ", content=" + content + ", boardDiv=" + boardDiv
+				+ ", image_no=" + image_no + ", origin_img=" + origin_img + ", stroed_img=" + stroed_img + "]";
 	}
-	
-	//getter, setter
 	public int getFindNo() {
 		return findNo;
 	}
@@ -97,5 +100,25 @@ public class FindBoard {
 	public void setBoardDiv(int boardDiv) {
 		this.boardDiv = boardDiv;
 	}
+	public int getImage_no() {
+		return image_no;
+	}
+	public void setImage_no(int image_no) {
+		this.image_no = image_no;
+	}
+	public String getOrigin_img() {
+		return origin_img;
+	}
+	public void setOrigin_img(String origin_img) {
+		this.origin_img = origin_img;
+	}
+	public String getStroed_img() {
+		return stroed_img;
+	}
+	public void setStroed_img(String stroed_img) {
+		this.stroed_img = stroed_img;
+	}
+	
+
 	
 }

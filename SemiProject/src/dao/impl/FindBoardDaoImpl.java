@@ -106,12 +106,22 @@ public class FindBoardDaoImpl implements FindBoardDao {
 		sql += "SELECT * FROM (";
 		sql += " 	SELECT rownum rnum, F.* FROM (";
 		sql += " 		SELECT";
-		sql += " 			find_no, user_no, title, create_date, update_date, views";
-		sql += " 			, pet_name, pet_kinds, pet_age, loc, content, board_div";
-		sql += " 		FROM findboard";
+		sql += " 			FB.find_no, FB.user_no, FB.title, FB.create_date, FB.update_date";
+		sql += " 			, FB.views, FB.pet_name, FB.pet_kinds, FB.pet_age, FB.loc, FB.content, FB.board_div";
+		sql += "            , FI.image_no, FI.origin_img, FI.stored_img ";
+		sql += " 		FROM findboard FB, (";
+		sql += "        	SELECT FIND_IMG.* FROM (";
+		sql += " 				SELECT";
+		sql += " 					row_number() over( partition by find_no order by image_no) rnum";
+		sql += " 					, image_no, find_no, origin_img, stored_img";
+		sql += " 				FROM findimg";
+		sql += " 			) FIND_IMG";
+		sql += "			WHERE rnum = 1";
 		if( map.get("pet") != null && map.get("loc") != null ) {
-			sql += " WHERE loc=? AND pet_kinds=?";
+			sql += " AND loc=? AND pet_kinds=?";
 		}
+		sql += " 		)FI";
+		sql += " 		WHERE FB.find_no = FI.find_no(+)";		
 		sql += " 		ORDER BY find_no DESC";
 		sql += "	) F";
 		sql += " ) findboard";
@@ -151,6 +161,9 @@ public class FindBoardDaoImpl implements FindBoardDao {
 				f.setLoc( rs.getString("loc") );
 				f.setContent( rs.getString("content"));
 				f.setBoardDiv( rs.getInt("board_Div") );
+				f.setImage_no(rs.getInt("image_no"));
+				f.setOrigin_img(rs.getString("origin_img"));
+				f.setStroed_img(rs.getString("stored_img"));
 				
 				//리스트에 결과값 저장
 				findboardList.add(f);
@@ -367,7 +380,7 @@ public class FindBoardDaoImpl implements FindBoardDao {
 		String sql = "";
 		sql += "SELECT * FROM findimg";
 		sql += " WHERE find_no = ?";
-		sql += " ORDER BY image_no DESC";
+		sql += " ORDER BY image_no";
 		
 		//결과 저장할 BoardFile 객체
 		List<FindImg> findImg = new ArrayList<>();

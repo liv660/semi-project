@@ -191,8 +191,8 @@ function checkInfo() {
 }
 </script>
 <style type="text/css">
-input[type=text]:focus{outline: none;}
-input[type=text] {border: none;}
+input[type=text]:focus, input[type=number]:focus {outline: none;}
+input[type=text], input[type=number] {border: none;}
 
 .mainimg{
 	position: absolute;
@@ -294,7 +294,7 @@ textarea {
 		</div>
 		<div>
 			<label for="petage">반려동물나이</label>
-			<input class="pat" type="text" id="petage" name="petage"/>
+			<input class="pat" type="number" id="petage" name="petage"/>
 		</div>
 		<div>
 			<label for="detail-loc">잃어버린 곳</label>
