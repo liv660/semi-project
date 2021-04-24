@@ -25,16 +25,26 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 		// SQL 작성
 		String sql = "";
 		sql += "SELECT * FROM (";
-		sql += " 	SELECT rownum rnum, F.* FROM (";
+		sql += " 	SELECT rownum rnum, D.* FROM (";
 		sql += " 		SELECT";
-		sql += " 			discover_no, user_no, title, create_date, update_date, views";
-		sql += " 			, pet_name, pet_kinds, pet_age, loc, content, board_div";
-		sql += " 		FROM discoverboard";
-		if (map.get("pet") != null && map.get("loc") != null) {
-			sql += " WHERE loc=? AND pet_kinds=?";
+		sql += " 			DB.discover_no, DB.user_no, DB.title, DB.create_date, DB.update_date";
+		sql += " 			, DB.views, DB.pet_name, DB.pet_kinds, DB.pet_age, DB.loc, DB.content, DB.board_div";
+		sql += "            , DI.image_no, DI.origin_img, DI.stored_img ";
+		sql += " 		FROM discoverboard DB, (";
+		sql += "        	SELECT DISCOVER_IMG.* FROM (";
+		sql += " 				SELECT";
+		sql += " 					row_number() over( partition by discover_no order by image_no) rnum";
+		sql += " 					, image_no, discover_no, origin_img, stored_img";
+		sql += " 				FROM discoverimg";
+		sql += " 			) DISCOVER_IMG";
+		sql += "			WHERE rnum = 1";
+		sql += " 		)DI";
+		sql += " 		WHERE DB.discover_no = DI.discover_no(+)";		
+		if( map.get("pet") != null && map.get("loc") != null ) {
+			sql += " AND loc=? AND pet_kinds=?";
 		}
 		sql += " 		ORDER BY discover_no DESC";
-		sql += "	) F";
+		sql += "	) D";
 		sql += " ) discoverboard";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 
@@ -72,6 +82,9 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 				f.setLoc(rs.getString("loc"));
 				f.setContent(rs.getString("content"));
 				f.setBoardDiv(rs.getInt("board_Div"));
+				f.setImage_no(rs.getInt("image_no"));
+				f.setOrigin_img(rs.getString("origin_img"));
+				f.setStroed_img(rs.getString("stored_img"));
 
 				// 리스트에 결과값 저장
 				discoverboardList.add(f);
@@ -261,7 +274,7 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 		String sql = "";
 		sql += "SELECT * FROM discoverimg";
 		sql += " WHERE discover_no = ?";
-		sql += " ORDER BY image_no DESC";
+		sql += " ORDER BY image_no";
 		
 		//결과 저장할 BoardFile 객체
 		List<DiscoverImg> dicoverImg = new ArrayList<>();

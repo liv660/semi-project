@@ -36,45 +36,6 @@ $(document).ready(function() {
 });
 </script>
 
-<script type="text/javascript">
-
-$(document).ready(function () {
-	
-	
-$("#subimages").on('click', function (){
-	
-	var imageLocation = this.getAttribute("src");
-	
-	lightboxImage.setAttribute("src", imageLocation);
-	
-	lightbox.style.display = "block";
-	
-	
-})
-
-	/* 팝업 클릭시 창닫음 */
-$("#lightbox").on('click', function() {
-	lightbox.style.display = "none";
-});
-
-
-// /* 클릭시 이미지저장경로와 display속성 부여 */
-// function showPopup() {
-// 	var imageLocation = this.getAttribute("src");
-// 	lightboxImage.setAttribute("src", imageLocation);
-// 	lightbox.style.display = "block";
-
-// 	/* 팝업 클릭시 창닫음 */
-// 	lightbox.onclick = function() {
-// 		lightbox.style.display = "none";
-// 	}
-// }
-
-
-})
-
-</script>
-
 <!-- 댓글 관련 -->
 <script type="text/javascript">
 
@@ -302,11 +263,11 @@ height : 70px;
 
 #lightbox {
   position: fixed;
-  width:50%;
-  height:50%;
+  width:100%;
+  height:100%;
   background-color:rgba(0,0,0,0.7); 
-  top:20%;
-  left:20%;
+  top:0%;
+  left:0%;
   display:none;
 }
 
@@ -314,8 +275,6 @@ height : 70px;
   position:absolute; 
   top:50%;
   left:50%;
-  width:100%;
-  height:100%;
   transform:translate(-50%, -50%);
   border:1px solid #eee;      
 }
@@ -361,55 +320,47 @@ height : 70px;
 		<div id="subimg2"></div>
 		<div id="subimg3"></div>
 	</div>
-		<div id="lightbox">
-		<img alt="" src="" id="lightboxImage">
-	</div>
+
 	<%}	if(i < 2 && i > 0) {%>
 	
-	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages"/></div>
+	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages" class="subimages"/></div>
 	<div class="subimg-grid">
 <!-- 		<div id="subimg1"></div> -->
 <!-- 		<div id="subimg2"></div> -->
 <!-- 		<div id="subimg3"></div> -->
 	</div>
-		<div id="lightbox">
-		<img alt="" src="" id="lightboxImage" />
-	</div>
+
 	<%}	if(i < 3 && i > 1) {%>
 
-	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages"/></div>
+	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages" class="subimages"/></div>
 	<div class="subimg-grid">
 		<div id="subimg1"><img src="/upload/<%=discoverImg.get(1).getStoredImg() %>" id="subimages" class="subimages" /></div>
 <!-- 		<div id="subimg2"></div> -->
 <!-- 		<div id="subimg3"></div> -->
 	</div>
-		<div id="lightbox">
-		<img alt="" src="" id="lightboxImage">
-	</div>
+
 	<%}	if(i < 4 && i > 2) {%>
 		
-	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages"/></div>
+	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages" class="subimages"/></div>
 	<div class="subimg-grid">
 		<div id="subimg1"><img src="/upload/<%=discoverImg.get(1).getStoredImg() %>" id="subimages" class="subimages" /></div>
 		<div id="subimg2"><img src="/upload/<%=discoverImg.get(2).getStoredImg() %>" id="subimages" class="subimages" /></div>
 <!-- 		<div id="subimg3"></div> -->
 	</div>	
-		<div id="lightbox">
-		<img alt="" src="" id="lightboxImage">
-	</div>
+
 	<%}	if(i < 5 && i > 3) {%>
-	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages"/></div>
+	<div id="mainimg" class="mainimg"><img src="/upload/<%=discoverImg.get(0).getStoredImg() %>" id="mainimages" class="subimages"/></div>
 	<div class="subimg-grid">
 		<div id="subimg1"><img src="/upload/<%=discoverImg.get(1).getStoredImg() %>"  id="subimages" class="subimages" /></div>
 		<div id="subimg2"><img src="/upload/<%=discoverImg.get(2).getStoredImg() %>"  id="subimages" class="subimages" /></div>
 		<div id="subimg3"><img src="/upload/<%=discoverImg.get(3).getStoredImg() %>"  id="subimages" class="subimages" /></div>
 	</div>	
-	<div id="lightbox">
-		<img alt="" src="" id="lightboxImage" />
-	</div>
 
 	<% } %><!-- if문 끝 -->
 
+	<div id="lightbox">
+		<img alt="" src="" id="lightboxImage" />
+	</div>
 
 <div style="width: 1100px; height: 300px; border: 1px solid; margin: 10px 0 10px 0;">
 <!-- <p style="width: 1100px; height: 300px; border: 1px solid; margin: 10px 0 10px 0; ">123</p> -->
@@ -442,6 +393,31 @@ height : 70px;
 	<button id="btnList" class="btn btn-primary">목록</button>
 </div>
 </div>
+
+<script type="text/javascript">
+
+	/* .pic 인 이미지들의 배열 */
+	var pics = document.getElementsByClassName("subimages");
+
+	/* 이미지에 클릭 이벤트 등록 */
+	for(var i=0; i<pics.length; i++) {
+	   pics[i].addEventListener("click", showPopup);
+	}
+
+	/* 클릭시 이미지저장경로와 display속성 부여 */
+	function showPopup() {
+	   var imageLocation = this.getAttribute("src");
+	   lightboxImage.setAttribute("src", imageLocation);
+	   lightbox.style.display = "block";
+	}
+
+	/* 팝업 클릭시 창닫음 */
+	lightbox.onclick = function() {
+		lightbox.style.display = "none";
+	};
+
+
+</script>
 
 
 

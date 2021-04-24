@@ -22,7 +22,7 @@ $(document).ready(function() {
 			return false
 		
 		<% } else { %>
-			location.href="/discover/add";
+			location.href="/find/add";
 		<% } %>
 		});
 	
@@ -109,7 +109,7 @@ function search(){
 	
 	#container .pet_list p a{display:block;}
 	
-	#container .pet_list .img_box{width:150px; height:150px; line-height:150px; border:1px solid #ccc;}
+	#container .pet_list .img_box{width:150px; height:150px; line-height:150px;}
 </style>
 	
 	<div id="container">
@@ -151,10 +151,12 @@ function search(){
 		</div>
 		<%	for(int i=0; i<list.size(); i++) { %>
 			<div class="pet_list">
-				<p class="img_box" ><a href="/find/read?FindNo=<%=list.get(i).getFindNo() %>">img</a></p>
+				<p class="img_box" ><a href="/find/read?FindNo=<%=list.get(i).getFindNo() %>">
+				<img src="<%=request.getContextPath() %>/upload/<%=list.get(i).getStroed_img() %>" id="mainimages" style="width:148px; height:150px;"/>
+				</a></p>
 				<p><%=list.get(i).getTitle() %></p>
 				<p><%=list.get(i).getLoc() %></p>
-				<p><%=list.get(i).getPetKinds() %></p>
+				<p><%=list.get(i).getPetKinds() %></p> 
 			</div>
 		<% } %>
 	</div>
