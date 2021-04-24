@@ -27,4 +27,6 @@ public interface NoticeDao {
 
 	public Map<String, Integer> selectByPostdate(Connection conn);
 
+	public Map<String, Integer> selectByFindTextCnt(Connection conn);
+
 }

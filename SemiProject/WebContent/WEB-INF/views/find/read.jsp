@@ -103,19 +103,10 @@ function commentlist() {
 	               html += "<input type='button' id='foldbtn' value='댓글 더보기'>"
 	            }
 				
-// 				html += "<div class='commentwrap'> <span class='commnetNick'>"
-// 				html += commentlist[i].nick
-// 				html += "</span> <span class='commentDate'>"
-// 				html += commentlist[i].commentDate
-// 				html += "</span>"
-// 				html += "<input type='button' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
-// 				html += "<input type='button' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
-// 				html += "<br> <div id='comwrap" + commentlist[i].commentNo + "'> <span class='commentText' id='commentText" + commentlist[i].commentNo + "'> "
-// 				html += commentlist[i].commentText
-// 				html += "</span> </div>"
-				
 				$("#commentwrap").append(html);
 			}/* for문 끝 */
+	         $("#commentCnt").html("");
+	         $("#commentCnt").append(commentCnt);
 			
 		}/* success끝 */
 		
@@ -492,7 +483,7 @@ height : 70px;
 <hr>
 
 <div>
-	<h3>댓글</h3>
+	<h3>댓글<span id="commentCnt"></span></h3>
 	
 	<input type="text" id=comment name="comment" />
 	<input type="button" id="commentUpdatebtn" value="댓글 등록"/>

@@ -7,7 +7,8 @@
     
 <% List<Notice> list = (List) request.getAttribute("list"); %>
 
-<% Map<String, Integer> map = (Map) request.getAttribute("map"); %>
+<% Map<String, Integer> map = (Map) request.getAttribute("map1"); %>
+<% Map<String, Integer> map2 = (Map) request.getAttribute("map2"); %>
 
 <script type="text/javascript"
 src = "http://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -113,16 +114,51 @@ ul.tabs li.current{
 
 
 /* TAB-2 */
-#wrapChart {
+#wrapChart1 {
 	width:600px;
 	margin : 80px auto;
 	text-align: center;
 }
 
-#wrapChart h3 {
+#wrapChart2 {
+	width:1000px;
+	margin : 80px auto;
+	text-align: center;
+}
+
+#wrapChart2chart {
+	width: 600px;
+}
+
+#wrapChart2chart, #wrapChart2info {
+	display : inline-block;
+}
+
+#wrapChart2info {
+	position : absolute;
+	top : 1000px;
+	text-align: left;
+}
+
+#wrapChart1 h3, #wrapChart2 h3  {
 	margin-bottom : 50px;
 }
 
+#wrapChart2info #infoColor1 {
+	width:20px;
+	height:20px;
+	background : rgba(255, 99, 132, 0.2);
+	border : 1px solid rgba(255, 99, 132, 1);
+	display: inline-block;
+}
+
+#wrapChart2info #infoColor2 {
+	width:20px;
+	height:20px;
+	background : rgba(54, 162, 235, 0.2);
+	border : 1px solid rgba(54, 162, 235, 1);
+	display: inline-block;
+}
 
 
 /* TAB-3 */
@@ -280,11 +316,24 @@ ul.tabs li.current{
 	
 	</div>
 	<div id="tab-2" class="tab-content">
-		<div id="wrapChart">
+		<div id="wrapChart1">
 			<h3>요일별 유기동물 발견 글 수</h3>
-			<canvas id="myChart"></canvas>
+			<canvas id="myChart1"></canvas> <br>
 		</div>
-		
+		<div id="wrapChart2">
+			<div id="wrapChart2chart">
+				<h3>찾기 게시판 비율</h3>
+				<canvas id="myChart2"></canvas>
+			</div>
+			<div id="wrapChart2info">
+				<div id="infoColor1"></div>
+				<span id="chart2span1"></span>
+				<br>
+				<div id="infoColor2"></div>
+				<span id="chart2span2"></span>
+			</div>
+		</div>
+	
 	</div>
 
 	<div id="tab-3" class="tab-content">
@@ -322,9 +371,15 @@ ul.tabs li.current{
 	</div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script type="text/javascript">
-var ctx = document.getElementById('myChart');
+$(document).ready(function() {
+	
+	$("#chart2span1").html("가족이 찾고있는 유기견  " + Math.round(((<%=map2.get("totalCnt")%> / (<%=map2.get("totalCnt") %>+<%=map2.get("completeCnt") %>))*100)) + "%");
+	$("#chart2span2").html("가족을 찾은 유기견  " + Math.round(((<%=map2.get("completeCnt")%> / (<%=map2.get("totalCnt") %>+<%=map2.get("completeCnt") %>))*100)) + "%");
+})
+
+var ctx = document.getElementById('myChart1');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -356,6 +411,29 @@ var myChart = new Chart(ctx, {
     options: {
 	    legend: {display: false} 
 
+    }
+});
+
+var ctx2 = document.getElementById('myChart2');
+var myChart = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['가족이 찾고있는 글', '가족을 만난 글'],
+        datasets: [{
+            data: [<%=map2.get("totalCnt") %>-<%=map2.get("completeCnt") %>, <%=map2.get("completeCnt") %>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+            ], 
+            borderWidth: 1
+        }]
+    },
+    options: {
+    	legend: {display: false}
     }
 });
 	

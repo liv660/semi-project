@@ -512,5 +512,14 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 	}
 	
+	@Override
+	public Map<String, Integer> percentByText() {
+
+		conn = JDBCTemplate.getConnection();
+		
+		Map<String, Integer> chart2 = noticeDao.selectByFindTextCnt(conn);
+		
+		return chart2;
+	}
 	
 }

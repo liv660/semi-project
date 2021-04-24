@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="../resources/css/slider.css"/>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="../resources/js/slider.js"></script>
+<script type="text/javascript" src="../resources/js/slider.js"></script> 
 
 <script type="text/javascript">
 

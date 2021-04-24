@@ -300,27 +300,27 @@ public class NoticeDaoImpl implements NoticeDao {
 		//요일별 게시글 수 조회
 		String sql = "";
 		sql += "select";
-		sql += " (select count(to_char(create_date, 'DY')) from notice_board where to_char(create_date, 'DY')='월'";
+		sql += " (select count(to_char(create_date, 'DY')) from discoverboard where to_char(create_date, 'DY')='월'";
 		sql += " and to_char(create_date, 'YYYYMMDD') between to_char(sysdate-6, 'YYYYMMDD') and to_char(sysdate, 'YYYYMMDD')) as MON,";
-		sql += " (select count(to_char(create_date, 'DY')) from notice_board where to_char(create_date, 'DY')='화'";
+		sql += " (select count(to_char(create_date, 'DY')) from discoverboard where to_char(create_date, 'DY')='화'";
 		sql += " and to_char(create_date, 'YYYYMMDD') between to_char(sysdate-6, 'YYYYMMDD') and to_char(sysdate, 'YYYYMMDD')) as TUE,";
-		sql += " (select count(to_char(create_date, 'DY')) from notice_board where to_char(create_date, 'DY')='수'";
+		sql += " (select count(to_char(create_date, 'DY')) from discoverboard where to_char(create_date, 'DY')='수'";
 		sql += " and to_char(create_date, 'YYYYMMDD') between to_char(sysdate-6, 'YYYYMMDD') and to_char(sysdate, 'YYYYMMDD')) as WEN,";
-		sql += " (select count(to_char(create_date, 'DY')) from notice_board where to_char(create_date, 'DY')='목' ";
+		sql += " (select count(to_char(create_date, 'DY')) from discoverboard where to_char(create_date, 'DY')='목' ";
 		sql += " and to_char(create_date, 'YYYYMMDD') between to_char(sysdate-6, 'YYYYMMDD') and to_char(sysdate, 'YYYYMMDD')) as TUR,";
-		sql += " (select count(to_char(create_date, 'DY')) from notice_board where to_char(create_date, 'DY')='금'";
+		sql += " (select count(to_char(create_date, 'DY')) from discoverboard where to_char(create_date, 'DY')='금'";
 		sql += " and to_char(create_date, 'YYYYMMDD') between to_char(sysdate-6, 'YYYYMMDD') and to_char(sysdate, 'YYYYMMDD')) as FRI,";
-		sql += " (select count(to_char(create_date, 'DY')) from notice_board where to_char(create_date, 'DY')='토'";
+		sql += " (select count(to_char(create_date, 'DY')) from discoverboard where to_char(create_date, 'DY')='토'";
 		sql += " and to_char(create_date, 'YYYYMMDD') between to_char(sysdate-6, 'YYYYMMDD') and to_char(sysdate, 'YYYYMMDD')) as SAT,";
-		sql += " (select count(to_char(create_date, 'DY')) from notice_board where to_char(create_date, 'DY')='일'";
+		sql += " (select count(to_char(create_date, 'DY')) from discoverboard where to_char(create_date, 'DY')='일'";
 		sql += " and to_char(create_date, 'YYYYMMDD') between to_char(sysdate-6, 'YYYYMMDD') and to_char(sysdate, 'YYYYMMDD')) as SUN";
-		sql += " from notice_board";
+		sql += " from findboard";
 		sql += " where rownum=1";
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql); 
 			
 			rs = ps.executeQuery();
 			
@@ -335,6 +335,36 @@ public class NoticeDaoImpl implements NoticeDao {
 				map.put("sun", rs.getInt("sun"));
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return map;
+	}
+	
+	@Override
+	public Map<String, Integer> selectByFindTextCnt(Connection conn) {
+
+		String sql = "";
+		sql += "SELECT count(*) count, count(find_complete) comCnt FROM findboard";
+		
+		Map<String, Integer> map = new HashMap<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				map.put("totalCnt", rs.getInt("count"));
+				map.put("completeCnt", rs.getInt("comCnt"));
+				
+			}
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -40,5 +40,7 @@ public interface NoticeService {
 
 	public void reviceComment(NoticeComment param);
 
+	public Map<String, Integer> percentByText();
+
 
 }

@@ -52,7 +52,9 @@ public class NoticeListController extends HttpServlet {
 		
 		//TAB-2
 		//요일별 작성글 수 조회
-		Map<String, Integer> chart = noticeService.postByDate();
+		Map<String, Integer> chart1 = noticeService.postByDate();
+		
+		Map<String, Integer> chart2 = noticeService.percentByText();
 		
 		
 		
@@ -63,7 +65,8 @@ public class NoticeListController extends HttpServlet {
 		req.setAttribute("list", list);
 		
 		//요일별 작성글 수 전달
-		req.setAttribute("map", chart);
+		req.setAttribute("map1", chart1);
+		req.setAttribute("map2", chart2);
 		
 		req.getRequestDispatcher("/WEB-INF/views/notice/list.jsp").forward(req, resp);
 	
