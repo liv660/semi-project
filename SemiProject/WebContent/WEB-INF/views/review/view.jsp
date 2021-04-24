@@ -29,6 +29,16 @@ $(document).ready(function() {
 		}
 	});
 	
+	
+	/* 이미지 팝업 */
+	var img = document.getElementsByClassName('click_img');
+
+	for(var x=0; x<img.length; x++) {
+		img.item(x).onclick = function() {
+			window.open(this.src)
+		};
+	};
+	
 });
 </script>
 
@@ -40,8 +50,10 @@ $(document).ready(function() {
 	width: 98%;
 }
 
-.table {
+.tables {
 	width: 1100px;
+	background-color: #FDF5E6;
+	border-radius: 15px;
 }
 
 #imgs {
@@ -135,6 +147,27 @@ height : 70px;
    margin-top : 20px;
 }
 
+.boxs {
+	border: 1px solid white;
+ 	padding: 2px; 
+	background-color: white;
+	border-radius: 8px;
+	margin: 8px;
+}
+
+.btns {
+	margin-left: 40%;
+	background-color: #EBAA5F;
+	color: white;
+	border-radius: 8px;
+	padding: 3px 15px;
+	border: 0;
+	outline: 0;
+}
+
+.center {
+	text-align: center;
+}
 
 </style>
 
@@ -144,66 +177,70 @@ height : 70px;
 <h3 style="text-align: center;">게시글 상세보기</h3>
 <hr>
 
-<table class="table table-bordered">
+<!-- <table class="table table-bordered"> -->
+<table class="tables">
 
 <tr>
-	<td>분류</td><td colspan="3"><%=view.getReviewSortDetail() %></td>
+	<td class="center">분류</td>
+	<td colspan="3"><div class="boxs"><%=view.getReviewSortDetail() %></div></td>
 </tr>
 
 <tr>
-	<td>제목</td><td colspan="6"><%=view.getTitle() %></td>
+	<td class="center">제목</td>
+	<td colspan="6"><div class="boxs"><%=view.getTitle() %></div></td>
 </tr>
 
 <tr>
-	<td>작성자</td><td colspan="2"><%=view.getNick() %></td>
-	<td>작성일</td><td colspan="2"><%=view.getCreateDate() %></td>
+	<td class="center">작성자</td><td><div class="boxs"><%=view.getNick() %></div></td>
+	<td class="center">작성일</td><td><div class="boxs"><%=view.getCreateDate() %></div></td>
+	<td colspan="2"></td>
 	<% if(nick.equals(view.getNick()))  {%>
-	<td><button type="button" id="btnUpdate" class="btn">수정</button></td>
-	<td><button type="button" id="btnDelete" class="btn">삭제</button></td>
+	<td><button type="button" id="btnUpdate" class="btns">수정</button></td>
+	<td><button type="button" id="btnDelete" class="btns" style="margin-left: 0;">삭제</button></td>
 	<% }%>
 	
 </tr>
-	
+
 <% int i = imgs.size(); %>	
 	<% if(i <= 0) { %>
 		<tr>
 			<!-- 이미지 띄워줄 자리 -->
-			<td colspan="2"><img src=".." alt="img1" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img2" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img3" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+			<td colspan="2"><img src=".." alt="img1" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img2" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img3" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs" class="click_img" /></td>
 		</tr>
 	<% } else if(i < 2 && i > 0) { %>
 		<tr>
 			<!-- 이미지 띄워줄 자리 -->
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img2" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img3" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img2" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img3" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs" class="click_img" /></td>
 		</tr>
 	<% } else if(i < 3 && i > 1)  {%>	
 		<tr>
 			<!-- 이미지 띄워줄 자리 -->
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img3" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img3" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs" class="click_img" /></td>
 		</tr>
 	<% } else if(i < 4 && i > 2) { %>
 		<tr>
 			<!-- 이미지 띄워줄 자리 -->
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" /></td>
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(2).getStoredImg() %>" alt="img3" id="imgs" /></td>
-			<td colspan="2"><img src=".." alt="img4" id="imgs"></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(2).getStoredImg() %>" alt="img3" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src=".." alt="img4" id="imgs" class="click_img" /></td>
 		</tr>
 	<% } else if(i < 5 && i > 3) { %>
 		<tr>
 			<!-- 이미지 띄워줄 자리 -->
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" /></td>
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" /></td>
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(2).getStoredImg() %>" alt="img3" id="imgs" /></td>
-			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(3).getStoredImg() %>" alt="img4" id="imgs"></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(0).getStoredImg() %>" alt="img1" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(1).getStoredImg() %>" alt="img2" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(2).getStoredImg() %>" alt="img3" id="imgs" class="click_img" /></td>
+			<td colspan="2"><img src="/reviewImgFile/<%=imgs.get(3).getStoredImg() %>" alt="img4" id="imgs" class="click_img" /></td>
 		</tr>
 	<% } %>
 		
@@ -211,14 +248,16 @@ height : 70px;
 <tr> <!-- 본문 -->
 	<td colspan="8">
 <%-- 		<textarea style="width: 97%; height: 300px;" name="content" id="content"><%=view.getContent() %></textarea> --%>
-		<div style="width: 1100px; height: 300px; border: 1px solid; margin: 10px 0 10px 0;">
+		<div style="width: 1100px; height: 300px; border: 1px solid; margin: 10px; border: 0; background-color: white;">
 		<p><%=view.getContent() %></p>
 		</div>
 	</td>
 </tr>
 
 <tr>
-	<td colspan="8" style="text-align: right; padding-right: 15px;"><button type="button" id="btnList" class="btn">목록으로</button></td>
+	<td colspan="8" style="text-align: right; padding-right: 15px; padding-bottom: 5px;">
+		<button type="button" id="btnList" class="btn">목록으로</button>
+	</td>
 </tr>
 
 </table>

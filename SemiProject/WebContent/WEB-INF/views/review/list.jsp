@@ -22,6 +22,16 @@ h2 {
 	float: right;
 }
 
+#write {
+	background-color: green;
+	color: white;
+	border-radius: 8px;
+	padding: 3px 15px;
+	border: 0;
+	outline: 0;
+}
+
+
 </style>
 
 <script type="text/javascript">
@@ -48,17 +58,17 @@ $(document).ready(function() {
 
 <div class="container">
 
-<h2>후기 게시판</h2>
+<h2 style="color: #EA9A56;">후기 게시판</h2>
 
 <div id="btnBox">
-	<button class="btn" id="write">글쓰기</button>
+	<button id="write">글쓰기</button>
 </div>
 
 <br><br>
 
 <table class="table table-hover">
-<tr>
-	<th style="width: 8%;">글 번호</th>
+<tr style="background-color: #EBC680;">
+	<th style="width: 8%">글 번호</th>
 	<th style="width: 22%">분류</th>
 	<th style="width: 35%">제목</th>
 	<th style="width: 15%">작성자</th>
