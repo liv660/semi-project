@@ -42,6 +42,8 @@ public interface DiscoverBoardService {
 	public void updateComment(DiscoverComment param);
 
 	public void removeComment(DiscoverComment param);
+
+	public void completeDiscover(int discoverno);
 	
 	
 	

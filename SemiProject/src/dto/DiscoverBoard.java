@@ -16,6 +16,7 @@ public class DiscoverBoard {
 	private String loc;
 	private String content;
 	private int boardDiv;
+	private String discover_complete;
 	
 	//discoverImg Join data
 	private int image_no;
@@ -26,8 +27,8 @@ public class DiscoverBoard {
 		return "DiscoverBoard [discoverNo=" + discoverNo + ", userNo=" + userNo + ", title=" + title + ", createDate="
 				+ createDate + ", updateDate=" + updateDate + ", views=" + views + ", petName=" + petName
 				+ ", petKinds=" + petKinds + ", petAge=" + petAge + ", loc=" + loc + ", content=" + content
-				+ ", boardDiv=" + boardDiv + ", image_no=" + image_no + ", origin_img=" + origin_img + ", stroed_img="
-				+ stroed_img + "]";
+				+ ", boardDiv=" + boardDiv + ", discover_complete=" + discover_complete + ", image_no=" + image_no
+				+ ", origin_img=" + origin_img + ", stroed_img=" + stroed_img + "]";
 	}
 	public int getDiscoverNo() {
 		return discoverNo;
@@ -101,6 +102,12 @@ public class DiscoverBoard {
 	public void setBoardDiv(int boardDiv) {
 		this.boardDiv = boardDiv;
 	}
+	public String getDiscover_complete() {
+		return discover_complete;
+	}
+	public void setDiscover_complete(String discover_complete) {
+		this.discover_complete = discover_complete;
+	}
 	public int getImage_no() {
 		return image_no;
 	}
@@ -119,8 +126,6 @@ public class DiscoverBoard {
 	public void setStroed_img(String stroed_img) {
 		this.stroed_img = stroed_img;
 	}
-	
-	
 
 	
 	

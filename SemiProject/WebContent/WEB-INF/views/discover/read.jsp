@@ -42,6 +42,12 @@ $(document).ready(function() {
 /* 댓글목록 조회 */
 $(document).ready(function() {
 	commentlist();
+	
+   $(document).on('click', '#foldbtn', function() {
+	      
+	      $('.fold').css('display','block');
+	      $('#foldbtn').css('display','none');
+	   })
 })
 
 // $("#commentwrap").click(
@@ -64,19 +70,43 @@ function commentlist() {
 				
 				var html = '';
 				
-				html += "<div class='commentwrap'> <span class='commnetNick'>"
-				html += commentlist[i].nick
-				html += "</span> <span class='commentDate'>"
-				html += commentlist[i].commentDate
-				html += "</span>"
-				html += "<input type='button' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
-				html += "<input type='button' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
-				html += "<br> <div id='comwrap" + commentlist[i].commentNo + "'> <span class='commentText' id='commentText" + commentlist[i].commentNo + "'> "
-				html += commentlist[i].commentText
-				html += "</span> </div>"
+	            if(commentlist[i].commentCnt != null) {
+		               var commentCnt = commentlist[i].commentCnt;
+	            }
+	            
+	            if(i > 4) {
+	               html += "<div class='fold'>";
+	            }
+	            html += "<div class='commentwrap'>"
+	            html += "<div class='commentImg'> <img src='"
+	            if(commentlist[i].storedName == "basic.png" || commentlist[i].storedName == null) {
+	               html += "/resources/image/basic.png"
+	            } else {
+	               html += "/userimgup/" + commentlist[i].storedName
+	            }
+	            html += " '/> </div>"
+	            html += "<div class='commentNick'>" + commentlist[i].nick + "</div>"
+	            html += "<div class='commentDate'>" + commentlist[i].commentDate + "</div>"
+	            if( $("#userno").val() == commentlist[i].userNo) {
+	            html += "<div class='commentBtn'>"
+	            html += "<input type='button' class='combtn' onclick = 'commentUpdateTrans(" + commentlist[i].commentNo + ")' id='updatebtn" + commentlist[i].commentNo + "' value='수정'/>"
+	            html += "<input type='button' class='combtn' onclick = 'commentDelete(" + commentlist[i].commentNo + ")' id='deletebtn" + commentlist[i].commentNo + "' value='삭제'/>"
+	            html += "</div>"
+	            }
+				html += "<div class='commentText' id='comwrap" + commentlist[i].commentNo + "'>" 
+				html += "<span class='commentText' id='commentText" + commentlist[i].commentNo + "'> " + commentlist[i].commentText + "</span>"
+				html += "</div>"
+	    	    if( i == commentlist.length-1) {
+	               html += "</div>"
+	            }
+	            if( i == 4) {
+	               html += "<input type='button' id='foldbtn' value='댓글 더보기'>"
+	            }
 				
 				$("#commentwrap").append(html);
 			}/* for문 끝 */
+	         $("#commentCnt").html("");
+	         $("#commentCnt").append(commentCnt);
 			
 		}/* success끝 */
 		
@@ -190,6 +220,28 @@ function updatecancle() {
 
 <style type="text/css">
 
+.container h1 {
+	display: inline-block;
+}
+
+.container .complete {
+	width : 500px;
+	display : inline-block;
+	position : relative;
+}
+
+.container .complete #completebtn {
+	position : absolute;
+	left : 800px;
+}
+
+.container .complete #completeMsg {
+	position : absolute;
+	left : 800px;
+	color : red;
+	width: 80px;
+}
+
 #findheader{
 	border:1px solid;
 	width: 700px;
@@ -279,6 +331,44 @@ height : 70px;
   border:1px solid #eee;      
 }
 
+#commentwrap .commentwrap .commentImg {
+   width: 30px;
+   height : 30px;
+   margin-right : 10px;
+   display : inline-block;
+}
+
+#commentwrap .commentwrap .commentImg img {
+   width : 100%;
+   height : 100%;
+   object-fit : cover;
+   border-radius: 50%;
+}
+
+#commentwrap .commentwrap .commentDate {
+   left : 100px;
+   display : inline-block;
+}
+
+#commentwrap .commentwrap .commentNick {
+   display : inline-block;
+}
+
+#commentwrap .commentwrap .commentBtn {
+   display : inline-block;
+   left : 100px;
+}
+
+#commentwrap .fold {
+   display : none;
+}
+
+#commentwrap #foldbtn {
+   width : 800px;
+   border : none;
+   margin-top : 20px;
+}
+
 </style>
 
 
@@ -286,6 +376,17 @@ height : 70px;
 <div class="container">
 
 <h1>반려동물 찾기</h1>
+
+<div class="complete">
+<% if( ((Integer)session.getAttribute("userno")) == b.getUserNo() && b.getDiscover_complete() == null) { %>
+<input type="button" id="completebtn" value="완료" onclick="complete();">
+<% } %>
+
+<% if(b.getDiscover_complete() != null) {%>
+<span id='completeMsg'>찾기 완료</span>
+<% } %>
+</div>
+
 <hr>
 
 <input type ="hidden" name ="DiscoverNo" id ="DiscoverNo" value="<%=request.getParameter("DiscoverNo") %>" />
@@ -379,7 +480,7 @@ height : 70px;
 <hr>
 
 <div>
-	<h3>댓글</h3>
+	<h3>댓글<span id="commentCnt"></span></h3>
 	
 	<input type="text" id=comment name="comment" />
 	<input type="button" id="commentUpdatebtn" value="댓글 등록"/>
@@ -415,6 +516,36 @@ height : 70px;
 	lightbox.onclick = function() {
 		lightbox.style.display = "none";
 	};
+	
+
+	function complete() {
+
+		var con = confirm("정말 완료 하시겠습니까? \n완료 이후에는 변경할 수 없습니다.")
+
+		if(con == true) {
+
+			$.ajax({
+				
+				type : 'get'
+				, url : '/discover/complete'
+				, data : { 'discoverno' : $('#DiscoverNo').val()}
+				, success : function() {
+				
+					var html = '';
+					
+					html += "<span id='completeMsg'>찾기 완료</span>"
+					
+					
+					$('.complete').html(html);
+					
+					
+				}
+			
+			})
+			
+		}
+		
+	}
 
 
 </script>

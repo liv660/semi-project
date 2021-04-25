@@ -110,7 +110,7 @@ function search(){
 	
 	#container .pet_list p a{display:block;}
 	
-	#container .pet_list .img_box{width:150px; height:150px; line-height:150px; border:1px solid #ccc;}
+	#container .pet_list .img_box{width:150px; height:150px; line-height:150px;}
 </style>
 	
 	<div id="container">
@@ -156,11 +156,18 @@ function search(){
 		<%	for(int i=0; i<list.size(); i++) { %>
 			<div class="pet_list">
 				<p class="img_box" ><a href="/discover/read?DiscoverNo=<%=list.get(i).getDiscoverNo() %>">
+				<%if(list.get(i).getDiscover_complete() == null) { %>
 				<img src="<%=request.getContextPath() %>/upload/<%=list.get(i).getStroed_img() %>" id="mainimages" style="width:148px; height:150px;"/>
 				</a></p>
 				<p><%=list.get(i).getTitle() %></p>
 				<p><%=list.get(i).getLoc() %></p>
-				<p><%=list.get(i).getPetKinds() %></p>
+				<p><%=list.get(i).getPetKinds() %></p> 
+				<% } else { %>
+				<img src="/resources/image/complete.png" id="mainimages" style="width:148px; height:150px;"/>
+				</a></p>
+				<p><%=list.get(i).getTitle() %></p>
+				<p style="color:red;">[완료]</p>
+				<% } %>
 			</div>
 		<% } %>
 <%-- 			<h1><%=session.getAttribute("login")%></h1> --%>

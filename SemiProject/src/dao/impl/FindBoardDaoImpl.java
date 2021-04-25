@@ -650,9 +650,6 @@ public class FindBoardDaoImpl implements FindBoardDao {
 	public List<FindComment> selectComment(Connection conn, int findNo) {
 		
 		String sql = "";
-//		sql += "SELECT * FROM findboard_comment";
-//		sql += " WHERE find_no = ?";
-//		sql += " ORDER BY comment_no";
 		
 		sql += "SELECT comment_no, find_no, FC.user_no, nick, comment_text, comment_date, comment_update, UI.storedname,(";
 		sql += " SELECT count(*) FROM findboard_comment WHERE find_no = ?) count";

@@ -684,5 +684,22 @@ public class DiscoverBoardServiceImpl implements DiscoverBoardService {
 		}
 		
 	}
+	
+	@Override
+	public void completeDiscover(int discoverno) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = discoverBoardDao.updateComplete(conn, discoverno); 
+		
+		if(res > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		
+	}
 
 }

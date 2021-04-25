@@ -47,6 +47,8 @@ public interface DiscoverBoardDao {
 
 	public int deleteComment(Connection conn, DiscoverComment param);
 
+	public int updateComplete(Connection conn, int discoverno);
+
 
 
 }

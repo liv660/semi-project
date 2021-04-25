@@ -28,7 +28,7 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 		sql += " 	SELECT rownum rnum, D.* FROM (";
 		sql += " 		SELECT";
 		sql += " 			DB.discover_no, DB.user_no, DB.title, DB.create_date, DB.update_date";
-		sql += " 			, DB.views, DB.pet_name, DB.pet_kinds, DB.pet_age, DB.loc, DB.content, DB.board_div";
+		sql += " 			, DB.views, DB.pet_name, DB.pet_kinds, DB.pet_age, DB.loc, DB.content, DB.board_div, DB.discover_complete";
 		sql += "            , DI.image_no, DI.origin_img, DI.stored_img ";
 		sql += " 		FROM discoverboard DB, (";
 		sql += "        	SELECT DISCOVER_IMG.* FROM (";
@@ -85,6 +85,7 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 				f.setImage_no(rs.getInt("image_no"));
 				f.setOrigin_img(rs.getString("origin_img"));
 				f.setStroed_img(rs.getString("stored_img"));
+				f.setDiscover_complete(rs.getString("discover_complete")); 
 
 				// 리스트에 결과값 저장
 				discoverboardList.add(f);
@@ -160,6 +161,7 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 				viewdiscoverboard.setDiscoverNo( rs.getInt("discover_No") );
 				viewdiscoverboard.setUserNo( rs.getInt("user_No") );
 				viewdiscoverboard.setUpdateDate( rs.getDate("update_Date") );
+				viewdiscoverboard.setDiscover_complete(rs.getString("discover_complete")); 
 								
 			}
 			
@@ -532,9 +534,12 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 	public List<DiscoverComment> selectComment(Connection conn, int discoverNo) {
 
 		String sql = "";
-		sql += "SELECT * FROM discoverboard_comment";
-		sql += " WHERE discover_no = ?";
-		sql += " ORDER BY comment_no";
+		sql += "SELECT comment_no, discover_no, DC.user_no, nick, comment_text, comment_date, comment_update, UI.storedname,(";
+		sql += " SELECT count(*) FROM discoverboard_comment WHERE discover_no = ?) count";
+		sql += " FROM discoverboard_comment DC, userimg UI";
+		sql += " WHERE DC.user_no = UI.user_no";
+		sql += " AND discover_no = ?";
+		sql += " ORDER BY comment_no DESC";
 		
 		
 		List<DiscoverComment> list = new ArrayList<>();
@@ -544,6 +549,7 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, discoverNo);
+			ps.setInt(2, discoverNo);
 			
 			rs = ps.executeQuery();
 			
@@ -551,12 +557,16 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 				
 				DiscoverComment res = new DiscoverComment();
 				
-				res.setNick( rs.getString("nick") );
 				res.setCommentNo( rs.getInt("comment_no") );
+				res.setDiscoverNo(rs.getInt("discover_no"));
+				res.setUserNo(rs.getInt("user_no"));
+				res.setNick( rs.getString("nick") );
 				res.setCommentText( rs.getString("comment_text") );
 				res.setCommentDate( rs.getDate("comment_date") );
 				res.setCommentUpdate( rs.getDate("comment_update") );
-
+				res.setStoredName(rs.getString("storedname"));
+				res.setCommentCnt(rs.getInt("count"));
+				
 				list.add(res);				
 				
 			}			
@@ -643,6 +653,32 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 			
 			res = ps.executeUpdate();
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	
+	@Override
+	public int updateComplete(Connection conn, int discoverno) {
+
+		String sql = "";
+		sql += "UPDATE discoverboard";
+		sql += " SET discover_complete = 'Y'";
+		sql += " WHERE discover_no = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, discoverno);
+			
+			res = ps.executeUpdate();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
