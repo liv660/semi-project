@@ -1,10 +1,11 @@
+<%@page import="util.FindPaging"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 
 
 <%@page import="util.Paging"%>
-<% Paging paging = (Paging) request.getAttribute("paging"); %>
+<% FindPaging paging = (FindPaging) request.getAttribute("paging"); %>
 
 <div class="text-center">
 	<ul class ="pagination">

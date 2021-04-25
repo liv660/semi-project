@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dto.FindBoard;
 import service.face.FindBoardService;
 import service.impl.FindBoardServiceImpl;
-import util.Paging;
+import util.FindPaging;
 
 
 @WebServlet("/find/list")
@@ -29,9 +29,7 @@ public class FindListController extends HttpServlet {
 		System.out.println("findListController - GET");
 		
 		//요청파라미터를 전달하여 Paging객체 생성하기
-		Paging paging = findboardService.getPaging(req);
-		System.out.println("findListController - " + paging);
-		
+		FindPaging paging = findboardService.getPaging(req);
 		
 		String pet = req.getParameter("pet");
 		String loc = req.getParameter("loc");

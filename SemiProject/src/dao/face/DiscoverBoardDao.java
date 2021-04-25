@@ -7,11 +7,11 @@ import java.util.Map;
 import dto.DiscoverBoard;
 import dto.DiscoverComment;
 import dto.DiscoverImg;
-import util.Paging;
+import util.FindPaging;
 
 public interface DiscoverBoardDao {
 
-	public List<DiscoverBoard> selectAll(Connection conn, Paging paging, Map<String, String> map);
+	public List<DiscoverBoard> selectAll(Connection conn, FindPaging paging, Map<String, String> map);
 
 	public int selectCntAll(Connection conn);
 

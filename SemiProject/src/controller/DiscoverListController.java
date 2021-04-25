@@ -11,12 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dto.DiscoverBoard;
 import service.face.DiscoverBoardService;
 import service.impl.DiscoverBoardServiceImpl;
-import util.Paging;
+import util.FindPaging;
 
 
 
@@ -29,12 +28,8 @@ public class DiscoverListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		System.out.println("discoverListController - GET");
-		
 		//요청파라미터를 전달하여 Paging객체 생성하기
-		Paging paging = discoverBoardService.getPaging(req);
-		System.out.println("discoverListController - " + paging);
-		
+		FindPaging paging = discoverBoardService.getPaging(req);
 		
 		String pet = req.getParameter("pet");
 		String loc = req.getParameter("loc");

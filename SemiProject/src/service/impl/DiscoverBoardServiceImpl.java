@@ -23,6 +23,7 @@ import dto.DiscoverBoard;
 import dto.DiscoverComment;
 import dto.DiscoverImg;
 import service.face.DiscoverBoardService;
+import util.FindPaging;
 import util.Paging;
 
 public class DiscoverBoardServiceImpl implements DiscoverBoardService {
@@ -30,12 +31,12 @@ public class DiscoverBoardServiceImpl implements DiscoverBoardService {
 	private DiscoverBoardDao discoverBoardDao = new DiscoverBoardDaoImpl();
 	
 	@Override
-	public List<DiscoverBoard> getList(Paging paging, Map<String, String> map) {
+	public List<DiscoverBoard> getList(FindPaging paging, Map<String, String> map) {
 		return discoverBoardDao.selectAll(JDBCTemplate.getConnection(), paging, map);
 	}
 
 	@Override
-	public Paging getPaging(HttpServletRequest req) {
+	public FindPaging getPaging(HttpServletRequest req) {
 		
 		String param = req.getParameter("curPage");
 		int curPage = 0;
@@ -45,7 +46,7 @@ public class DiscoverBoardServiceImpl implements DiscoverBoardService {
 		
 		int totalCount = discoverBoardDao.selectCntAll(JDBCTemplate.getConnection());
 		
-		Paging paging = new Paging(totalCount, curPage);
+		FindPaging paging = new FindPaging(totalCount, curPage);
 		
 		return paging;
 	}

@@ -8,6 +8,7 @@ import java.util.Map;
 import dto.FindBoard;
 import dto.FindComment;
 import dto.FindImg;
+import util.FindPaging;
 import util.Paging;
 
 public interface FindBoardDao {
@@ -28,7 +29,7 @@ public interface FindBoardDao {
 	 * @param paging - 페이징 정보 객체
 	 * @return List<FindBoard> - FindBoard테이블 전체 조회 결과 리스트
 	 */
-	public List<FindBoard> selectAll(Connection conn, Paging paging, Map<String, String> map);
+	public List<FindBoard> selectAll(Connection conn, FindPaging paging, Map<String, String> map);
 
 	/**
 	 * 총 게시글 수 조회

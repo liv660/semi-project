@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,15 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dto.DiscoverBoard;
+import dto.FindBoard;
+import dto.Notice;
+import dto.ReviewUserJoin;
 import dto.Usertb;
 import service.face.LoginService;
+import service.face.MainService;
 import service.impl.LoginServiceImpl;
+import service.impl.MainServiceImpl;
 
 @WebServlet("/main")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private LoginService loginService = new LoginServiceImpl();
+	private MainService mainService = new MainServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,8 +35,6 @@ public class MainController extends HttpServlet {
 		
 		//자동 로그인 쿠키 저장
 		if("on".equals(req.getParameter("autologin"))) {
-			
-			System.out.println("자동로그인");
 			
 			String auto = req.getParameter("userid");
 			
@@ -45,9 +51,8 @@ public class MainController extends HttpServlet {
 			resp.addCookie(userid);
 		}
 		
+		//아이디 저장 쿠키 저장
 		if("on".equals(req.getParameter("rememberid"))) {
-			
-			System.out.println("아이디저장");
 			
 			String remuserid = req.getParameter("userid");
 			
@@ -64,7 +69,7 @@ public class MainController extends HttpServlet {
 			resp.addCookie(userid);
 		}
 
-
+		//자동로그인 쿠키있을시 로그인 해줌
 		if(req.getCookies() != null) {
 			
 			Cookie[] cookies = req.getCookies();
@@ -83,15 +88,12 @@ public class MainController extends HttpServlet {
 			
 			if("autologin".equals(value)) {
 				
-				System.out.println("ds");
-				
 				Usertb info = new Usertb();
 				info.setUserId(id);
 				
 				Usertb res = loginService.loginUser(info);
 				
 				if(res != null) {
-					System.out.println("aaa");
 					session.setAttribute("login", true);
 					session.setAttribute("userid", res.getUserId());
 					session.setAttribute("userno", res.getUserNo());
@@ -99,6 +101,17 @@ public class MainController extends HttpServlet {
 				}
 			}
 		}
+		
+		List<FindBoard> findboard = mainService.getFindBoard();
+		List<DiscoverBoard> discoverboard = mainService.getDiscoverBoard();
+		List<ReviewUserJoin> reviewboard = mainService.getReviewBoard();
+		List<Notice> noticeboard = mainService.getNoticeBoard();
+		
+		
+		req.setAttribute("findboard", findboard);
+		req.setAttribute("discoverboard", discoverboard);
+		req.setAttribute("reviewboard", reviewboard);
+		req.setAttribute("noticeboard", noticeboard);
 
 		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
 	

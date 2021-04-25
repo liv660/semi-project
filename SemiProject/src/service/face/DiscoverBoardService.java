@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import dto.DiscoverBoard;
 import dto.DiscoverComment;
 import dto.DiscoverImg;
-import util.Paging;
+import util.FindPaging;
 
 public interface DiscoverBoardService {
 
 	
-	public List<DiscoverBoard> getList(Paging paging, Map<String, String> map);
+	public List<DiscoverBoard> getList(FindPaging paging, Map<String, String> map);
 	
-	public Paging getPaging(HttpServletRequest req);
+	public FindPaging getPaging(HttpServletRequest req);
 
 	public DiscoverBoard getParam(HttpServletRequest req);
 

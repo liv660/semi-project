@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import dto.FindBoard;
 import dto.FindComment;
 import dto.FindImg;
+import util.FindPaging;
 import util.Paging;
 
 
@@ -32,7 +33,7 @@ public interface FindBoardService {
 	 * @param paging - 페이징 정보 객체
 	 * @return List<FindBoard> - 게시글 전체 조회 결과 리스트
 	 */
-	public List<FindBoard> getList(Paging paging, Map<String,String> map);
+	public List<FindBoard> getList(FindPaging paging, Map<String,String> map);
 
 	
 	/**
@@ -44,7 +45,7 @@ public interface FindBoardService {
 	 * @param req - curPage정보를 담고 있는 요청정보 객체
 	 * @return 페이징 계산이 완료된 Paging 객체
 	 */
-	public Paging getPaging(HttpServletRequest req);
+	public FindPaging getPaging(HttpServletRequest req);
 	
 	/**
 	 *  find_no를 이용하여 게시글 조회

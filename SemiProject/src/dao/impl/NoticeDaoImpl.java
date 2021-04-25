@@ -57,11 +57,11 @@ public class NoticeDaoImpl implements NoticeDao {
 		
 		String sql = "";
 		sql += "SELECT * FROM (";
-		sql += " SELECT rownum rnum, N.* FROM(";
-		sql += " SELECT notice_no,title, manager_id, create_date, views, notice_imp" ;
-		sql += " ,(SELECT count(*) FROM notice_comment";
-		sql += " WHERE NB.notice_no = notice_comment.notice_no ) as count";
-		sql += " FROM notice_board NB";
+		sql += " 	SELECT rownum rnum, N.* FROM(";
+		sql += " 		SELECT notice_no,title, manager_id, create_date, views, notice_imp" ;
+		sql += " 		,(SELECT count(*) FROM notice_comment";
+		sql += " 		WHERE NB.notice_no = notice_comment.notice_no ) as count";
+		sql += " 	FROM notice_board NB";
 		if("writer".equals(map.get("title"))) {
 			sql += " WHERE manager_id LIKE '%' || ? || '%' ";
 		} else if ("title".equals(map.get("title"))) {
@@ -69,8 +69,8 @@ public class NoticeDaoImpl implements NoticeDao {
 		} else if ("content".equals(map.get("title"))) {
 			sql += " WHERE content LIKE '%' || ? || '%'";
 		}
-		sql += " ORDER BY notice_imp ASC, notice_no DESC";
-		sql += " ) N";
+		sql += " 	ORDER BY notice_imp ASC, notice_no DESC";
+		sql += " 	) N";
 		sql += " ) NOTICE";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 		

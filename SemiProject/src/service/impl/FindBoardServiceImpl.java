@@ -23,6 +23,7 @@ import dto.FindBoard;
 import dto.FindComment;
 import dto.FindImg;
 import service.face.FindBoardService;
+import util.FindPaging;
 import util.Paging;
 
 public class FindBoardServiceImpl implements FindBoardService{
@@ -36,12 +37,12 @@ public class FindBoardServiceImpl implements FindBoardService{
 	}
 	
 	@Override
-	public List<FindBoard> getList(Paging paging, Map<String, String> map) {
+	public List<FindBoard> getList(FindPaging paging, Map<String, String> map) {
 		return findBoardDao.selectAll(JDBCTemplate.getConnection(), paging, map);
 	}
 
 	@Override
-	public Paging getPaging(HttpServletRequest req) {
+	public FindPaging getPaging(HttpServletRequest req) {
 		//전달파라미터 curPage 파싱
 		String param = req.getParameter("curPage");
 		int curPage = 0;
@@ -53,7 +54,7 @@ public class FindBoardServiceImpl implements FindBoardService{
 		int totalCount = findBoardDao.selectCntAll(JDBCTemplate.getConnection());
 
 		//Paging객체 생성
-		Paging paging = new Paging(totalCount, curPage);
+		FindPaging paging = new FindPaging(totalCount, curPage);
 		
 		return paging;
 	}

@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import common.JDBCTemplate;
 import dao.face.FindBoardDao;
 import dto.FindBoard;
 import dto.FindComment;
 import dto.FindImg;
-import oracle.net.aso.f;
-import util.Paging;
-import common.JDBCTemplate;
+import util.FindPaging;
 
 public class FindBoardDaoImpl implements FindBoardDao {
 	
@@ -97,7 +96,7 @@ public class FindBoardDaoImpl implements FindBoardDao {
 	}
 
 	@Override
-	public List<FindBoard> selectAll(Connection conn, Paging paging, Map<String, String> map) {
+	public List<FindBoard> selectAll(Connection conn, FindPaging paging, Map<String, String> map) {
 		
 		//SQL 작성
 		String sql = "";

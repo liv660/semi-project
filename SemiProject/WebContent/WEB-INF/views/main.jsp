@@ -1,49 +1,369 @@
+<%@page import="dto.Notice"%>
+<%@page import="dto.ReviewUserJoin"%>
+<%@page import="dto.DiscoverBoard"%>
+<%@page import="dto.FindBoard"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 
-<link rel="stylesheet" type="text/css" href="../resources/css/slider.css"/>
 <script src="http://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="../resources/js/slider.js"></script> 
+<script type="text/javascript" src="../resources/js/slider.js"></script>
+
+<%List<FindBoard> findboard = (List) request.getAttribute("findboard"); %>
+<%List<DiscoverBoard> discoverboard = (List) request.getAttribute("discoverboard"); %>
+<%List<ReviewUserJoin> reviewboard = (List) request.getAttribute("reviewboard"); %>
+<%List<Notice> noticeboard = (List) request.getAttribute("noticeboard"); %>
 
 <script type="text/javascript">
 
 delete localStorage.menu;
 
 </script>
+<style type="text/css">
+	/* 여백 초기화 */
+	*{margin:0; padding:0;}
+	li{list-style:none;}
+	a:link, a:visited{text-decoration:none; color:#000;}
+	
+	#container{width:1200px; overflow:hidden;
+		margin:0 auto; 
+	}
+	
+	#screen{max-width:1200px; 
+		width:100%; 
+		border:5px solid #ccc; 
+		margin:0 auto; 
+		position:relative; 
+		overflow:hidden;
+	}
+	#film{width:400%; height:350px; margin:0; padding:0;}
+	/* 부모요소가 크던 작던 100%로 인식함*/
+	.scene{float:left; width:25%; height:100%;}
+	.scene img{ width:100%; height:100%;}
+	#film:after{ content:""; display:block; clear:both; }
 
-<!-- <div class="sliderbox"> -->
-<div class="sliderbox" style="margin-top: 45px;">
-   <input type="radio" name="slide" id="slide1" checked="checked" />
-   <input type="radio" name="slide" id="slide2"  />
-   <input type="radio" name="slide" id="slide3"  />
-   <input type="radio" name="slide" id="slide4"  />
-   <input type="radio" name="slide" id="slide5"  />
-   <ul class="imgslide imgs" >
-      <li><img src="http://i.imgur.com/viuPHoS.gif" /></li>
-      <li><img src="http://i.imgur.com/i7sW1WN.jpg" /></li>
-      <li><img src="http://i.imgur.com/MrZcQnN.jpg" /></li>
-      <li><img src="http://i.imgur.com/hhsrPwq.jpg" /></li>
-      <li><img src="http://i.imgur.com/RstXW7v.jpg" /></li>
-   </ul>
-   <div class="moveBtn">
-      <a href="#" class="pre"> &#10094; </a>
-      <a href="#" class="next"> &#10095; </a>
-<!-- <div class="moveBtn"> -->
-   </div>
-<!-- <div id="slidebox"> -->
+	#btn p{ position:absolute; top:50%; width:50px; height:100px; margin-top:-50px;}
+	#btn p img{ width:100%; height:100%;}
+
+	#btn .nextBtn{right:0;}
+	#btn .prevBtn{left:0;}
+	
+	#content_box{width:830px; overflow:hidden; margin:70px auto 0;}
+	#content_box .discover_box{width:400px;
+		height:350px;
+/* 		overflow:hidden; */
+		border:1px solid #ccc;
+		border-radius:10px;
+		float:left;
+		margin-right:30px;
+	}
+	#content_box .discover_box .sel_box{width:400px; height:250px; margin:0; padding:30px;}
+	#content_box .discover_box .sel_box .title_box{width:100%;
+		height:40px;
+		margin-bottom:15px;
+		
+	}
+	#content_box .discover_box .sel_box .title_box h4{width:250px;
+		height:40px;
+		line-height:40px;
+		margin:0;
+		text-indent:20px;
+		font-weight:700;
+		font-size:16px;
+		float:left;
+		
+		
+	}
+	#content_box .discover_box .sel_box .title_box a{
+		display:block;
+		width:70px;
+		height:20px; 
+		float:left;
+		background-color:aqua;
+		text-align:center;
+		margin-top:10px;
+		font-size:12px;
+		border-radius:5px;
+		line-height:20px;
+	}
+	
+	#content_box .discover_box .sel_box .discover_sub{width:100%; height:250px;}
+	#content_box .discover_box .sel_box .discover_sub li{width:115px; 
+		text-align:center;
+		float:left;
+		cursor:pointer;
+	}
+	#content_box .discover_box .sel_box .discover_sub .fir{margin-right:40px;}
+	#content_box .discover_box .sel_box .discover_sub li p{width:150px;}
+	#content_box .discover_box .sel_box .discover_sub li .img_box{ width:130px; height:130px; line-height:150px;}
+
+	#content_box .notice_box{width:400px;
+		height:350px;
+		overflow:hidden;
+		border:1px solid #ccc;
+		border-radius:10px;
+		float:left;
+		overflow:hidden; 
+	}
+	
+	#content_box .notice_box .sel_box{width:400px; height:100%; padding:30px; overflow:hidden;}
+	#content_box .notice_box .sel_box .title_box{width:100%;
+		height:40px;
+		margin-bottom:15px;
+		
+	}
+	#content_box .notice_box .sel_box .title_box h4{width:250px;
+		height:40px;
+		line-height:40px;
+		margin:0;
+		text-indent:20px;
+		font-weight:700;
+		font-size:16px;
+		float:left;
+		
+		
+	}
+	#content_box .notice_box .sel_box .title_box a{
+		display:block;
+		width:70px;
+		height:20px; 
+		float:left;
+		background-color:aqua;
+		text-align:center;
+		margin-top:10px;
+		font-size:12px;
+		border-radius:5px;
+		line-height:20px;
+	}
+	#content_box .notice_box .sel_box .notice_sub{width:100%; height:220px; overflow:hidden;}
+	#content_box .notice_box .sel_box .notice_sub li{width:100%;
+		line-height:30px;
+	} 
+	
+	#content_box .notice_box .sel_box .notice_sub li a{
+		display:block;
+		width:100%;
+		overflow:hidden;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		font-size:15px;
+	}
+	
+	#product_box{width:830px; margin:70px auto 0;}
+	#product_box h4{text-align:center; font-weight:700; font-size:20px;}
+	#product_box ul{width:830px; height:400px; overflow:hidden; margin-top:20px;}
+	#product_box ul li{width:200px; margin-right:10px; height:300px; float:left;}
+	#product_box ul .last{margin:0;}
+	#product_box ul li img{width:100%; height:200px;}
+	
+	
+ul.tabs{
+margin: 0px;
+padding: 0px;
+list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+	font-weight: bold;
+}
 
 
-   <div class="bullets">
-        <label for="slide1">&nbsp;</label>
-        <label for="slide2">&nbsp;</label>
-        <label for="slide3">&nbsp;</label>
-        <label for="slide4">&nbsp;</label>
-        <label for="slide5">&nbsp;</label>
-   </div>
+ul.tabs li.current{
+	background: #FFC091;
+	border : 1px solid #EA9A56;
+	color: #222;
+}
 
+.firsttab-content, .secondtab-content{
+	display: none;
+	padding: 15px;
+}
+
+.firsttab-content.current, .secondtab-content.current{
+	display: inherit;
+}
+</style>
+<script>
+	
+		$(function(){
+			
+			
+			// 이전 버튼을 해결하기 위하여 이미지 한장을 빼놓음
+			$("#film").prepend( $(".scene:last") );
+			$("#film").css({"marginLeft":"-100%"});
+			
+
+			/* 다음 버튼 누르기 */
+			$(".nextBtn").click(function(){
+				$("#film").animate({"marginLeft":"-=100%"},500,"swing",function(){
+					$("#film").append( $(".scene:first") );
+					$("#film").css({"marginLeft":"-100%"});
+				});
+			});
+
+
+			/* 이전 버튼 누르기 */
+			
+			
+			$(".prevBtn").click(function(){
+				$("#film:not(:animated)").stop().animate({"marginLeft":"+=100%"},500,"swing",function(){
+					$("#film").prepend( $(".scene:last") );
+					$("#film").css({"marginLeft":"-100%"});
+				});
+			});
+		
+		
+		});
+
+
+</script>
+<div id="container">
+	<div id="screen">
+		<ul id="film">
+			<li class="scene">
+				<img src="http://i.imgur.com/viuPHoS.gif" />
+			</li>
+			<li class="scene">
+				<img src="http://i.imgur.com/i7sW1WN.jpg" />
+			</li>
+			<li class="scene">
+				<img src="http://i.imgur.com/MrZcQnN.jpg" />
+			</li>
+			<li class="scene">
+				<img src="http://i.imgur.com/hhsrPwq.jpg" />
+			</li>
+		</ul>
+		<div id="btn">
+			<p class="nextBtn"><img src="../resources/se2/img/next_shadow.png" alt="다음버튼" class="next"/></p>
+			<p class="prevBtn"><img src="../resources/se2/img/prev_shadow.png" alt="이전버튼" class="prev"/></p>
+		</div>
+	</div>
+	<div id="content_box">
+		<div class="discover_box">
+			<div class="sel_box"> <!-- 선택박스 -->
+				<div class="title_box">
+					<ul class="tabs">
+						<li class="firsttab-link current" data-tab="firsttab-1">유기동물 찾기</li>
+						<li class="firsttab-link" data-tab="firsttab-2">유기동물 발견</li>
+					</ul>
+				</div>
+					<ul class="discover_sub firsttab-content current" id="firsttab-1">
+						<%for(int i=0; i<findboard.size(); i++) { %>
+						<li class="fir">
+							<a href="/find/read?FindNo=<%=findboard.get(i).getFindNo() %>">
+							<img class="img_box" src="<%=request.getContextPath()%>/upload/<%=findboard.get(i).getStroed_img()%>">
+							</a>
+							<p class="text_box"><%=findboard.get(i).getTitle() %></p>
+							<p class="loc_box"><%=findboard.get(i).getLoc() %></p>
+							<p class="kinds_box"><%=findboard.get(i).getPetKinds() %></p>
+						</li>
+						<% } %>
+					</ul>
+					<ul class="discover_sub firsttab-content" id="firsttab-2">
+						<%for(int i=0; i<discoverboard.size(); i++) { %>
+						<li class="fir">
+							<a href="/discover/read?FindNo=<%=discoverboard.get(i).getDiscoverNo() %>">
+							<img class="img_box" src="<%=request.getContextPath()%>/upload/<%=discoverboard.get(i).getStroed_img()%>">
+							</a>
+							<p class="text_box"><%=discoverboard.get(i).getTitle() %></p>
+							<p class="loc_box"><%=discoverboard.get(i).getLoc() %></p>
+							<p class="kinds_box"><%=discoverboard.get(i).getPetKinds() %></p>
+						</li>
+						<% } %>
+					</ul>
+			</div>
+		</div>
+		
+		<div class="notice_box">
+			<div class="sel_box"> <!-- 선택박스 -->
+				<div class="title_box">
+					<ul class="tabs">
+						<li class="secondtab-link current" data-tab="secondtab-1">후기</li>
+						<li class="secondtab-link" data-tab="secondtab-2">공지사항</li>
+					</ul>
+				</div>
+				<ul class="notice_sub secondtab-content current" id="secondtab-1">
+					<% for(int i=0; i<noticeboard.size(); i++) { %>
+					<li><a href="/review/view?reviewNo=<%=reviewboard.get(i).getReviewNo() %>" title="후기">
+						<span style="font-size: small; font-weight: bold;">[<%=reviewboard.get(i).getReviewSortDetail() %>]</span> <%=reviewboard.get(i).getTitle() %>
+					</a></li>
+					<% } %>
+				</ul>
+				<ul class="notice_sub secondtab-content" id="secondtab-2">
+					<% for(int i=0; i<noticeboard.size(); i++) { %>
+					<li><a href="/notice/view?noticeno=<%=noticeboard.get(i).getNoticeNo() %>" title="공지사항">
+						<%if (noticeboard.get(i).getNoticeImp() != null) { %>
+							<img src="/resources/image/check.jpg" style="width:15px; height:15px;"/>
+						<% } else { %>
+							<img src="#" style="width:15px; height:15px;"/>
+						<% } %>
+						<%=noticeboard.get(i).getTitle() %>
+					</a></li>
+					<% } %>
+				</ul>
+				
+			</div>
+		</div>
+	</div>
+	<div id="product_box">
+		<h4>스토어</h4>
+		<ul>
+			<li>
+				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+				<p>가격</p>
+				<p>정보내용</p>
+			</li>
+			<li>
+				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+				<p>가격</p>
+				<p>정보내용</p>
+			</li>
+			<li>
+				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+				<p>가격</p>
+				<p>정보내용</p>
+			</li>
+			<li class="last">
+				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+				<p>가격</p>
+				<p>정보내용</p>
+			</li>
+		</ul>
+	</div>
 </div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	$('ul.tabs li.firsttab-link').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li.firsttab-link').removeClass('current');
+		$('.firsttab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+	$('ul.tabs li.secondtab-link').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li.secondtab-link').removeClass('current');
+		$('.secondtab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+})
+</script>
 
 
 <%@ include file="/WEB-INF/views/layout/footer.jsp" %>

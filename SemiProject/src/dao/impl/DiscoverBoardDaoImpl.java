@@ -13,15 +13,14 @@ import dao.face.DiscoverBoardDao;
 import dto.DiscoverBoard;
 import dto.DiscoverComment;
 import dto.DiscoverImg;
-import dto.FindComment;
-import util.Paging;
+import util.FindPaging;
 
 public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 
 	private PreparedStatement ps = null; //SQL수행 객체
 	private ResultSet rs = null; //SQL조회 결과 객체
 	@Override
-	public List<DiscoverBoard> selectAll(Connection conn, Paging paging, Map<String, String> map) {
+	public List<DiscoverBoard> selectAll(Connection conn, FindPaging paging, Map<String, String> map) {
 		// SQL 작성
 		String sql = "";
 		sql += "SELECT * FROM (";
