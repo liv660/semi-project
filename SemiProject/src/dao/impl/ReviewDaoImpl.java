@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import common.JDBCTemplate;
 import dao.face.ReviewDao;
@@ -107,6 +108,69 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 		return reviewBoardList;
 	}
+	
+	
+	@Override
+	public List<ReviewUserJoin> selectAll(Connection conn, Paging paging, Map<String, Integer> map) {
+		
+		String sql = "";
+		sql +="SELECT * FROM (";
+		sql +="	    SELECT rownum rnum, R.* FROM (";
+		sql +="	           SELECT";
+		sql +="	               review_no, s.review_sort_detail, title, u.user_id, create_date, views";
+		sql +="	           FROM review_board b, review_board_sort s, usertb u";
+		sql +="	           WHERE b.review_sort = s.review_sort AND b.user_no = u.user_no";
+		if(map.get("sort") != 0) {
+			sql +="               AND s.review_sort = ?";
+		}
+		sql +="	           ORDER BY review_no DESC";
+		sql +="	       ) R";
+		sql +="	   ) REVIEW";
+		sql +="	   WHERE rnum BETWEEN ? AND ?";
+		
+		//결과 저장
+		List<ReviewUserJoin> reviewBoardList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			if(map.get("sort") == 0) {
+				ps.setInt(1, paging.getStartNo());
+				ps.setInt(2, paging.getEndNo());
+			} else {
+				ps.setInt(1, map.get("sort"));
+				ps.setInt(2, paging.getStartNo());
+				ps.setInt(3, paging.getEndNo());
+			}
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ReviewUserJoin review = new ReviewUserJoin(); // 결과값 저장 객체
+				
+				review.setReviewNo(rs.getInt("review_no"));
+				review.setReviewSortDetail(rs.getString("review_sort_detail"));
+				review.setTitle(rs.getString("title"));
+				review.setUserId(rs.getString("user_id"));
+				review.setCreateDate(rs.getDate("create_date"));
+				review.setViews(rs.getInt("views"));
+				
+				//리스트에 저장
+				reviewBoardList.add(review);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return reviewBoardList;
+	}
+	
+	
 
 	@Override
 	public int selectReviewNo(Connection conn) {

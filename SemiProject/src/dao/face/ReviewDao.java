@@ -2,6 +2,7 @@ package dao.face;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import dto.ReviewBoard;
 import dto.ReviewDetailView;
@@ -125,5 +126,15 @@ public interface ReviewDao {
 	 * @return
 	 */
 	public int delete(Connection conn, ReviewBoard reviewNo);
+
+	/**
+	 * 후기별 게시글 조회
+	 * 
+	 * @param connection
+	 * @param paging
+	 * @param map
+	 * @return
+	 */
+	public List<ReviewUserJoin> selectAll(Connection connection, Paging paging, Map<String, Integer> map);
 
 }

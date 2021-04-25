@@ -156,7 +156,7 @@ height : 70px;
 }
 
 .btns {
-	margin-left: 40%;
+	margin-left: 45%;
 	background-color: #EBAA5F;
 	color: white;
 	border-radius: 8px;

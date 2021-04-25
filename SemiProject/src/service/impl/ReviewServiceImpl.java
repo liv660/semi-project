@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +59,13 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return reviewDao.selectAll(JDBCTemplate.getConnection(), paging);
 	} //getPaging() end
+	
+	
+	@Override
+	public List<ReviewUserJoin> getList(Paging paging, Map<String, Integer> map) {
+		return reviewDao.selectAll(JDBCTemplate.getConnection(), paging, map);
+	}
+	
 	
 	@Override
 	public void reviewWrite(HttpServletRequest req) {

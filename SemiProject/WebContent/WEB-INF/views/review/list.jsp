@@ -18,6 +18,25 @@ h2 {
 	border-color: #EBC680;
 } 
 
+.bigbox {
+	width: 98%;
+	height: 7px;
+	margin-top: 30px;
+}
+
+#sortbtn {
+	float: left;
+}
+
+.bigbox #sortbtn input {
+	background-color: green;
+	border-style: none;
+	border-radius: 10px;
+	color: #eee;
+	margin-left: 10px;
+	padding: 1px 10px;
+}
+
 #btnBox {
 	float: right;
 }
@@ -54,17 +73,42 @@ $(document).ready(function() {
 	
 	<%	} %>
 });
+
+
+function search() {
+// 	console.log($('#review').val());
+
+	location.href="/review/list?sort=" + $('#sort').val();
+}
+
 </script>
 
 <div class="container">
 
 <h2 style="color: #EA9A56;">후기 게시판</h2>
 
-<div id="btnBox">
-	<button id="write">글쓰기</button>
+
+<div class="bigbox">
+
+	<div id="sortbtn">
+		<select id="sort">
+			<option value="">후기</option>
+			<option value="1">스토어 후기</option>
+			<option value="2">유기동물 찾아준 후기</option>
+			<option value="3">반려동물 찾은 후기</option>
+		</select>
+		<input type="button" id="reviewsearch" onclick="search();" value="조회" />
+	</div>
+	
+	<div id="btnBox">
+		<button id="write">글쓰기</button>
+	</div>
+	
 </div>
 
+
 <br><br>
+
 
 <table class="table table-hover">
 <tr style="background-color: #EBC680;">

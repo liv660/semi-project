@@ -1,6 +1,7 @@
 package service.face;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -112,5 +113,15 @@ public interface ReviewService {
 	 * @param param
 	 */
 	public void recomment(ReviewComment param);
+
+	
+	/**
+	 * 리뷰 분류에 따른 게시글 조회
+	 * 
+	 * @param paging
+	 * @param map
+	 * @return
+	 */
+	public List<ReviewUserJoin> getList(Paging paging, Map<String, Integer> map);
 
 }
