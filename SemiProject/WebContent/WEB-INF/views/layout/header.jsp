@@ -52,6 +52,7 @@
 
 .navbar {
    background-color: none;
+   margin:0;
 }
 
 .container-fluid .navbar-header {

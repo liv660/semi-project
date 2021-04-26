@@ -50,8 +50,8 @@ delete localStorage.menu;
 		left:300px; top:180px;
 	}
 	.scene div p{color:#fff;
-		font-size:30px;
-		font-family: "nanumsquare";
+		font-size:45px;
+		font-family:"nanumsquare";
 		font-weight:800;
 	}
 	#film:after{ content:""; display:block; clear:both; }
@@ -292,37 +292,43 @@ ul.tabs li.current{
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual01.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual02.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual03.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual04.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual05.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual06.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 		</ul>
