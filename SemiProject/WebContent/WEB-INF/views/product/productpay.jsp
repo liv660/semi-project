@@ -76,8 +76,8 @@ $(document).ready(function() {
 		    pay_method : 'card', //결제방식 - 'samsung':삼성페이, 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
 		    merchant_uid : 'merchant_' + new Date().getTime(), //고유주문번호 - random, unique
 		    name : '<%=p.getProductName() %>' ,//주문명 - 선택항목, 결제정보 확인을 위한 입력, 16자 이내로 작성
-<%-- 		    amount : <%=p.getPrice() + 2000 %>, //결제금액 - 필수항목 --%>
-		    amount : 100, //결제금액 - 필수항목
+		    amount : <%=p.getPrice() + 2000 %>, //결제금액 - 필수항목
+// 		    amount : 100, //결제금액 - 필수항목
 		    buyer_email : 'iamport@siot.do', //주문자Email - 선택항목
 		    buyer_name : '구매자이름', //주문자명 - 선택항목
 		    buyer_tel : '010-1234-5678', //주문자연락처 - 필수항목, 누락되면 PG사전송 시 오류 발생

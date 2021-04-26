@@ -19,6 +19,8 @@
 
 
 <style type="text/css">
+
+
 #wrap{ max-width:1920px; min-width:1280px; width:100%; margin:0 auto;}
 
 #header {
