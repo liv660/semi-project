@@ -27,7 +27,7 @@ delete localStorage.menu;
 	li{list-style:none;}
 	a:link, a:visited{text-decoration:none; color:#000;}
 	
-	#container{width:1200px; overflow:hidden;
+	#container{width:100%; overflow:hidden;
 		margin:0 auto; 
 	}
 	
@@ -60,7 +60,7 @@ delete localStorage.menu;
 	#btn .nextBtn{right:20px;}
 	#btn .prevBtn{left:20px;}
 	
-	#content_box{width:100%; height:520px;  }
+	#content_box{width:100%; height:520px;}
 	#content_box #content_all{width:830px; overflow:hidden;
 		padding:70px 0 0;
 		margin:0 auto;
@@ -172,7 +172,7 @@ delete localStorage.menu;
 	#product_box{width:100%; padding-top:50px; background-color:#f0f0f0; }
 	#product_box .product_sub{width:1200px; margin:0 auto;}
 	#product_box .product_sub h4{text-align:center; font-weight:700; font-size:20px;}
-	#product_box .product_sub ul{width:830px; height:400px; overflow:hidden; margin-top:20px;}
+	#product_box .product_sub ul{width:830px; height:400px; overflow:hidden; margin:20px auto 0;}
 	#product_box .product_sub ul li{width:200px; margin-right:10px; height:300px; float:left;}
 	#product_box .product_sub ul .last{margin:0;}
 	#product_box .product_sub ul li img{width:100%; height:200px;}
@@ -328,14 +328,15 @@ ul.tabs li.current{
 		</div>
 	</div>
 	<div id="content_box">
-		<div class="discover_box">
-			<div class="sel_box"> <!-- 선택박스 -->
-				<div class="title_box">
-					<ul class="tabs">
-						<li class="firsttab-link current" data-tab="firsttab-1">유기동물 찾기</li>
-						<li class="firsttab-link" data-tab="firsttab-2">유기동물 발견</li>
-					</ul>
-				</div>
+		<div id="content_all">
+			<div class="discover_box">
+				<div class="sel_box"> <!-- 선택박스 -->
+					<div class="title_box">
+						<ul class="tabs">
+							<li class="firsttab-link current" data-tab="firsttab-1">유기동물 찾기</li>
+							<li class="firsttab-link" data-tab="firsttab-2">유기동물 발견</li>
+						</ul>
+					</div>
 					<ul class="discover_sub firsttab-content current" id="firsttab-1">
 						<%for(int i=0; i<findboard.size(); i++) { %>
 						<li class="fir">
@@ -360,37 +361,37 @@ ul.tabs li.current{
 						</li>
 						<% } %>
 					</ul>
-			</div>
-		</div>
-		
-		<div class="notice_box">
-			<div class="sel_box"> <!-- 선택박스 -->
-				<div class="title_box">
-					<ul class="tabs">
-						<li class="secondtab-link current" data-tab="secondtab-1">후기</li>
-						<li class="secondtab-link" data-tab="secondtab-2">공지사항</li>
-					</ul>
 				</div>
-				<ul class="notice_sub secondtab-content current" id="secondtab-1">
-					<% for(int i=0; i<noticeboard.size(); i++) { %>
-					<li><a href="/review/view?reviewNo=<%=reviewboard.get(i).getReviewNo() %>" title="후기">
-						<span style="font-size: small; font-weight: bold;">[<%=reviewboard.get(i).getReviewSortDetail() %>]</span> <%=reviewboard.get(i).getTitle() %>
-					</a></li>
-					<% } %>
-				</ul>
-				<ul class="notice_sub secondtab-content" id="secondtab-2">
-					<% for(int i=0; i<noticeboard.size(); i++) { %>
-					<li><a href="/notice/view?noticeno=<%=noticeboard.get(i).getNoticeNo() %>" title="공지사항">
-						<%if (noticeboard.get(i).getNoticeImp() != null) { %>
-							<img src="/resources/image/check.jpg" style="width:15px; height:15px;"/>
-						<% } else { %>
-							<img src="#" style="width:15px; height:15px;"/>
+			</div>
+			<div class="notice_box">
+				<div class="sel_box"> <!-- 선택박스 -->
+					<div class="title_box">
+						<ul class="tabs">
+							<li class="secondtab-link current" data-tab="secondtab-1">후기</li>
+							<li class="secondtab-link" data-tab="secondtab-2">공지사항</li>
+						</ul>
+					</div>
+					<ul class="notice_sub secondtab-content current" id="secondtab-1">
+						<% for(int i=0; i<noticeboard.size(); i++) { %>
+						<li><a href="/review/view?reviewNo=<%=reviewboard.get(i).getReviewNo() %>" title="후기">
+							<span style="font-size: small; font-weight: bold;">[<%=reviewboard.get(i).getReviewSortDetail() %>]</span> <%=reviewboard.get(i).getTitle() %>
+						</a></li>
 						<% } %>
-						<%=noticeboard.get(i).getTitle() %>
-					</a></li>
-					<% } %>
-				</ul>
-				
+					</ul>
+					<ul class="notice_sub secondtab-content" id="secondtab-2">
+						<% for(int i=0; i<noticeboard.size(); i++) { %>
+						<li><a href="/notice/view?noticeno=<%=noticeboard.get(i).getNoticeNo() %>" title="공지사항">
+							<%if (noticeboard.get(i).getNoticeImp() != null) { %>
+								<img src="/resources/image/check.jpg" style="width:15px; height:15px;"/>
+							<% } else { %>
+								<img src="#" style="width:15px; height:15px;"/>
+							<% } %>
+							<%=noticeboard.get(i).getTitle() %>
+						</a></li>
+						<% } %>
+					</ul>
+					
+				</div>
 			</div>
 		</div>
 	</div>
