@@ -116,10 +116,10 @@ function search(){
 	<div id="container">
 		<div class="click_box">
 			<div class="left_box">
-				<span>반려동물선택</span>
+				<span>발견동물선택</span>
 <!-- 				<INPUT TYPE="HIDDEN" NAME="PET_KINDS"/> -->
 				<select id="pet">
-					<option value="">반려동물</option>
+					<option value="">발견동물</option>
 					<option value="dog">강아지</option>
 					<option value="cat">고양이</option>
 					<option value="etc">기타</option>
