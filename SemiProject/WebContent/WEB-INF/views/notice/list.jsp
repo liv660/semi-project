@@ -257,6 +257,15 @@ ul.tabs li.current{
   width: 100%;
 }
 
+#tab-3 #guide {
+	text-align: left;
+	width : 600px;
+	margin : 0 auto;
+	margin-top : 50px;
+	line-height: 40px;
+	
+}
+
 </style>
 
 
@@ -360,8 +369,20 @@ ul.tabs li.current{
 		
 		<button type="button" class="startbtn" onClick='userCoupon();'>START</button> <br><br><br>
 		
-		<input type="text" size=55 name="result" id="result" value="START버튼을 눌러주세요" readonly="readonly"><br>
+		<input type="text" size=55 name="result" id="result" value="START버튼을 눌러주세요" readonly="readonly" style="font-weight: bold;"><br>
 		<input type="text" size=55 id='couponNo' readonly="readonly" />
+		
+		
+		<div id="guide">
+			<span style="font-weight: bold; font-size: medium;">이용안내</span>
+			<ol style="color : #666">
+				<li>쿠폰 뽑기는 하루에 한번만 참여가 가능합니다</li>
+				<li>START 버튼을 누르고 60초이내 STOP버튼을 눌러서 <br> 같은그림이 3장 나오면 30% 할인 쿠폰, 2장 나오면 20% 할인쿠폰이 지급됩니다.</li>
+				<li>받은 쿠폰은 스토어 결제창에서 확인하실 수 있습니다.</li>
+				<li>쿠폰을 이미 발급 받으신 회원은 중복참여가 제한됩니다.</li>
+			</ol>
+		
+		</div>
 		
 		
 		<div ></div>

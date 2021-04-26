@@ -80,6 +80,15 @@ input[type = "button"] {
 p {margin-bottom : 0px;}
 
 .deleteFile {margin-right : 10px;}
+
+.table>tbody>tr>td.info {
+	background : rgba(255, 159, 64, 0.2);
+	text-align : center;
+}
+.container table {border : none;}
+.container table tr td {
+	border : none;
+}
 </style>
 
 
