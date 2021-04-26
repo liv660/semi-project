@@ -65,6 +65,8 @@ public interface ProFileDao {
 
 	public String selectByReviewStroed(Connection conn, MyBoard myBoard);
 
+	public int insertmybasket(Connection conn, int userno, int productId);
+
 
 
 

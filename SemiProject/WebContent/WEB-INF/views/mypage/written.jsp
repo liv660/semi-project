@@ -186,12 +186,12 @@ function writtenDelete() {
 	<% } %>
 	
 	<% if (mbl.get(i).getBoard_div().equals("찾기 게시판")) { %>
-	<td><a href="find/read?FindNo=<%=mbl.get(i).getBorad_no() %>" style="font-size: 14px">
+	<td><a href="/find/read?FindNo=<%=mbl.get(i).getBorad_no() %>" style="font-size: 14px">
 		<%=mbl.get(i).getTitle() %>
 		</a>
 	</td>
 	<% } else if (mbl.get(i).getBoard_div().equals("발견 게시판")) { %>
-	<td><a href="discover/read?DiscoverNo=<%=mbl.get(i).getBorad_no()%>" style="font-size: 14px">
+	<td><a href="/discover/read?DiscoverNo=<%=mbl.get(i).getBorad_no()%>" style="font-size: 14px">
 		<%=mbl.get(i).getTitle() %>
 		</a>
 	</td>

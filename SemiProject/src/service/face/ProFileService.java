@@ -34,6 +34,8 @@ public interface ProFileService {
 
 	public int deleteMyBoard(HttpServletRequest req);
 
+	public int insertmypocket(HttpServletRequest req);
+
 
 
 	

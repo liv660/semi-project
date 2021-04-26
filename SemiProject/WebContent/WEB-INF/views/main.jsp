@@ -32,6 +32,7 @@ delete localStorage.menu;
 	}
 	
 	#screen{max-width:1200px; 
+		height:520px;
 		width:100%; 
 		border:5px solid #ccc; 
 		margin:0 auto; 
