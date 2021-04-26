@@ -318,8 +318,9 @@ ul.tabs li.current{
 			</tr>
 			<% } %>
 		</table>
-		
+		<%if (session.getAttribute("adminid") != null) {  %>
 		<a href="/notice/write"><input type="button" value="글쓰기" id="writebtn"/></a>
+		<% } %>
 		<br>
 		<%@ include file="/WEB-INF/views/layout/NoticePaging.jsp" %>
 	

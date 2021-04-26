@@ -133,6 +133,48 @@ $(document).ready(function() {
 		#container #product_img ul{width:100%; height:100%; }
 		#container #product_img ul li{width:200px; height:200px; float:left; margin:20px 0 0 20px;}
 		#container #product_img li img{width:100%; height:100%;}
+		
+.img_box {
+  list-style:none;
+  padding:0;
+}
+.img_box li {
+  float: left;
+  padding: 0;
+  margin: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.img_box img {
+  margin:0;
+  padding:0;
+  float:left;
+  z-index:1;
+  width:200px;
+  height:200px;
+} 
+.img_box .caption {
+  position: absolute;
+  top:200px;  /* 기준 위치보다 200px 아래로 */
+  width:200px;
+  height:200px;
+  padding-top:20px;
+  background:rgba(0,0,0,0.6);  /* 반투명한 검정 배경 */ 
+  opacity:0;  /* 화면에 보이지 않게 */ 
+  transition: all 0.6s ease-in-out;  /* 나타날 때 부드럽게 트랜지션 추가 */
+  z-index:2;  /* 다른 요소보다 위에 있도록 */ 
+}
+.img_box li:hover .caption {
+  opacity: 1;  /* 설명글이 화면에 보이게 */ 
+  transform: translateY(-200px);  /* 설명글이 위로 200px 이동하게 */
+}  
+.img_box .caption h2, .img_box .caption p {
+  color: #fff;
+  text-align:center;
+}      
+
+		
+
   </style>
 <body>
 	<div id="container">
@@ -171,8 +213,13 @@ $(document).ready(function() {
 			<div id="product_img">
 				<ul class="img_box">
 			<% for( int i=0; i<product.size(); i++) { %>
-				<li><a href="/product/detail?productId=<%=product.get(i).getProductId() %>" ><img src="<%=request.getContextPath() %>/uploadProd/<%=product.get(i).getStoredName() %>" alt="제품이미지1"/></a></li>
-
+				<li><a href="/product/detail?productId=<%=product.get(i).getProductId() %>" ><img src="<%=request.getContextPath() %>/uploadProd/<%=product.get(i).getStoredName() %>" alt="제품이미지1"/>
+				</a>
+					<div class="caption">
+						<h2><%=product.get(i).getProductName() %></h2>
+						<p> 가격 : <%=product.get(i).getPrice() %> </p>
+					</div>
+				</li>
 			<% } %>
 				</ul>
 			</div>
