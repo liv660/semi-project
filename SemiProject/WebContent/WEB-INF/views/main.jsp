@@ -176,6 +176,7 @@ delete localStorage.menu;
 	#product_box .product_sub h4{text-align:center; font-weight:700; font-size:20px;}
 	#product_box .product_sub ul{width:840px; height:400px; overflow:hidden; margin:20px auto 0;}
 	#product_box .product_sub ul li{width:200px; margin-right:10px; height:300px; float:left;}
+	#product_box .product_sub ul li p{text-align: center;}
 	#product_box .product_sub ul .last{margin:0;}
 	#product_box .product_sub ul li img{width:100%; height:200px;}
 	
