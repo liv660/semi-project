@@ -19,7 +19,7 @@ $(document).ready(function () {
 	})
 	
 	var reviewno = 0
-	getReviewno()		//findno post 전송
+	getReviewno()		//Reviewno post 전송
 	handleBtns()	//수정, 삭제 버튼 event
 }) 
 </script>	

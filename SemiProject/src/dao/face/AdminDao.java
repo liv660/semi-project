@@ -156,6 +156,14 @@ public interface AdminDao {
 	 */
 	List<ReviewUserJoin> selectReviewBySort(Connection conn, int reviewSort);
 
+	/**
+	 * 후기 글 번호로 글을 삭제한다.
+	 * @param conn		DB 연결 객체
+	 * @param reviewno	후기 글 번호
+	 * @return	업데이트 행 수
+	 */
+	int deleteReviewByRevno(Connection conn, int reviewno);
+
 
 	
 	

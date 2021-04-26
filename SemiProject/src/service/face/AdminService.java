@@ -119,6 +119,12 @@ public interface AdminService {
 	 */
 	List<ReviewUserJoin> getReviewBySort(int reviewSort);
 
+	/**
+	 * 후기글을 삭제한다.
+	 * @param req	후기 글 번호
+	 */
+	void deleteReview(HttpServletRequest req);
+
 
 
 }

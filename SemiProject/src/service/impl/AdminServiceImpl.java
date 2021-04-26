@@ -237,4 +237,19 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.selectReviewBySort(JDBCTemplate.getConnection(), reviewSort);
 	}
 
+	@Override
+	public void deleteReview(HttpServletRequest req) {
+		int reviewno = 0;
+		String reviewString = req.getParameter("reviewno");
+		if(reviewString != null && !"".equals(reviewString)) {
+			reviewno = Integer.parseInt(reviewString);
+		}
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int res = adminDao.deleteReviewByRevno(conn, reviewno);
+		if(res > 0 ) JDBCTemplate.commit(conn);
+		else JDBCTemplate.rollback(conn);
+		
+	}
+
 }

@@ -48,5 +48,14 @@ public class AdminReviewController extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/views/admin/review.jsp").forward(req, resp);
 		}
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println(req.getParameter("reviewno"));
+
+		adminService.deleteReview(req);
+		resp.sendRedirect("/admin/review");
+	
+	}
 
 }

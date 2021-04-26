@@ -624,4 +624,26 @@ public class AdminDaoImpl implements AdminDao {
 		
 		return reviewBoardList;
 	}
+
+	@Override
+	public int deleteReviewByRevno(Connection conn, int reviewno) {
+		String sql = "";
+		sql += "DELETE FROM review_board";
+		sql += " WHERE review_no = ?";
+		
+		int res = -1;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, reviewno);
+			
+			res = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+				
+		return res;
+	}
 }
