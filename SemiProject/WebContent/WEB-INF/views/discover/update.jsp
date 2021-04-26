@@ -219,12 +219,10 @@ function uploadImg(e) {
 	float: left;
 	margin: 10px 3px 10px 3px;
 	text-align: center;
-
 }
 
 #title{
-
-	width: 700px;
+	width: 680px;
 	float: left;
 	margin: 10px 3px 10px 3px;
 	text-align: center;
@@ -304,6 +302,9 @@ table table tr td img{
 	margin: 0px 0 0px 50px;
 }
 
+#write { background-color: #EBC680; }
+#write:hover{color: white;}
+#cancle:hover{color: red;}
 </style>
 
 
@@ -415,8 +416,8 @@ table table tr td img{
 
 
 <div style="width: 120px; margin: 5px 45%">
-	<button id="write" class="btn btn-info">작성</button>
-	<button id="cancle" class="btn btn-danger" onclick="history.go(-1)">취소</button>
+	<button id="write" class="btn">작성</button>
+	<button id="cancle" class="btn" onclick="history.go(-1)">취소</button>
 </div>
 
 </form>
