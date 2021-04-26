@@ -191,6 +191,7 @@ delete localStorage.menu;
 		color:#fff;
 		font-weight: 600;
 		font-family: "nanumsquare";
+		margin:0;
 	
 	}
 	#bt_box ul{width:1200px; height:220px; margin:0 auto;}
