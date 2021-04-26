@@ -151,12 +151,13 @@ delete localStorage.menu;
 		font-size:15px;
 	}
 	
-	#product_box{width:830px; margin:70px auto 0;}
-	#product_box h4{text-align:center; font-weight:700; font-size:20px;}
-	#product_box ul{width:830px; height:400px; overflow:hidden; margin-top:20px;}
-	#product_box ul li{width:200px; margin-right:10px; height:300px; float:left;}
-	#product_box ul .last{margin:0;}
-	#product_box ul li img{width:100%; height:200px;}
+	#product_box{width:100%; padding-top:50px; background-color:#f0f0f0; }
+	#product_box .product_sub{width:1200px; margin:0 auto;}
+	#product_box .product_sub h4{text-align:center; font-weight:700; font-size:20px;}
+	#product_box .product_sub ul{width:830px; height:400px; overflow:hidden; margin-top:20px;}
+	#product_box .product_sub ul li{width:200px; margin-right:10px; height:300px; float:left;}
+	#product_box .product_sub ul .last{margin:0;}
+	#product_box .product_sub ul li img{width:100%; height:200px;}
 	
 	#bt_box{width:100%;
 		height:450px;
@@ -376,29 +377,31 @@ ul.tabs li.current{
 		</div>
 	</div>
 	<div id="product_box">
-		<h4>스토어</h4>
-		<ul>
-			<li>
-				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-				<p>가격</p>
-				<p>정보내용</p>
-			</li>
-			<li>
-				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-				<p>가격</p>
-				<p>정보내용</p>
-			</li>
-			<li>
-				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-				<p>가격</p>
-				<p>정보내용</p>
-			</li>
-			<li class="last">
-				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-				<p>가격</p>
-				<p>정보내용</p>
-			</li>
-		</ul>
+		<div class="product_sub">
+			<h4>스토어</h4>
+			<ul>
+				<li>
+					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+					<p>가격</p>
+					<p>정보내용</p>
+				</li>
+				<li>
+					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+					<p>가격</p>
+					<p>정보내용</p>
+				</li>
+				<li>
+					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+					<p>가격</p>
+					<p>정보내용</p>
+				</li>
+				<li class="last">
+					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
+					<p>가격</p>
+					<p>정보내용</p>
+				</li>
+			</ul>
+		</div>
 	</div>
 	<div id="bt_box">
 		<h5>유기견 보호센터 안내</h5>
