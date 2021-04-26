@@ -59,6 +59,7 @@ delete localStorage.menu;
 		border-radius:10px;
 		float:left;
 		margin-right:30px;
+		background-color:#fff;
 	}
 	#content_box .discover_box .sel_box{width:400px; height:250px; margin:0; padding:30px;}
 	#content_box .discover_box .sel_box .title_box{width:100%;
@@ -107,6 +108,7 @@ delete localStorage.menu;
 		border-radius:10px;
 		float:left;
 		overflow:hidden; 
+		background-color:#fff;
 	}
 	
 	#content_box .notice_box .sel_box{width:400px; height:100%; padding:30px; overflow:hidden;}
