@@ -74,13 +74,13 @@ textarea {
 
 label {font-weight: 400;}
 
-button {
+#write {
 	transition-duration: 0.4s;
 	background-color: #EBAA5F;
 	float:right;
 	
 }
-button:hover{box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+#write:hover{box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
 </style>
 
 <div class="container" style="width: 900px;">
