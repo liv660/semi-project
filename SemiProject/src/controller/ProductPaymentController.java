@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dto.Coupon;
 import dto.Product;
 import dto.ProductImg;
 import service.face.ProductService;
@@ -40,6 +42,13 @@ public class ProductPaymentController extends HttpServlet {
 		req.setAttribute("viewProduct", viewProduct);
 		
 		List<ProductImg> productImg = productService.viewImg(viewProduct);
+		
+		HttpSession session = req.getSession();
+		int userno = (int) session.getAttribute("userno");
+		
+		List<Coupon> coupon = productService.lookUpCoupon(userno); 
+		
+		req.setAttribute("coupon", coupon);
 		
 		System.out.println( "/product/pay 전달할 상품 이미지 정보 = " + productImg);
 		

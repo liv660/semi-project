@@ -43,6 +43,7 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("login", true);
 				session.setAttribute("adminid", admin.getAdminId());
 				session.setAttribute("nick", admin.getNick());
+				session.setAttribute("userno", admin.getAdminNo());
 				resp.sendRedirect("/admin");
 			} else {
 				req.setAttribute("msg", "아이디/비밀번호를 확인해 주세요");

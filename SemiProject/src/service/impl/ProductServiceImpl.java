@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import common.JDBCTemplate;
 import dao.face.ProductDao;
 import dao.impl.ProductDaoImpl;
+import dto.Coupon;
 import dto.Product;
 import dto.ProductImg;
 import dto.Userorder;
@@ -377,6 +378,16 @@ public class ProductServiceImpl implements ProductService {
 			JDBCTemplate.rollback(conn);				
 		}
 		
+	}
+	
+	@Override
+	public List<Coupon> lookUpCoupon(int userno) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		List<Coupon> coupon = productDao.selectCoupon(conn, userno);
+		
+		return coupon;
 	}
 
 

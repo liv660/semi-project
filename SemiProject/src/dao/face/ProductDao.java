@@ -3,6 +3,7 @@ package dao.face;
 import java.sql.Connection;
 import java.util.List;
 
+import dto.Coupon;
 import dto.Product;
 import dto.ProductImg;
 import dto.Userorder;
@@ -76,6 +77,8 @@ public interface ProductDao {
 	 * @return
 	 */
 	public int insertUserOrder(Connection conn, Userorder param);
+
+	public List<Coupon> selectCoupon(Connection conn, int userno);
 
 
 

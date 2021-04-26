@@ -9,7 +9,7 @@ import java.util.List;
 
 import common.JDBCTemplate;
 import dao.face.ProductDao;
-
+import dto.Coupon;
 import dto.Product;
 import dto.ProductImg;
 import dto.Userorder;
@@ -352,6 +352,43 @@ public class ProductDaoImpl implements ProductDao {
 		
 		
 		return res;
+	}
+	
+	@Override
+	public List<Coupon> selectCoupon(Connection conn, int userno) {
+
+		String sql = "";
+		sql += "SELECT * FROM coupon";
+		sql += " WHERE user_no = ?";
+		
+		List<Coupon> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, userno);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Coupon res = new Coupon();
+				
+				res.setCouponNo(rs.getString("coupon_no"));
+				res.setCouponUse(rs.getString("coupon_use"));
+				res.setDiscount(rs.getInt("discount"));
+				
+				list.add(res);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return list;
 	}
 
 

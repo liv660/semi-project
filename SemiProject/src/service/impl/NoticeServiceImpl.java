@@ -194,7 +194,7 @@ public class NoticeServiceImpl implements NoticeService {
 		conn = JDBCTemplate.getConnection();
 		
 		//세션에 저장된 관리자 아이디 값 저장
-		notice.setManagerId((String)req.getSession().getAttribute("userid"));
+		notice.setManagerId((String)req.getSession().getAttribute("adminid"));
 		
 		//게시글 등록
 		int res1 = 0;

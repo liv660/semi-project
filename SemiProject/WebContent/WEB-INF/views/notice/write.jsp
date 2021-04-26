@@ -109,7 +109,7 @@ p {margin-bottom : 0px;}
 	
 	<tr>
 		<td class="info"><label for="writer">작성자</label></td>
-		<td><input type="text" id="writer" name="writer" value=<%=session.getAttribute("userid") %> readonly="readonly"/></td>
+		<td><input type="text" id="writer" name="writer" value=<%=session.getAttribute("adminid") %> readonly="readonly"/></td>
 		<td>중요공지 <input type="checkbox" name="check" id="check"/></td>
 	
 	</tr>

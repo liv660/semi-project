@@ -26,12 +26,12 @@ public class NoticeWriteController extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		//관리자가 아닌데 글 작성 페이지에 들어올시 메인으로 리다이렉트
-//		if(session.getAttribute("managerlogin") == null) {
-//			resp.sendRedirect("/main");
-//			return;
-//		} else {
+		if(session.getAttribute("adminid") == null) {
+			resp.sendRedirect("/main");
+			return;
+		} else {
 			req.getRequestDispatcher("/WEB-INF/views/notice/write.jsp").forward(req, resp);
-//		}
+		}
 	
 	}
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import dto.Coupon;
 import dto.Product;
 import dto.ProductImg;
 import dto.Userorder;
@@ -70,7 +70,9 @@ public interface ProductService {
 	Userorder getOrderParam(HttpServletRequest req);
 	
 	
-	void insertOrder(Userorder param);
+	public void insertOrder(Userorder param);
+
+	List<Coupon> lookUpCoupon(int userno);
 	
 
 

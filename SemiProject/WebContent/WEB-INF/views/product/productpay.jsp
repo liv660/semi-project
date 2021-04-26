@@ -1,3 +1,4 @@
+<%@page import="dto.Coupon"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -7,6 +8,7 @@
 
 <% Product p = (Product) request.getAttribute("viewProduct");%>
 <% List<ProductImg> productImg = (List)request.getAttribute("productImg");%>  
+<% List<Coupon> coupon = (List)request.getAttribute("coupon"); %>
     
     
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
@@ -67,6 +69,15 @@ $(document).ready(function() {
 
 	});/* pay 끝 */
 	
+	$("#couponbtn").on("click", function() {
+		
+		var totalprice = $("#totalprice").val() - 2000;
+		var discount = $("#discount").val();
+		
+		$("#totalprice").val(totalprice - ((totalprice/100) * discount) + 2000);
+		
+	})
+	
 });
 	
 	// 결제 요청 - 결제 모듈 불러오기
@@ -76,7 +87,7 @@ $(document).ready(function() {
 		    pay_method : 'card', //결제방식 - 'samsung':삼성페이, 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
 		    merchant_uid : 'merchant_' + new Date().getTime(), //고유주문번호 - random, unique
 		    name : '<%=p.getProductName() %>' ,//주문명 - 선택항목, 결제정보 확인을 위한 입력, 16자 이내로 작성
-		    amount : <%=p.getPrice() + 2000 %>, //결제금액 - 필수항목
+		    amount : $("#totalprice").val(), //결제금액 - 필수항목
 // 		    amount : 100, //결제금액 - 필수항목
 		    buyer_email : 'iamport@siot.do', //주문자Email - 선택항목
 		    buyer_name : '구매자이름', //주문자명 - 선택항목
@@ -140,6 +151,7 @@ $(document).ready(function() {
 		    alert(msg);
 		});
 	}
+	
 
 </script>
 <style type="text/css">
@@ -260,11 +272,25 @@ $(document).ready(function() {
 		   					<td><%=p.getPrice() %></td>
 		   					<td>2000원</td>
 		   				</tr>
-		   				
 		   			</table>
+						<br><br><br>
+						
+						<div>쿠폰목록</div>
+						<%for(int i=0; i<coupon.size(); i++) { %>
+							<%if(coupon.get(i).getCouponNo() == null) { %>
+								<div>조회된 쿠폰이 없습니다.</div>
+							<% } else { %>
+								<div id="coupinwether"><%=coupon.get(i).getDiscount()%>%할인쿠폰 : <%=coupon.get(i).getCouponNo()%>
+									<input type="button" id="couponbtn" value="적용"></div>
+								<input type="hidden" id="discount" value="<%=coupon.get(i).getDiscount()%>">
+							<% } %>	
+						<% } %>	   			
+		   			
+		   			<br><br><br><br>
 		   			<div class="price">
-		   				<p>총 결제 금액 : <%=p.getPrice() + 2000 %></p>
+		   				총 결제 금액 : <input type="text" style="font-size: 20px;" id="totalprice" value="<%=p.getPrice() + 2000 %>" readonly="readonly"> 원
 		   			</div>
+		   				
 		   		</div>	
 		   	</div>
 	   		<div class="product_info">
