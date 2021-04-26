@@ -45,7 +45,7 @@ function checkForm() {
 </script>
 
 <style type="text/css">
-div {font-size: 16px;}
+form {font-size: 16px;}
 
 #repre-img {
 	width: 100%; 
@@ -60,7 +60,7 @@ input[type=text] {
 	width: 250x;
 }
 
-span {
+form div span {
 	display: inline-block;
 	width: 150px;
 	margin: 10px 0;
