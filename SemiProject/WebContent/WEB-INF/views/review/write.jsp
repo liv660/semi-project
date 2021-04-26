@@ -172,7 +172,6 @@ function uploadImg(e) {
 		reader.readAsDataURL(files[i])
 		
 	} //for() END
-	}
 }
 
 </script>
