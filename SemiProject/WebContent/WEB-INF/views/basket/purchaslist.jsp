@@ -270,7 +270,7 @@ function oribtnskinetc(data) {
 <!-- </div> -->
 
 <% for(int i=0; i<pl.size();i++) { %>
-<% if (null != pl.get(0).getPurchaseDate() ) { %>
+<% 	if (null != pl.get(i).getPurchaseDate() ) { %>
 <div class="pur_layout">
 <p><%=pl.get(i).getPurchaseDate() %> 구매</p>
 <table class="table_layout">
@@ -286,7 +286,7 @@ function oribtnskinetc(data) {
 
 		<td class="td_twolay">
 			<div class="twolay_onediv"><%=pl.get(i).getProductName() %></div>
-			<div><%=pl.get(i).getPrice() %></div>
+			<div><%=pl.get(i).getPrice() %>원</div>
 		</td>
 
 		<td class="td_threelay">
@@ -294,12 +294,11 @@ function oribtnskinetc(data) {
 	</tr>
 </table>
 </div>
-<% } else {%>
+<% 	} else { %>
 <div class="no_pur">
 		<h1>구매하신 상품이 없습니다</h1>
-		
 </div>
-<% } %>
+<% 	} %>
 <% } %>
 
 

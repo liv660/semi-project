@@ -24,6 +24,7 @@ public class MypurchaseListController extends HttpServlet {
 		
 	List<PurchaseList> purchaseList = proFileService.myorderList(req);
 	
+	System.out.println( purchaseList );
 	req.setAttribute("purchaseList", purchaseList);	
 	
 	

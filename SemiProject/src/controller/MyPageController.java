@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.MyBoard;
+import dto.PurchaseList;
 import dto.UserImg;
 import service.face.ProFileService;
 import service.impl.ProFileServiceImpl;
@@ -32,6 +33,10 @@ public class MyPageController extends HttpServlet {
 		UserImg userimg = proFileService.getuserno(req);
 		
 		userimg = proFileService.viewimg(userimg);
+		
+		List<PurchaseList> purchaseList = proFileService.myorderList(req);
+		
+		req.setAttribute("purchaseList", purchaseList);	
 		
 		
 		List<MyBoard> myBoard = proFileService.myboradlist(req);

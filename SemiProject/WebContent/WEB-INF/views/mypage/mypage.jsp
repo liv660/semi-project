@@ -1,9 +1,10 @@
+<%@page import="dto.PurchaseList"%>
 <%@page import="java.util.List"%>
 <%@page import="dto.MyBoard"%>
 <%@page import="dto.UserImg"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<% List<PurchaseList> pl = (List) request.getAttribute("purchaseList"); %>    
 <% UserImg userimg = (UserImg) request.getAttribute("userimg"); %>
 <% List<MyBoard> listMyb = (List) request.getAttribute("myBoard"); %>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
@@ -100,7 +101,6 @@
 	height: 240px;
 	top: 93%;
 	left: 15px;
-	border: 1px solid #333;
 
 }
 
@@ -120,6 +120,82 @@ height: 30px;
 width: 30px;
 font-size: 30px;
 
+}
+
+.no_pur {
+    width: 684px;
+    height: 155px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.pur_layout {
+	border: 1px solid #ccc;
+	margin-top: 15px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    width: 850px;
+    height: 270px;
+}
+.table_layout {
+	border: 1px solid #ccc;
+    width: 684px;
+}
+
+.pur_layout p{
+	margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 0;
+    font-size: 17px;
+}
+
+.td_onelay {
+	width: 200px;
+    padding-left: 16px;
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+.td_onelay:nth-child(1) { 
+	font-size: 17px; 
+    font-weight: 600; 
+    margin-bottom: 15px; 
+}
+
+.td_twolay {
+	padding-top: 20px;
+	width: 40%;
+}
+
+.twolay_onediv {
+
+	margin-bottom: 15px;
+	font-size: 20px; 
+	font-weight: 600;
+	
+}
+
+.twolay_onediv + div {
+
+	font-size: 17px;
+
+}
+
+.td_threelay {
+ text-align: center;
+
+}
+
+.pbox {
+    width: 150px;
+    height: 150px; 
+    overflow: hidden;
+
+}
+
+.product {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>
 
@@ -211,13 +287,39 @@ font-size: 30px;
 
 <div class="rel_ord">
 <div class="abs_botx">최근 주문 목록</div>
-<div class="abs_puls"><a href="#" style="font-size: 30px;">+</a></div>
+<div class="abs_puls"><a href="/purchase/list" style="font-size: 30px;">+</a></div>
 </div>
 
 
 <div class="rel_order">
 
+<% 	if (null != pl.get(0).getPurchaseDate() ) { %>
+<p style="text-align: left;"><%=pl.get(0).getPurchaseDate() %> 구매</p>
+<table class="table_layout">
+	<tr>
+		<td class="td_onelay">
+			<div style="margin-bottom: 15px;" >배송완료</div>
+			<div class="pbox" style="background: #BDBDBD;">
+				<a href="<%=request.getContextPath() %>/product/detail?productId=<%=pl.get(0).getProductId() %>"  >
+    			<img class="product" src="<%=request.getContextPath() %>/uploadProd/<%=pl.get(0).getStoredImg() %>">
+				</a>
+			</div>
+		</td>
 
+		<td class="td_twolay">
+			<div class="twolay_onediv"><%=pl.get(0).getProductName() %></div>
+			<div><%=pl.get(0).getPrice() %>원</div>
+		</td>
+
+		<td class="td_threelay">
+		</td>
+	</tr>
+</table>
+<% 	} else { %>
+<div class="no_pur">
+		<h3>구매하신 상품이 없습니다</h3>
+</div>
+<% 	} %>
 
 
 </div>
@@ -233,7 +335,6 @@ font-size: 30px;
 
 
 </div>
-<%@ include file="/WEB-INF/views/layout/myfooter.jsp" %>
 
 
 

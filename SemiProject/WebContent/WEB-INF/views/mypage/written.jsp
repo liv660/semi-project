@@ -64,7 +64,7 @@
 }
 .t_design th {
 	text-align: center;
-
+	font-size: 17px;
 }
 
 .btn_del {
@@ -152,7 +152,7 @@ function writtenDelete() {
 </div>
 
 <div class="rel_se">
-<span style="font-size: 23px;">내가 작성한 글</span>
+<span style="font-size: 20px;">내가 작성한 글</span>
 </div>
 
 <div class="rel_t">
@@ -196,7 +196,7 @@ function writtenDelete() {
 		</a>
 	</td>
 	<% } else if (mbl.get(i).getBoard_div().equals("후기 게시판")) { %>
-	<td><a href="/review/view?reviewNo=<%=mbl.get(i).getBorad_no() %>" style="font-size: 17px">
+	<td><a href="/review/view?reviewNo=<%=mbl.get(i).getBorad_no() %>" style="font-size: 14px">
 		<%=mbl.get(i).getTitle() %>
 		</a>
 	</td>
