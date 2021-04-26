@@ -105,7 +105,6 @@
 <body>
 
 <div id="header">
-
 <%   if(session.getAttribute("login") == null || !(boolean)session.getAttribute("login")) { %>
 <!-- 비로그인상태 -->
 
@@ -120,8 +119,13 @@
    <div id="login">
       <div id="loginNick">
          <%=session.getAttribute("nick") %>님 
+         <%	if(session.getAttribute("adminid") != null && (boolean)session.getAttribute("login")) { %>
+         <button class="btn" onclick="location.href='/admin'">관리자홈</button> |
+         <button class="btn" onclick="location.href= '/login/logout';">로그아웃</button> 
+         <% } else { %>
          <button class="btn" onclick="location.href= '/mypage';">마이페이지</button> |
          <button class="btn" onclick="location.href= '/login/logout';">로그아웃</button> 
+         <% } %>
       </div>
    </div>
 
