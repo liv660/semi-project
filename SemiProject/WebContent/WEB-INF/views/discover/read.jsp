@@ -375,8 +375,12 @@ height : 70px;
 
 <div class="container">
 
-<h1>반려동물 찾기</h1>
-
+<h1>유기동물 발견</h1>
+<%	if(session.getAttribute("login") == null || !(boolean)session.getAttribute("login")) { %>
+<div style="height: 250px; padding: 100px 0;">
+	<h3 style="text-align: center">로그인이 필요합니다.</h3>
+</div>
+<% } else {  %>
 <div class="complete">
 <% if( ((Integer)session.getAttribute("userno")) == b.getUserNo() && b.getDiscover_complete() == null) { %>
 <input type="button" id="completebtn" value="완료" onclick="complete();">
@@ -494,7 +498,7 @@ height : 70px;
 	<button id="btnList" class="btn btn-primary">목록</button>
 </div>
 </div>
-
+<% } %>
 <script type="text/javascript">
 
 	/* .pic 인 이미지들의 배열 */
