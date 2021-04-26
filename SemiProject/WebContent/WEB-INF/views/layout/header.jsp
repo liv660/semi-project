@@ -53,7 +53,7 @@
 .navbar {
    background-color: none;
 }
-
+fdsa
 .container-fluid .navbar-header {
 /*    margin-right: 30px; */
 /*     margin-left: 10px; */
