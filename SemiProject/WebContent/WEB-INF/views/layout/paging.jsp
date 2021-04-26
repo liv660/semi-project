@@ -7,66 +7,46 @@
 <%@page import="util.Paging"%>
 <% FindPaging paging = (FindPaging) request.getAttribute("paging"); %>
 
+<style type="text/css">
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+
+	background-color : #EBC680;
+	border-color : #ccc;
+	z-index: 0;
+	/* FFC091 */
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover, .pagination>li>a {
+
+	color: #000;
+	/* EA9A56 */
+
+}
+
+</style>
+
 <div class="text-center">
-	<ul class ="pagination">
-	
-		<!-- 첫 페이지로 이동 -->
-		<% if(paging.getCurPage() != 1) { %>	<!-- 첫 페이지가 아닐 때 보인다 -->
-		<li><a href="/find/list">&larr;</a></li>
+	<ul class="pagination">
+		
+		<!-- 현재페이지가 1이 아닐때만 왼쪽이동 표시 -->
+		<% if(paging.getCurPage() != 1 ) { %>
+		<li><a href="<%=request.getContextPath() %>?curPage=<%=paging.getCurPage() - 1%>">&lt;</a></li>
 		<% } %>
-		<!-- 조건에 만족하지 않으면 아예 안보임 -->
-		
-		
-		
-		<!-- 이전 페이징 리스트로 가기 -->
-		<% if(paging.getStartPage() > paging.getPageCount() ){ %>
-		<li>
-		<a href="/find/list?curPage=<%=paging.getStartPage() - paging.getPageCount() %>"> &laquo; </a>
-		</li>
-		<% } else { %>
-		<li class="disabled"><a>&laquo;</a></li>
-		<% } %>
-		<!-- 조건에 만족하지 않으면 금지 -->
-		
-		
-		<!-- 이전 페이지로 가기 -->
-		<% if(paging.getCurPage() != 1) { %>
-		<li><a href="/find/list?curPage=<%=paging.getCurPage() - 1 %>"> &lt; </a></li>
-		<% } %>
-		<!-- 조건에 만족하지 않으면 아예 안보임 -->
-		
-		
-		<!-- 페이징 리스트 -->
-		<% for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++ ) { %>
-			<% if( i == paging.getCurPage() ) { %>
-		<li class="active"><a href="/find/list?curPage=<%=i %>"><%=i %></a></li>
-			<% }  else {%>
-		<li><a href="/find/list?curPage=<%=i %>"><%=i %></a></li>
+	    
+	    <% for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
+			<% if(i == paging.getCurPage()) { %>
+				<li class="active"><a href="<%=request.getContextPath() %>?curPage=<%=i%>"><%=i %></a></li>
+			<% } else { %>
+				<li><a href="<%=request.getContextPath() %>?curPage=<%=i%>"><%=i %></a></li>
 			<% } %>
 		<% } %>
 		
-		
-		<!-- 다음 페이지로 가기 -->		
-		<% if(paging.getCurPage() != paging.getTotalPage() ) { %>
-		<li><a href="/find/list?curPage=<%=paging.getCurPage() + 1%>">&gt;</a></li>
+		<!-- 현재페이지가 마지막 페이지가 아닐때만 오른쪽이동 표시 -->
+		<% if(paging.getCurPage() != paging.getTotalPage()) { %>
+		<li><a href="<%=request.getContextPath() %>?curPage=<%=paging.getCurPage() + 1 %>">&gt;</a></li>
 		<% } %>
-		
-		
-		
-		<!-- 다음 페이징 리스트로 가기 -->
-		<% if( paging.getEndPage() != paging.getTotalPage() ) { %>
-		<li><a href="/find/list?curPage=<%=paging.getStartPage() + paging.getPageCount()%>">&raquo;</a></li>
-		<% } else {%>
-		<li class="disabled"><a>&raquo;</a></li>
-		<% } %>
-		
-		
-		
-		<!-- 마지막 페이지로 가기 -->
-		<% if(paging.getCurPage() != paging.getTotalPage() ) { %>	<!-- 마지막 페이지가 아닐 때 보인다 -->
-		<li><a href="/find/list?curPage=<%=paging.getTotalPage()%>">&rarr;</a></li>
-		<% } %>
-		<!-- 조건에 만족하지 않으면 아예 안보임 -->
-		
+	
+	
 	</ul>
 </div>
