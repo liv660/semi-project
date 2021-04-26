@@ -75,8 +75,9 @@ $(document).ready(function() {
 		    pg : 'html5_inicis', //PG사 - 'kakao':카카오페이, 'html5_inicis':이니시스(웹표준결제), 'nice':나이스페이, 'jtnet':제이티넷, 'uplus':LG유플러스, 'danal':다날, 'payco':페이코, 'syrup':시럽페이, 'paypal':페이팔
 		    pay_method : 'card', //결제방식 - 'samsung':삼성페이, 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
 		    merchant_uid : 'merchant_' + new Date().getTime(), //고유주문번호 - random, unique
-		    name : '주문명:결제테스트', //주문명 - 선택항목, 결제정보 확인을 위한 입력, 16자 이내로 작성
-		    amount : 1000, //결제금액 - 필수항목
+		    name : '<%=p.getProductName() %>' ,//주문명 - 선택항목, 결제정보 확인을 위한 입력, 16자 이내로 작성
+<%-- 		    amount : <%=p.getPrice() + 2000 %>, //결제금액 - 필수항목 --%>
+		    amount : 100, //결제금액 - 필수항목
 		    buyer_email : 'iamport@siot.do', //주문자Email - 선택항목
 		    buyer_name : '구매자이름', //주문자명 - 선택항목
 		    buyer_tel : '010-1234-5678', //주문자연락처 - 필수항목, 누락되면 PG사전송 시 오류 발생
@@ -92,7 +93,15 @@ $(document).ready(function() {
 		        msg += '결제 금액 : ' + rsp.paid_amount;
 		        msg += '카드 승인번호 : ' + rsp.apply_num;
 		        msg += '[rsp.success]';
-	
+		
+		        
+		        var	productId = $("#ProductId").val();
+		    	var userNo = $("#userNo").val();
+		        var totalPay = $("#totalPay").val(); 
+
+				console.log("productId 값 = " + productId)
+				console.log("userNo 의 값 =" + userNo)
+				console.log("totalPay 의 값 = " + totalPay)
 		        
 		        // 결제 완료 처리 로직
 				//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -101,8 +110,10 @@ $(document).ready(function() {
 					type: 'POST',
 					dataType: 'json',
 					data: {
-						// rsp객체를 통해 전달된 데이터를 DB에 저장할 때 사용한다
-						imp_uid : rsp.imp_uid
+						'productId' : productId
+						, 'userNo' : userNo
+						, 'totalPay' : totalPay
+						
 					}
 				
 				}).done(function(data) {
@@ -114,12 +125,11 @@ $(document).ready(function() {
 						msg += '\n결제 금액 : ' + rsp.paid_amount;
 						msg += '\n카드 승인번호 : ' + rsp.apply_num;
 				        msg += '\n[done]';
-	
+	//userid + productid 
 						alert(msg);
 						
 		    		} else {
-		    			//[3] 아직 제대로 결제가 되지 않았습니다.
-		    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+
 		    		}
 		    	});
 		        
@@ -214,8 +224,19 @@ $(document).ready(function() {
 		border-radius:10px;
 		color:#fff;
 	}
+	
+	#agreechk {
+		margin:10px; auto0;
+/* 		width:5px; */
+	}
+	
 </style>
 	<div id="container">
+<input type ="hidden" name ="ProductId" id ="ProductId" value="<%=p.getProductId() %>" />
+<input type="hidden" id="userNo" value="<%=session.getAttribute("userno")%>">
+<input type="hidden" id="totalPay" value="<%=p.getPrice() + 2000 %>">
+
+
 		<h3>결제하기</h3>
 		<div id="payment">
 <%-- 		<% int  %> --%>
@@ -230,23 +251,19 @@ $(document).ready(function() {
 		   			<table>
 		   				<tr class="br_bot">
 		   					<th>상품/옵션 정보</th>
-		   					<th>수량</th>
 		   					<th>금액</th>
 		   					<th>배송비</th>
 		   				</tr>
 		   				<!-- for문으로 장바구니 담긴거 계산 -->
 		   				<tr>
-		   					<td>상품이름</td>
-		   					<td>n개</td>
-		   					<td>0원</td>
+		   					<td><%=p.getProductName() %></td>
+		   					<td><%=p.getPrice() %></td>
 		   					<td>2000원</td>
 		   				</tr>
 		   				
 		   			</table>
 		   			<div class="price">
-		   				<p>상품금액 </p>
-		   				<p>배송비</p>
-		   				<p>총 결제 금액</p>
+		   				<p>총 결제 금액 : <%=p.getPrice() + 2000 %></p>
 		   			</div>
 		   		</div>	
 		   	</div>
@@ -259,9 +276,11 @@ $(document).ready(function() {
 					"해당 상품 자체"와 관계없는 글, 양도, 광고성, 욕설, 비방, 도배 등의 글은 예고 없이 이동, 노출제한, 삭제 등의 조치가 취해질 수 있습니다.<br/>
 					공개 게시판이므로 전화번호, 메일 주소 등 고객님의 소중한 개인정보는 절대 남기지 말아주세요.<br/>
 				</p>
+				<div id="agreechk">
  				<form action="#" method="get" name = "CheckAgreement"  >
  					<input type="radio" id="chk" name="chk" /> 동의 사항 확인
  				</form>
+ 				</div>
 			</div>
 			<div class="info_box">
 				<h5>배송 정보</h5>

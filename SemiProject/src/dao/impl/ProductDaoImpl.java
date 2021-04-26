@@ -12,6 +12,7 @@ import dao.face.ProductDao;
 
 import dto.Product;
 import dto.ProductImg;
+import dto.Userorder;
 import util.ProductPaging;
 
 public class ProductDaoImpl implements ProductDao {
@@ -318,6 +319,39 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		
 		return result;
+	}
+
+
+
+
+	@Override
+	public int insertUserOrder(Connection conn, Userorder param) {
+		
+		String sql = "";
+		sql += "INSERT INTO userorder( userorder_no, product_id, user_no, total_pay)";
+		sql += " VALUES (userorder_seq.nextval, ?, ?, ?)";
+		
+		System.out.println("DAO - insertUserOrder 전달 완료 ");
+
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, param.getProduct_id() );
+			ps.setInt(2, param.getUser_no() );
+			ps.setInt(3, param.getTotal_pay() );
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return res;
 	}
 
 

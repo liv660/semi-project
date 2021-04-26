@@ -27,6 +27,8 @@ public class ProductPaymentController extends HttpServlet {
 		//상품 아이디로 상품정보 얻어오기
 		Product productid = productService.getProdByProdId(req);
 		
+//		List<Product> 
+		
 		System.out.println("/product/pay productid 확인 = " + productid);
 		
 		//게시글번호로 게시글 상세보기

@@ -5,6 +5,7 @@ import java.util.List;
 
 import dto.Product;
 import dto.ProductImg;
+import dto.Userorder;
 import util.ProductPaging;
 
 
@@ -67,6 +68,14 @@ public interface ProductDao {
 	 * @return
 	 */
 	public List<ProductImg> selectMainImg(Connection connection, List<Product> product);
+
+	/**
+	 * 결제완료한 정보 DB에 삽입
+	 * @param conn
+	 * @param param
+	 * @return
+	 */
+	public int insertUserOrder(Connection conn, Userorder param);
 
 
 

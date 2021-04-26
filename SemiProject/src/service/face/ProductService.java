@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import dto.Product;
 import dto.ProductImg;
+import dto.Userorder;
 import util.ProductPaging;
 
 public interface ProductService {
@@ -60,6 +61,16 @@ public interface ProductService {
 	 * @return
 	 */
 	List<ProductImg> viewMainImg(List<Product> product);
+	
+	/**
+	 * 결제 완료시 정보 얻어옴
+	 * @param req
+	 * @return
+	 */
+	Userorder getOrderParam(HttpServletRequest req);
+	
+	
+	void insertOrder(Userorder param);
 	
 
 

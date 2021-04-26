@@ -20,6 +20,7 @@ import dao.face.ProductDao;
 import dao.impl.ProductDaoImpl;
 import dto.Product;
 import dto.ProductImg;
+import dto.Userorder;
 import service.face.ProductService;
 import util.ProductPaging;
 
@@ -314,6 +315,66 @@ public class ProductServiceImpl implements ProductService {
 			} else {
 				JDBCTemplate.rollback(conn);
 			}
+		}
+		
+	}
+
+	@Override
+	public Userorder getOrderParam(HttpServletRequest req) {
+		
+		Userorder userorder = new Userorder();
+		
+		//얻어온 상품 아이디 검사
+		String param1 = req.getParameter("productId");
+		
+		int productId = 0;
+		if( param1 != null && !"".equals(param1)) {
+			productId = Integer.parseInt(param1);
+		}
+		
+		System.out.println("product service의 productId 추출값 = " + productId);
+		
+		//얻어온 유저 번호 검사
+		String param2 = req.getParameter("userNo");
+		
+		int userNo = 0;
+		if( param2 != null && !"".equals(param2)) {
+			userNo = Integer.parseInt(param2);
+		}
+		
+		System.out.println("product service의 userNo 추출값 = " + userNo);
+		
+		//얻어온 유저 번호 검사
+		String param3 = req.getParameter("totalPay");
+				
+		int totalPay = 0;
+		if( param3 != null && !"".equals(param3)) {
+			totalPay = Integer.parseInt(param3);
+		}
+				
+		System.out.println("product service의 totalPay 추출값 = " + totalPay);
+				
+		
+		userorder.setProduct_id(productId);
+		userorder.setUser_no(userNo);
+		userorder.setTotal_pay(totalPay);
+		
+		
+		
+		return userorder;
+	}
+
+	@Override
+	public void insertOrder(Userorder param) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = productDao.insertUserOrder(conn, param);
+		
+		if(res > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);				
 		}
 		
 	}
