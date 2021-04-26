@@ -181,7 +181,7 @@ $(document).ready(function() {
 		<div id="screen">
 			<ul id="film">
 				<li class="scene">
-					<p><img src="../resources/se2/img/product_slider1.jpg" /></p>
+					<p><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></p>
 				</li>
 				<li class="scene">
 					<p><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></p>
