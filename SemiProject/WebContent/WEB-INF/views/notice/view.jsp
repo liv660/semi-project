@@ -72,7 +72,7 @@ function confirmDelete() {
 
 .wrapBox .botbtn {
    position : relative;
-   left : 700px;
+   left : 750px;
 }
 
 .wrapBox input[type = "button"] {
@@ -213,10 +213,10 @@ function confirmDelete() {
 
 
    <h1>Notice</h1>
-<%--    <% if(session.getAttribute("manager") != null) { %> --%>
+   <% if(session.getAttribute("adminid") != null) { %>
       <a  href="/notice/update?noticeno=<%=view.getNoticeNo()%>"  class="topbtn orange"><input type="button" value="수정"></a>
       <input type="button" value="삭제" class="topbtn red" onclick="confirmDelete();"/>
-<%--    <% } %> --%>
+   <% } %>
    <div class="line"></div>
    
    <table>
@@ -264,7 +264,9 @@ function confirmDelete() {
    <%=view.getContent() %>
    </div>
    
+   <% if(session.getAttribute("adminid") != null) { %>
    <a href="/notice/write" class="botbtn"><input type="button" value="글쓰기"/></a>
+   <% } %>
    <a href="/notice/list" class="botbtn"><input type="button" value="목록" /></a>
    
 </div>
