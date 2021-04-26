@@ -93,7 +93,7 @@ label {font-weight: 400;}
 			<option value="0" selected="selected">분류</option>
 			<option value="1">반려동물</option>
 			<option value="2">악세서리</option>
-			<option value="3">폰케이스</option>
+			<option value="3">사료 및 간식</option>
 		</select>
 	</div>
 	<div>

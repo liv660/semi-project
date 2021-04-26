@@ -165,7 +165,7 @@ $(document).ready(function() {
 				<li class="fir"><h3><a id="fir" title="전체보기">전체보기</a></h3></li>
 				<li class="sec"><h4><a id="sec" title="반려동물">반려동물</a></h4></li>
 				<li class="sec"><h4><a id="thi" title="악세서리">악세서리</a></h4></li>
-				<li class="sec"><h4><a id="for" title="폰케이스">폰케이스</a></h4></li>
+				<li class="sec"><h4><a id="for" title="사료및간식">사료 및 간식</a></h4></li>
 			</ul>
 <%-- 			<p><%=productImg.size() %><p> --%>
 			<div id="product_img">
