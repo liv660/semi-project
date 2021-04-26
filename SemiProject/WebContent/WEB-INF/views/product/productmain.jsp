@@ -92,15 +92,16 @@ $(document).ready(function() {
 		a:link, a:visited{text-decoration:none; color:#777;}
 		
 		
-		#container{width:900px; margin:0 auto;}
+		#container{width:100%; height:1250px;}
 		
-		#screen{max-width:800px; width:100%; height:300px; border:5px solid #ccc; margin:0 auto; position:relative; 
+		#screen{max-width:1200px; width:100%; height:400px; border:1px solid #ccc; margin:0 auto; position:relative; 
 			overflow:hidden;
 		}
 		#film{width:400%;}
 		/* 부모요소가 크던 작던 100%로 인식함*/
 		.scene{float:left; width:25%;}
-		.scene p{ width:100%; }
+		.scene p{ width:100%; height:400px; }
+		.scene p img{width:100%; height:100%;}
 	
 		#film:after{ content:""; display:block; clear:both; }
 
