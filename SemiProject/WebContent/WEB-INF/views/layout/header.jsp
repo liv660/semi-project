@@ -54,10 +54,22 @@
    background-color: none;
 }
 
-.container-fluid > .navbar-header {
+.container-fluid .navbar-header {
 /*    margin-right: 30px; */
-    margin-left: 10px;
+/*     margin-left: 10px; */
+    width:150px;
+    height:70px;
+/*     padding-left:45px; */
+    margin-bottom:10px;
+   
 }
+.container-fluid .navbar-header h1{width:150px; height:70px;
+	padding:0;
+	margin:0;
+}
+.container-fluid .navbar-header h1 a{display:block; width:100%; height:100%;}
+.container-fluid .navbar-header img{width:100%; height:100%; z-index:99;}
+
 
 
 /* 메뉴 가운데 정렬 */
@@ -144,9 +156,11 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/main">
-         <img alt="Logo" src="">
-      </a>
+      <h1 class="navbar-brand" >
+      	<a href="/main" title="메인으로이동">
+         <img src="../resources/se2/img/logo.png" />
+        </a>
+      </h1>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
