@@ -1,7 +1,11 @@
+<%@page import="dto.PurchaseList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
 
+
+<% List<PurchaseList> pl = (List) request.getAttribute("purchaseList"); %>
 
 <script type="text/javascript">
 $(document).ready (function () {
@@ -205,7 +209,6 @@ function oribtnskinetc(data) {
 .td_twolay {
 	padding-top: 20px;
 	width: 40%;
-	border-right: 1px solid #ccc;
 }
 
 .twolay_onediv {
@@ -258,41 +261,46 @@ function oribtnskinetc(data) {
 <h1>구매 목록</h1>
 </div>
 
-<div id="btn_layout">
-<button type="button" >최근 6개월</button>
-<button type="button" >2021</button>
-<button type="button" >2020</button>
-<button type="button" >2019</button>
-<button type="button" >2018</button>
-</div>
+<!-- <div id="btn_layout"> -->
+<!-- <button type="button" >최근 6개월</button> -->
+<!-- <button type="button" >2021</button> -->
+<!-- <button type="button" >2020</button> -->
+<!-- <button type="button" >2019</button> -->
+<!-- <button type="button" >2018</button> -->
+<!-- </div> -->
 
+<% for(int i=0; i<pl.size();i++) { %>
+<% if (null != pl.get(0).getPurchaseDate() ) { %>
 <div class="pur_layout">
-<p>2021 1월 21일 주문</p>
+<p><%=pl.get(i).getPurchaseDate() %> 구매</p>
 <table class="table_layout">
 	<tr>
 		<td class="td_onelay">
 			<div style="margin-bottom: 15px;" >배송완료</div>
 			<div class="box" style="background: #BDBDBD;">
-    			<img class="product" src="/resources/image/basic.png">
+				<a href="<%=request.getContextPath() %>/product/detail?productId=<%=pl.get(i).getProductId() %>"  >
+    			<img class="product" src="<%=request.getContextPath() %>/uploadProd/<%=pl.get(i).getStoredImg() %>">
+				</a>
 			</div>
 		</td>
 
 		<td class="td_twolay">
-			<div class="twolay_onediv">상품명</div>
-			<div>14,200 원</div>
+			<div class="twolay_onediv"><%=pl.get(i).getProductName() %></div>
+			<div><%=pl.get(i).getPrice() %></div>
 		</td>
 
 		<td class="td_threelay">
-			<button type="button" id="btn_basket">장바구니 담기</button>
 		</td>
 	</tr>
 </table>
 </div>
-
+<% } else {%>
 <div class="no_pur">
 		<h1>구매하신 상품이 없습니다</h1>
 		
 </div>
+<% } %>
+<% } %>
 
 
 

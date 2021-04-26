@@ -13,7 +13,7 @@ import dao.face.ProFileDao;
 import dto.Usertb;
 import util.MyPaging;
 import dto.MyBoard;
-import dto.UserAddress;
+import dto.PurchaseList;
 import dto.UserImg;
 import dto.UserLeave;
 import dto.Usertb;
@@ -536,7 +536,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += "SELECT * FROM (";
 		sql += "    SELECT rownum rnum, B.* FROM (";
 		sql += "        SELECT";
-		sql += "            find_no , board_div, title, create_date";
+		sql += "            find_no, board_div, title, create_date";
 		sql += "        FROM findboard";
 		sql += "        UNION";
 		sql += "        SELECT";
@@ -823,6 +823,66 @@ public class ProFileDaoImpl implements ProFileDao {
 		
 		
 		return res;
+	}
+
+	@Override
+	public List<PurchaseList> selectPurList(Connection conn, int userno) {
+
+		String sql = "";
+		sql += "SELECT";
+		sql += "    U.product_id,U.user_no, product.product_name,product.price, product.stored_img, U.purchase_date";
+		sql += " FROM userorder U,";
+		sql += "    (SELECT";
+		sql += "        PB.product_id, PB.product_name, PB.price, PI.stored_img";
+		sql += "    FROM product PB,";
+		sql += "        (SELECT PRODUCT_IMG.* FROM";
+		sql += "            (SELECT";
+		sql += "                row_number() over( partition by product_id order by image_no) rnum";
+		sql += "                ,product_id , stored_img";
+		sql += "            FROM product_img";
+		sql += "        ) PRODUCT_IMG";
+		sql += "        WHERE rnum = 1";
+		sql += "    )PI";
+		sql += "    WHERE PB.product_id = PI.product_id(+)";
+		sql += "    ) product";
+		sql += " WHERE U.product_id = product.product_id(+)";
+		sql += "     AND user_no = ?";
+		sql += " ORDER BY product_id DESC";
+		
+		List<PurchaseList> pl = new ArrayList<>();
+		
+		try {
+			
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, userno);
+			
+			rs = ps.executeQuery();
+			
+			
+			while( rs.next() ) {
+				
+				PurchaseList p = new PurchaseList();
+				
+				p.setProductId( rs.getInt("product_id") );
+				p.setUserNo( rs.getInt("user_no") );
+				p.setProductName( rs.getString("product_name") );
+				p.setPrice( rs.getInt("price") );
+				p.setStoredImg( rs.getString("stored_img") );
+				p.setPurchaseDate(rs.getDate("purchase_date") );
+				
+				pl.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return pl;
 	}
 		
 		

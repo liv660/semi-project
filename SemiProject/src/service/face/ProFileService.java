@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import dto.MyBoard;
+import dto.PurchaseList;
 import dto.UserImg;
 import util.MyPaging;
 
@@ -35,6 +36,9 @@ public interface ProFileService {
 	public int deleteMyBoard(HttpServletRequest req);
 
 	public int insertmypocket(HttpServletRequest req);
+
+
+	public List<PurchaseList> myorderList(HttpServletRequest req);
 
 
 

@@ -20,6 +20,7 @@ import common.JDBCTemplate;
 import dao.face.ProFileDao;
 import dao.impl.ProFileDaoImpl;
 import dto.MyBoard;
+import dto.PurchaseList;
 import dto.UserAddress;
 import dto.UserImg;
 import dto.UserLeave;
@@ -581,6 +582,21 @@ public class ProFileServiceImpl implements ProFileService {
 		
 		
 		return res;
+	}
+
+
+	@Override
+	public List<PurchaseList> myorderList(HttpServletRequest req) {
+		
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int userno = (int) req.getSession().getAttribute("userno");
+		
+		List<PurchaseList> purchaseList = proFileDao.selectPurList(conn, userno);
+		
+		
+		return purchaseList;
 	}
 
 

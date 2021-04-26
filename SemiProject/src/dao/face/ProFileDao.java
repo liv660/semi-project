@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import dto.MyBoard;
+import dto.PurchaseList;
 import dto.UserAddress;
 import dto.UserImg;
 import dto.UserLeave;
@@ -66,6 +67,8 @@ public interface ProFileDao {
 	public String selectByReviewStroed(Connection conn, MyBoard myBoard);
 
 	public int insertmybasket(Connection conn, int userno, int productId);
+
+	public List<PurchaseList> selectPurList(Connection conn, int userno);
 
 
 
