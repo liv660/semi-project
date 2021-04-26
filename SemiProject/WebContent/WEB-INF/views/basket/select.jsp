@@ -11,7 +11,6 @@
 #content
 {
 	height:680px;
-	border: 1px solid #ccc;
 }
 
 .right {
@@ -42,7 +41,6 @@ hr {
     height: 120px; 
     border-radius: 70%;
     overflow: hidden;
-    border: 0;
 
 }
 .hlogo {
@@ -138,13 +136,14 @@ hr {
 .twolay_onediv {
 
 	margin-bottom: 15px;
-	font-size: 25px; 
+	font-size: 20px; 
+	font-weight: 600;
 	
 }
 
 .twolay_onediv + div {
 
-	font-size: 23px;
+	font-size: 15px;
 
 }
 
@@ -154,7 +153,7 @@ hr {
 }
 
 #btn_basket {
-	font-size: 20px;
+	font-size: 17px;
     width: 170px;
     background: white;
     border: 1px solid #ccc
@@ -233,7 +232,7 @@ $(document).ready (function() {
 			<table>
 				<tr>
 					<td>
-						<div class="boxone" style="background: #BDBDBD;">
+						<div class="boxone" style="background: #BDBDBD; border: 0;">
     					<img class="hlogo" src="/resources/image/heart.png">
 						</div>	
 					<td>
@@ -251,7 +250,7 @@ $(document).ready (function() {
 		<div class="allchk_layout">
 			<hr style="margin-bottom: 10px">
 			<input type="checkbox" id="allcheck"/>
-			<label for="allcheck"style="font-size: 20px; margin-left: 15px;">전체선택</label>
+			<label for="allcheck"style="font-size: 15px; margin-left: 15px;">전체선택</label>
 			<button class="btn_del">선택 삭제</button>
 			<hr style="margin-top: 10px">
 		</div>

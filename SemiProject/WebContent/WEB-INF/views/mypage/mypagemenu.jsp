@@ -15,7 +15,7 @@
 a {
 	color: #626960;
 	text-decoration: none;
-	font-size: 20px;
+	font-size: 17px;
 
 }
 .tx_size {

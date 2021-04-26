@@ -187,7 +187,7 @@ function oribtnskinetc(data) {
 	margin-top: 10px;
     margin-left: 20px;
     margin-bottom: 0;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .td_onelay {
@@ -197,7 +197,7 @@ function oribtnskinetc(data) {
     padding-bottom: 10px;
 }
 .td_onelay:nth-child(1) { 
-	font-size: 18px; 
+	font-size: 17px; 
     font-weight: 600; 
     margin-bottom: 15px; 
 }
@@ -211,13 +211,14 @@ function oribtnskinetc(data) {
 .twolay_onediv {
 
 	margin-bottom: 15px;
-	font-size: 25px; 
+	font-size: 20px; 
+	font-weight: 600;
 	
 }
 
 .twolay_onediv + div {
 
-	font-size: 23px;
+	font-size: 17px;
 
 }
 
@@ -227,7 +228,7 @@ function oribtnskinetc(data) {
 }
 
 #btn_basket {
-	font-size: 20px;
+	font-size: 15px;
     width: 170px;
     background: white;
     border: 1px solid #ccc
@@ -297,5 +298,3 @@ function oribtnskinetc(data) {
 
 </div>
 </div>
-</body>
-</html>
