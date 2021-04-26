@@ -32,7 +32,9 @@ public class DiscoverReadController extends HttpServlet {
 		System.out.println("viewDiscoverBoard = "+ viewDiscoverBoard);
 		
 		req.setAttribute("nick", discoverBoardService.getnick(viewDiscoverBoard));
-		req.setAttribute("eamil", discoverBoardService.getemail(viewDiscoverBoard));
+		req.setAttribute("email", discoverBoardService.getemail(viewDiscoverBoard));
+		
+//		System.out.println("/discover/read 의 emali = " + viewDiscoverBoard);
 		req.setAttribute("viewDiscoverBoard", viewDiscoverBoard);
 		
 //		System.out.println("viewDiscoverBoard = "+ viewDiscoverBoard);

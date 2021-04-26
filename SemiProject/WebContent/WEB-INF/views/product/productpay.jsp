@@ -218,6 +218,7 @@ $(document).ready(function() {
 	<div id="container">
 		<h3>결제하기</h3>
 		<div id="payment">
+<%-- 		<% int  %> --%>
 			<div class="product_box">
 				<div class="product_img" >
 			      <p class="img_box"><img src="/uploadProd/<%=productImg.get(0).getStoredImg() %>" /></p>
