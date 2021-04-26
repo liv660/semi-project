@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp" %>
-
+<% %>
 
 <style type="text/css">
 .menu-grid {
@@ -35,7 +35,7 @@
 }
 
 </style>
-
+<%	if(session.getAttribute("adminid") != null && (boolean)session.getAttribute("login")) { %>
 <div class="container">
 	<div class="menu-grid" >
 	<button class="btns btn" onclick="location.href='/admin/user'">회원 관리</button>
@@ -46,5 +46,8 @@
 	</div>
 	<div class="contents"></div>
 </div>
+<% } else { %>
+<%@ include file="/WEB-INF/views/layout/Error.jsp" %>
+<% } %>
 </body>
 </html>

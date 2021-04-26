@@ -1,16 +1,5 @@
-/common/
 /controller/
-<<<<<<< HEAD
+/common/
 /dao/
-<<<<<<< Updated upstream
-=======
-/service/
-/dto/
->>>>>>> Stashed changes
-=======
 /dto/
 /service/
->>>>>>> f40095fcea943edbdc72c1b9457b8c2ad7390944
-/util/
-/uuid/
-/dao/

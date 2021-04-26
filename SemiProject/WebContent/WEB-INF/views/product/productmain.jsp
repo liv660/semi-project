@@ -171,18 +171,8 @@ $(document).ready(function() {
 			<div id="product_img">
 				<ul class="img_box">
 			<% for( int i=0; i<product.size(); i++) { %>
-				<li><a href="/product/detail?productId=<%=product.get(i).getProductId() %>" ><img src="" alt="제품이미지1"/></a></li>
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
-<!-- 					<li><a href="#" title="제품이미지1"><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></a></li> -->
+				<li><a href="/product/detail?productId=<%=product.get(i).getProductId() %>" ><img src="<%=request.getContextPath() %>/uploadProd/<%=product.get(i).getStoredName() %>" alt="제품이미지1"/></a></li>
+
 			<% } %>
 				</ul>
 			</div>

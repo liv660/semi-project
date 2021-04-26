@@ -27,19 +27,21 @@ public class ProductPaymentController extends HttpServlet {
 		//상품 아이디로 상품정보 얻어오기
 		Product productid = productService.getProdByProdId(req);
 		
-		System.out.println("productid 확인 = " + productid);
+		System.out.println("/product/pay productid 확인 = " + productid);
 		
 		//게시글번호로 게시글 상세보기
 		Product viewProduct = productService.views(productid);
 		
-		System.out.println("게시글 번호로 게시글 상세보기정보 = " + viewProduct);
+		System.out.println(" /product/pay - 게시글 번호로 게시글 상세보기정보 = " + viewProduct);
 		
 		//상세보기 조회결과 전달
 		req.setAttribute("viewProduct", viewProduct);
 		
 		List<ProductImg> productImg = productService.viewImg(viewProduct);
 		
-		System.out.println( "전달할 상품 이미지 정보 = " + productImg);
+		System.out.println( "/product/pay 전달할 상품 이미지 정보 = " + productImg);
+		
+		//장바구니에서 전달된 
 		
 		//이미지 전달 
 		req.setAttribute("productImg", productImg);

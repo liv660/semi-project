@@ -147,7 +147,7 @@ $(document).ready(function() {
 <!-- 				<p>소재 : 면</p> -->
 				<p>상품이름 : <%= p.getProductName() %></p>
 				<p>판매 금액 : <%= p.getPrice() %></p>
-				<p>배송비 : <%=p.getContent() %></p>
+				<p>상품상세정보 : <%=p.getContent() %></p>
 
 				<div class="l_basket">
 					<button id="btnbasket">장바구니</button>

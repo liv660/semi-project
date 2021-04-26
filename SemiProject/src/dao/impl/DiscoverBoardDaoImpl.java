@@ -343,7 +343,7 @@ public class DiscoverBoardDaoImpl implements DiscoverBoardDao {
 									+ ", loc, content, board_div)";
 		sql += " VALUES (?, ?, ?, 0"
 				+ ", ?, ?, ?"
-				+ ", ?, ?, 1)";
+				+ ", ?, ?, 2)";
 		
 		int result = -1;
 		

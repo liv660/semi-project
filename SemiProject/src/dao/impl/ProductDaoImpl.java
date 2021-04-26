@@ -28,13 +28,22 @@ public class ProductDaoImpl implements ProductDao {
 		sql += "SELECT * FROM (";
 		sql += " 	SELECT rownum rnum, P.* FROM (";
 		sql += " 		SELECT";
-		sql += " 			product_id, category_id, product_name, price, content";
-		sql += " 		FROM product";
+		sql += " 			PB.product_id, PB.category_id, PB.product_name, PB.price, PB.content, PI.stored_img";
+		sql += " 		FROM product PB, (";
+		sql += "			SELECT PRODUCT_IMG.* FROM (";
+		sql += "				SELECT";
+		sql += " 					row_number() over( partition by product_id order by image_no) rnum";
+		sql += " 					, image_no, product_id, origin_img, stored_img";
+		sql += "				FROM product_img";
+		sql += "			) PRODUCT_IMG";
+		sql += "			WHERE rnum = 1";
+		sql += " 		)PI";
+		sql += " 		WHERE PB.product_id = PI.product_id(+)";
 		sql += " 		ORDER BY product_id DESC";
 		sql += "	) P";
 		sql += " ) product";
 		sql += " WHERE rnum BETWEEN ? AND ?";
-		
+				
 		
 		List<Product> productList = new ArrayList<>();
 		
@@ -55,6 +64,7 @@ public class ProductDaoImpl implements ProductDao {
 				p.setProductName( rs.getString("product_Name") );
 				p.setPrice( rs.getInt("price") );
 				p.setContent( rs.getString("content") );
+				p.setStoredName(rs.getString("stored_img"));
 				
 				productList.add(p);
 				
