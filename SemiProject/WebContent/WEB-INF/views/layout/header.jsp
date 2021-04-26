@@ -21,7 +21,12 @@
 <style type="text/css">
 
 
-#wrap{ max-width:1920px; min-width:1280px; width:100%; margin:0 auto;}
+#wrap{ max-width:1920px; 
+	min-width:1280px; 
+	width:100%; 
+	background-color:rgba(234,205,153, 0.3 );
+	margin:0 auto;
+}
 
 #header {
    width: 1200px;
