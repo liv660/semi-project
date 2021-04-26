@@ -415,7 +415,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += "        discover_no, board_div, title, create_date";
 		sql += "    FROM discoverboard";
 		sql += "    WHERE user_no = ?)";
-		sql += " ORDER BY board_div desc, find_no desc";
+		sql += " ORDER BY create_date desc";
 		
 		List<MyBoard> myBoard = new ArrayList<MyBoard>();
 		
@@ -548,7 +548,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += "        FROM discoverboard";
 		sql += "        WHERE user_no = ?";
 		sql += "    ) B";
-		sql += "    ORDER BY board_div desc, find_no desc";
+		sql += "    ORDER BY create_date desc";
 		sql += " ) BOARD";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 		
@@ -797,6 +797,32 @@ public class ProFileDaoImpl implements ProFileDao {
 		}
 		
 		return StoredName;
+	}
+
+	@Override
+	public int insertmybasket(Connection conn, int userno, int productId) {
+		
+		String sql = "";
+		sql += "INSERT INTO mypocket (mypocket_no, user_no, product_id)";
+		sql += " VALUES ( mypoc_seq.nextval, ?, ? )";
+		int res = 0;
+			
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			ps.setInt(2, productId);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return res;
 	}
 		
 		

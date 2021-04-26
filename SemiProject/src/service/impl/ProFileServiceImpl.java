@@ -558,5 +558,31 @@ public class ProFileServiceImpl implements ProFileService {
 	}
 
 
+	@Override
+	public int insertmypocket(HttpServletRequest req) {
+		Connection conn = JDBCTemplate.getConnection();
+		int userno = (int) req.getSession().getAttribute("userno");
+		
+		int productId = Integer.parseInt( req.getParameter("productId") );
+		
+		System.out.println(productId);
+		
+		int res = 0;
+		
+		res = proFileDao.insertmybasket(conn, userno, productId);
+		
+		if ( res > 0 ) {
+
+			JDBCTemplate.commit(conn);
+		} else {
+
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		return res;
+	}
+
+
 
 }
