@@ -107,8 +107,10 @@ $(document).ready(function() {
 		#btn p{ position:absolute; top:60%; width:50px; height:100px; margin-top:-50px;}
 		#btn p span{ width:100%; height:100%;}
 
-		#btn .nextBtn{right:0; text-align:right;}
-		#btn .prevBtn{left:0;}
+		#btn .nextBtn{width:40px; height:60px; right:20px; text-align:right;}
+		#btn .prevBtn{width:40px; height:60px; left:20px;}
+		#btn .nextBtn img, #btn .prevBtn img{width:100%; height:100%;}
+		
 		
 		hr{ width:880px; 
 			margin:30px auto; 
@@ -118,9 +120,11 @@ $(document).ready(function() {
 		
 
 		#container #sponsor{width:100%; height:40px; margin:0;}
+		#container #sponsor ul{width:800px; height:100%; margin:0 auto;}
 		#container #sponsor li{float:right; list-style:disc;}
 		
-		#container #product{width:100%; overflow:hidden;}
+		#container #product_box{width:100%; overflow:hidden;}
+		#container #product{ width:900px; margin:0 auto;}
 		#container #pro_cate{width:850px; /*padding-left:50px;*/ margin-bottom:30px; height:26px;}
 		#container #pro_cate li{float:left; text-align:center;} 
 		#container #pro_cate li h3, h4{margin:0; line-height:26px;}
@@ -181,50 +185,50 @@ $(document).ready(function() {
 		<div id="screen">
 			<ul id="film">
 				<li class="scene">
-					<p><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></p>
+					<p><img src="../resources/se2/img/product_slider3.png" /></p>
 				</li>
 				<li class="scene">
-					<p><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></p>
+					<p><img src="../resources/se2/img/product_slider2.png" /></p>
 				</li>
 				<li class="scene">
-					<p><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></p>
-				</li>
-				<li class="scene">
-					<p><img src="http://i.imgur.com/i7sW1WN.jpg" alt="제품이미지1"/></p>
+					<p><img src="../resources/se2/img/product_slider1.png" /></p>
 				</li>
 			</ul>
 			<div id="btn">
-				<p class="nextBtn"><span>&gt;</span></p>
-				<p class="prevBtn"><span>&lt;</span></p>
+				<p class="nextBtn"><img src="../resources/se2/img/next_shadow.png" alt="다음버튼" class="next"/></p>
+				<p class="prevBtn"><img src="../resources/se2/img/prev_shadow.png" alt="이전버튼" class="prev"/></p>
 			</div>
 		</div>
 		<hr>
-			<ul id="sponsor">
-				<li>수익금액 일부는 후원금으로 사용됩니다.</li>
-			</ul>
-		<div id="product">
-			<ul id="pro_cate">
-				<li class="fir"><h3><a id="fir" title="전체보기">전체보기</a></h3></li>
-				<li class="sec"><h4><a id="sec" title="반려동물">반려동물</a></h4></li>
-				<li class="sec"><h4><a id="thi" title="악세서리">악세서리</a></h4></li>
-				<li class="sec"><h4><a id="for" title="사료및간식">사료 및 간식</a></h4></li>
-			</ul>
-<%-- 			<p><%=productImg.size() %><p> --%>
-			<div id="product_img">
-				<ul class="img_box">
-			<% for( int i=0; i<product.size(); i++) { %>
-				<li><a href="/product/detail?productId=<%=product.get(i).getProductId() %>" ><img src="<%=request.getContextPath() %>/uploadProd/<%=product.get(i).getStoredName() %>" alt="제품이미지1"/>
-					<div class="caption">
-						<h2><%=product.get(i).getProductName() %></h2>
-						<p> 가격 : <%=product.get(i).getPrice() %> </p>
-					</div>
-				</a>
-				</li>
-			<% } %>
+		
+			<div id="sponsor">
+				<ul>
+					<li>수익금액 일부는 후원금으로 사용됩니다.</li>
 				</ul>
 			</div>
-			
+		<div id="product_box">
+			<div id="product">
+				<ul id="pro_cate">
+					<li class="fir"><h3><a id="fir" title="전체보기">전체보기</a></h3></li>
+					<li class="sec"><h4><a id="sec" title="반려동물">반려동물</a></h4></li>
+					<li class="sec"><h4><a id="thi" title="악세서리">악세서리</a></h4></li>
+					<li class="sec"><h4><a id="for" title="사료및간식">사료 및 간식</a></h4></li>
+				</ul>
+	<%-- 			<p><%=productImg.size() %><p> --%>
+				<div id="product_img">
+					<ul class="img_box">
+					<% for( int i=0; i<product.size(); i++) { %>
+						<li><a href="/product/detail?productId=<%=product.get(i).getProductId() %>" ><img src="<%=request.getContextPath() %>/uploadProd/<%=product.get(i).getStoredName() %>" alt="제품이미지1"/>
+							<div class="caption">
+								<h2><%=product.get(i).getProductName() %></h2>
+								<p> 가격 : <%=product.get(i).getPrice() %> </p>
+							</div>
+						</a>
+						</li>
+					<% } %>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
-</body>
-</html>
+<%@ include file="/WEB-INF/views/layout/footer.jsp" %>
