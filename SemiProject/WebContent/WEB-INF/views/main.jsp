@@ -390,7 +390,6 @@ ul.tabs li.current{
 						</a></li>
 						<% } %>
 					</ul>
-					d
 				</div>
 			</div>
 		</div>
