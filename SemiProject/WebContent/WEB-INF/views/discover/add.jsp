@@ -261,6 +261,10 @@ textarea {
 	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }	
 
+input#title {
+	background-color:rgba(234,205,153,0.1);
+	width: 550px;
+}
 </style>
 
 <div class="container">
@@ -282,7 +286,7 @@ textarea {
 	</div>
 	
 	<div class="petinfo-grid">
-		<div id=msg style='color:#EBAA5F;'><h5>※제목 / 이름 / 동물 종류 / 지역은 필수 입력사항입니다.※</h5></div>
+		<div id=msg style='color:#EBAA5F;'><h5 style="font-weight: 700;">※제목 / 이름 / 동물 종류 / 지역은 필수 입력사항입니다.※</h5></div>
 		<div>
 			<label for="petname">반려동물이름</label>
 			<input class="pat" type="text" id="petname" name="petname" />
