@@ -8,45 +8,66 @@ public class Product {
 	private int price;
 	private String content;
 	
-	
-	
+	//product_img JOIN
+	private String storedName;
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", categoryId=" + categoryId + ", productName=" + productName
-				+ ", price=" + price + ", content=" + content + "]";
+				+ ", price=" + price + ", content=" + content + ", storedName=" + storedName + "]";
 	}
-	
-	
+
 	public int getProductId() {
 		return productId;
 	}
+
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
+
 	public int getCategoryId() {
 		return categoryId;
 	}
+
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
+
 	public String getProductName() {
 		return productName;
 	}
+
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+
 	public int getPrice() {
 		return price;
 	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	public String getStoredName() {
+		return storedName;
+	}
+
+	public void setStoredName(String storedName) {
+		this.storedName = storedName;
+	}
+	
+	
+	
+
 	
 	
 }
