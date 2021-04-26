@@ -11,7 +11,9 @@
 <style type="text/css">
 .wrapper {
 	width: 680px;
+	height: 350px;
 	margin: 0 auto;
+	background-color: rgba(234,205,153, 0.3 );
 }
 
 

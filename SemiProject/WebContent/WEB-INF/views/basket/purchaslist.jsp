@@ -105,6 +105,8 @@ function oribtnskinetc(data) {
 #wrapper {
 	width: 1200px;
 	margin: 0 auto;
+	background-color: rgba(234,205,153, 0.3 );
+	height: 1000px
 }
 
 #content
@@ -305,3 +307,4 @@ function oribtnskinetc(data) {
 
 </div>
 </div>
+
