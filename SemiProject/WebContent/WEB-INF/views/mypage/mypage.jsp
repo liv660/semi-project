@@ -62,7 +62,7 @@
 .rel_bor {
 	position: relative;
 	width: 200px;
-	height: 30px;
+	height: 24px;
 	top: 110%;
 	left: 15px;
 	background: #FFC091;
@@ -71,7 +71,7 @@
 .rel_ord {
 	position: relative;
 	width: 200px;
-	height: 30px;
+	height: 24px;
 	top: 85%;
 	left: 15px;
 	background: #FFC091;
@@ -80,7 +80,8 @@
 
 .abs_botx {
 	text-align: center;
-	font-size: 25px;
+	font-size: 17px;
+	font-weight: 600;
 	
 	
 }
@@ -104,7 +105,7 @@
 }
 
 .table_di {
-	font-size: 19px;
+	font-size: 14px;
 
 }
 th{
@@ -146,8 +147,8 @@ font-size: 30px;
 </div>
 
 <div class="abs_info">
-		<div style="font-size: 25px;"><%=session.getAttribute("nick") %> 님</div>
-		<div><button class="btn btn-default btn-lg btn-block" onclick="location.href= '/mypage/profile';">프로필수정</button></div>
+		<div style="font-size: 17px;"><%=session.getAttribute("nick") %> 님</div>
+		<div><button class="btn btn-default btn-block" onclick="location.href= '/mypage/profile';">프로필수정</button></div>
 </div>
 
 <div class="rel_bor">
@@ -168,29 +169,29 @@ font-size: 30px;
 	<tr>
 	<td><%=listMyb.get(i).getBorad_no() %></td>
 	<% if(listMyb.get(i).getBoard_div().equals("찾기 게시판")) { %>
-	<td><a href="#" style="font-size: 17px">
+	<td><a href="/find/list" style="font-size: 14px">
 		<%=listMyb.get(i).getBoard_div() %>
 		</a>
 	</td>
 	<% } else if (listMyb.get(i).getBoard_div().equals("발견 게시판")) {%>
-	<td><a href="#" style="font-size: 17px">
+	<td><a href="/discover/list" style="font-size: 14px">
 		<%=listMyb.get(i).getBoard_div() %>
 		</a>
 	</td>
 	<% } else if (listMyb.get(i).getBoard_div().equals("후기 게시판")) {%>
-	<td><a href="/review/list" style="font-size: 17px">
+	<td><a href="/review/list" style="font-size: 14px">
 		<%=listMyb.get(i).getBoard_div() %>
 		</a>
 	</td>
 	<% } %>
 	
 	<% if (listMyb.get(i).getBoard_div().equals("찾기 게시판")) { %>
-	<td><a href="#" style="font-size: 17px">
+	<td><a href="find/read?FindNo=<%=listMyb.get(i).getBorad_no() %>" style="font-size: 17px">
 		<%=listMyb.get(i).getTitle() %>
 		</a>
 	</td>
 	<% } else if (listMyb.get(i).getBoard_div().equals("발견 게시판")) { %>
-	<td><a href="#" style="font-size: 17px">
+	<td><a href="discover/read?DiscoverNo=<%=listMyb.get(i).getBorad_no()%>" style="font-size: 17px">
 		<%=listMyb.get(i).getTitle() %>
 		</a>
 	</td>
@@ -231,8 +232,8 @@ font-size: 30px;
 
 
 
-
 </div>
+<%@ include file="/WEB-INF/views/layout/myfooter.jsp" %>
 
 
 

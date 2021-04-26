@@ -47,7 +47,7 @@ public interface ProFileDao {
 
 	public String selectByNick(Connection conn, int userno);
 
-	public int selectCntAll(Connection conn);
+	public int selectCntAll(Connection conn, int userno);
 
 	public int deleteFindImg(Connection conn, MyBoard myBoard);
 	

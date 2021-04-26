@@ -402,14 +402,19 @@ public class ProFileDaoImpl implements ProFileDao {
 	public List<MyBoard> selectMyList(Connection conn, int userno) {
 		
 		String sql = "";
-		sql += "SELECT";
-		sql += " find_no , board_div, title, create_date";
-		sql += " FROM findboard";
-		sql += " UNION";
-		sql += " SELECT";
-		sql += " review_no, board_div, title, create_date";
-		sql += " FROM review_board";
-		sql += " WHERE user_no = ?";
+		sql += "SELECT * FROM (";
+		sql += "    SELECT";
+		sql += "        find_no, board_div, title, create_date";
+		sql += "    FROM findboard";
+		sql += "    UNION";
+		sql += "    SELECT";
+		sql += "        review_no, board_div, title, create_date";
+		sql += "    FROM review_board";
+		sql += "    UNION";
+		sql += "    SELECT";
+		sql += "        discover_no, board_div, title, create_date";
+		sql += "    FROM discoverboard";
+		sql += "    WHERE user_no = ?)";
 		sql += " ORDER BY board_div desc, find_no desc";
 		
 		List<MyBoard> myBoard = new ArrayList<MyBoard>();
@@ -485,24 +490,29 @@ public class ProFileDaoImpl implements ProFileDao {
 	}
 
 	@Override
-	public int selectCntAll(Connection conn) {
+	public int selectCntAll(Connection conn, int userno) {
 		
 		String sql = "";
 		sql += "SELECT count(*) cnt FROM (";
-		sql += " SELECT";
-		sql += " find_no , board_div, title, create_date";
-		sql += " FROM findboard";
-		sql += " UNION";
-		sql += " SELECT ";
-		sql += " review_no, board_div, title, create_date";
-		sql += " FROM review_board)";
-		
+		sql += "    SELECT";
+		sql += "        find_no, board_div, title, create_date";
+		sql += "    FROM findboard";
+		sql += "    UNION";
+		sql += "    SELECT";
+		sql += "        review_no, board_div, title, create_date";
+		sql += "    FROM review_board";
+		sql += "    UNION";
+		sql += "    SELECT";
+		sql += "        discover_no, board_div, title, create_date";
+		sql += "    FROM discoverboard";
+		sql += "    WHERE user_no = ?)";
 		//총 게시글 수
 		int cnt = 0;
 		
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -524,7 +534,7 @@ public class ProFileDaoImpl implements ProFileDao {
 		
 		String sql = "";
 		sql += "SELECT * FROM (";
-		sql += " SELECT rownum rnum, B.* FROM (";
+		sql += "    SELECT rownum rnum, B.* FROM (";
 		sql += "        SELECT";
 		sql += "            find_no , board_div, title, create_date";
 		sql += "        FROM findboard";
@@ -532,9 +542,13 @@ public class ProFileDaoImpl implements ProFileDao {
 		sql += "        SELECT";
 		sql += "            review_no, board_div, title, create_date";
 		sql += "        FROM review_board";
-		sql += " 		WHERE user_no = ?";
-		sql += "        ORDER BY board_div desc, find_no desc";
+		sql += "        UNION";
+		sql += "        SELECT";
+		sql += "            discover_no, board_div, title, create_date";
+		sql += "        FROM discoverboard";
+		sql += "        WHERE user_no = ?";
 		sql += "    ) B";
+		sql += "    ORDER BY board_div desc, find_no desc";
 		sql += " ) BOARD";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 		
@@ -685,7 +699,7 @@ public class ProFileDaoImpl implements ProFileDao {
 	public int deleteDiscoveryImg(Connection conn, MyBoard myBoard) {
 		
 		String sql = "";
-		sql += "DELETE findimg";
+		sql += "DELETE discoverimg";
 		sql += " WHERE 1 = 1";
 		sql += " AND find_no = ?";
 		int res = 0;
@@ -708,10 +722,10 @@ public class ProFileDaoImpl implements ProFileDao {
 	@Override
 	public int deleteDiscoveryBoard(Connection conn, MyBoard myBoard) {
 		String sql = "";
-		sql += "DELETE findboard";
+		sql += "DELETE discoverboard";
 		sql += " WHERE 1 = 1";
 		sql += " 	AND user_no = ?";
-		sql += " 		AND find_no = ?";
+		sql += " 		AND discover_no = ?";
 		int res = 0;
 		
 		try {

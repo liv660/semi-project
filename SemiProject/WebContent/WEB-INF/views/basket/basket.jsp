@@ -33,7 +33,7 @@ hr {
 }
 .allchk_layout {
 	width: 250px;
-	margin-left: 25px;
+	margin-left: 15px;
 } 
 #allcheck {
 	zoom:1.6;
@@ -44,9 +44,9 @@ hr {
     background-color: white;
     color: #0CBCF2;
     border-radius: 10px;
-    height: 31px;
+    height: 23px;
     width: 85px;
-    font-size: 15px;
+    font-size: 14px;
     margin-left: 10px;
 
 }
@@ -77,10 +77,10 @@ hr {
 
 }
 .table_layout tr th {
-	font-size: 23px;
+	font-size: 20px;
 }
 .table_layout tr td {
-	font-size: 17px;
+	font-size: 15px;
 	text-align: center;
 }
 .f_po {
@@ -88,8 +88,8 @@ hr {
     margin-right: 50px;
 }
 .pri_info {
-	width: 740px;
-    height: 44px;
+	width: 650px;
+    height: 37px;
     border: 4px solid #ccc;
     text-align: center;
 	font-size: 20px;
@@ -97,7 +97,7 @@ hr {
 }
 
 .pri_info span {
-	font-size: 26px;
+	font-size: 20px;
 }
 .btn_f {
 	margin: 0 auto;
@@ -172,7 +172,7 @@ $(document).ready (function () {
 
 		<div class="allchk_layout">
 			<input type="checkbox" id="allcheck"/>
-			<label for="allcheck"style="font-size: 20px; margin-left: 15px;">전체선택</label>
+			<label for="allcheck"style="font-size: 15px; margin-left: 15px;">전체선택</label>
 			<button class="btn_del">선택 삭제</button>
 		</div>
 
@@ -215,3 +215,4 @@ $(document).ready (function () {
 		</div>
 	</div>
 </div>
+<%@ include file="/WEB-INF/views/layout/myfooter.jsp" %>

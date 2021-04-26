@@ -450,7 +450,9 @@ public class ProFileServiceImpl implements ProFileService {
 
 
 		//myBoard 테이블의 총 게시글 수를 조회한다
-		int totalCount = proFileDao.selectCntAll(conn);
+		int userno = (int) req.getSession().getAttribute("userno");
+		
+		int totalCount = proFileDao.selectCntAll(conn, userno);
 
 		MyPaging myPaging = new MyPaging(totalCount, curPage);
 
