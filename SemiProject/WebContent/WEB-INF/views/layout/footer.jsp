@@ -116,6 +116,7 @@
 	</div>
 
 </div> <!-- .footer end -->
+</div>
 
 <script type="text/javascript">
 
