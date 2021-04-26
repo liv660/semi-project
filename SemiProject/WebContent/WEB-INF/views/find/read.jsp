@@ -23,7 +23,6 @@ $(document).ready(function() {
 	$("#btnUpdate").click(function() {
 		$(location).attr("href", "/find/update?FindNo=<%=b.getFindNo() %>");
 	});
-
 	//삭제버튼 동작
 	$("#btnDelete").click(function() {		
 		if( confirm("게시글을 삭제하시겠습니까?") ) {
@@ -37,7 +36,6 @@ $(document).ready(function() {
 
 <!-- 댓글 관련 -->
 <script type="text/javascript">
-
 /* 댓글목록 조회 */
 $(document).ready(function() {
 	commentlist();
@@ -48,9 +46,7 @@ $(document).ready(function() {
 	      $('#foldbtn').css('display','none');
 	   })
 })
-
 // $("#commentwrap").click(
-
 /* 댓글 목록조회 */
 function commentlist() {
 	
@@ -64,7 +60,6 @@ function commentlist() {
 		success : function(data) {
 			var jsontext = JSON.stringify(data);
 			var commentlist = JSON.parse(jsontext);
-
 			for(var i=0; i<commentlist.length; i++) {
 				
 				var html = '';
@@ -113,12 +108,7 @@ function commentlist() {
 	})/* ajax끝 */
 	
 }//click 이벤트 끝	
-
-
 $(document).ready(function() {
-
-
-
 /* 댓글 추가 */
 $("#commentUpdatebtn").click(function() {
 	
@@ -127,7 +117,6 @@ $("#commentUpdatebtn").click(function() {
 	var comment = $("#comment").val();
 	var nick = $("#nick").val();
 	var userno = $("#userno").val();
-
 	console.log(findNo);
 	
 	$.ajax({
@@ -147,9 +136,7 @@ $("#commentUpdatebtn").click(function() {
 	})	//ajax
 	
 })//click
-
 })//document
-
 /* 댓글 삭제 */
 function commentDelete(commentno) {
 	
@@ -166,7 +153,6 @@ function commentDelete(commentno) {
 			
 	})
 }
-
 /* 댓글 수정 */
 function commentUpdateTrans(commentno) {
 	
@@ -185,8 +171,6 @@ function commentUpdateTrans(commentno) {
 	
 	commentUpdateFocus();
 }
-
-
 /* 수정버튼 클릭 */
 function commentUpdate(commentno) {
 	
@@ -205,7 +189,6 @@ function commentUpdate(commentno) {
 		}
 	})
 }
-
 /* 취소버튼 클릭 */
 function updatecancle() {
 	
@@ -213,28 +196,22 @@ function updatecancle() {
 	
 	commentlist();
 }
-
-
 </script>
 
 
 <style type="text/css">
-
 .container h1 {
 	display: inline-block;
 }
-
 .container .complete {
 	width : 500px;
 	display : inline-block;
 	position : relative;
 }
-
 .container .complete #completebtn {
 	position : absolute;
 	left : 800px;
 }
-
 .container .complete #completeMsg {
 	position : absolute;
 	left : 800px;
@@ -242,23 +219,22 @@ function updatecancle() {
 	width: 80px;
 }
 
-
-
-#findheader{
-	border:1px solid;
-	width: 700px;
-	float: left;
-	margin: 10px 3px 10px 3px;
+.head {
 	text-align: center;
-
+	font-size: 16px;
 }
-#findheader1{
- 	border:1px solid; 
-	width: 200px;
-	float: left;
-	margin: 10px 3px 10px 3px;
-	text-align: center;
 
+.head #findheader{
+	border:1px solid; 
+	float: left;
+	width: 700px;
+	margin: 10px 3px 10px 3px;
+}
+.head #findheader1{
+	border:1px solid; 
+	float: left;
+	width: 200px;
+	margin: 10px 3px 10px 3px;
 }
 #subimages{
 	width: 148px;
@@ -277,7 +253,6 @@ function updatecancle() {
 	border: 1px solid #A48654;
 	border-radius: 5px;
 }
-
 .subimg-grid {
 	display: inline-grid;
 	grid-template-rows: 100px 100px 100px;
@@ -286,13 +261,10 @@ function updatecancle() {
 	width: 150px;
 	height: 309px;
 }
-
 .subimg-grid div {
 	border: 1px solid #A48654;
 	border-radius: 5px;
 }
-
-
 #findinfo{
 	width: 450px;
 	float: right;
@@ -304,17 +276,14 @@ function updatecancle() {
 	padding: 2%;
 	text-align: center;
 }
-
 #comment {
 width : 500px;
-height : 70px;
+height : 30px;
 }
-
 #button{
 	float: right;
 	margin: 0px 0 0px 50px;
 }
-
 #lightbox {
   position: fixed;
   width:100%;
@@ -324,7 +293,6 @@ height : 70px;
   left:0%;
   display:none;
 }
-
 #lightbox img {
   position:absolute; 
   top:50%;
@@ -332,45 +300,42 @@ height : 70px;
   transform:translate(-50%, -50%);
   border:1px solid #eee;      
 }
-
 #commentwrap .commentwrap .commentImg {
    width: 30px;
    height : 30px;
    margin-right : 10px;
    display : inline-block;
 }
-
 #commentwrap .commentwrap .commentImg img {
    width : 100%;
    height : 100%;
    object-fit : cover;
    border-radius: 50%;
 }
-
 #commentwrap .commentwrap .commentDate {
    left : 100px;
    display : inline-block;
 }
-
 #commentwrap .commentwrap .commentNick {
    display : inline-block;
 }
-
 #commentwrap .commentwrap .commentBtn {
    display : inline-block;
    left : 100px;
 }
-
 #commentwrap .fold {
    display : none;
 }
-
 #commentwrap #foldbtn {
    width : 800px;
    border : none;
    margin-top : 20px;
 }
 
+#btnUpdate:hover{color: white;}
+#btnList:hover{color: white;}
+#btnDelete:hover{color: red;}
+#commentUpdatebtn:hover{color: #A48654;}
 </style>
 
 <div class="container">
@@ -398,7 +363,7 @@ height : 70px;
 <input type="hidden" id="nick" value="<%=session.getAttribute("nick") %>">
 <input type="hidden" id="userno" value="<%=session.getAttribute("userno")%>">
 	
-<div>
+<div class="head">
 
 <div id="findheader"><%=b.getTitle() %></div>
 <div id="findheader1"><%=request.getAttribute("nick") %></div>
@@ -478,58 +443,48 @@ height : 70px;
 
 <div class="text-left">	
 <%	if( request.getAttribute("nick").equals(session.getAttribute("nick")) ) { %>
-	<button id="btnUpdate" class="btn btn-info">글수정</button>
-	<button id="btnDelete" class="btn btn-danger">글삭제</button>
+	<button id="btnUpdate" class="btn" style="background-color:#FFC091;">글수정</button>
+	<button id="btnDelete" class="btn">글삭제</button>
 <%	} %>
 </div>
 <hr>
 
-<div>
+<div style="height: 100px;">
 	<h3>댓글<span id="commentCnt"></span></h3>
 	
 	<input type="text" id=comment name="comment" />
-	<input type="button" id="commentUpdatebtn" value="댓글 등록"/>
+	<input type="button" class="btn" id="commentUpdatebtn" value="댓글 등록"/>
 	
 	<div id="commentwrap">
 <!-- 	<h1>댓글목록</h1> -->
 	</div>
 </div>
 
-<div class="text-center">	
-	<button id="btnList" class="btn btn-primary">목록</button>
+<div class="text-center" style="height: 50px;">	
+	<button id="btnList" class="btn" style="background-color:#EA9A56;">목록</button>
 </div>
 </div>
 <% } %>
 <script type="text/javascript">
-
 /* .pic 인 이미지들의 배열 */
 var pics = document.getElementsByClassName("subimages");
-
 /* 이미지에 클릭 이벤트 등록 */
 for(var i=0; i<pics.length; i++) {
    pics[i].addEventListener("click", showPopup);
 }
-
 /* 클릭시 이미지저장경로와 display속성 부여 */
 function showPopup() {
    var imageLocation = this.getAttribute("src");
    lightboxImage.setAttribute("src", imageLocation);
    lightbox.style.display = "block";
 }
-
 /* 팝업 클릭시 창닫음 */
 lightbox.onclick = function() {
 	lightbox.style.display = "none";
 };
-
-
-
 function complete() {
-
 	var con = confirm("정말 완료 하시겠습니까? \n완료 이후에는 변경할 수 없습니다.")
-
 	if(con == true) {
-
 		$.ajax({
 			
 			type : 'get'
@@ -554,8 +509,6 @@ function complete() {
 }
 	
 	
-
-
 </script>
 
 
@@ -587,6 +540,4 @@ function complete() {
 
 
 
-
-
-
+>>>>>>> Stashed changes

@@ -242,7 +242,12 @@ function updatecancle() {
 	width: 80px;
 }
 
-#findheader{
+.head {
+	text-align: center;
+	font-size: 16px;
+}
+
+.head #findheader{
 	border:1px solid;
 	width: 700px;
 	float: left;
@@ -250,7 +255,7 @@ function updatecancle() {
 	text-align: center;
 
 }
-#findheader1{
+.head #findheader1{
  	border:1px solid; 
 	width: 200px;
 	float: left;
@@ -305,7 +310,7 @@ function updatecancle() {
 
 #comment {
 width : 500px;
-height : 70px;
+height : 30px;
 }
 
 #button{
@@ -369,6 +374,10 @@ height : 70px;
    margin-top : 20px;
 }
 
+#btnUpdate:hover{color: white;}
+#btnList:hover{color: white;}
+#btnDelete:hover{color: red;}
+#commentUpdatebtn:hover{color: #A48654;}
 </style>
 
 
@@ -397,7 +406,7 @@ height : 70px;
 <input type="hidden" id="nick" value="<%=session.getAttribute("nick") %>">
 <input type="hidden" id="userno" value="<%=session.getAttribute("userno")%>">
 	
-<div>
+<div class="head">
 
 <div id="findheader"><%=b.getTitle() %></div>
 <div id="findheader1"><%=request.getAttribute("nick") %></div>
@@ -406,10 +415,10 @@ height : 70px;
 </div>
 
 <div id="findinfo">		
-	<div id="findinfo1">반려동물 종류 : <%=b.getPetKinds() %></div>
-	<div id="findinfo1">반려동물 이름 : <%=b.getPetName() %></div>
-	<div id="findinfo1">반려동물 나이 : <%=b.getPetAge() %></div>
-	<div id="findinfo1">잃어버린 위치 : <%=b.getLoc() %></div>
+	<div id="findinfo1">유기동물 종류 : <%=b.getPetKinds() %></div>
+	<div id="findinfo1">유기동물 이름 : <%=b.getPetName() %></div>
+	<div id="findinfo1">유기동물 나이 : <%=b.getPetAge() %></div>
+	<div id="findinfo1">발견 위치 : <%=b.getLoc() %></div>
 	<div id="findinfo1">이메일 : <%=request.getAttribute("email") %></div>
 </div>
 
@@ -477,25 +486,25 @@ height : 70px;
 
 <div class="text-left">	
 <%	if( request.getAttribute("nick").equals(session.getAttribute("nick")) ) { %>
-	<button id="btnUpdate" class="btn btn-info">글수정</button>
-	<button id="btnDelete" class="btn btn-danger">글삭제</button>
+	<button id="btnUpdate" class="btn" style="background-color:#FFC091;">글수정</button>
+	<button id="btnDelete" class="btn">글삭제</button>
 <%	} %>
 </div>
 <hr>
 
-<div>
+<div style="height: 100px;">
 	<h3>댓글<span id="commentCnt"></span></h3>
 	
 	<input type="text" id=comment name="comment" />
-	<input type="button" id="commentUpdatebtn" value="댓글 등록"/>
+	<input type="button" class="btn" id="commentUpdatebtn" value="댓글 등록"/>
 	
 	<div id="commentwrap">
 <!-- 	<h1>댓글목록</h1> -->
 	</div>
 </div>
 
-<div class="text-center">	
-	<button id="btnList" class="btn btn-primary">목록</button>
+<div class="text-center" style="height: 50px;">	
+	<button id="btnList" class="btn" style="background-color:#EA9A56;">목록</button>
 </div>
 </div>
 <% } %>
