@@ -214,11 +214,11 @@ $(document).ready(function() {
 				<ul class="img_box">
 			<% for( int i=0; i<product.size(); i++) { %>
 				<li><a href="/product/detail?productId=<%=product.get(i).getProductId() %>" ><img src="<%=request.getContextPath() %>/uploadProd/<%=product.get(i).getStoredName() %>" alt="제품이미지1"/>
-				</a>
 					<div class="caption">
 						<h2><%=product.get(i).getProductName() %></h2>
 						<p> 가격 : <%=product.get(i).getPrice() %> </p>
 					</div>
+				</a>
 				</li>
 			<% } %>
 				</ul>
