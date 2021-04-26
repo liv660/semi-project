@@ -31,27 +31,40 @@ delete localStorage.menu;
 		margin:0 auto; 
 	}
 	
-	#screen{max-width:1200px; 
-		height:520px;
+	#screen{ 
 		width:100%; 
-		border:5px solid #ccc; 
+		height:520px;
+/* 		border:5px solid #ccc;  */
 		margin:0 auto; 
 		position:relative; 
 		overflow:hidden;
 	}
-	#film{width:400%; height:350px; margin:0; padding:0;}
+	#film{width:400%; height:100%; margin:0; padding:0;}
 	/* 부모요소가 크던 작던 100%로 인식함*/
-	.scene{float:left; width:25%; height:100%;}
+	.scene{float:left; width:25%; height:100%; position:relative;}
 	.scene img{ width:100%; height:100%;}
+	.scene div{position:absolute; 
+		z-index:99; 
+		left:300px; top:180px;
+	}
+	.scene div p{color:#fff;
+		font-size:30px;
+		font-family: "nanumsquare";
+		font-weight:800;
+	}
 	#film:after{ content:""; display:block; clear:both; }
 
 	#btn p{ position:absolute; top:50%; width:50px; height:100px; margin-top:-50px;}
 	#btn p img{ width:100%; height:100%;}
 
-	#btn .nextBtn{right:0;}
-	#btn .prevBtn{left:0;}
+	#btn .nextBtn{right:20px;}
+	#btn .prevBtn{left:20px;}
 	
-	#content_box{width:830px; overflow:hidden; margin:70px auto 0;}
+	#content_box{width:100%; height:520px;  }
+	#content_box #content_all{width:830px; overflow:hidden;
+		padding:70px 0 0;
+		margin:0 auto;
+	}
 	#content_box .discover_box{width:400px;
 		height:350px;
 /* 		overflow:hidden; */
@@ -63,6 +76,7 @@ delete localStorage.menu;
 	}
 	#content_box .discover_box .sel_box{width:400px; height:250px; margin:0; padding:30px;}
 	#content_box .discover_box .sel_box .title_box{width:100%;
+	
 		height:40px;
 		margin-bottom:15px;
 		
@@ -97,9 +111,10 @@ delete localStorage.menu;
 		float:left;
 		cursor:pointer;
 	}
+	
 	#content_box .discover_box .sel_box .discover_sub .fir{margin-right:40px;}
 	#content_box .discover_box .sel_box .discover_sub li p{width:150px;}
-	#content_box .discover_box .sel_box .discover_sub li .img_box{ width:130px; height:130px; line-height:150px;}
+	#content_box .discover_box .sel_box .discover_sub li .img_box{ width:150px; height:150px; line-height:150px;}
 
 	#content_box .notice_box{width:400px;
 		height:350px;
