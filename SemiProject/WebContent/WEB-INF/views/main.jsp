@@ -158,6 +158,46 @@ delete localStorage.menu;
 	#product_box ul .last{margin:0;}
 	#product_box ul li img{width:100%; height:200px;}
 	
+	#bt_box{width:100%;
+		height:450px;
+		margin:0 auto; 
+		background-image:url("../resources/se2/img/bg_img.jpeg");
+		background-repeat:repeat-x;
+		background-position:0 0;
+		background-size:100% 100%;
+	}
+	#bt_box h5{text-align:center; 
+		font-size:30px; 
+		padding:50px 0;
+		color:#fff;
+		font-weight: 600;
+		font-family: "nanumsquare";
+	
+	}
+	#bt_box ul{width:1200px; height:220px; margin:0 auto;}
+	#bt_box ul li{width:350px;
+		height:100%;
+		float:left; 
+		margin-left:20px;
+		background-color: rgba(255,255,255,0.1);
+   		border: 1px solid rgba(255,255,255,0.2);
+	
+	}
+	#bt_box ul li .bgicon{width:60px; height:60px; 
+		background-color:#009d8f;
+		margin:0 auto;
+		border-radius:0 0 10px 10px;
+	
+	}
+	#bt_box ul li .bgicon img{width:35px; 
+		height:35px;
+		margin-top:10px;
+		text-align:center;
+	}
+	#bt_box ul li p{color:#fff; text-align:center; font-family: "nanumsquare";}
+	#bt_box ul li .bgtext{ padding:30px 0; line-height:40px;}
+	#bt_box ul li p strong{font-size:24px;}
+	
 	
 ul.tabs{
 margin: 0px;
@@ -227,16 +267,40 @@ ul.tabs li.current{
 	<div id="screen">
 		<ul id="film">
 			<li class="scene">
-				<img src="http://i.imgur.com/viuPHoS.gif" />
+				<img src="../resources/se2/img/main-visual01.jpg" />
+				<div>
+					<p>3조 유기동물</p>
+				</div>
 			</li>
 			<li class="scene">
-				<img src="http://i.imgur.com/i7sW1WN.jpg" />
+				<img src="../resources/se2/img/main-visual02.jpg" />
+				<div>
+					<p>3조 유기동물</p>
+				</div>
 			</li>
 			<li class="scene">
-				<img src="http://i.imgur.com/MrZcQnN.jpg" />
+				<img src="../resources/se2/img/main-visual03.jpg" />
+				<div>
+					<p>3조 유기동물</p>
+				</div>
 			</li>
 			<li class="scene">
-				<img src="http://i.imgur.com/hhsrPwq.jpg" />
+				<img src="../resources/se2/img/main-visual04.jpg" />
+				<div>
+					<p>3조 유기동물</p>
+				</div>
+			</li>
+			<li class="scene">
+				<img src="../resources/se2/img/main-visual05.jpg" />
+				<div>
+					<p>3조 유기동물</p>
+				</div>
+			</li>
+			<li class="scene">
+				<img src="../resources/se2/img/main-visual06.jpg" />
+				<div>
+					<p>3조 유기동물</p>
+				</div>
 			</li>
 		</ul>
 		<div id="btn">
@@ -333,6 +397,34 @@ ul.tabs li.current{
 				<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
 				<p>가격</p>
 				<p>정보내용</p>
+			</li>
+		</ul>
+	</div>
+	<div id="bt_box">
+		<h5>유기견 보호센터 안내</h5>
+		<ul>
+			<li>
+				<p class="bgicon">
+					<img src="../resources/se2/img/bg_icon01.png" alt="배경이미지1"/>
+				</p>
+				<p class="bgtext">
+					<strong>운영시간안내</strong><br/>
+					<span>09:00 am ~ 18:00 pm</span>
+				</p>
+			</li>
+			<li>
+				<p class="bgicon"><img src="../resources/se2/img/bg_icon02.png" alt="배경이미지1"/></p>
+				<p class="bgtext">
+					<strong>입양 및 기타 문의사항</strong><br/>
+					<span>TEL : 010-1234-5678</span>
+				</p>
+			</li>
+			<li>
+				<p class="bgicon"><img src="../resources/se2/img/bg_icon03.png" alt="배경이미지1"/></p>
+				<p class="bgtext">
+					<strong>찾아오시는길</strong><br/>
+					<span>서울특별시 강남구 테헤란로14길 6 남도빌딩 2F</span>
+				</p>
 			</li>
 		</ul>
 	</div>
