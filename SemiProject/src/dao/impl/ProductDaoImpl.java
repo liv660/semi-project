@@ -45,6 +45,8 @@ public class ProductDaoImpl implements ProductDao {
 		sql += " ) product";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 				
+		System.out.println("startNo = " + paging.getStartNo());
+		System.out.println("endNo = " + paging.getEndNo());
 		
 		List<Product> productList = new ArrayList<>();
 		
@@ -53,6 +55,209 @@ public class ProductDaoImpl implements ProductDao {
 			
 			ps.setInt( 1, paging.getStartNo() );
 			ps.setInt( 2, paging.getEndNo() );
+			
+			rs = ps.executeQuery();
+			
+			while ( rs.next() ) {
+				
+				Product p = new Product();
+				
+				p.setProductId( rs.getInt("product_Id") );
+				p.setCategoryId( rs.getInt("category_Id") );
+				p.setProductName( rs.getString("product_Name") );
+				p.setPrice( rs.getInt("price") );
+				p.setContent( rs.getString("content") );
+				p.setStoredName(rs.getString("stored_img"));
+				
+				productList.add(p);
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		return productList;
+	}
+	
+
+	@Override
+	public List<Product> selectAll1(Connection conn, ProductPaging paging) {
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += " 	SELECT rownum rnum, P.* FROM (";
+		sql += " 		SELECT";
+		sql += " 			PB.product_id, PB.category_id, PB.product_name, PB.price, PB.content, PI.stored_img";
+		sql += " 		FROM product PB, (";
+		sql += "			SELECT PRODUCT_IMG.* FROM (";
+		sql += "				SELECT";
+		sql += " 					row_number() over( partition by product_id order by image_no) rnum";
+		sql += " 					, image_no, product_id, origin_img, stored_img";
+		sql += "				FROM product_img";
+		sql += "			) PRODUCT_IMG";
+		sql += "			WHERE rnum = 1";
+		sql += " 		)PI";
+		sql += " 		WHERE PB.product_id = PI.product_id(+) AND pb.category_id = ?";
+		sql += " 		ORDER BY product_id DESC";
+		sql += "	) P";
+		sql += " ) product";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+				
+
+		
+		List<Product> productList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, 1 );
+			ps.setInt( 2, paging.getStartNo() );
+			ps.setInt( 3, paging.getEndNo() );
+			
+			rs = ps.executeQuery();
+			
+			while ( rs.next() ) {
+				
+				Product p = new Product();
+				
+				p.setProductId( rs.getInt("product_Id") );
+				p.setCategoryId( rs.getInt("category_Id") );
+				p.setProductName( rs.getString("product_Name") );
+				p.setPrice( rs.getInt("price") );
+				p.setContent( rs.getString("content") );
+				p.setStoredName(rs.getString("stored_img"));
+				
+				productList.add(p);
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		return productList;
+	}
+
+
+
+
+	@Override
+	public List<Product> selectAll2(Connection conn, ProductPaging paging) {
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += " 	SELECT rownum rnum, P.* FROM (";
+		sql += " 		SELECT";
+		sql += " 			PB.product_id, PB.category_id, PB.product_name, PB.price, PB.content, PI.stored_img";
+		sql += " 		FROM product PB, (";
+		sql += "			SELECT PRODUCT_IMG.* FROM (";
+		sql += "				SELECT";
+		sql += " 					row_number() over( partition by product_id order by image_no) rnum";
+		sql += " 					, image_no, product_id, origin_img, stored_img";
+		sql += "				FROM product_img";
+		sql += "			) PRODUCT_IMG";
+		sql += "			WHERE rnum = 1";
+		sql += " 		)PI";
+		sql += " 		WHERE PB.product_id = PI.product_id(+) AND pb.category_id = ?";
+		sql += " 		ORDER BY product_id DESC";
+		sql += "	) P";
+		sql += " ) product";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+				
+
+		
+		List<Product> productList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, 2 );
+			ps.setInt( 2, paging.getStartNo() );
+			ps.setInt( 3, paging.getEndNo() );
+			
+			rs = ps.executeQuery();
+			
+			while ( rs.next() ) {
+				
+				Product p = new Product();
+				
+				p.setProductId( rs.getInt("product_Id") );
+				p.setCategoryId( rs.getInt("category_Id") );
+				p.setProductName( rs.getString("product_Name") );
+				p.setPrice( rs.getInt("price") );
+				p.setContent( rs.getString("content") );
+				p.setStoredName(rs.getString("stored_img"));
+				
+				productList.add(p);
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			// DB객체 닫기
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		return productList;
+	}
+
+
+
+
+	@Override
+	public List<Product> selectAll3(Connection conn, ProductPaging paging) {
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += " 	SELECT rownum rnum, P.* FROM (";
+		sql += " 		SELECT";
+		sql += " 			PB.product_id, PB.category_id, PB.product_name, PB.price, PB.content, PI.stored_img";
+		sql += " 		FROM product PB, (";
+		sql += "			SELECT PRODUCT_IMG.* FROM (";
+		sql += "				SELECT";
+		sql += " 					row_number() over( partition by product_id order by image_no) rnum";
+		sql += " 					, image_no, product_id, origin_img, stored_img";
+		sql += "				FROM product_img";
+		sql += "			) PRODUCT_IMG";
+		sql += "			WHERE rnum = 1";
+		sql += " 		)PI";
+		sql += " 		WHERE PB.product_id = PI.product_id(+) AND pb.category_id = ?";
+		sql += " 		ORDER BY product_id DESC";
+		sql += "	) P";
+		sql += " ) product";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+				
+		System.out.println("startNo = " + paging.getStartNo());
+		System.out.println("endNo = " + paging.getEndNo());
+		
+		List<Product> productList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, 3 );
+			ps.setInt( 2, paging.getStartNo() );
+			ps.setInt( 3, paging.getEndNo() );
 			
 			rs = ps.executeQuery();
 			
@@ -390,6 +595,10 @@ public class ProductDaoImpl implements ProductDao {
 		
 		return list;
 	}
+
+
+
+
 
 
 

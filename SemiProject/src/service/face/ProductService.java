@@ -73,6 +73,12 @@ public interface ProductService {
 	public void insertOrder(Userorder param);
 
 	List<Coupon> lookUpCoupon(int userno);
+
+	List<Product> getList1(ProductPaging paging);
+
+	List<Product> getList2(ProductPaging paging);
+
+	List<Product> getList3(ProductPaging paging);
 	
 
 

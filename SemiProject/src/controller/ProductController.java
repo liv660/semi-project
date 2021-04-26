@@ -33,12 +33,18 @@ public class ProductController extends HttpServlet {
 	
 		
 		List<Product> product = productService.getList(paging);
+		List<Product> product1 = productService.getList1(paging);
+		List<Product> product2 = productService.getList2(paging);
+		List<Product> product3 = productService.getList3(paging);
 		
 		System.out.println("/product 의 productImg = " + product);
 		
 		req.setAttribute("paging", paging);
 		
 		req.setAttribute("product", product);
+		req.setAttribute("product1", product1);
+		req.setAttribute("product2", product2);
+		req.setAttribute("product3", product3);
 		
 //		List<ProductImg> productImg = productService.viewMainImg(product);
 		
