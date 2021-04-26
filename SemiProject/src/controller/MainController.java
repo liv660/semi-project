@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import dto.DiscoverBoard;
 import dto.FindBoard;
 import dto.Notice;
+import dto.Product;
 import dto.ReviewUserJoin;
 import dto.Usertb;
 import service.face.LoginService;
@@ -106,12 +107,14 @@ public class MainController extends HttpServlet {
 		List<DiscoverBoard> discoverboard = mainService.getDiscoverBoard();
 		List<ReviewUserJoin> reviewboard = mainService.getReviewBoard();
 		List<Notice> noticeboard = mainService.getNoticeBoard();
+		List<Product> productboard = mainService.getProductBoard();
 		
 		
 		req.setAttribute("findboard", findboard);
 		req.setAttribute("discoverboard", discoverboard);
 		req.setAttribute("reviewboard", reviewboard);
 		req.setAttribute("noticeboard", noticeboard);
+		req.setAttribute("productboard", productboard);
 
 		req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import dto.DiscoverBoard;
 import dto.FindBoard;
 import dto.Notice;
+import dto.Product;
 import dto.ReviewUserJoin;
 
 public interface MainService {
@@ -16,5 +17,7 @@ public interface MainService {
 	public List<ReviewUserJoin> getReviewBoard();
 
 	public List<Notice> getNoticeBoard();
+
+	public List<Product> getProductBoard();
 
 }

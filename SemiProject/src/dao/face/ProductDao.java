@@ -22,6 +22,17 @@ public interface ProductDao {
 	// 상품 전체 조회
 	public List<Product> selectAll(Connection conn, ProductPaging paging);
 	
+	// 상품 카테고리 1 조회
+	public List<Product> selectAll1(Connection conn, ProductPaging paging);
+	
+	// 상품 카테고리 2 조회
+	public List<Product> selectAll2(Connection conn, ProductPaging paging);
+	
+	// 상품 카테고리 3 조회
+	public List<Product> selectAll3(Connection conn, ProductPaging paging);
+
+
+	
 	/**
 	 * 상품 ID로 데이터를 조회한다.
 	 * @param conn		DB 연결 객체
@@ -80,6 +91,6 @@ public interface ProductDao {
 
 	public List<Coupon> selectCoupon(Connection conn, int userno);
 
-
+	
 
 }

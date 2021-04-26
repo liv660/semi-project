@@ -60,7 +60,7 @@ $(document).ready(function() {
 	#container{width:900px; margin:0 auto; overflow:auto;}
 	
 	
-	#container .product_box{width:100%; border:1px solid #ccc; height:800px;}
+	#container .product_box{width:100%; border:1px solid #ccc; height:100%; background-color: #FFFFFF;}
 	
 	#container .product_box .support{width:100%; margin:0; overflow:auto;}
 	#container .product_box .support li{
@@ -77,18 +77,18 @@ $(document).ready(function() {
 	
 	
 	#container .product_box .product_price{width:400px; height:350px; float:left; padding:20px 20px 20px 50px;}
-	#container .product_box .product_price .l_basket, #container .product_box .r_price{width:100px; 
+	#container .product_box .product_price .l_basket, #container .product_box .r_price{width:100%; 
 		height:40px; 
 		background-color:lightblue;
 		text-align:center;
 		line-height:40px;
 		border-radius:10px;
-		float:left;
+ 		float:left; 
 	}
 	#container .product_box .product_price .l_basket{margin-right:30px;}
 	#container .product_box .product_price .l_basket a, #container .product_box .r_price a{display:inline-block; width:100%; height:100%;}
 	
-	#container .product_box .product_price p{font-size:20px; line-height:50px;}
+	#container .product_box .product_price p{font-size:17px; line-height:50px;}
 	
 	#container .product_box .product_txBox{width:850px; clear:both; 
 		margin:0 auto;
@@ -126,6 +126,26 @@ $(document).ready(function() {
     	border-radius: 10px;
     	box-shadow: inset 0px 0px 5px white;
 	}
+	.container img{
+		width:835px;
+/* 		height: px;  */
+		clear:both; 
+		margin:0 auto;
+		text-align:center; 
+	}
+	
+	#btnPay{
+	border:0;
+	outline:0;
+	background-color:lightblue;
+	height:40px; 
+	width:100%;
+ 	text-align:center; 
+	line-height:40px;
+	border-radius:10px;
+/* 	float:left; */
+	
+	}
 
 </style>
 
@@ -147,11 +167,12 @@ $(document).ready(function() {
 <!-- 				<p>소재 : 면</p> -->
 				<p>상품이름 : <%= p.getProductName() %></p>
 				<p>판매 금액 : <%= p.getPrice() %></p>
-				<p>상품상세정보 : <%=p.getContent() %></p>
+				<p>상품상세정보 </p>
+				<p style="font-size: 14px;"> <%=p.getContent() %></p>
 
-				<div class="l_basket">
-					<button id="btnbasket">장바구니</button>
-				</div>
+<!-- 				<div class="l_basket"> -->
+<!-- 					<button id="btnbasket">장바구니</button> -->
+<!-- 				</div> -->
 				<div class="r_price">
 <!-- 					<a href="/product/pay" title="바로 구매">바로구매</a> -->
 					<button id="btnPay">구매하기</button>
@@ -160,12 +181,12 @@ $(document).ready(function() {
 			
 			<div class="product_txBox">
 				<p>상품정보</p>
-				<div class = "container">
-					<img src="/uploadProd/<%=productImg.get(1).getStoredImg() %>" />
-				</div>
 			</div>
+			<div class ="container" id="cont">
+				<img src="/uploadProd/<%=productImg.get(1).getStoredImg() %>" />
+			</div>
+			<hr>
 		</div>
 	</div>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/views/layout/footer.jsp" %>

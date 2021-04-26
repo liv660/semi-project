@@ -6,11 +6,13 @@
 #wrapper {
 	width: 1200px;
 	margin: 0 auto;
+	background-color: rgba(234,205,153, 0.3 );
+	height: 600px
 }
 
 #content
 {
-	height:680px;
+	height:600px;
 }
 
 .right {
@@ -277,5 +279,5 @@ $(document).ready (function() {
 		
 	</div>
 </div>
-</body>
-</html>
+
+<%@ include file="/WEB-INF/views/layout/footer.jsp" %>

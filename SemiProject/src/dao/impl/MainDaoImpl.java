@@ -12,6 +12,7 @@ import dao.face.MainDao;
 import dto.DiscoverBoard;
 import dto.FindBoard;
 import dto.Notice;
+import dto.Product;
 import dto.ReviewUserJoin;
 
 public class MainDaoImpl implements MainDao {
@@ -208,6 +209,58 @@ public class MainDaoImpl implements MainDao {
 		}
 		
 		return noticeboard;
+	}
+	
+	@Override
+	public List<Product> selectProductBoard(Connection conn) {
+
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += " 	SELECT rownum rnum, P.* FROM (";
+		sql += " 		SELECT";
+		sql += " 			PB.product_id, PB.category_id, PB.product_name, PB.price, PB.content, PI.stored_img";
+		sql += " 		FROM product PB, (";
+		sql += "			SELECT PRODUCT_IMG.* FROM (";
+		sql += "				SELECT";
+		sql += " 					row_number() over( partition by product_id order by image_no) rnum";
+		sql += " 					, image_no, product_id, origin_img, stored_img";
+		sql += "				FROM product_img";
+		sql += "			) PRODUCT_IMG";
+		sql += "			WHERE rnum = 1";
+		sql += " 		)PI";
+		sql += " 		WHERE PB.product_id = PI.product_id(+)";
+		sql += " 		ORDER BY product_id DESC";
+		sql += "	) P";
+		sql += " ) product";
+		sql += " WHERE rnum BETWEEN 1 AND 4";
+		
+		List<Product> productboard = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Product res = new Product();
+				
+				res.setProductId(rs.getInt("product_id"));
+				res.setCategoryId(rs.getInt("category_id"));
+				res.setProductName(rs.getString("product_name"));
+				res.setPrice(rs.getInt("price"));
+				res.setStoredName(rs.getString("stored_img"));
+				
+				productboard.add(res);
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		return productboard;
 	}
 
 }

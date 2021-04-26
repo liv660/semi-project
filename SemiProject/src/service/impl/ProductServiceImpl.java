@@ -54,6 +54,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<Product> getList1(ProductPaging paging) {
+		return productDao.selectAll1(JDBCTemplate.getConnection(), paging);
+	}
+
+	@Override
+	public List<Product> getList2(ProductPaging paging) {
+		return productDao.selectAll2(JDBCTemplate.getConnection(), paging);
+	}
+
+	@Override
+	public List<Product> getList3(ProductPaging paging) {
+		return productDao.selectAll3(JDBCTemplate.getConnection(), paging);
+	}
+	
+	@Override
 	public Product getProdByProdId(HttpServletRequest req) {
 		
 		//productId를 저장할 객체 생성
@@ -389,6 +404,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		return coupon;
 	}
+
+
 
 
 
