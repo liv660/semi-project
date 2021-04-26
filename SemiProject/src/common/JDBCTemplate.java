@@ -24,7 +24,7 @@ public class JDBCTemplate {
 	private static Connection conn;
 	
 	//Connection객체 반환 - 싱글톤패턴 적용
-	public static Connection getConnection() {
+	public static Connection getConnection() { 
 		
 		//한번 생성된 객체를 유지한다
 		if(conn == null) {
