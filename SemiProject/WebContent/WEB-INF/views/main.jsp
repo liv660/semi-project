@@ -1,3 +1,4 @@
+<%@page import="dto.Product"%>
 <%@page import="dto.Notice"%>
 <%@page import="dto.ReviewUserJoin"%>
 <%@page import="dto.DiscoverBoard"%>
@@ -15,6 +16,7 @@
 <%List<DiscoverBoard> discoverboard = (List) request.getAttribute("discoverboard"); %>
 <%List<ReviewUserJoin> reviewboard = (List) request.getAttribute("reviewboard"); %>
 <%List<Notice> noticeboard = (List) request.getAttribute("noticeboard"); %>
+<%List<Product> productboard = (List) request.getAttribute("productboard"); %>
 
 <script type="text/javascript">
 
@@ -48,8 +50,8 @@ delete localStorage.menu;
 		left:300px; top:180px;
 	}
 	.scene div p{color:#fff;
-		font-size:30px;
-		font-family: "nanumsquare";
+		font-size:45px;
+		font-family:"nanumsquare";
 		font-weight:800;
 	}
 	#film:after{ content:""; display:block; clear:both; }
@@ -172,8 +174,9 @@ delete localStorage.menu;
 	#product_box{width:100%; padding-top:50px; background-color:#f0f0f0; }
 	#product_box .product_sub{width:1200px; margin:0 auto;}
 	#product_box .product_sub h4{text-align:center; font-weight:700; font-size:20px;}
-	#product_box .product_sub ul{width:830px; height:400px; overflow:hidden; margin:20px auto 0;}
+	#product_box .product_sub ul{width:840px; height:400px; overflow:hidden; margin:20px auto 0;}
 	#product_box .product_sub ul li{width:200px; margin-right:10px; height:300px; float:left;}
+	#product_box .product_sub ul li p{text-align: center;}
 	#product_box .product_sub ul .last{margin:0;}
 	#product_box .product_sub ul li img{width:100%; height:200px;}
 	
@@ -191,6 +194,7 @@ delete localStorage.menu;
 		color:#fff;
 		font-weight: 600;
 		font-family: "nanumsquare";
+		margin:0;
 	
 	}
 	#bt_box ul{width:1200px; height:220px; margin:0 auto;}
@@ -288,37 +292,43 @@ ul.tabs li.current{
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual01.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual02.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual03.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual04.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual05.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 			<li class="scene">
 				<img src="../resources/se2/img/main-visual06.jpg" />
 				<div>
-					<p>3조 유기동물</p>
+					<p>3조 유기견</p>
+					<p>복지센터</p>
 				</div>
 			</li>
 		</ul>
@@ -398,26 +408,13 @@ ul.tabs li.current{
 		<div class="product_sub">
 			<h4>스토어</h4>
 			<ul>
+				<% for(int i=0; i<productboard.size(); i++) { %>
 				<li>
-					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-					<p>가격</p>
-					<p>정보내용</p>
+					<a href="/product/detail?productId=<%=productboard.get(i).getProductId() %>" title="이미지"><img src="<%=request.getContextPath()%>/uploadProd/<%=productboard.get(i).getStoredName() %>" /></a>
+					<p><%=productboard.get(i).getProductName() %></p>
+					<p><%=productboard.get(i).getPrice() %> 원</p>
 				</li>
-				<li>
-					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-					<p>가격</p>
-					<p>정보내용</p>
-				</li>
-				<li>
-					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-					<p>가격</p>
-					<p>정보내용</p>
-				</li>
-				<li class="last">
-					<a href="#" title="이미지"><img src="http://i.imgur.com/viuPHoS.gif" /></a>
-					<p>가격</p>
-					<p>정보내용</p>
-				</li>
+				<% } %>
 			</ul>
 		</div>
 	</div>

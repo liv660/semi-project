@@ -9,6 +9,7 @@ import dao.impl.MainDaoImpl;
 import dto.DiscoverBoard;
 import dto.FindBoard;
 import dto.Notice;
+import dto.Product;
 import dto.ReviewUserJoin;
 import service.face.MainService;
 
@@ -55,6 +56,16 @@ public class MainServiceImpl implements MainService {
 		List<Notice> noticeboard = mainDao.selectNoticeBoard(conn);
 		
 		return noticeboard;
+	}
+	
+	@Override
+	public List<Product> getProductBoard() {
+
+		conn = JDBCTemplate.getConnection();
+		
+		List<Product> productboard = mainDao.selectProductBoard(conn);
+		
+		return productboard;
 	}
 
 }
