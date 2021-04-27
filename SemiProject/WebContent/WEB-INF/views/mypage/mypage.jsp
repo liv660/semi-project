@@ -295,7 +295,7 @@ font-size: 30px;
 
 <div class="rel_order">
 
-<% 	if (null != pl.get(0).getPurchaseDate() ) { %>
+<% 	if ( pl.size() > 0 ) { %>
 <p style="text-align: left;"><%=pl.get(0).getPurchaseDate() %> 구매</p>
 <table class="table_layout">
 	<tr>
