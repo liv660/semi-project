@@ -76,7 +76,7 @@ function uconfirm() {
 <div class="rel_tx">
 <div class="abs_tx">
 	<div class="tx_size">MY 쇼핑</div>
-	<a href="/mypage/basket">장바구니</a><br>
+<!-- 	<a href="/mypage/basket">장바구니</a><br> -->
 	<a href="/purchase/list">구매목록</a>
 </div>
 </div>

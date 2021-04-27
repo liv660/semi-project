@@ -276,10 +276,10 @@ $(document).ready(function() {
 						<br><br><br>
 						
 						<div>쿠폰목록</div>
-						<%for(int i=0; i<coupon.size(); i++) { %>
-							<%if(coupon.get(i).getCouponNo() == null) { %>
 								<div>조회된 쿠폰이 없습니다.</div>
-							<% } else { %>
+
+						<%for(int i=0; i<coupon.size(); i++) { %>
+							<%if(coupon.get(i).getCouponNo() != null) { %>
 								<div id="coupinwether"><%=coupon.get(i).getDiscount()%>%할인쿠폰 : <%=coupon.get(i).getCouponNo()%>
 									<input type="button" id="couponbtn" value="적용"></div>
 								<input type="hidden" id="discount" value="<%=coupon.get(i).getDiscount()%>">
