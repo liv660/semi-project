@@ -11,25 +11,23 @@
 
 > 메뉴는 총 5개로 구성되어 있으며, `회원` 으로 로그인 했을 때는 `마이페이지` 를 추가적으로 이용할 수 있습니다.<br/>
 > `반려동물 찾기`, `유기동물 발견`, `후기` 게시판의 `글쓰기` 와 `글 상세보기` 기능은 `회원` 에게만 제공됩니다. <br/>
-> `관리자 계정` 으로 로그인 했을 때는 `관리자 페이지` 를 이용할 수 있습니다. <br /><br />
+> `관리자 계정` 으로 로그인 했을 때는 `관리자 페이지` 를 이용할 수 있습니다. <br />
 
 ## 🐾Development Environments
 + `OS` Window 10
 + `Server` Apache Tomcat 9.0
 + `DataBase` ORACLE 11g Express Edition Release 11.2.0
 + `IDE` Eclipse 2019.12
-+ `Browser Support` Chrome
++ `Browser Support` Chrome <br /><br />
 
-<br /><br />
 ## 🐾APIs
 + Import 결제모듈 API
 + KAKAO 지도 API
 + KAKAO 우편번호 API
 + Chart.js
 + Naver SmartEditor
-+ SHA-256
++ SHA-256 <br /><br />
 
-<br /><br />
 ## 🐾Library
 + OJDBC6
 + Commons-fileupload-1.4
