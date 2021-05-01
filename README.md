@@ -22,3 +22,20 @@
 + `DataBase` ORACLE 11g Express Edition Release 11.2.0
 + `IDE` Eclipse 2019.12
 + `Browser Support` Chrome
+
+<br /><br />
+## 🐾APIs
++ Import 결제모듈 API
++ KAKAO 지도 API
++ KAKAO 우편번호 API
++ Chart.js
++ Naver SmartEditor
++ SHA-256
+
+<br /><br />
+## 🐾Library
++ OJDBC6
++ Commons-fileupload-1.4
++ Commons-io-2.8.0
++ gson-2.8.6
++ mail-1.4
