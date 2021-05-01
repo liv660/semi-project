@@ -34,3 +34,5 @@
 + Commons-io-2.8.0
 + gson-2.8.6
 + mail-1.4
+
+### `우리 가족 어딨어?`의 모든 페이지를 보시려면 [상세보기](https://github.com/liv660/semi-project/blob/main/Detail.md) 를 참고해주세요.  
