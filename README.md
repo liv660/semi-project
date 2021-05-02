@@ -22,6 +22,7 @@
 + `design` bootstrap-3.3.2
 + `JAVA` java-1.8.0-openjdk
 + `jQuery` jquery-2.2.4 <br /><br />
++ `SVN` Git
 
 ## 🐾APIs
 + Import 결제모듈 API
