@@ -14,11 +14,14 @@
 > `관리자 계정` 으로 로그인 했을 때는 `관리자 페이지` 를 이용할 수 있습니다. <br />
 
 ## 🐾Development Environments
-+ `OS` Window 10
-+ `Server` Apache Tomcat 9.0
-+ `DataBase` ORACLE 11g Express Edition Release 11.2.0
-+ `IDE` Eclipse 2019.12
-+ `Browser Support` Chrome <br /><br />
++ `OS` <span>Window 10 64bit <!-- Mac 확인해보기 -->
++ `WAS` Apache Tomcat 9.0
++ `DBMS` ORACLE 11g Express Edition Release 11.2.0
++ `IDE` Eclipse 2019.12, Oracle SQL Developer
++ `Browser Support` Chrome
++ `design` bootstrap-3.3.2
++ `JAVA` java-1.8.0-openjdk
++ `jQuery` jquery-2.2.4 <br /><br />
 
 ## 🐾APIs
 + Import 결제모듈 API
