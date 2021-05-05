@@ -12,6 +12,8 @@
 + 게시판 홈
 
 + 게시글 작성
+<img src=https://user-images.githubusercontent.com/73643995/117098353-311d1580-ada9-11eb-942a-1b3981be00df.jpg height="600" />
+
 
 + 게시글 상세조회
 
