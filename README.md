@@ -22,7 +22,8 @@
 + `design` bootstrap-3.3.2
 + `JAVA` java-1.8.0-openjdk
 + `jQuery` jquery-2.2.4
-+ `SVN` Git <br /><br />
++ `SVN` Git
++ `Language` JAVA HTML5 CSS3 Javascript jQuery Servlet<br /><br />
 
 ## 🐾APIs
 + Import 결제모듈 API
@@ -39,4 +40,4 @@
 + gson-2.8.6
 + mail-1.4
 
-##### `우리 가족 어딨어?` 의 모든 페이지를 보시려면 [상세보기](https://github.com/liv660/semi-project/blob/main/Detail.md) 를 참고해주세요.  
+##### `우리 가족 어딨어?` 의 상세 페이지를 보시려면 [상세보기](https://github.com/liv660/semi-project/blob/main/Detail.md) 를 참고해주세요.  
