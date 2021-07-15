@@ -1,5 +1,5 @@
 # Semi Project - 우리 가족 어딨어?
-![main](https://user-images.githubusercontent.com/73643995/116791580-57675a80-aaf6-11eb-99ff-9bc8a48ffd1d.jpg) <br /><br />
+![mainslide](https://user-images.githubusercontent.com/73643995/125737739-774d8832-bd24-4fe7-a607-d14d02137864.gif) <br /><br />
 
 ## 🐾Description
 `'우리 가족 어딨어?'` 는 잃어버린 반려동물을 찾을 때 사용할 수 있는 게시판 형식의 웹페이지 입니다.
