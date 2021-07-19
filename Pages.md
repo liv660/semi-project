@@ -1,7 +1,7 @@
 # 구현한 페이지
 
 ## 반려동물 게시판 글쓰기 
-<img src="https://user-images.githubusercontent.com/73643995/117130219-b79e1b00-adda-11eb-905d-250b8435e272.jpg" height="500" />
+<img src="https://user-images.githubusercontent.com/73643995/126105531-d4388a87-1d3c-4c51-bdd5-190d32955868.png" height="500" />
 
 ## 관리자 페이지
 + 회원 관리
